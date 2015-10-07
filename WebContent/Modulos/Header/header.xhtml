@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+<h:head>
+	<h:outputStylesheet library="css" name="material.min.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+</h:head>
+<h1 style="text-align:center">Sistema de Matriculas UEB</h1>
+<div class="navbar navbar-warning">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse"
+			data-target=".navbar-warning-collapse">
+			<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+				class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="javascript:void(0)">Matriculas UEB</a>
+	</div>
+	<div class="navbar-collapse collapse navbar-warning-collapse">
+		<ul class="nav navbar-nav">
+			<li><a href="javascript:void(0)">Estudiantes</a></li>
+			<li><a href="javascript:void(0)">Facultades</a></li>
+			<li><a href="javascript:void(0)">Carreras</a></li>
+			<li><a href="javascript:void(0)">Mi Prematricula</a></li>
+		</ul>
+<!-- 		<form class="navbar-form navbar-left"> -->
+<!-- 			<input type="text" class="form-control col-lg-8" placeholder="Search"/> -->
+<!-- 		</form> -->
+		<ul class="nav navbar-nav navbar-right">
+			<li class="dropdown"><a href="bootstrap-elements.html"
+				data-target="#" class="dropdown-toggle" data-toggle="dropdown">Usuario
+					<b class="caret"></b>
+			</a>
+				<ul class="dropdown-menu">
+					<li><a href="javascript:void(0)">Cerrar Sesión</a></li>
+				</ul></li>
+		</ul>
+	</div>
+</div>
+<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
+<h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
+<h:outputScript library="js" name="material.min.js"></h:outputScript>
+<f:verbatim>
+	<script>
+		$.material.init();
+	</script>
+</f:verbatim>
+</html>
