@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -8,10 +7,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
 <h:head>
 	<h:outputStylesheet library="css" name="material.min.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="material-fullpalette.min.css"></h:outputStylesheet>
 	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+	
 </h:head>
-<h1 style="text-align:center">Sistema de Matriculas UEB</h1>
-<div class="navbar navbar-warning">
+
+<div style="text-align:center; margin-bottom: 10px">
+	<h1 style="text-align:center;display:inline-block; vertical-align:middle; margin-right: 100px">Sistema de Matriculas UEB</h1>
+	<h:graphicImage style="display:inline-block; vertical-align:middle" url="/resources/images/logo_UEB.jpg"></h:graphicImage>
+</div>
+
+<h:form>
+<div class="navbar navbar-success">
 	<div class="navbar-header">
 		<button type="button" class="navbar-toggle" data-toggle="collapse"
 			data-target=".navbar-warning-collapse">
@@ -22,7 +29,7 @@
 	</div>
 	<div class="navbar-collapse collapse navbar-warning-collapse">
 		<ul class="nav navbar-nav">
-			<li><a href="javascript:void(0)">Estudiantes</a></li>
+			<li><h:commandLink value="Estudiantes" action="paginaEstudiante"></h:commandLink> </li>
 			<li><a href="javascript:void(0)">Facultades</a></li>
 			<li><a href="javascript:void(0)">Carreras</a></li>
 			<li><a href="javascript:void(0)">Mi Prematricula</a></li>
@@ -41,6 +48,7 @@
 		</ul>
 	</div>
 </div>
+</h:form>
 <h:outputScript library="js" name="jquery.min.js"></h:outputScript>
 <h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
 <h:outputScript library="js" name="material.min.js"></h:outputScript>
