@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-oct-2015 23:22:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Facultad" table="FACULTAD">
+        <id name="idFacultad" type="big_decimal">
+            <column name="ID_FACULTAD" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombreFacultad" type="string">
+            <column name="NOMBRE_FACULTAD" length="50" />
+        </property>
+        <property name="estadoFacultad" type="java.lang.Character">
+            <column name="ESTADO_FACULTAD" length="1" />
+        </property>
+        <set name="carreras" table="CARRERA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_FACULTAD" precision="22" scale="0" />
+            </key>
+            <one-to-many class="Carrera" />
+        </set>
+    </class>
+</hibernate-mapping>
