@@ -2,28 +2,58 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
-	<table-filter match-name=".*" />
-	<table-filter match-name="CARRERA_ESTUDIANTE"></table-filter>
 	<table-filter match-name="CARRERA"></table-filter>
+	<table-filter match-name="CARRERA_ESTUDIANTE"></table-filter>
 	<table-filter match-name="CARRERA_MATERIA"></table-filter>
 	<table-filter match-name="FACULTAD"></table-filter>
 	<table-filter match-name="MATERIA"></table-filter>
 	<table-filter match-name="MATERIA_MATRICULA"></table-filter>
 	<table-filter match-name="MATRICULA"></table-filter>
 	<table-filter match-name="PERFIL"></table-filter>
-	<table-filter match-name="PERFIL"></table-filter>
 	<table-filter match-name="PERSONA"></table-filter>
 	<table-filter match-name="TELEFONOS"></table-filter>
-	<table name="MATERIA_MATRICULA">
-		<primary-key></primary-key>
+	<table name="CARRERA_ESTUDIANTE">
+	 <foreign-key constraint-name="fk_carrera_estudiante">
+	 <set exclude="true"/>
+	 </foreign-key>
+	 <foreign-key constraint-name="fk_carrera_estudiante_persona">
+	 <set exclude="true"/>
+	 </foreign-key>
 	</table>
-	<table name="MATERIA"></table>
-	<table name="MATRICULA"></table>
-	<table name="PERFIL"></table>
-	<table name="CARRERA_MATERIA"></table>
-	<table name="TELEFONOS"></table>
-	<table name="FACULTAD"></table>
-	<table name="CARRERA_ESTUDIANTE"></table>
-	<table name="CARRERA"></table>
-	<table name="PERSONA"></table>
+	<table name="CARRERA_MATERIA">
+	 <foreign-key constraint-name="fk_carrera_materia">
+	 <set exclude="true"/>
+	 </foreign-key>
+	 <foreign-key constraint-name="fk_carrera_materia_2">
+	 <set exclude="true"/>
+	 </foreign-key>
+	</table>
+	<table name="MATERIA_MATRICULA">
+	 <foreign-key constraint-name="fk_materia_matricula">
+	 <set exclude="true"/>
+	 </foreign-key>
+	 <foreign-key constraint-name="fk_materia_matricula_2">
+	 <set exclude="true"/>
+	 </foreign-key>
+	</table>
+	<table name="CARRERA">
+	 <foreign-key constraint-name="fk_carrera">
+	 <set exclude="true"/>
+	 </foreign-key>
+	</table>
+	<table name="PERSONA">
+	 <foreign-key constraint-name="fk_persona">
+	 <set exclude="true"/>
+	 </foreign-key>
+	</table>
+	<table name="MATRICULA">
+	 <foreign-key constraint-name="fk_matricula">
+	 <set exclude="true"/>
+	 </foreign-key>
+	</table>
+	<table name="TELEFONOS">
+	 <foreign-key constraint-name="fk_telefono">
+	 <set exclude="true"/>
+	 </foreign-key>
+	</table>
 </hibernate-reverse-engineering>

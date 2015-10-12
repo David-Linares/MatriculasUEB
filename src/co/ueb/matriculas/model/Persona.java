@@ -1,5 +1,5 @@
 // default package
-// Generated 11-oct-2015 23:22:04 by Hibernate Tools 3.4.0.CR1
+// Generated Oct 12, 2015 4:45:01 PM by Hibernate Tools 3.4.0.CR1
 
 import java.math.BigDecimal;
 import java.util.Date;
