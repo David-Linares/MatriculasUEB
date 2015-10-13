@@ -1,7 +1,7 @@
-// default package
-// Generated Oct 12, 2015 4:45:01 PM by Hibernate Tools 3.4.0.CR1
+package Entidades;
 
-import java.math.BigDecimal;
+// Generated 12-oct-2015 22:22:37 by Hibernate Tools 4.3.1
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,31 +10,31 @@ import java.util.Set;
  */
 public class Perfil implements java.io.Serializable {
 
-	private BigDecimal idPerfil;
+	private int idPerfil;
 	private String nombrePerfil;
 	private Character estadoPerfil;
-	private Set personas = new HashSet(0);
+	private Set<Persona> personas = new HashSet<Persona>(0);
 
 	public Perfil() {
 	}
 
-	public Perfil(BigDecimal idPerfil) {
+	public Perfil(int idPerfil) {
 		this.idPerfil = idPerfil;
 	}
 
-	public Perfil(BigDecimal idPerfil, String nombrePerfil,
-			Character estadoPerfil, Set personas) {
+	public Perfil(int idPerfil, String nombrePerfil, Character estadoPerfil,
+			Set<Persona> personas) {
 		this.idPerfil = idPerfil;
 		this.nombrePerfil = nombrePerfil;
 		this.estadoPerfil = estadoPerfil;
 		this.personas = personas;
 	}
 
-	public BigDecimal getIdPerfil() {
+	public int getIdPerfil() {
 		return this.idPerfil;
 	}
 
-	public void setIdPerfil(BigDecimal idPerfil) {
+	public void setIdPerfil(int idPerfil) {
 		this.idPerfil = idPerfil;
 	}
 
@@ -54,11 +54,11 @@ public class Perfil implements java.io.Serializable {
 		this.estadoPerfil = estadoPerfil;
 	}
 
-	public Set getPersonas() {
+	public Set<Persona> getPersonas() {
 		return this.personas;
 	}
 
-	public void setPersonas(Set personas) {
+	public void setPersonas(Set<Persona> personas) {
 		this.personas = personas;
 	}
 

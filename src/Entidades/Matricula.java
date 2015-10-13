@@ -1,7 +1,7 @@
-// default package
-// Generated Oct 12, 2015 4:45:01 PM by Hibernate Tools 3.4.0.CR1
+package Entidades;
 
-import java.math.BigDecimal;
+// Generated 12-oct-2015 22:22:37 by Hibernate Tools 4.3.1
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,36 +10,37 @@ import java.util.Set;
  */
 public class Matricula implements java.io.Serializable {
 
-	private BigDecimal idMatricula;
+	private int idMatricula;
 	private Persona persona;
-	private BigDecimal totalCreditos;
-	private BigDecimal totalMatricula;
+	private Integer totalCreditos;
+	private Integer totalMatricula;
 	private Character estadoMatricula;
-	private Set materias = new HashSet(0);
+	private Set<MateriaMatricula> materiaMatriculas = new HashSet<MateriaMatricula>(
+			0);
 
 	public Matricula() {
 	}
 
-	public Matricula(BigDecimal idMatricula) {
+	public Matricula(int idMatricula) {
 		this.idMatricula = idMatricula;
 	}
 
-	public Matricula(BigDecimal idMatricula, Persona persona,
-			BigDecimal totalCreditos, BigDecimal totalMatricula,
-			Character estadoMatricula, Set materias) {
+	public Matricula(int idMatricula, Persona persona, Integer totalCreditos,
+			Integer totalMatricula, Character estadoMatricula,
+			Set<MateriaMatricula> materiaMatriculas) {
 		this.idMatricula = idMatricula;
 		this.persona = persona;
 		this.totalCreditos = totalCreditos;
 		this.totalMatricula = totalMatricula;
 		this.estadoMatricula = estadoMatricula;
-		this.materias = materias;
+		this.materiaMatriculas = materiaMatriculas;
 	}
 
-	public BigDecimal getIdMatricula() {
+	public int getIdMatricula() {
 		return this.idMatricula;
 	}
 
-	public void setIdMatricula(BigDecimal idMatricula) {
+	public void setIdMatricula(int idMatricula) {
 		this.idMatricula = idMatricula;
 	}
 
@@ -51,19 +52,19 @@ public class Matricula implements java.io.Serializable {
 		this.persona = persona;
 	}
 
-	public BigDecimal getTotalCreditos() {
+	public Integer getTotalCreditos() {
 		return this.totalCreditos;
 	}
 
-	public void setTotalCreditos(BigDecimal totalCreditos) {
+	public void setTotalCreditos(Integer totalCreditos) {
 		this.totalCreditos = totalCreditos;
 	}
 
-	public BigDecimal getTotalMatricula() {
+	public Integer getTotalMatricula() {
 		return this.totalMatricula;
 	}
 
-	public void setTotalMatricula(BigDecimal totalMatricula) {
+	public void setTotalMatricula(Integer totalMatricula) {
 		this.totalMatricula = totalMatricula;
 	}
 
@@ -75,12 +76,12 @@ public class Matricula implements java.io.Serializable {
 		this.estadoMatricula = estadoMatricula;
 	}
 
-	public Set getMaterias() {
-		return this.materias;
+	public Set<MateriaMatricula> getMateriaMatriculas() {
+		return this.materiaMatriculas;
 	}
 
-	public void setMaterias(Set materias) {
-		this.materias = materias;
+	public void setMateriaMatriculas(Set<MateriaMatricula> materiaMatriculas) {
+		this.materiaMatriculas = materiaMatriculas;
 	}
 
 }
