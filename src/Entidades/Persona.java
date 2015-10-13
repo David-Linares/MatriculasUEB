@@ -1,7 +1,7 @@
-// default package
-// Generated Oct 12, 2015 4:45:01 PM by Hibernate Tools 3.4.0.CR1
+package Entidades;
 
-import java.math.BigDecimal;
+// Generated 12-oct-2015 22:22:37 by Hibernate Tools 4.3.1
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public class Persona implements java.io.Serializable {
 
-	private BigDecimal idPersona;
+	private int idPersona;
 	private Perfil perfil;
 	private String nombrePersona;
 	private String apellidosPersona;
@@ -21,22 +21,24 @@ public class Persona implements java.io.Serializable {
 	private String correoElectronico;
 	private Character estadoPersona;
 	private String contrasena;
-	private Set matriculas = new HashSet(0);
-	private Set carreras = new HashSet(0);
-	private Set telefonoses = new HashSet(0);
+	private Set<CarreraEstudiante> carreraEstudiantes = new HashSet<CarreraEstudiante>(
+			0);
+	private Set<Matricula> matriculas = new HashSet<Matricula>(0);
+	private Set<Telefonos> telefonoses = new HashSet<Telefonos>(0);
 
 	public Persona() {
 	}
 
-	public Persona(BigDecimal idPersona) {
+	public Persona(int idPersona) {
 		this.idPersona = idPersona;
 	}
 
-	public Persona(BigDecimal idPersona, Perfil perfil, String nombrePersona,
+	public Persona(int idPersona, Perfil perfil, String nombrePersona,
 			String apellidosPersona, Date fechaNacimiento,
 			String lugarNacimiento, String direccion, String correoElectronico,
-			Character estadoPersona, String contrasena, Set matriculas,
-			Set carreras, Set telefonoses) {
+			Character estadoPersona, String contrasena,
+			Set<CarreraEstudiante> carreraEstudiantes,
+			Set<Matricula> matriculas, Set<Telefonos> telefonoses) {
 		this.idPersona = idPersona;
 		this.perfil = perfil;
 		this.nombrePersona = nombrePersona;
@@ -47,16 +49,16 @@ public class Persona implements java.io.Serializable {
 		this.correoElectronico = correoElectronico;
 		this.estadoPersona = estadoPersona;
 		this.contrasena = contrasena;
+		this.carreraEstudiantes = carreraEstudiantes;
 		this.matriculas = matriculas;
-		this.carreras = carreras;
 		this.telefonoses = telefonoses;
 	}
 
-	public BigDecimal getIdPersona() {
+	public int getIdPersona() {
 		return this.idPersona;
 	}
 
-	public void setIdPersona(BigDecimal idPersona) {
+	public void setIdPersona(int idPersona) {
 		this.idPersona = idPersona;
 	}
 
@@ -132,27 +134,27 @@ public class Persona implements java.io.Serializable {
 		this.contrasena = contrasena;
 	}
 
-	public Set getMatriculas() {
+	public Set<CarreraEstudiante> getCarreraEstudiantes() {
+		return this.carreraEstudiantes;
+	}
+
+	public void setCarreraEstudiantes(Set<CarreraEstudiante> carreraEstudiantes) {
+		this.carreraEstudiantes = carreraEstudiantes;
+	}
+
+	public Set<Matricula> getMatriculas() {
 		return this.matriculas;
 	}
 
-	public void setMatriculas(Set matriculas) {
+	public void setMatriculas(Set<Matricula> matriculas) {
 		this.matriculas = matriculas;
 	}
 
-	public Set getCarreras() {
-		return this.carreras;
-	}
-
-	public void setCarreras(Set carreras) {
-		this.carreras = carreras;
-	}
-
-	public Set getTelefonoses() {
+	public Set<Telefonos> getTelefonoses() {
 		return this.telefonoses;
 	}
 
-	public void setTelefonoses(Set telefonoses) {
+	public void setTelefonoses(Set<Telefonos> telefonoses) {
 		this.telefonoses = telefonoses;
 	}
 

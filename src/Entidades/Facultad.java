@@ -1,7 +1,7 @@
-// default package
-// Generated Oct 12, 2015 4:45:01 PM by Hibernate Tools 3.4.0.CR1
+package Entidades;
 
-import java.math.BigDecimal;
+// Generated 12-oct-2015 22:22:37 by Hibernate Tools 4.3.1
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,31 +10,31 @@ import java.util.Set;
  */
 public class Facultad implements java.io.Serializable {
 
-	private BigDecimal idFacultad;
+	private int idFacultad;
 	private String nombreFacultad;
 	private Character estadoFacultad;
-	private Set carreras = new HashSet(0);
+	private Set<Carrera> carreras = new HashSet<Carrera>(0);
 
 	public Facultad() {
 	}
 
-	public Facultad(BigDecimal idFacultad) {
+	public Facultad(int idFacultad) {
 		this.idFacultad = idFacultad;
 	}
 
-	public Facultad(BigDecimal idFacultad, String nombreFacultad,
-			Character estadoFacultad, Set carreras) {
+	public Facultad(int idFacultad, String nombreFacultad,
+			Character estadoFacultad, Set<Carrera> carreras) {
 		this.idFacultad = idFacultad;
 		this.nombreFacultad = nombreFacultad;
 		this.estadoFacultad = estadoFacultad;
 		this.carreras = carreras;
 	}
 
-	public BigDecimal getIdFacultad() {
+	public int getIdFacultad() {
 		return this.idFacultad;
 	}
 
-	public void setIdFacultad(BigDecimal idFacultad) {
+	public void setIdFacultad(int idFacultad) {
 		this.idFacultad = idFacultad;
 	}
 
@@ -54,11 +54,11 @@ public class Facultad implements java.io.Serializable {
 		this.estadoFacultad = estadoFacultad;
 	}
 
-	public Set getCarreras() {
+	public Set<Carrera> getCarreras() {
 		return this.carreras;
 	}
 
-	public void setCarreras(Set carreras) {
+	public void setCarreras(Set<Carrera> carreras) {
 		this.carreras = carreras;
 	}
 
