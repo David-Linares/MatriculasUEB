@@ -6,10 +6,11 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
 <h:head>
+	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
 	<h:outputStylesheet library="css" name="material.min.css"></h:outputStylesheet>
 	<h:outputStylesheet library="css" name="material-fullpalette.min.css"></h:outputStylesheet>
-	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
-	
+	<h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet>
+		
 </h:head>
 
 <div style="text-align:center; margin-bottom: 10px">
@@ -29,7 +30,7 @@
 	</div>
 	<div class="navbar-collapse collapse navbar-warning-collapse">
 		<ul class="nav navbar-nav">
-			<li><h:commandLink value="Estudiantes" action="paginaEstudiante"></h:commandLink> </li>
+			<li><h:outputLink value="Modulos/Estudiante/index.xhtml">Estudiantes</h:outputLink> </li>
 			<li><a href="javascript:void(0)">Facultades</a></li>
 			<li><a href="javascript:void(0)">Carreras</a></li>
 			<li><a href="javascript:void(0)">Mi Prematricula</a></li>
