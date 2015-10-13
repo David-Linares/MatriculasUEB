@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 13, 2015 7:48:35 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="co.ueb.matriculas.model.Materia" table="MATERIA" optimistic-lock="version">
+        <id name="idMateria" type="big_decimal">
+            <column name="ID_MATERIA" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombreMateria" type="string">
+            <column name="NOMBRE_MATERIA" length="50" />
+        </property>
+        <property name="creditos" type="big_decimal">
+            <column name="CREDITOS" precision="22" scale="0" />
+        </property>
+        <property name="estadoMateria" type="java.lang.Character">
+            <column name="ESTADO_MATERIA" length="1" />
+        </property>
+        <set name="materiaMatriculas" table="MATERIA_MATRICULA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_MATERIA" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="co.ueb.matriculas.model.MateriaMatricula" />
+        </set>
+        <set name="carreraMaterias" table="CARRERA_MATERIA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_MATERIA" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="co.ueb.matriculas.model.CarreraMateria" />
+        </set>
+    </class>
+</hibernate-mapping>

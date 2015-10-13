@@ -2,14 +2,14 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
-  <table-filter match-catalog="matriculasueb" match-name="carrera"/>
-  <table-filter match-catalog="matriculasueb" match-name="carrera_estudiante"/>
-  <table-filter match-catalog="matriculasueb" match-name="carrera_materia"/>
-  <table-filter match-catalog="matriculasueb" match-name="facultad"/>
-  <table-filter match-catalog="matriculasueb" match-name="materia"/>
-  <table-filter match-catalog="matriculasueb" match-name="materia_matricula"/>
-  <table-filter match-catalog="matriculasueb" match-name="matricula"/>
-  <table-filter match-catalog="matriculasueb" match-name="perfil"/>
-  <table-filter match-catalog="matriculasueb" match-name="persona"/>
-  <table-filter match-catalog="matriculasueb" match-name="telefonos"/>
+  <table-filter match-name="CARRERA"/>
+  <table-filter match-name="CARRERA_ESTUDIANTE"/>
+  <table-filter match-name="CARRERA_MATERIA"/>
+  <table-filter match-name="FACULTAD"/>
+  <table-filter match-name="MATERIA"/>
+  <table-filter match-name="MATERIA_MATRICULA"/>
+  <table-filter match-name="MATRICULA"/>
+  <table-filter match-name="PERFIL"/>
+  <table-filter match-name="PERSONA"/>
+  <table-filter match-name="TELEFONOS"/>
 </hibernate-reverse-engineering>
