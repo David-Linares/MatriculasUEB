@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 12, 2015 4:45:01 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Matricula" table="MATRICULA">
+        <id name="idMatricula" type="big_decimal">
+            <column name="ID_MATRICULA" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="persona" class="Persona" fetch="select">
+            <column name="ID_PERSONA" precision="22" scale="0" />
+        </many-to-one>
+        <property name="totalCreditos" type="big_decimal">
+            <column name="TOTAL_CREDITOS" precision="22" scale="0" />
+        </property>
+        <property name="totalMatricula" type="big_decimal">
+            <column name="TOTAL_MATRICULA" precision="22" scale="0" />
+        </property>
+        <property name="estadoMatricula" type="java.lang.Character">
+            <column name="ESTADO_MATRICULA" length="1" />
+        </property>
+        <set name="materias" table="MATERIA_MATRICULA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_MATRICULA" precision="22" scale="0" not-null="true" />
+            </key>
+            <many-to-many entity-name="Materia">
+                <column name="ID_MATERIA" precision="22" scale="0" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
