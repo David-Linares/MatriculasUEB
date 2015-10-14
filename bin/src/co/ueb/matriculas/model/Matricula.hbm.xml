@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 13, 2015 8:11:29 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="co.ueb.matriculas.model.Matricula" table="MATRICULA" optimistic-lock="version">
+        <id name="idMatricula" type="big_decimal">
+            <column name="ID_MATRICULA" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="persona" class="co.ueb.matriculas.model.Persona" fetch="select">
+            <column name="ID_PERSONA" precision="22" scale="0" />
+        </many-to-one>
+        <property name="totalCreditos" type="big_decimal">
+            <column name="TOTAL_CREDITOS" precision="22" scale="0" />
+        </property>
+        <property name="totalMatricula" type="big_decimal">
+            <column name="TOTAL_MATRICULA" precision="22" scale="0" />
+        </property>
+        <property name="estadoMatricula" type="java.lang.Character">
+            <column name="ESTADO_MATRICULA" length="1" />
+        </property>
+        <set name="materiaMatriculas" table="MATERIA_MATRICULA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_MATRICULA" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="co.ueb.matriculas.model.MateriaMatricula" />
+        </set>
+    </class>
+</hibernate-mapping>

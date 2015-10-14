@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:*" PATH="*" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:0" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="paginaEstudiante::Modulos#Estudiante#index.xhtml" NAME="output"
+    PATH="Modulos/Estudiante/index.xhtml"
+    TARGET="rules:Modulos#Estudiante#index.xhtml"
+    TITLE="paginaEstudiante" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="paginaCarreras::Modulos#Carreras#index.xhtml" NAME="output1"
+    PATH="Modulos/Carreras/index.xhtml"
+    TARGET="rules:Modulos#Carreras#index.xhtml" TITLE="paginaCarreras" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="paginaFacultad::Modulos#Facultad#index.xhtml" NAME="output2"
+    PATH="Modulos/Facultad/index.xhtml"
+    TARGET="rules:Modulos#Facultad#index.xhtml" TITLE="paginaFacultad" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="login::Modulos#Login#login.xhtml"
+    NAME="output3" PATH="Modulos/Login/login.xhtml"
+    TARGET="rules:Modulos#Login#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="paginaMatricula::Modulos#Matricula#index.xhtml" NAME="output4"
+    PATH="Modulos/Matricula/index.xhtml"
+    TARGET="rules:Modulos#Matricula#index.xhtml" TITLE="paginaMatricula" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:Modulos#Login#login.xhtml"
+  PATH="Modulos/Login/login.xhtml" SHAPE="304,497,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:Modulos#Carreras#index.xhtml"
+  PATH="Modulos/Carreras/index.xhtml" SHAPE="304,273,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:Modulos#Facultad#index.xhtml"
+  PATH="Modulos/Facultad/index.xhtml" SHAPE="304,385,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:Modulos#Matricula#index.xhtml"
+  PATH="Modulos/Matricula/index.xhtml" SHAPE="304,609,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:Modulos#Estudiante#index.xhtml"
+  PATH="Modulos/Estudiante/index.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>
