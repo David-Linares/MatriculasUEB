@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory name="MySessionFactory">
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+        <property name="hibernate.connection.password">admin12345</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@104.197.2.43:1521:xe</property>
+        <property name="hibernate.connection.username">admin_matriculas</property>
+        <property name="hibernate.default_schema">ADMIN_MATRICULAS</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+        <property name="hibernate.search.autoregister_listeners">false</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property>
+        <mapping resource="co/ueb/matriculas/model/Materia.hbm.xml" />
+        <mapping resource="co/ueb/matriculas/model/Perfil.hbm.xml" />
+        <mapping resource="co/ueb/matriculas/model/MateriaMatricula.hbm.xml" />
+        <mapping resource="co/ueb/matriculas/model/Carrera.hbm.xml" />
+        <mapping resource="co/ueb/matriculas/model/CarreraEstudiante.hbm.xml" />
+        <mapping resource="co/ueb/matriculas/model/Matricula.hbm.xml" />
+        <mapping resource="co/ueb/matriculas/model/Telefonos.hbm.xml" />
+        <mapping resource="co/ueb/matriculas/model/Persona.hbm.xml" />
+        <mapping resource="co/ueb/matriculas/model/Facultad.hbm.xml" />
+        <mapping resource="co/ueb/matriculas/model/CarreraMateria.hbm.xml" />
+    </session-factory>
+</hibernate-configuration>

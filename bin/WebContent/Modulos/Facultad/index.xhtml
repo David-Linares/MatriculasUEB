@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+	<ui:insert>
+		<ui:include src="../Header/header.xhtml"></ui:include>
+	</ui:insert>
+<body> 
+	<div class="container">
+		<div class="col-md-12" style="margin-bottom:30px">
+			<div class="col-md-3" style="text-align:center">
+				<button data-toggle="modal" data-target="#myModal" style="background-color: transparent;border: none;">
+					<h:graphicImage url="/resources/images/add.png"></h:graphicImage>
+				</button>
+			</div>
+			<div class="col-md-3" style="text-align:center">
+				<h:graphicImage url="/resources/images/save.png"></h:graphicImage>
+			</div>
+			<div class="col-md-3" style="text-align:center">
+				<h:graphicImage url="/resources/images/delete.png"></h:graphicImage>
+			</div>
+			<div class="col-md-3" style="text-align:center">
+				<h:form>
+					<div class="form-control-wrapper">
+						<h:inputText class="form-control col-sm-10 empty"></h:inputText>
+						<div class="floating-label"><h:graphicImage url="/resources/images/search.png"></h:graphicImage> Buscar</div>
+						<span class="material-input"></span>	                    
+					</div>
+				</h:form>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<table class="table table-hover table-striped">
+				<ui:repeat value="#{estudianteBean.listadoEstudiantes}" var="estudiante">
+		            <h:commandButton value="#{estudiante.nombrePersona}" />
+		        </ui:repeat>   
+				<thead style="font-weight:bold">
+					<td># Facultad</td>
+					<td>Nombre de la Facultad</td>
+				</thead>
+				<tbody>	
+					<tr>
+						<td><h:outputText value="#{estudianteBean.nombreEstudiante}" /> </td>
+						<td>a</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>a</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>a</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>a</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Agregar Facultad</h4>
+	      </div>
+        <form>
+	      <div class="modal-body">
+	      		<br></br>
+	        	<div class="form-control-wrapper">
+					<h:inputText class="form-control col-sm-10 empty" required="true"></h:inputText>
+					<div class="floating-label">Nombre de la facultad</div>
+					<span class="material-input"></span>	                    
+				</div>
+				<br></br>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	        <button type="button" class="btn btn-primary">Guardar Facultad</button>
+	      </div>
+        </form>
+	    </div>
+	  </div>
+	</div>
+</body> 
+</html>
