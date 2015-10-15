@@ -35,34 +35,14 @@
 		<div class="col-md-12">
 			<h:dataTable value="#{facultadBean.listadoFacultades}" var="facultad" class="table table-hover table-striped">
 				<h:column>
+					<f:facet name="header"># Facultad</f:facet>
+					#{facultad.idFacultad}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nombre de la Facultad</f:facet>
 					#{facultad.nombreFacultad}
 				</h:column>
 			</h:dataTable>
-			<ui:repeat var="facultad" value="#{facultadBean.listadoFacultades}"></ui:repeat>
-			<table class="table table-hover table-striped">
-				<thead style="font-weight:bold">
-					<td># Facultad</td>
-					<td>Nombre de la Facultad</td>
-				</thead>
-				<tbody>	
-					<tr>
-						<td><h:outputText value="#{estudianteBean.nombreEstudiante}" /> </td>
-						<td>a</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>a</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>a</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>a</td>
-					</tr>
-				</tbody>
-			</table>
 		</div>
 	</div>
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

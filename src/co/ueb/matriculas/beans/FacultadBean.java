@@ -36,6 +36,7 @@ public class FacultadBean {
 		Facultad nuevaFacultad = new Facultad(new BigDecimal(0), this.nombreFacultad, '1', carreras);
 		boolean guardado = fl.crearNuevaFacultad(nuevaFacultad);
 		if(guardado){
+			this.setListadoFacultades();
 			return "paginaFacultad";			
 		}else{
 			return "error";

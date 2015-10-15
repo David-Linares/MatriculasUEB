@@ -28,7 +28,7 @@ public class FacultadLogical {
 	
 	public List<Facultad> consultarFacultades(){
 		List<Facultad> facultades = new ArrayList<Facultad>();
-		String sql = "select f from Facultad as f order by f.nombreFacultad";
+		String sql = "select f from Facultad as f order by f.idFacultad";
 		Session session = HibernateSession.getSf().getCurrentSession();
 		session.beginTransaction();
 		Query query = session.createQuery(sql);
