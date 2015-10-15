@@ -8,13 +8,13 @@ public class HibernateSession {
 	private static SessionFactory sf;
 	private static String filename = "hibernate.cfg.xml";
 	
-	private static SessionFactory buildSessionFactory(String filename){
+	private static SessionFactory buildSessionFactory(){
 		sf = new Configuration().configure(filename).buildSessionFactory();
 		return sf;
 	}
 
 	public static SessionFactory getSf() {
-		sf = buildSessionFactory(filename);
+		sf = buildSessionFactory();
 		return sf;
 	}
 	

@@ -1,8 +1,5 @@
 package co.ueb.matriculas.model;
 
-// default package
-// Generated 14-oct-2015 14:38:56 by Hibernate Tools 3.4.0.CR1
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
@@ -39,7 +36,7 @@ public class Persona implements java.io.Serializable {
 			String apellidosPersona, Date fechaNacimiento,
 			String lugarNacimiento, String direccion, String correoElectronico,
 			Character estadoPersona, String contrasena, String persona,
-			Set matriculas, Set carreras, Set telefonoses) {
+			Set matriculas, Set carreraEstudiantes, Set telefonoses) {
 		this.idPersona = idPersona;
 		this.perfil = perfil;
 		this.nombrePersona = nombrePersona;

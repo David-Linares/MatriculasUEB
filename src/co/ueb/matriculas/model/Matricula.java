@@ -1,8 +1,5 @@
 package co.ueb.matriculas.model;
 
-// default package
-// Generated 14-oct-2015 14:38:56 by Hibernate Tools 3.4.0.CR1
-
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;

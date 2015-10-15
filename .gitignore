@@ -1,5 +1,10 @@
-.settings/*
-/build/
+#.settings/*
+#/build/
 #*.classpath
+<<<<<<< HEAD
 /target/
 /bin/
+=======
+#/target/
+>>>>>>> origin/master
+/build/

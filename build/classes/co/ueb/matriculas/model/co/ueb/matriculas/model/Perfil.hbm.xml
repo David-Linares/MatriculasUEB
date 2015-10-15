@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-oct-2015 22:40:39 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="co.ueb.matriculas.model.Perfil" table="PERFIL">
+        <id name="idPerfil" type="big_decimal">
+            <column name="ID_PERFIL" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombrePerfil" type="string">
+            <column name="NOMBRE_PERFIL" length="20" />
+        </property>
+        <property name="estadoPerfil" type="java.lang.Character">
+            <column name="ESTADO_PERFIL" length="1" />
+        </property>
+        <set name="personas" table="PERSONA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_PERFIL" precision="22" scale="0" />
+            </key>
+            <one-to-many class="co.ueb.matriculas.model.Persona" />
+        </set>
+    </class>
+</hibernate-mapping>
