@@ -2,14 +2,24 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
-  <table-filter match-name="CARRERA"/>
-  <table-filter match-name="CARRERA_ESTUDIANTE"/>
-  <table-filter match-name="CARRERA_MATERIA"/>
-  <table-filter match-name="FACULTAD"/>
-  <table-filter match-name="MATERIA"/>
-  <table-filter match-name="MATERIA_MATRICULA"/>
-  <table-filter match-name="MATRICULA"/>
-  <table-filter match-name="PERFIL"/>
-  <table-filter match-name="PERSONA"/>
-  <table-filter match-name="TELEFONOS"/>
+	<table-filter match-name="CARRERA" />
+	<table-filter match-name="CARRERA_ESTUDIANTE" />
+	<table-filter match-name="CARRERA_MATERIA" />
+	<table-filter match-name="FACULTAD" />
+	<table-filter match-name="MATERIA" />
+	<table-filter match-name="MATERIA_MATRICULA" />
+	<table-filter match-name="MATRICULA" />
+	<table-filter match-name="PERFIL" />
+	<table-filter match-name="PERSONA" />
+	<table-filter match-name="TELEFONOS" />
+	<table name="PERSONA"></table>
+	<table name="CARRERA"></table>
+	<table name="MATERIA_MATRICULA"></table>
+	<table name="CARRERA_MATERIA"></table>
+	<table name="MATERIA"></table>
+	<table name="PERFIL"></table>
+	<table name="TELEFONOS"></table>
+	<table name="MATRICULA"></table>
+	<table name="FACULTAD"></table>
+	<table name="CARRERA_ESTUDIANTE"></table>
 </hibernate-reverse-engineering>

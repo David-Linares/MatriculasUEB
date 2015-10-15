@@ -1,6 +1,7 @@
 package co.ueb.matriculas.model;
 
-// Generated Oct 13, 2015 8:11:29 AM by Hibernate Tools 4.3.1
+// default package
+// Generated 14-oct-2015 14:38:56 by Hibernate Tools 3.4.0.CR1
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -22,8 +23,9 @@ public class Persona implements java.io.Serializable {
 	private String correoElectronico;
 	private Character estadoPersona;
 	private String contrasena;
+	private String persona;
 	private Set matriculas = new HashSet(0);
-	private Set carreraEstudiantes = new HashSet(0);
+	private Set carreras = new HashSet(0);
 	private Set telefonoses = new HashSet(0);
 
 	public Persona() {
@@ -36,8 +38,8 @@ public class Persona implements java.io.Serializable {
 	public Persona(BigDecimal idPersona, Perfil perfil, String nombrePersona,
 			String apellidosPersona, Date fechaNacimiento,
 			String lugarNacimiento, String direccion, String correoElectronico,
-			Character estadoPersona, String contrasena, Set matriculas,
-			Set carreraEstudiantes, Set telefonoses) {
+			Character estadoPersona, String contrasena, String persona,
+			Set matriculas, Set carreras, Set telefonoses) {
 		this.idPersona = idPersona;
 		this.perfil = perfil;
 		this.nombrePersona = nombrePersona;
@@ -48,8 +50,9 @@ public class Persona implements java.io.Serializable {
 		this.correoElectronico = correoElectronico;
 		this.estadoPersona = estadoPersona;
 		this.contrasena = contrasena;
+		this.persona = persona;
 		this.matriculas = matriculas;
-		this.carreraEstudiantes = carreraEstudiantes;
+		this.carreras = carreras;
 		this.telefonoses = telefonoses;
 	}
 
@@ -133,6 +136,14 @@ public class Persona implements java.io.Serializable {
 		this.contrasena = contrasena;
 	}
 
+	public String getPersona() {
+		return this.persona;
+	}
+
+	public void setPersona(String persona) {
+		this.persona = persona;
+	}
+
 	public Set getMatriculas() {
 		return this.matriculas;
 	}
@@ -141,12 +152,12 @@ public class Persona implements java.io.Serializable {
 		this.matriculas = matriculas;
 	}
 
-	public Set getCarreraEstudiantes() {
-		return this.carreraEstudiantes;
+	public Set getCarreras() {
+		return this.carreras;
 	}
 
-	public void setCarreraEstudiantes(Set carreraEstudiantes) {
-		this.carreraEstudiantes = carreraEstudiantes;
+	public void setCarreras(Set carreras) {
+		this.carreras = carreras;
 	}
 
 	public Set getTelefonoses() {

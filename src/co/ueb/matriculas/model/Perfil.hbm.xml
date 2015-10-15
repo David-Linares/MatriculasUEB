@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 13, 2015 8:11:29 AM by Hibernate Tools 4.3.1 -->
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-oct-2015 14:38:57 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="co.ueb.matriculas.model.Perfil" table="PERFIL" optimistic-lock="version">
+    <class name="Perfil" table="PERFIL">
         <id name="idPerfil" type="big_decimal">
             <column name="ID_PERFIL" precision="22" scale="0" />
             <generator class="assigned" />
@@ -18,7 +18,7 @@
             <key>
                 <column name="ID_PERFIL" precision="22" scale="0" />
             </key>
-            <one-to-many class="co.ueb.matriculas.model.Persona" />
+            <one-to-many class="Persona" />
         </set>
     </class>
 </hibernate-mapping>

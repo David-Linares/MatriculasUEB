@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 13, 2015 8:11:29 AM by Hibernate Tools 4.3.1 -->
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-oct-2015 14:38:57 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="co.ueb.matriculas.model.Persona" table="PERSONA" optimistic-lock="version">
+    <class name="Persona" table="PERSONA">
         <id name="idPersona" type="big_decimal">
             <column name="ID_PERSONA" precision="22" scale="0" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="perfil" class="co.ueb.matriculas.model.Perfil" fetch="select">
+        <many-to-one name="perfil" class="Perfil" fetch="select">
             <column name="ID_PERFIL" precision="22" scale="0" />
         </many-to-one>
         <property name="nombrePersona" type="string">
@@ -33,25 +33,30 @@
             <column name="ESTADO_PERSONA" length="1" />
         </property>
         <property name="contrasena" type="string">
-            <column name="CONTRASENA" length="20" />
+            <column name="CONTRASENA" length="100" />
+        </property>
+        <property name="persona" type="string">
+            <column name="PERSONA" length="50" />
         </property>
         <set name="matriculas" table="MATRICULA" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="ID_PERSONA" precision="22" scale="0" />
             </key>
-            <one-to-many class="co.ueb.matriculas.model.Matricula" />
+            <one-to-many class="Matricula" />
         </set>
-        <set name="carreraEstudiantes" table="CARRERA_ESTUDIANTE" inverse="true" lazy="true" fetch="select">
+        <set name="carreras" table="CARRERA_ESTUDIANTE" inverse="false" lazy="true" fetch="select">
             <key>
                 <column name="ID_PERSONA" precision="22" scale="0" not-null="true" />
             </key>
-            <one-to-many class="co.ueb.matriculas.model.CarreraEstudiante" />
+            <many-to-many entity-name="Carrera">
+                <column name="ID_CARRERA" precision="22" scale="0" not-null="true" />
+            </many-to-many>
         </set>
         <set name="telefonoses" table="TELEFONOS" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="ID_PERSONA" precision="22" scale="0" not-null="true" />
             </key>
-            <one-to-many class="co.ueb.matriculas.model.Telefonos" />
+            <one-to-many class="Telefonos" />
         </set>
     </class>
 </hibernate-mapping>

@@ -1,6 +1,7 @@
 package co.ueb.matriculas.model;
 
-// Generated Oct 13, 2015 8:11:29 AM by Hibernate Tools 4.3.1
+// default package
+// Generated 14-oct-2015 14:38:56 by Hibernate Tools 3.4.0.CR1
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -16,8 +17,8 @@ public class Carrera implements java.io.Serializable {
 	private String nombreCarrera;
 	private BigDecimal totalCreditos;
 	private Character estadoCarrera;
-	private Set carreraEstudiantes = new HashSet(0);
-	private Set carreraMaterias = new HashSet(0);
+	private Set personas = new HashSet(0);
+	private Set materias = new HashSet(0);
 
 	public Carrera() {
 	}
@@ -28,14 +29,14 @@ public class Carrera implements java.io.Serializable {
 
 	public Carrera(BigDecimal idCarrera, Facultad facultad,
 			String nombreCarrera, BigDecimal totalCreditos,
-			Character estadoCarrera, Set carreraEstudiantes, Set carreraMaterias) {
+			Character estadoCarrera, Set personas, Set materias) {
 		this.idCarrera = idCarrera;
 		this.facultad = facultad;
 		this.nombreCarrera = nombreCarrera;
 		this.totalCreditos = totalCreditos;
 		this.estadoCarrera = estadoCarrera;
-		this.carreraEstudiantes = carreraEstudiantes;
-		this.carreraMaterias = carreraMaterias;
+		this.personas = personas;
+		this.materias = materias;
 	}
 
 	public BigDecimal getIdCarrera() {
@@ -78,20 +79,20 @@ public class Carrera implements java.io.Serializable {
 		this.estadoCarrera = estadoCarrera;
 	}
 
-	public Set getCarreraEstudiantes() {
-		return this.carreraEstudiantes;
+	public Set getPersonas() {
+		return this.personas;
 	}
 
-	public void setCarreraEstudiantes(Set carreraEstudiantes) {
-		this.carreraEstudiantes = carreraEstudiantes;
+	public void setPersonas(Set personas) {
+		this.personas = personas;
 	}
 
-	public Set getCarreraMaterias() {
-		return this.carreraMaterias;
+	public Set getMaterias() {
+		return this.materias;
 	}
 
-	public void setCarreraMaterias(Set carreraMaterias) {
-		this.carreraMaterias = carreraMaterias;
+	public void setMaterias(Set materias) {
+		this.materias = materias;
 	}
 
 }

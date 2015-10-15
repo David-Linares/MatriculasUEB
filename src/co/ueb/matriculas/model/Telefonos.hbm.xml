@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 13, 2015 8:11:29 AM by Hibernate Tools 4.3.1 -->
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-oct-2015 14:38:57 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="co.ueb.matriculas.model.Telefonos" table="TELEFONOS" optimistic-lock="version">
-        <composite-id name="id" class="co.ueb.matriculas.model.TelefonosId">
+    <class name="Telefonos" table="TELEFONOS">
+        <composite-id name="id" class="TelefonosId">
             <key-property name="idPersona" type="big_decimal">
                 <column name="ID_PERSONA" precision="22" scale="0" />
             </key-property>
@@ -12,7 +12,7 @@
                 <column name="TELEFONO" precision="22" scale="0" />
             </key-property>
         </composite-id>
-        <many-to-one name="persona" class="co.ueb.matriculas.model.Persona" update="false" insert="false" fetch="select">
+        <many-to-one name="persona" class="Persona" update="false" insert="false" fetch="select">
             <column name="ID_PERSONA" precision="22" scale="0" not-null="true" />
         </many-to-one>
     </class>

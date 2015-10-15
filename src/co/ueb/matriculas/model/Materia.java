@@ -1,6 +1,7 @@
 package co.ueb.matriculas.model;
 
-// Generated Oct 13, 2015 8:11:29 AM by Hibernate Tools 4.3.1
+// default package
+// Generated 14-oct-2015 14:38:56 by Hibernate Tools 3.4.0.CR1
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -15,8 +16,8 @@ public class Materia implements java.io.Serializable {
 	private String nombreMateria;
 	private BigDecimal creditos;
 	private Character estadoMateria;
-	private Set materiaMatriculas = new HashSet(0);
-	private Set carreraMaterias = new HashSet(0);
+	private Set matriculas = new HashSet(0);
+	private Set carreras = new HashSet(0);
 
 	public Materia() {
 	}
@@ -26,14 +27,14 @@ public class Materia implements java.io.Serializable {
 	}
 
 	public Materia(BigDecimal idMateria, String nombreMateria,
-			BigDecimal creditos, Character estadoMateria,
-			Set materiaMatriculas, Set carreraMaterias) {
+			BigDecimal creditos, Character estadoMateria, Set matriculas,
+			Set carreras) {
 		this.idMateria = idMateria;
 		this.nombreMateria = nombreMateria;
 		this.creditos = creditos;
 		this.estadoMateria = estadoMateria;
-		this.materiaMatriculas = materiaMatriculas;
-		this.carreraMaterias = carreraMaterias;
+		this.matriculas = matriculas;
+		this.carreras = carreras;
 	}
 
 	public BigDecimal getIdMateria() {
@@ -68,20 +69,20 @@ public class Materia implements java.io.Serializable {
 		this.estadoMateria = estadoMateria;
 	}
 
-	public Set getMateriaMatriculas() {
-		return this.materiaMatriculas;
+	public Set getMatriculas() {
+		return this.matriculas;
 	}
 
-	public void setMateriaMatriculas(Set materiaMatriculas) {
-		this.materiaMatriculas = materiaMatriculas;
+	public void setMatriculas(Set matriculas) {
+		this.matriculas = matriculas;
 	}
 
-	public Set getCarreraMaterias() {
-		return this.carreraMaterias;
+	public Set getCarreras() {
+		return this.carreras;
 	}
 
-	public void setCarreraMaterias(Set carreraMaterias) {
-		this.carreraMaterias = carreraMaterias;
+	public void setCarreras(Set carreras) {
+		this.carreras = carreras;
 	}
 
 }
