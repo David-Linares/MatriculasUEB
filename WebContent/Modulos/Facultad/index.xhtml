@@ -33,10 +33,13 @@
 			</div>
 		</div>
 		<div class="col-md-12">
+			<h:dataTable value="#{facultadBean.listadoFacultades}" var="facultad" class="table table-hover table-striped">
+				<h:column>
+					#{facultad.nombreFacultad}
+				</h:column>
+			</h:dataTable>
+			<ui:repeat var="facultad" value="#{facultadBean.listadoFacultades}"></ui:repeat>
 			<table class="table table-hover table-striped">
-				<ui:repeat value="#{estudianteBean.listadoEstudiantes}" var="estudiante">
-		            <h:commandButton value="#{estudiante.nombrePersona}" />
-		        </ui:repeat>   
 				<thead style="font-weight:bold">
 					<td># Facultad</td>
 					<td>Nombre de la Facultad</td>
@@ -69,11 +72,11 @@
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title" id="myModalLabel">Agregar Facultad</h4>
 	      </div>
-        <form>
+        <h:form >
 	      <div class="modal-body">
 	      		<br></br>
 	        	<div class="form-control-wrapper">
-					<h:inputText class="form-control col-sm-10 empty" required="true"></h:inputText>
+					<h:inputText class="form-control col-sm-10 empty" required="true" value="#{facultadBean.nombreFacultad}"></h:inputText>
 					<div class="floating-label">Nombre de la facultad</div>
 					<span class="material-input"></span>	                    
 				</div>
@@ -81,9 +84,9 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-	        <button type="button" class="btn btn-primary">Guardar Facultad</button>
+	        <h:commandButton class="btn btn-primary" action="#{facultadBean.crearFacultad}" value="Guardar Facultad" />
 	      </div>
-        </form>
+        </h:form>
 	    </div>
 	  </div>
 	</div>

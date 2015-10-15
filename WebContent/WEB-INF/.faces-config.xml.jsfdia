@@ -22,6 +22,8 @@
     ID="paginaMatricula::Modulos#Matricula#index.xhtml" NAME="output4"
     PATH="Modulos/Matricula/index.xhtml"
     TARGET="rules:Modulos#Matricula#index.xhtml" TITLE="paginaMatricula" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="error::#error.xhtml" NAME="output5"
+    PATH="/error.xhtml" TARGET="rules:#error.xhtml" TITLE="error" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:Modulos#Login#login.xhtml"
@@ -34,4 +36,6 @@
   PATH="Modulos/Matricula/index.xhtml" SHAPE="304,609,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:Modulos#Estudiante#index.xhtml"
   PATH="Modulos/Estudiante/index.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#error.xhtml" PATH="/error.xhtml"
+  SHAPE="304,305,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

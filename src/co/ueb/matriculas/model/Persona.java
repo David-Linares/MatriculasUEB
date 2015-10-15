@@ -1,6 +1,6 @@
 package co.ueb.matriculas.model;
 
-// Generated Oct 13, 2015 8:11:29 AM by Hibernate Tools 4.3.1
+// Generated Oct 14, 2015 8:54:14 PM by Hibernate Tools 4.3.1
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -22,6 +22,7 @@ public class Persona implements java.io.Serializable {
 	private String correoElectronico;
 	private Character estadoPersona;
 	private String contrasena;
+	private String persona;
 	private Set matriculas = new HashSet(0);
 	private Set carreraEstudiantes = new HashSet(0);
 	private Set telefonoses = new HashSet(0);
@@ -36,8 +37,8 @@ public class Persona implements java.io.Serializable {
 	public Persona(BigDecimal idPersona, Perfil perfil, String nombrePersona,
 			String apellidosPersona, Date fechaNacimiento,
 			String lugarNacimiento, String direccion, String correoElectronico,
-			Character estadoPersona, String contrasena, Set matriculas,
-			Set carreraEstudiantes, Set telefonoses) {
+			Character estadoPersona, String contrasena, String persona,
+			Set matriculas, Set carreraEstudiantes, Set telefonoses) {
 		this.idPersona = idPersona;
 		this.perfil = perfil;
 		this.nombrePersona = nombrePersona;
@@ -48,6 +49,7 @@ public class Persona implements java.io.Serializable {
 		this.correoElectronico = correoElectronico;
 		this.estadoPersona = estadoPersona;
 		this.contrasena = contrasena;
+		this.persona = persona;
 		this.matriculas = matriculas;
 		this.carreraEstudiantes = carreraEstudiantes;
 		this.telefonoses = telefonoses;
@@ -131,6 +133,14 @@ public class Persona implements java.io.Serializable {
 
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
+	}
+
+	public String getPersona() {
+		return this.persona;
+	}
+
+	public void setPersona(String persona) {
+		this.persona = persona;
 	}
 
 	public Set getMatriculas() {
