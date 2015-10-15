@@ -1,5 +1,7 @@
 package co.ueb.matriculas.model;
 
+// Generated Oct 15, 2015 8:58:55 AM by Hibernate Tools 4.3.1
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
@@ -22,7 +24,7 @@ public class Persona implements java.io.Serializable {
 	private String contrasena;
 	private String persona;
 	private Set matriculas = new HashSet(0);
-	private Set carreras = new HashSet(0);
+	private Set carreraEstudiantes = new HashSet(0);
 	private Set telefonoses = new HashSet(0);
 
 	public Persona() {
@@ -49,7 +51,7 @@ public class Persona implements java.io.Serializable {
 		this.contrasena = contrasena;
 		this.persona = persona;
 		this.matriculas = matriculas;
-		this.carreras = carreras;
+		this.carreraEstudiantes = carreraEstudiantes;
 		this.telefonoses = telefonoses;
 	}
 
@@ -149,12 +151,12 @@ public class Persona implements java.io.Serializable {
 		this.matriculas = matriculas;
 	}
 
-	public Set getCarreras() {
-		return this.carreras;
+	public Set getCarreraEstudiantes() {
+		return this.carreraEstudiantes;
 	}
 
-	public void setCarreras(Set carreras) {
-		this.carreras = carreras;
+	public void setCarreraEstudiantes(Set carreraEstudiantes) {
+		this.carreraEstudiantes = carreraEstudiantes;
 	}
 
 	public Set getTelefonoses() {

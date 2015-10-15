@@ -1,5 +1,7 @@
 package co.ueb.matriculas.model;
 
+// Generated Oct 15, 2015 8:58:55 AM by Hibernate Tools 4.3.1
+
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +16,7 @@ public class Matricula implements java.io.Serializable {
 	private BigDecimal totalCreditos;
 	private BigDecimal totalMatricula;
 	private Character estadoMatricula;
-	private Set materias = new HashSet(0);
+	private Set materiaMatriculas = new HashSet(0);
 
 	public Matricula() {
 	}
@@ -25,13 +27,13 @@ public class Matricula implements java.io.Serializable {
 
 	public Matricula(BigDecimal idMatricula, Persona persona,
 			BigDecimal totalCreditos, BigDecimal totalMatricula,
-			Character estadoMatricula, Set materias) {
+			Character estadoMatricula, Set materiaMatriculas) {
 		this.idMatricula = idMatricula;
 		this.persona = persona;
 		this.totalCreditos = totalCreditos;
 		this.totalMatricula = totalMatricula;
 		this.estadoMatricula = estadoMatricula;
-		this.materias = materias;
+		this.materiaMatriculas = materiaMatriculas;
 	}
 
 	public BigDecimal getIdMatricula() {
@@ -74,12 +76,12 @@ public class Matricula implements java.io.Serializable {
 		this.estadoMatricula = estadoMatricula;
 	}
 
-	public Set getMaterias() {
-		return this.materias;
+	public Set getMateriaMatriculas() {
+		return this.materiaMatriculas;
 	}
 
-	public void setMaterias(Set materias) {
-		this.materias = materias;
+	public void setMateriaMatriculas(Set materiaMatriculas) {
+		this.materiaMatriculas = materiaMatriculas;
 	}
 
 }

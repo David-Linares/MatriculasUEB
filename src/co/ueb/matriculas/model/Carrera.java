@@ -1,4 +1,7 @@
 package co.ueb.matriculas.model;
+
+// Generated Oct 15, 2015 8:58:55 AM by Hibernate Tools 4.3.1
+
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,8 +16,8 @@ public class Carrera implements java.io.Serializable {
 	private String nombreCarrera;
 	private BigDecimal totalCreditos;
 	private Character estadoCarrera;
-	private Set personas = new HashSet(0);
-	private Set materias = new HashSet(0);
+	private Set carreraEstudiantes = new HashSet(0);
+	private Set carreraMaterias = new HashSet(0);
 
 	public Carrera() {
 	}
@@ -25,14 +28,14 @@ public class Carrera implements java.io.Serializable {
 
 	public Carrera(BigDecimal idCarrera, Facultad facultad,
 			String nombreCarrera, BigDecimal totalCreditos,
-			Character estadoCarrera, Set personas, Set materias) {
+			Character estadoCarrera, Set carreraEstudiantes, Set carreraMaterias) {
 		this.idCarrera = idCarrera;
 		this.facultad = facultad;
 		this.nombreCarrera = nombreCarrera;
 		this.totalCreditos = totalCreditos;
 		this.estadoCarrera = estadoCarrera;
-		this.personas = personas;
-		this.materias = materias;
+		this.carreraEstudiantes = carreraEstudiantes;
+		this.carreraMaterias = carreraMaterias;
 	}
 
 	public BigDecimal getIdCarrera() {
@@ -75,20 +78,20 @@ public class Carrera implements java.io.Serializable {
 		this.estadoCarrera = estadoCarrera;
 	}
 
-	public Set getPersonas() {
-		return this.personas;
+	public Set getCarreraEstudiantes() {
+		return this.carreraEstudiantes;
 	}
 
-	public void setPersonas(Set personas) {
-		this.personas = personas;
+	public void setCarreraEstudiantes(Set carreraEstudiantes) {
+		this.carreraEstudiantes = carreraEstudiantes;
 	}
 
-	public Set getMaterias() {
-		return this.materias;
+	public Set getCarreraMaterias() {
+		return this.carreraMaterias;
 	}
 
-	public void setMaterias(Set materias) {
-		this.materias = materias;
+	public void setCarreraMaterias(Set carreraMaterias) {
+		this.carreraMaterias = carreraMaterias;
 	}
 
 }

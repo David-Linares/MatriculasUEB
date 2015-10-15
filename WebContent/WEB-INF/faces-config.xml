@@ -14,7 +14,12 @@
  <managed-bean>
   <managed-bean-name>facultadBean</managed-bean-name>
   <managed-bean-class>co.ueb.matriculas.beans.FacultadBean</managed-bean-class>
-  <managed-bean-scope>request</managed-bean-scope>
+  <managed-bean-scope>session</managed-bean-scope>
+  <managed-property>
+   <property-name>listadoFacultades</property-name>
+   <property-class>java.util.List</property-class>
+   <value/>
+  </managed-property>
   <managed-property>
    <property-name>nombreFacultad</property-name>
    <property-class>java.lang.String</property-class>
