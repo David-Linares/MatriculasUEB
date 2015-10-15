@@ -17,9 +17,6 @@
 				</button>
 			</div>
 			<div class="col-md-3" style="text-align:center">
-				<h:graphicImage url="/resources/images/save.png"></h:graphicImage>
-			</div>
-			<div class="col-md-3" style="text-align:center">
 				<h:graphicImage url="/resources/images/delete.png"></h:graphicImage>
 			</div>
 			<div class="col-md-3" style="text-align:center">
@@ -42,7 +39,14 @@
 					<h:column>
 						<f:facet name="header">Nombre de la Facultad</f:facet>
 						#{facultad.nombreFacultad}
+					</h:column>					
+					<h:column>
+						<f:facet name="header">Acciones</f:facet>
+						<button>
+							<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
+						</button>
 					</h:column>
+					
 				</h:dataTable>
 			</h:form>
 		</div>
