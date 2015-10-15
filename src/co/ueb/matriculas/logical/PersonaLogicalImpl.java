@@ -13,7 +13,7 @@ public class PersonaLogicalImpl implements PersonaLogical {
 	(Persona persona){
 		Persona model=null;
 		Session sesion  = HibernateSession.getSf().getCurrentSession();
-		String sql="FROM Persona WHERE estadoPersona=1 and persona='"+persona.getPersona()+"'";
+		String sql="FROM Persona WHERE estadoPersona=1 and persona='"+persona.getUsuario()+"'";
 		try{
 			sesion.beginTransaction();
 			model=(Persona) sesion.createQuery(sql).uniqueResult();

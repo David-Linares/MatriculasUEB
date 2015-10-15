@@ -12,12 +12,9 @@
 	<div class="container">
 		<div class="col-md-12" style="margin-bottom:30px">
 			<div class="col-md-3" style="text-align:center">
-				<button data-toggle="modal" data-target="#myModal" style="background-color: transparent;border: none;">
+				<button data-toggle="modal" data-target="#myModal" class="botonImg">
 					<h:graphicImage url="/resources/images/add.png"></h:graphicImage>
 				</button>
-			</div>
-			<div class="col-md-3" style="text-align:center">
-				<h:graphicImage url="/resources/images/delete.png"></h:graphicImage>
 			</div>
 			<div class="col-md-3" style="text-align:center">
 				<h:form>
@@ -31,23 +28,25 @@
 		</div>
 		<div class="col-md-12">
 			<h:form>
-				<h:dataTable value="#{facultadBean.listadoFacultades}" var="facultad" class="table table-hover table-striped">
-					<h:column>
-						<f:facet name="header"># Facultad</f:facet>
-						<h:commandLink value="#{facultad.idFacultad}" data-toggle="modal" data-target="#myModalEdit"/>
-					</h:column>
-					<h:column>
-						<f:facet name="header">Nombre de la Facultad</f:facet>
-						#{facultad.nombreFacultad}
-					</h:column>					
-					<h:column>
-						<f:facet name="header">Acciones</f:facet>
-						<button>
-							<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
-						</button>
-					</h:column>
-					
-				</h:dataTable>
+			<h:dataTable value="#{facultadBean.listadoFacultades}" var="facultad" class="table table-hover table-striped" id="tablaFacultad">
+				<h:column>
+					<f:facet name="header"># Facultad</f:facet>
+					#{facultad.idFacultad}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nombre de la Facultad</f:facet>
+					#{facultad.nombreFacultad}
+				</h:column>					
+				<h:column>
+					<f:facet name="header">Acciones</f:facet>
+					<h:commandLink class="botonImg" data-toggle="modal" data-target="#myModalEdit" actionListener="#{facultadBean.setEditarFacultad(facultad)}" update="tablaFacultad">
+						<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
+					</h:commandLink>
+					<h:commandLink class="botonImg" data-toggle="modal" data-target="#myModalConfirm" action="#{facultadBean.eliminarFacultad(facultad)}" update="tablaFacultad">
+						<h:graphicImage url="/resources/images/32/delete.png" ></h:graphicImage>
+					</h:commandLink>
+				</h:column>
+			</h:dataTable>
 			</h:form>
 		</div>
 	</div>
@@ -81,7 +80,7 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Agregar Facultad</h4>
+	        <h4 class="modal-title" id="myModalLabel">Modificar Facultad</h4>
 	      </div>
         <h:form >
 	      <div class="modal-body">
@@ -96,6 +95,21 @@
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 	        <h:commandButton class="btn btn-primary" action="#{facultadBean.crearFacultad}" value="Guardar Facultad" />
+	      </div>
+        </h:form>
+	    </div>
+	  </div>
+	</div>
+	<div class="modal fade" id="myModalConfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title" id="myModalLabel">Estás Seguro que deseas eliminar el registro?</h4>
+	      </div>
+        <h:form >
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	        <h:commandButton class="btn btn-primary" value="Si, Eliminar" />
 	      </div>
         </h:form>
 	    </div>

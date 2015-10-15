@@ -17,9 +17,15 @@ public class FacultadBean {
 	Facultad editarFacultad = null;
 	
 	public String setEditarFacultad(Facultad facultadEdit){
+		System.out.println(facultadEdit);
 		this.editarFacultad = facultadEdit;
 		return "";
 	}
+	
+	public Facultad editarFacultad(){
+		return this.editarFacultad;
+	}
+
 
 	public List<Facultad> getListadoFacultades() {
 		return listadoFacultades;
@@ -43,6 +49,15 @@ public class FacultadBean {
 		boolean guardado = fl.crearNuevaFacultad(nuevaFacultad);
 		if(guardado){
 			this.listadoFacultades.add(nuevaFacultad);
+			return "paginaFacultad";			
+		}else{
+			return "error";
+		}
+	}
+	
+	public String eliminarFacultad(Facultad eFacultad){
+		boolean eliminada = fl.eliminarFacultad(eFacultad);
+		if(eliminada){
 			return "paginaFacultad";			
 		}else{
 			return "error";
