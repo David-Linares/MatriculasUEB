@@ -7,7 +7,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 	
 	<ui:insert>
-		<ui:include src="../Header/header.xhtml"></ui:include>
+	<ui:include src="/Modulos/Header/header.xhtml"></ui:include>
 	</ui:insert>
 	
 	<div class="col-sm-5 col-sm-offset-4">
@@ -17,20 +17,20 @@
 			<h:form>
 				<div class="col-sm-12 form-group">
 					<div class="form-control-wrapper">
-						<input class="form-control col-sm-12 empty" type="text"></input>
+						<h:inputText class="form-control col-sm-12 empty" type="text" required="true" value="#{loginBean.usuario}"></h:inputText>
 						<div class="floating-label">Usuario</div>
 						<span class="material-input"></span>
 					</div>
 				</div>
 				<div class="col-sm-12 form-group">
 					<div class="form-control-wrapper">
-						<input class="form-control col-sm-12 empty" type="password"></input>
+						<h:inputText class="form-control col-sm-12 empty" type="password" required="true" value="#{loginBean.contrasena}"></h:inputText>
 						<div class="floating-label">Password</div>
 						<span class="material-input"></span>
 					</div>
 				</div>
 				<div class="col-sm-12 form-group">
-					<input class="btn btn-success col-sm-12" value="Ingresar"/>
+					<h:commandButton class="btn btn-success col-sm-12" value="Ingresar" required="true" action="#{loginBean.verificarDatos()}"/>
 				</div>				
 			</h:form>
 		</div>

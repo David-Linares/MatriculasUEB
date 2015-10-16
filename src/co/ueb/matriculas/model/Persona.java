@@ -33,6 +33,11 @@ public class Persona implements java.io.Serializable {
 	public Persona(BigDecimal idPersona) {
 		this.idPersona = idPersona;
 	}
+	
+	public Persona(String usuario, String contrasena ){
+		this.usuario = usuario;
+		this.contrasena = contrasena;
+	}
 
 	public Persona(BigDecimal idPersona, Perfil perfil, String nombrePersona,
 			String apellidosPersona, Date fechaNacimiento,
@@ -166,5 +171,13 @@ public class Persona implements java.io.Serializable {
 	public void setTelefonoses(Set telefonoses) {
 		this.telefonoses = telefonoses;
 	}
+
+	@Override
+	public String toString() {
+		return "Persona [contrasena=" + contrasena + ", usuario=" + usuario
+				+ "]";
+	}
+	
+	
 
 }
