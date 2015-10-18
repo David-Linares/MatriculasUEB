@@ -8,10 +8,6 @@ import java.util.List;
 import co.ueb.matriculas.logical.EstudiantesLogical;
 import co.ueb.matriculas.model.Persona;
 
-/**
- * @author davidlinares
- *
- */
 public class EstudianteBean {
 
 	private String nombreEstudiante = "Nuevo mensaje";
