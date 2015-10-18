@@ -3,38 +3,46 @@ package co.ueb.matriculas.beans;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+
 import javax.faces.context.FacesContext;
+
+import org.apache.commons.codec.digest.DigestUtils;
 
 import co.ueb.matriculas.logical.PersonaLogical;
 import co.ueb.matriculas.model.Persona;
 
-
-
 @SuppressWarnings("serial")
-public class LoginBean implements Serializable{
+public class LoginBean implements Serializable {
 
 	private String usuario;
 	private String contrasena;
-	private boolean perfilUsuario = false;
+	private String resultado;
+	private BigDecimal perfilUsuario;
+	private Persona sesionPersona;
 	
+	public void setPerfilUsuario(){
+		sesionPersona = (Persona) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+		if( sesionPersona != null){
+			perfilUsuario = sesionPersona.getPerfil().getIdPerfil();
+		}
+		System.out.println("-------------------");
+		System.out.println("El perfil de usuario es: " + perfilUsuario);
+		System.out.println("-------------------");
+			
+	}
 	
-	public boolean isPerfilUsuario() {
+	public BigDecimal getPerfilUsuario() {
 		return perfilUsuario;
 	}
 
-	public void setPerfilUsuario(boolean perfilUsuario) {
-		this.perfilUsuario = perfilUsuario;
+	public Persona getSesionPersona() {
+		return sesionPersona;
 	}
 
-	public LoginBean(){
-		Persona sesionPersona = (Persona) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-		System.out.println(sesionPersona);
-		if( sesionPersona != null){
-			perfilUsuario = sesionPersona.getPerfil().getIdPerfil() == new BigDecimal(2);
-		}
-		
+	public void setSesionPersona(Persona sesionPersona) {
+		this.sesionPersona = sesionPersona;
 	}
-
+	
 	public String getUsuario() {
 		return usuario;
 	}
@@ -51,35 +59,41 @@ public class LoginBean implements Serializable{
 		this.contrasena = contrasena;
 	}
 
-	public String verificarDatos() throws Exception{
+
+	public String verificarDatos() throws Exception {
 		System.out.println("entrò a verificar Datos");
+		String encript = DigestUtils.md5Hex(this.contrasena);
+		this.contrasena= encript;
 		Persona nuevaPersona = new Persona(usuario, contrasena);
 		PersonaLogical personaLogical = new PersonaLogical();
 		Persona nuevoUsuario;
-		String resultado;
 		try {
+			System.out.println("-------------------");
+			System.out.println(perfilUsuario);
+			System.out.println("-------------------");
 			System.out.println("entrò try 1");
-			nuevoUsuario=personaLogical.verificarDatos(nuevaPersona);
+			nuevoUsuario = personaLogical.verificarDatos(nuevaPersona);
 			System.out.println("entró a try 2");
-			if(nuevoUsuario!= null){
-	//			nomUsuario = true;
-				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", nuevoUsuario);			
-	/*			if(nuevoUsuario.getPerfil().getIdPerfil() !=  new BigDecimal(2)){
-					secretarioAcademico = true;
-					System.out.println(nuevoUsuario.getPerfil().getIdPerfil());
-				}else{
-					estudiante = true;
-				} */
-				resultado="paginaEstudiante";
-			System.out.println("entró if");
-			}else{
-				resultado="error";
+			if (nuevoUsuario != null) {
+				FacesContext.getCurrentInstance().getExternalContext()
+						.getSessionMap().put("usuario", nuevoUsuario);
+				this.setPerfilUsuario();
+				this.resultado = "paginaEstudiante";
+			} else {
+				this.resultado = "error";
 			}
 		} catch (Exception e) {
-			System.out.println("entró a Catch");
 			throw e;
 		}
-		return resultado;
+		return this.resultado;
+	}
+
+	public String cerrarSesion() {
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.clear();
+		this.resultado = "login";
+		System.out.println("finalizar");
+		return this.resultado;
 	}
 
 }

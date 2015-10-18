@@ -14,7 +14,6 @@ public class FacultadLogical {
 
 	public boolean crearNuevaFacultad(Facultad nuevaFacultad){
 		Session sesion  = HibernateSession.getSf().getCurrentSession();
-		System.out.println(sesion);
 		try{
 			sesion.beginTransaction();
 			sesion.persist(nuevaFacultad);
@@ -49,6 +48,20 @@ public class FacultadLogical {
 		facultades = query.list();
 		session.getTransaction().commit();
 		return facultades;
+	}
+	
+	public boolean modificarFacultad(Facultad editaFacultad){
+		Session sesion  = HibernateSession.getSf().getCurrentSession();
+		System.out.println(editaFacultad);
+		try{
+			sesion.beginTransaction();
+			sesion.update(editaFacultad);
+			sesion.getTransaction().commit();
+			return true;
+		}catch(Exception e){
+			sesion.getTransaction().rollback();
+			return false;
+		}
 	}
 	
 }
