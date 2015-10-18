@@ -29,18 +29,18 @@
 		<a class="navbar-brand" href="javascript:void(0)">Matriculas UEB</a>
 	</div>
 	<div class="navbar-collapse collapse navbar-warning-collapse">
-		<ul class="nav navbar-nav">
-			<li><h:outputLink value="/MatriculasUEB/Modulos/Estudiante/index.xhtml">Estudiantes</h:outputLink></li>
-			<li><h:outputLink value="/MatriculasUEB/Modulos/Facultad/index.xhtml">Facultades</h:outputLink></li>
-			<li><h:outputLink value="/MatriculasUEB/Modulos/Carreras/index.xhtml">Carreras</h:outputLink></li>
-			<li><h:outputLink value="/MatriculasUEB/Modulos/Matricula/index.xhtml">Mi Matricula</h:outputLink></li>
+		<ul class="nav navbar-nav">                            
+			<li><h:outputLink value="/MatriculasUEB/Modulos/Estudiante/index.xhtml" rendered="!{LoginBean.perfilUsuario}" >Estudiantes</h:outputLink></li>
+			<li><h:outputLink value="/MatriculasUEB/Modulos/Facultad/index.xhtml" rendered="!{LoginBean.perfilUsuario}">Facultades</h:outputLink></li>
+			<li><h:outputLink value="/MatriculasUEB/Modulos/Carreras/index.xhtml" rendered="!{LoginBean.perfilUsuario}">Carreras</h:outputLink></li>
+			<li><h:outputLink value="/MatriculasUEB/Modulos/Matricula/index.xhtml" rendered="!{LoginBean.estudiante}">Mi Matricula</h:outputLink></li>
 		</ul>
 <!-- 		<form class="navbar-form navbar-left"> -->
 <!-- 			<input type="text" class="form-control col-lg-8" placeholder="Search"/> -->
 <!-- 		</form> -->
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown"><a href="bootstrap-elements.html"
-				data-target="#" class="dropdown-toggle" data-toggle="dropdown">Usuario
+				data-target="#" class="dropdown-toggle" data-toggle="dropdown" rendered="!{LoginBean.nomUsuario}">Usuario
 					<b class="caret"></b>
 			</a>
 				<ul class="dropdown-menu">

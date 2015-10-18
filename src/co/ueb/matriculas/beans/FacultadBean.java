@@ -9,7 +9,7 @@ import co.ueb.matriculas.logical.FacultadLogical;
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Facultad;
 
-public class FacultadBean {
+public class FacultadBean<listadoFacultades> {
 	
 	FacultadLogical fl = new FacultadLogical();
 	String nombreFacultad = "";
