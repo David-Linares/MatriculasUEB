@@ -1,6 +1,7 @@
 package co.ueb.matriculas.beans;
 
 import java.util.List;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +12,7 @@ import co.ueb.matriculas.logical.FacultadLogical;
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Facultad;
 
-public class FacultadBean {
+public class FacultadBean implements Serializable {
 	
 	FacultadLogical fl = new FacultadLogical();
 	String nombreFacultad = "";
