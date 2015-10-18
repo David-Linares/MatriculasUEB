@@ -25,6 +25,11 @@
    <property-class>java.lang.String</property-class>
    <value/>
   </managed-property>
+  <managed-property>
+   <property-name>editarFacultad</property-name>
+   <property-class>co.ueb.matriculas.model.Facultad</property-class>
+   <value/>
+  </managed-property>
  </managed-bean>
  <managed-bean>
   <managed-bean-name>loginBean</managed-bean-name>

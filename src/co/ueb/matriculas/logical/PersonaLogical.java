@@ -13,7 +13,7 @@ public class PersonaLogical {
 	public Persona verificarDatos(Persona persona) throws Exception {
 		Persona p = null;
 		try {
-			System.out.println("entrò persona logical");
+			System.out.println("entrï¿½ persona logical");
 			sesion = HibernateSession.getSf().getCurrentSession();
 			sesion.beginTransaction();
 			String hql = "FROM Persona WHERE usuario= '" + persona.getUsuario()
@@ -23,7 +23,7 @@ public class PersonaLogical {
 			System.out.println(query.list().isEmpty());
 			if (!query.list().isEmpty()) {
 				p = (Persona) query.list().get(0);
-				System.out.println("entrò if");
+				System.out.println("entrï¿½ if");
 			}
 			System.out.println(p.toString());
 			sesion.getTransaction().commit();

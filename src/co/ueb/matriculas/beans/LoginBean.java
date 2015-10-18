@@ -14,7 +14,7 @@ public class LoginBean implements Serializable{
 
 	private String usuario;
 	private String contrasena;
-
+	
 	public String getUsuario() {
 		return usuario;
 	}
@@ -34,24 +34,24 @@ public class LoginBean implements Serializable{
 	
 	
 	public String verificarDatos() throws Exception{
-		System.out.println("entrò a verificar Datos");
+		System.out.println("entrï¿½ a verificar Datos");
 		Persona nuevaPersona = new Persona(usuario, contrasena);
 		PersonaLogical personaLogical = new PersonaLogical();
 		Persona nuevoUsuario;
 		String resultado;
 		try {
-			System.out.println("entrò try 1");
+			System.out.println("entrï¿½ try 1");
 			nuevoUsuario=personaLogical.verificarDatos(nuevaPersona);
-			System.out.println("entró a try 2");
+			System.out.println("entrï¿½ a try 2");
 			if(nuevoUsuario!= null){
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", nuevoUsuario);			
 				resultado="paginaEstudiante";
-			System.out.println("entró if");	
+			System.out.println("entrï¿½ if");	
 			}else{
 				resultado="error";
 			}
 		} catch (Exception e) {
-			System.out.println("entró a Catch");
+			System.out.println("entrï¿½ a Catch");
 			throw e;
 		}
 		return resultado;
