@@ -17,19 +17,22 @@
 			<h:form>
 				<div class="col-sm-12 form-group">
 					<div class="form-control-wrapper">
-						<h:inputText class="form-control col-sm-12 empty" type="text" required="true" value="#{loginBean.usuario}"></h:inputText>
+						<h:inputText id="username" class="form-control col-sm-12 empty" type="text" required="true" requiredMessage="Ingrese el usuario" value="#{loginBean.usuario}"></h:inputText>
+						<h:message for="username" style="color: red;" />
 						<div class="floating-label">Usuario</div>
 						<span class="material-input"></span>
 					</div>
 				</div>
 				<div class="col-sm-12 form-group">
 					<div class="form-control-wrapper">
-						<h:inputText class="form-control col-sm-12 empty" type="password" required="true" value="#{loginBean.contrasena}"></h:inputText>
+						<h:inputSecret id="password" class="form-control col-sm-12 empty" type="password" required="true" requiredMessage="Ingrese el password" value="#{loginBean.contrasena}"></h:inputSecret>
+						<h:message for="password" style="color: red" />
 						<div class="floating-label">Password</div>
 						<span class="material-input"></span>
 					</div>
 				</div>
 				<div class="col-sm-12 form-group">
+					<h:outputLabel value="#{loginBean.resultado}" style="color: red" rendered="#{loginBean.mostrarError}" id="errorMsLogin"></h:outputLabel>
 					<h:commandButton class="btn btn-success col-sm-12" value="Ingresar" required="true" action="#{loginBean.verificarDatos()}"/>
 				</div>				
 			</h:form>

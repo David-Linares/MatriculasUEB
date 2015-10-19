@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 
+
+
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -17,7 +21,7 @@ public class LoginBean implements Serializable {
 	private String usuario;
 	private String contrasena;
 	private String resultado;
-
+    private boolean mostrarError;
 	private BigDecimal perfilUsuario;
 	private Persona sesionPersona;
 	
@@ -30,6 +34,10 @@ public class LoginBean implements Serializable {
 		System.out.println("El perfil de usuario es: " + perfilUsuario);
 		System.out.println("-------------------");
 			
+	}
+	
+	public boolean isMostrarError(){
+		return mostrarError;
 	}
 	
 	public BigDecimal getPerfilUsuario() {
@@ -59,6 +67,15 @@ public class LoginBean implements Serializable {
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
+	
+	public String getResultado() {
+		return resultado;
+	}
+
+	public void setResultado(String resultado) {
+		this.resultado = resultado;
+		this.mostrarError = true;
+	}
 
 	public String verificarDatos() throws Exception {
 		System.out.println("entr� a verificar Datos");
@@ -76,7 +93,8 @@ public class LoginBean implements Serializable {
 				this.setPerfilUsuario();
 				this.resultado = "paginaEstudiante";
 			} else {
-				this.resultado = "error";
+				this.setResultado("Usuario o Password incorrectas");
+				return null;
 			}
 		} catch (Exception e) {
 			throw e;
