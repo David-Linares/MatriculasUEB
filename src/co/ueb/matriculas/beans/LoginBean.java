@@ -17,6 +17,7 @@ public class LoginBean implements Serializable {
 	private String usuario;
 	private String contrasena;
 	private String resultado;
+
 	private BigDecimal perfilUsuario;
 	private Persona sesionPersona;
 	
