@@ -13,13 +13,14 @@
 	<h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet>
 
 </h:head>
-<!-- 
+ 
 <div style="text-align:center; margin-bottom: 10px">
-	<h1 style="text-align:center;display:inline-block; vertical-align:middle; margin-right: 100px">Sistema de Matriculas UEB</h1>
 	<h:graphicImage style="display:inline-block; vertical-align:middle" url="/resources/images/logo_UEB.jpg"></h:graphicImage>
-</div> -->
+	<h1 style="text-align:center;display:inline-block; vertical-align:middle; margin-right: 100px">Sistema de Matriculas UEB</h1>
+</div>
 
-<h:form>
+<h:form rendered="#{loginBean.perfilUsuario>0}">
+
 	<div class="navbar navbar-success">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -27,18 +28,18 @@
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="javascript:void(0)">Matriculas UEB</a>
+			<a class="navbar-brand" href="javascript:void(0)">Matriculas UEB </a>
 		</div>
 		<div class="navbar-collapse collapse navbar-warning-collapse">
 			<ul class="nav navbar-nav">
 				<li><h:outputLink
-						value="/MatriculasUEB/Modulos/Estudiante/index.xhtml">Estudiantes</h:outputLink></li>
+						value="/MatriculasUEB/Modulos/Estudiante/index.xhtml" rendered="#{loginBean.perfilUsuario==2}">Estudiantes</h:outputLink></li>
 				<li><h:outputLink
-						value="/MatriculasUEB/Modulos/Facultad/index.xhtml">Facultades</h:outputLink></li>
+						value="/MatriculasUEB/Modulos/Facultad/index.xhtml" rendered="#{loginBean.perfilUsuario==2}">Facultades</h:outputLink></li>
 				<li><h:outputLink
-						value="/MatriculasUEB/Modulos/Carreras/index.xhtml">Carreras</h:outputLink></li>
+						value="/MatriculasUEB/Modulos/Carreras/index.xhtml" rendered="#{loginBean.perfilUsuario==2}">Carreras</h:outputLink></li>
 				<li><h:outputLink
-						value="/MatriculasUEB/Modulos/Matricula/index.xhtml">Mi Matricula</h:outputLink></li>
+						value="/MatriculasUEB/Modulos/Matricula/index.xhtml" rendered="#{loginBean.perfilUsuario==1}">Mi Matricula</h:outputLink></li>
 			</ul>
 			<!-- 		<form class="navbar-form navbar-left"> -->
 			<!-- 			<input type="text" class="form-control col-lg-8" placeholder="Search"/> -->
@@ -46,12 +47,14 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a href="bootstrap-elements.html"
 					data-target="#" class="dropdown-toggle" data-toggle="dropdown"> 
+						#{loginBean.sesionPersona.nombrePersona}
+						#{loginBean.sesionPersona.apellidosPersona}
 						<b class="caret"></b>
 				</a>
 					<ul class="dropdown-menu">
-					<h:form>	
+					<h:form>
+						
 						<li><h:commandButton value="Cerrar Sesión" action="#{loginBean.cerrarSesion}"></h:commandButton></li>
-
 					</h:form>
 					</ul></li>
 			</ul>
