@@ -12,8 +12,9 @@ import co.ueb.matriculas.util.HibernateSession;
 public class EstudiantesLogical {
 
 	Persona personaEstudiante = new Persona();
-	List<Persona> listadoEstudiantes = new ArrayList();
+	List<Persona> listadoEstudiantes = new ArrayList<Persona>();
 	
+	@SuppressWarnings("unchecked")
 	public List<Persona> getEstudiantes(){
 		String sql = "select p from Persona as p";
 

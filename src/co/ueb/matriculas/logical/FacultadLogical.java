@@ -27,18 +27,19 @@ public class FacultadLogical {
 	
 	public boolean eliminarFacultad(Facultad facultad){
 		Session sesion  = HibernateSession.getSf().getCurrentSession();
-		System.out.println(sesion);
 		try{
 			sesion.beginTransaction();
 			sesion.delete(facultad);
 			sesion.getTransaction().commit();
 			return true;
 		}catch(Exception e){
+			System.out.println("[Facultad Logical - Eliminar Facultad] Entró a Error");
 			sesion.getTransaction().rollback();
-			return false;
+			throw e;
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Facultad> consultarFacultades(){
 		List<Facultad> facultades = new ArrayList<Facultad>();
 		String sql = "select f from Facultad as f order by f.idFacultad";

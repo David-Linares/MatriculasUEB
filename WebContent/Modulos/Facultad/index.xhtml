@@ -39,11 +39,12 @@
 				</h:column>					
 				<h:column>
 					<f:facet name="header">Acciones</f:facet>
-					<h:commandLink class="botonImg"  data-toggle="modal" data-target="#myModalEdit" actionListener="#{facultadBean.setEditarFacultad(facultad)}">
+					<h:commandLink class="botonImg"  data-toggle="modal" data-target="#myModalEdit" actionListener="#{facultadBean.setFacultadAux(facultad)}">
 						<f:ajax execute="@form" render=":modalEditContent" onevent="function(data) { if (data.status == 'success') $('#myModalEdit').modal() ; }"/>
 						<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
 					</h:commandLink>
-					<h:commandLink class="botonImg" data-toggle="modal" data-target="#myModalConfirm" action="#{facultadBean.eliminarFacultad(facultad)}" update="tablaFacultad">
+					<h:commandLink class="botonImg" data-toggle="modal" data-target="#myModalConfirm" actionListener="#{facultadBean.setFacultadAux(facultad)}">
+						<f:ajax execute="@form" render=":modalConfirm" onevent="function(data) { if (data.status == 'success') $('#myModalConfirm').modal() ; }"/>
 						<h:graphicImage url="/resources/images/32/delete.png" ></h:graphicImage>
 					</h:commandLink>
 				</h:column>
@@ -89,7 +90,7 @@
 		      		<br></br>
 		        	<div class="form-group">
 						<label class="control-label">Nombre de la facultad</label>             
-						<h:inputText class="form-control col-sm-10 empty" required="true" value="#{facultadBean.editarFacultad.nombreFacultad}"></h:inputText>
+						<h:inputText class="form-control col-sm-10 empty" required="true" value="#{facultadBean.facultadAux.nombreFacultad}"></h:inputText>
 					</div>
 					<div class="togglebutton">
 						<label>
@@ -114,10 +115,10 @@
 	      <div class="modal-header">
 	        <h4 class="modal-title" id="myModalLabel">Estás Seguro que deseas eliminar el registro?</h4>
 	      </div>
-        <h:form >
+        <h:form id="modalConfirm">
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-	        <h:commandButton class="btn btn-primary" value="Si, Eliminar" />
+	        <h:commandButton class="btn btn-primary" value="Si, Eliminar" action="#{facultadBean.eliminarFacultad()}" />
 	      </div>
         </h:form>
 	    </div>

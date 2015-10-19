@@ -6,28 +6,32 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.faces.context.FacesContext;
-
 import co.ueb.matriculas.logical.FacultadLogical;
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Facultad;
 
 public class FacultadBean implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9166065171751439973L;
 	FacultadLogical fl = new FacultadLogical();
 	String nombreFacultad = "";
 	List<Facultad> listadoFacultades = fl.consultarFacultades();
-	Facultad editarFacultad = null;
+	Facultad facultadAux = null;
 	boolean banderaEdit = false;
 	boolean estadoFacultadEditar = false;
 	
 		
-	public void setEditarFacultad(Facultad facultadEdit){
-		if(facultadEdit != null){
-			System.out.println("[setEditarFacultad] => " + facultadEdit);
-			this.editarFacultad = facultadEdit;
-			if(this.editarFacultad.getEstadoFacultad().compareTo('1') == 0){
+	public void setFacultadAux(Facultad facultadAux){
+		if(facultadAux != null){
+			System.out.println("[setEditarFacultad] => " + facultadAux);
+			this.facultadAux = facultadAux;
+			if(this.facultadAux.getEstadoFacultad().compareTo('1') == 0){
 				this.setEstadoFacultadEditar(true);
+			}else{
+				this.setEstadoFacultadEditar(false);
 			}
 			this.setBanderaEdit(true);
 		}
@@ -50,8 +54,8 @@ public class FacultadBean implements Serializable {
 	}
 
 
-	public Facultad getEditarFacultad(){
-		return this.editarFacultad;
+	public Facultad getFacultadAux(){
+		return this.facultadAux;
 	}
 
 
@@ -72,22 +76,23 @@ public class FacultadBean implements Serializable {
 	}
 
 	public String crearFacultad(){
-		System.out.println("[crearFacultad] // Estado => "+this.isBanderaEdit());
-		System.out.println("[crearFacultad] // Facultad en editar => "+this.getEditarFacultad());
+		System.out.println("[crearFacultad] - Estado => "+this.isBanderaEdit());
+		System.out.println("[crearFacultad] - Facultad en editar => "+this.getFacultadAux());
 		if(this.isBanderaEdit()){
 			if(this.estadoFacultadEditar){
-				this.getEditarFacultad().setEstadoFacultad('1');	
+				this.getFacultadAux().setEstadoFacultad('1');	
 			}else{
-				this.getEditarFacultad().setEstadoFacultad('0');
+				this.getFacultadAux().setEstadoFacultad('0');
 			}
-			boolean guardado = fl.modificarFacultad(this.getEditarFacultad());
+			boolean guardado = fl.modificarFacultad(this.getFacultadAux());
+			this.setBanderaEdit(false);
 			if(guardado){
 				System.out.println("editado");
 				this.getListadoFacultades();
 				return "paginaFacultad";			
 			}else{
 				return "error";
-			}	
+			}
 		}else{
 			Set<Carrera> carreras = new HashSet<Carrera>(0);
 			Facultad nuevaFacultad = new Facultad((listadoFacultades.get(listadoFacultades.size() - 1).getIdFacultad().add(new BigDecimal(1))), this.nombreFacultad, '1', carreras);
@@ -97,12 +102,15 @@ public class FacultadBean implements Serializable {
 				return "paginaFacultad";			
 			}else{
 				return "error";
-			}			
+			}
 		}
 	}
 	
-	public String eliminarFacultad(Facultad eFacultad){
-		boolean eliminada = fl.eliminarFacultad(eFacultad);
+	
+	
+	public String eliminarFacultad(){
+		System.out.println("[FacultadBean - eliminarFacultad] " + this.getFacultadAux());
+		boolean eliminada = fl.eliminarFacultad(this.getFacultadAux());
 		if(eliminada){
 			return "paginaFacultad";			
 		}else{

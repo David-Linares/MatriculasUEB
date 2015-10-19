@@ -13,10 +13,7 @@ public class PersonaLogical {
 	public Persona verificarDatos(Persona persona) throws Exception {
 		Persona p = null;
 		try {
-<<<<<<< HEAD
-=======
-			System.out.println("entr� persona logical");
->>>>>>> origin/master
+			System.out.println(persona.getContrasena());
 			sesion = HibernateSession.getSf().getCurrentSession();
 			sesion.beginTransaction();
 			String hql = "FROM Persona WHERE usuario= '" + persona.getUsuario()
