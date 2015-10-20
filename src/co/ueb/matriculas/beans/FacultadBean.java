@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
+
 
 import co.ueb.matriculas.logical.FacultadLogical;
 import co.ueb.matriculas.model.Carrera;
@@ -16,6 +18,7 @@ public class FacultadBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -9166065171751439973L;
+    private static final Logger LOGGER = Logger.getLogger(FacultadBean.class.getName());
 	FacultadLogical fl = new FacultadLogical();
 	String nombreFacultad = "";
 	List<Facultad> listadoFacultades = fl.consultarFacultades();
@@ -26,7 +29,7 @@ public class FacultadBean implements Serializable {
 		
 	public void setFacultadAux(Facultad facultadAux){
 		if(facultadAux != null){
-			System.out.println("[setEditarFacultad] => " + facultadAux);
+			LOGGER.info("asdfasd");
 			this.facultadAux = facultadAux;
 			if(this.facultadAux.getEstadoFacultad().compareTo('1') == 0){
 				this.setEstadoFacultadEditar(true);
@@ -74,35 +77,33 @@ public class FacultadBean implements Serializable {
 	public void setNombreFacultad(String nombreFacultad) {
 		this.nombreFacultad = nombreFacultad;
 	}
+	
+	public String editarFacultad(){
+		if(this.estadoFacultadEditar){
+			this.getFacultadAux().setEstadoFacultad('1');	
+		}else{
+			this.getFacultadAux().setEstadoFacultad('0');
+		}
+		boolean guardado = fl.modificarFacultad(this.getFacultadAux());
+		this.setBanderaEdit(false);
+		if(guardado){
+			System.out.println("editado");
+			this.getListadoFacultades();
+			return "paginaFacultad";			
+		}else{
+			return "error";
+		}
+	}
 
 	public String crearFacultad(){
-		System.out.println("[crearFacultad] - Estado => "+this.isBanderaEdit());
-		System.out.println("[crearFacultad] - Facultad en editar => "+this.getFacultadAux());
-		if(this.isBanderaEdit()){
-			if(this.estadoFacultadEditar){
-				this.getFacultadAux().setEstadoFacultad('1');	
-			}else{
-				this.getFacultadAux().setEstadoFacultad('0');
-			}
-			boolean guardado = fl.modificarFacultad(this.getFacultadAux());
-			this.setBanderaEdit(false);
-			if(guardado){
-				System.out.println("editado");
-				this.getListadoFacultades();
-				return "paginaFacultad";			
-			}else{
-				return "error";
-			}
+		Set<Carrera> carreras = new HashSet<Carrera>(0);
+		Facultad nuevaFacultad = new Facultad((listadoFacultades.get(listadoFacultades.size() - 1).getIdFacultad().add(new BigDecimal(1))), this.nombreFacultad, '1', carreras);
+		boolean guardado = fl.crearNuevaFacultad(nuevaFacultad);
+		if(guardado){
+			this.listadoFacultades.add(nuevaFacultad);
+			return "paginaFacultad";			
 		}else{
-			Set<Carrera> carreras = new HashSet<Carrera>(0);
-			Facultad nuevaFacultad = new Facultad((listadoFacultades.get(listadoFacultades.size() - 1).getIdFacultad().add(new BigDecimal(1))), this.nombreFacultad, '1', carreras);
-			boolean guardado = fl.crearNuevaFacultad(nuevaFacultad);
-			if(guardado){
-				this.listadoFacultades.add(nuevaFacultad);
-				return "paginaFacultad";			
-			}else{
-				return "error";
-			}
+			return "error";
 		}
 	}
 	

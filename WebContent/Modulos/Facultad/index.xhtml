@@ -43,10 +43,6 @@
 						<f:ajax execute="@form" render=":modalEditContent" onevent="function(data) { if (data.status == 'success') $('#myModalEdit').modal() ; }"/>
 						<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
 					</h:commandLink>
-					<h:commandLink class="botonImg" data-toggle="modal" data-target="#myModalConfirm" actionListener="#{facultadBean.setFacultadAux(facultad)}">
-						<f:ajax execute="@form" render=":modalConfirm" onevent="function(data) { if (data.status == 'success') $('#myModalConfirm').modal() ; }"/>
-						<h:graphicImage url="/resources/images/32/delete.png" ></h:graphicImage>
-					</h:commandLink>
 				</h:column>
 			</h:dataTable>
 			</h:form>
@@ -109,20 +105,5 @@
 		  </div>
 		</div>
 	</h:panelGroup>
-	<div class="modal fade" id="myModalConfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h4 class="modal-title" id="myModalLabel">Estás Seguro que deseas eliminar el registro?</h4>
-	      </div>
-        <h:form id="modalConfirm">
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-	        <h:commandButton class="btn btn-primary" value="Si, Eliminar" action="#{facultadBean.eliminarFacultad()}" />
-	      </div>
-        </h:form>
-	    </div>
-	  </div>
-	</div>
 </body> 
 </html>
