@@ -28,9 +28,9 @@
 		</div>
 		<div class="col-md-12">
 			<h:form>
-			<h:dataTable  value="#{facultadBean.listadoFacultades}" var="facultad" class="table table-hover table-striped" id="tablaFacultad">
+			<h:dataTable value="#{facultadBean.listadoFacultades}" var="facultad" class="table table-hover table-striped" id="tablaFacultad">
 				<h:column>
-					<f:facet name="header"># Facultad</f:facet>
+					<f:facet name="header"># Facultad </f:facet>
 					#{facultad.idFacultad}
 				</h:column>
 				<h:column>
@@ -42,10 +42,6 @@
 					<h:commandLink class="botonImg"  data-toggle="modal" data-target="#myModalEdit" actionListener="#{facultadBean.setFacultadAux(facultad)}">
 						<f:ajax execute="@form" render=":modalEditContent" onevent="function(data) { if (data.status == 'success') $('#myModalEdit').modal() ; }"/>
 						<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
-					</h:commandLink>
-					<h:commandLink class="botonImg" data-toggle="modal" data-target="#myModalConfirm" actionListener="#{facultadBean.setFacultadAux(facultad)}">
-						<f:ajax execute="@form" render=":modalConfirm" onevent="function(data) { if (data.status == 'success') $('#myModalConfirm').modal() ; }"/>
-						<h:graphicImage url="/resources/images/32/delete.png" ></h:graphicImage>
 					</h:commandLink>
 				</h:column>
 			</h:dataTable>
@@ -102,27 +98,12 @@
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-		        <h:commandButton class="btn btn-primary" action="#{facultadBean.crearFacultad()}" value="Guardar Facultad" />
+		        <h:commandButton class="btn btn-primary" action="#{facultadBean.editarFacultad()}" value="Guardar Facultad" />
 		      </div>
 	        </h:form>
 		    </div>
 		  </div>
 		</div>
 	</h:panelGroup>
-	<div class="modal fade" id="myModalConfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h4 class="modal-title" id="myModalLabel">Estás Seguro que deseas eliminar el registro?</h4>
-	      </div>
-        <h:form id="modalConfirm">
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-	        <h:commandButton class="btn btn-primary" value="Si, Eliminar" action="#{facultadBean.eliminarFacultad()}" />
-	      </div>
-        </h:form>
-	    </div>
-	  </div>
-	</div>
 </body> 
 </html>
