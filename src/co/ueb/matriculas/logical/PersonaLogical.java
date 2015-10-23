@@ -23,6 +23,8 @@ public class PersonaLogical {
 			if (!query.list().isEmpty()) {
 				p = (Persona) query.list().get(0);
 				System.out.println("entr� if");
+			}else{
+				return null;
 			}
 			System.out.println(p.toString());
 			sesion.getTransaction().commit();
