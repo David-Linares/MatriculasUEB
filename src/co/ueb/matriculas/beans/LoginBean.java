@@ -94,7 +94,7 @@ public class LoginBean implements Serializable {
 				this.resultado = "paginaEstudiante";
 			} else {
 				this.setResultado("Usuario o Password incorrectas");
-				return null;
+				return null;	
 			}
 		} catch (Exception e) {
 			throw e;
