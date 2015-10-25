@@ -91,7 +91,7 @@ public class LoginBean implements Serializable {
 				FacesContext.getCurrentInstance().getExternalContext()
 						.getSessionMap().put("usuario", nuevoUsuario);
 				this.setPerfilUsuario();
-				this.resultado = "paginaEstudiante";
+				this.resultado = "paginaFacultad";
 			} else {
 				this.setResultado("Usuario o Password incorrectas");
 				return null;	

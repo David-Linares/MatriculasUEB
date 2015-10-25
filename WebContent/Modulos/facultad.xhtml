@@ -6,7 +6,7 @@
 
 <h:head></h:head> 
 	<ui:insert>
-		<ui:include src="../Header/header.xhtml"></ui:include>
+		<ui:include src="/Modulos/header.xhtml"></ui:include>
 	</ui:insert>
 <body> 
 	<div class="container">
@@ -26,6 +26,13 @@
 				</h:form>
 			</div>
 		</div>
+		<h:panelGroup rendered="#{!facultadBean.mensajeRespuesta.equals('')}">
+			<div class="col-md-12 alert alert-dismissable alert-warning" >
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4>Error!</h4>
+                <p>#{facultadBean.mensajeRespuesta}</p>
+            </div>
+		</h:panelGroup>
 		<div class="col-md-12">
 			<h:form>
 			<h:dataTable value="#{facultadBean.listadoFacultades}" var="facultad" class="table table-hover table-striped" id="tablaFacultad">

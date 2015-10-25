@@ -23,8 +23,17 @@ public class FacultadBean implements Serializable {
 	List<Facultad> listadoFacultades = fl.consultarFacultades();
 	Facultad facultadAux = null;
 	boolean banderaEdit = false;
-	boolean estadoFacultadEditar = false;	
+	boolean estadoFacultadEditar = false;
+	String mensajeRespuesta = "";
 		
+	public String getMensajeRespuesta() {
+		return mensajeRespuesta;
+	}
+
+	public void setMensajeRespuesta(String mensajeRespuesta) {
+		this.mensajeRespuesta = mensajeRespuesta;
+	}
+
 	public void setFacultadAux(Facultad facultadAux){
 		System.out.println("[FacultadBean] - setFacultadAux || Va a cambiar => "+facultadAux);
 		if(facultadAux != null){
@@ -80,6 +89,12 @@ public class FacultadBean implements Serializable {
 		System.out.println("[FacultadBean] - editarFacultad || Entró a editar");
 		System.out.println("[FacultadBean] - editarFacultad || Nueva Facultad => "+this.getFacultadAux());
 		System.out.println("[FacultadBean] - editarFacultad || Estado => "+this.estadoFacultadEditar);
+		System.out.println("[FacultadBean] - editarFacultad || Campo nombre => "+this.getFacultadAux().getNombreFacultad().equals(""));
+		if(this.getFacultadAux().getNombreFacultad().equals("")){
+			this.setMensajeRespuesta("El campo nombre no puede estar vacío");
+			System.out.println("[FacultadBean] - editarFacultad || "+this.getMensajeRespuesta());
+			return null;
+		}
 		if(this.estadoFacultadEditar){
 			this.getFacultadAux().setEstadoFacultad('1');
 		}else{

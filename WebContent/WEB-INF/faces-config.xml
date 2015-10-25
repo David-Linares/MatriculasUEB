@@ -50,23 +50,23 @@
   <from-view-id>*</from-view-id>
   <navigation-case>
    <from-outcome>paginaEstudiante</from-outcome>
-   <to-view-id>Modulos/Estudiante/index.xhtml</to-view-id>
+   <to-view-id>Modulos/estudiante.xhtml</to-view-id>
   </navigation-case>
   <navigation-case>
    <from-outcome>paginaCarreras</from-outcome>
-   <to-view-id>Modulos/Carreras/index.xhtml</to-view-id>
+   <to-view-id>Modulos/carreras.xhtml</to-view-id>
   </navigation-case>
   <navigation-case>
    <from-outcome>paginaFacultad</from-outcome>
-   <to-view-id>Modulos/Facultad/index.xhtml</to-view-id>
+   <to-view-id>Modulos/facultad.xhtml</to-view-id>
   </navigation-case>
   <navigation-case>
    <from-outcome>login</from-outcome>
-   <to-view-id>Modulos/Login/login.xhtml</to-view-id>
+   <to-view-id>Modulos/login.xhtml</to-view-id>
   </navigation-case>
   <navigation-case>
    <from-outcome>paginaMatricula</from-outcome>
-   <to-view-id>Modulos/Matricula/index.xhtml</to-view-id>
+   <to-view-id>Modulos/matricula.xhtml</to-view-id>
   </navigation-case>
   <navigation-case>
    <from-outcome>error</from-outcome>
