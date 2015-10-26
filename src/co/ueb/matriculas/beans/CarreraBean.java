@@ -20,9 +20,9 @@ public class CarreraBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -9166065171751439973L;
-	CarreraLogical fl = new CarreraLogical();
+	CarreraLogical cl = new CarreraLogical();
 	String nombreCarrera = "";
-	List<Carrera> listadoCarreras = fl.consultarCarreras();
+	List<Carrera> listadoCarreras = cl.consultarCarreras();
 	Carrera carreraAux = null;
 	boolean banderaEdit = false;
 	boolean estadoCarreraEditar = false;
@@ -72,11 +72,14 @@ public class CarreraBean implements Serializable {
 
 
 	public List<Carrera> getListadoCarreras() {
+		System.out.println(listadoCarreras);
+		System.out.println("****************");
+		System.out.println("****************");
 		return listadoCarreras;
 	}
 
 	public void setListadoCarreras(List<Carrera> carreras) {
-		this.listadoCarreras = fl.consultarCarreras();
+		this.listadoCarreras = cl.consultarCarreras();
 	}
 
 	public String getNombreCarrera() {
@@ -102,7 +105,7 @@ public class CarreraBean implements Serializable {
 		}else{
 			this.getCarreraAux().setEstadoCarrera('0');
 		}
-		boolean guardado = fl.modificarCarrera(this.getCarreraAux());
+		boolean guardado = cl.modificarCarrera(this.getCarreraAux());
 		if(guardado){
 			this.getListadoCarreras();
 			return "paginaCarrera";
@@ -116,7 +119,7 @@ public class CarreraBean implements Serializable {
 		Set<Materia> materias = new HashSet<Materia>(0);
 		Carrera nuevaCarrera = new Carrera((listadoCarreras.get(listadoCarreras.size() - 1).getIdCarrera().add(new BigDecimal(1))), null, this.nombreCarrera, null, '1', materias, materias);
 		System.out.println("[CarreraBean] - crearCarrera || Nueva Carrera => "+nuevaCarrera);
-		boolean guardado = fl.crearNuevaCarrera(nuevaCarrera);
+		boolean guardado = cl.crearNuevaCarrera(nuevaCarrera);
 		if(guardado){
 			this.listadoCarreras.add(nuevaCarrera);
 			return "paginaCarrera";			
@@ -128,7 +131,7 @@ public class CarreraBean implements Serializable {
 	
 	
 	public String eliminarCarrera(){
-		boolean eliminada = fl.eliminarCarrera(this.getCarreraAux());
+		boolean eliminada = cl.eliminarCarrera(this.getCarreraAux());
 		if(eliminada){
 			return "paginaCarrera";			
 		}else{

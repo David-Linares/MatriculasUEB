@@ -5,9 +5,9 @@
    <PROCESS-ITEM-OUTPUT ID="paginaEstudiante::Modulos#estudiante.xhtml"
     NAME="output" PATH="Modulos/estudiante.xhtml"
     TARGET="rules:Modulos#estudiante.xhtml" TITLE="paginaEstudiante" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="paginaCarreras::Modulos#carreras.xhtml"
-    NAME="output1" PATH="Modulos/carreras.xhtml"
-    TARGET="rules:Modulos#carreras.xhtml" TITLE="paginaCarreras" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="paginaCarrera::Modulos#carrera.xhtml"
+    NAME="output1" PATH="Modulos/carrera.xhtml"
+    TARGET="rules:Modulos#carrera.xhtml" TITLE="paginaCarrera" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="paginaFacultad::Modulos#facultad.xhtml"
     NAME="output2" PATH="Modulos/facultad.xhtml"
     TARGET="rules:Modulos#facultad.xhtml" TITLE="paginaFacultad" model-entity="JSFProcessItemOutput"/>
@@ -25,12 +25,12 @@
   SHAPE="304,305,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:Modulos#estudiante.xhtml"
   PATH="Modulos/estudiante.xhtml" SHAPE="32,817,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:Modulos#carreras.xhtml"
-  PATH="Modulos/carreras.xhtml" SHAPE="32,1041,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:Modulos#facultad.xhtml"
   PATH="Modulos/facultad.xhtml" SHAPE="32,1265,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:Modulos#login.xhtml"
   PATH="Modulos/login.xhtml" SHAPE="32,1489,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:Modulos#matricula.xhtml"
   PATH="Modulos/matricula.xhtml" SHAPE="32,1713,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:Modulos#carrera.xhtml"
+  PATH="Modulos/carrera.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
