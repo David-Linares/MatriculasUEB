@@ -94,4 +94,12 @@ public class Carrera implements java.io.Serializable {
 		this.carreraMaterias = carreraMaterias;
 	}
 
+	@Override
+	public String toString() {
+		return "Carrera [idCarrera=" + idCarrera + ", facultad=" + facultad
+				+ ", nombreCarrera=" + nombreCarrera + ", totalCreditos="
+				+ totalCreditos + ", estadoCarrera=" + estadoCarrera
+				+ ", carreraEstudiantes=" + carreraEstudiantes
+				+ ", carreraMaterias=" + carreraMaterias + "]";
+	}
 }

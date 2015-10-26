@@ -9,7 +9,11 @@ public class HibernateSession {
 	private static String filename = "hibernate.cfg.xml";
 	
 	private static SessionFactory buildSessionFactory(){
+		if(sf==null){
+		System.out.println(sf==null);
 		sf = new Configuration().configure(filename).buildSessionFactory();
+		}
+		System.out.println("[hibernatesession]-buildsessionFatory " + sf );
 		return sf;
 	}
 
@@ -17,6 +21,4 @@ public class HibernateSession {
 		sf = buildSessionFactory();
 		return sf;
 	}
-	
-
 }
