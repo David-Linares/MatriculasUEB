@@ -1,80 +1,58 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
-	
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
 	<ui:insert>
 		<ui:include src="/Modulos/header.xhtml"></ui:include>
 	</ui:insert>
-<body>
+<body> 
 	<div class="container">
 		<div class="col-md-12" style="margin-bottom:30px">
 			<div class="col-md-3" style="text-align:center">
-				<button data-toggle="modal" data-target="#myModal" style="background-color: white;border: none;">
+				<button data-toggle="modal" data-target="#myModal" class="botonImg">
 					<h:graphicImage url="/resources/images/add.png"></h:graphicImage>
 				</button>
 			</div>
 			<div class="col-md-3" style="text-align:center">
-				<h:graphicImage url="/resources/images/save.png"></h:graphicImage>
-			</div>
-			<div class="col-md-3" style="text-align:center">
-				<h:graphicImage url="/resources/images/delete.png"></h:graphicImage>
-			</div>
-			<div class="col-md-3" style="text-align:center">
 				<h:form>
-					<div class="col-lg-10">
-						<h:inputText class="form-control" placeholder="Búsqueda"></h:inputText>
-                    </div>
-                    <h:graphicImage url="/resources/images/search.png"></h:graphicImage>
+					<div class="form-control-wrapper">
+						<h:inputText class="form-control col-sm-10 empty"></h:inputText>
+						<div class="floating-label"><h:graphicImage url="/resources/images/search.png"></h:graphicImage> Buscar</div>
+						<span class="material-input"></span>	                    
+					</div>
 				</h:form>
 			</div>
 		</div>
+		<h:panelGroup rendered="#{!carreraBean.mensajeRespuesta.equals('')}">
+			<div class="col-md-12 alert alert-dismissable alert-warning" >
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4>Error!</h4>
+                <p>#{carreraBean.mensajeRespuesta}</p>
+            </div>
+		</h:panelGroup>
 		<div class="col-md-12">
-			<table class="table table-hover table-striped">
-				<ui:repeat value="#{estudianteBean.listadoEstudiantes}" var="estudiante">
-		            <h:commandButton value="#{estudiante.nombrePersona}" />
-		        </ui:repeat>   
-				<thead style="font-weight:bold">
-					<td>Identificación</td>
-					<td>Nombre</td>
-					<td>Apellidos</td>
-					<td>Carrera</td>
-					<td>Materias Inscritas</td>
-				</thead>
-				<tbody>	
-					<tr>
-						<td><h:outputText value="#{estudianteBean.nombreEstudiante}" /> </td>
-						<td>a</td>
-						<td>a</td>
-						<td>a</td>
-						<td>1</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>a</td>
-						<td>a</td>
-						<td>a</td>
-						<td>1</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>a</td>
-						<td>a</td>
-						<td>a</td>
-						<td>1</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>a</td>
-						<td>a</td>
-						<td>a</td>
-						<td>1</td>
-					</tr>
-				</tbody>
-			</table>
+			<h:form>
+			<h:dataTable value="#{carreraBean.listadoCarreras}" var="carrera" class="table table-hover table-striped" id="tablaCarrera">
+				<h:column>
+					<f:facet name="header"># Carrera </f:facet>
+					#{carrera.idCarrera}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nombre de la Carrera</f:facet>
+					#{carrera.nombreCarrera}
+				</h:column>					
+				<h:column>
+					<f:facet name="header">Acciones</f:facet>
+					<h:commandLink class="botonImg"  data-toggle="modal" data-target="#myModalEdit" actionListener="#{carreraBean.setCarreraAux(carrera)}">
+						<f:ajax execute="@form" render=":modalEditContent" onevent="function(data) { if (data.status == 'success') $('#myModalEdit').modal() ; }"/>
+						<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
+					</h:commandLink>
+				</h:column>
+			</h:dataTable>
+			</h:form>
 		</div>
 	</div>
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -82,17 +60,57 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+	        <h4 class="modal-title" id="myModalLabel">Agregar Carrera</h4>
 	      </div>
+        <h:form >
 	      <div class="modal-body">
-	        ...
+	      		<br></br>
+	        	<div class="form-control-wrapper">
+					<h:inputText id="nuevaCarrera" class="form-control col-sm-10 empty" required="true" value="#{facultadBean.nombreFacultad}"></h:inputText>
+					<div class="floating-label">Nombre de la Carrera</div>
+					<span class="material-input"></span>	                    
+				</div>
+				<br></br>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Save changes</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	        <h:commandButton class="btn btn-primary" action="#{carreraBean.crearCarrera()}" value="Guardar Carrera" />
 	      </div>
+        </h:form>
 	    </div>
 	  </div>
 	</div>
-</body>
+	<h:panelGroup>
+		<div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Modificar Carrera</h4>
+		      </div>
+	        <h:form  id="modalEditContent">
+		      <div class="modal-body">
+		      		<br></br>
+		        	<div class="form-group">
+						<label class="control-label">Nombre de la carrera</label>             
+						<h:inputText class="form-control col-sm-10 empty" required="true" value="#{carreraBean.carreraAux.nombreCarrera}"></h:inputText>
+					</div>
+					<div class="togglebutton">
+						<label>
+                            Estado Carrera
+                            <br/><h:selectBooleanCheckbox value="#{carreraBean.estadoCarreraEditar}" /><span class="toggle"></span>
+                        </label>
+					</div>
+					<br></br>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+		        <h:commandButton class="btn btn-primary" action="#{carreraBean.editarCarrera()}" value="Guardar Carrera" />
+		      </div>
+	        </h:form>
+		    </div>
+		  </div>
+		</div>
+	</h:panelGroup>
+</body> 
 </html>
