@@ -10,10 +10,8 @@ public class HibernateSession {
 	
 	private static SessionFactory buildSessionFactory(){
 		if(sf==null){
-		System.out.println(sf==null);
-		sf = new Configuration().configure(filename).buildSessionFactory();
+			sf = new Configuration().configure(filename).buildSessionFactory();
 		}
-		System.out.println("[hibernatesession]-buildsessionFatory " + sf );
 		return sf;
 	}
 
