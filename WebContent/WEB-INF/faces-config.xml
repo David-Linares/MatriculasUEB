@@ -46,6 +46,26 @@
    <value/>
   </managed-property>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>carreraBean</managed-bean-name>
+  <managed-bean-class>co.ueb.matriculas.beans.CarreraBean</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+  <managed-property>
+   <property-name>carreraAux</property-name>
+   <property-class>co.ueb.matriculas.model.Carrera</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>nombreCarrera</property-name>
+   <property-class>java.lang.String</property-class>
+   <value/>
+  </managed-property>
+  <managed-property>
+   <property-name>listadoCarreras</property-name>
+   <property-class>java.util.List</property-class>
+   <value/>
+  </managed-property>
+ </managed-bean>
  <navigation-rule>
   <from-view-id>*</from-view-id>
   <navigation-case>
@@ -53,8 +73,8 @@
    <to-view-id>Modulos/estudiante.xhtml</to-view-id>
   </navigation-case>
   <navigation-case>
-   <from-outcome>paginaCarreras</from-outcome>
-   <to-view-id>Modulos/carreras.xhtml</to-view-id>
+   <from-outcome>paginaCarrera</from-outcome>
+   <to-view-id>Modulos/carrera.xhtml</to-view-id>
   </navigation-case>
   <navigation-case>
    <from-outcome>paginaFacultad</from-outcome>
