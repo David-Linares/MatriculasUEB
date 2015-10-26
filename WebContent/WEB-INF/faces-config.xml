@@ -51,8 +51,8 @@
   <managed-bean-class>co.ueb.matriculas.beans.CarreraBean</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
   <managed-property>
-   <property-name>carreraAux</property-name>
-   <property-class>co.ueb.matriculas.model.Carrera</property-class>
+   <property-name>listadoCarreras</property-name>
+   <property-class>java.util.List</property-class>
    <value/>
   </managed-property>
   <managed-property>
@@ -61,8 +61,8 @@
    <value/>
   </managed-property>
   <managed-property>
-   <property-name>listadoCarreras</property-name>
-   <property-class>java.util.List</property-class>
+   <property-name>carreraAux</property-name>
+   <property-class>co.ueb.matriculas.model.Carrera</property-class>
    <value/>
   </managed-property>
  </managed-bean>

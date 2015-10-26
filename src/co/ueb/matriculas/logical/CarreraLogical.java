@@ -11,6 +11,7 @@ import co.ueb.matriculas.util.HibernateSession;
 public class CarreraLogical {
 
 	public boolean crearNuevaCarrera(Carrera nuevaCarrera){
+		System.out.println("Entro a crear una carrera");
 		Session sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
@@ -24,6 +25,7 @@ public class CarreraLogical {
 	}
 	
 	public boolean eliminarCarrera(Carrera carrera){
+		System.out.println("Entro a eliminar carrera");
 		Session sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
@@ -39,6 +41,7 @@ public class CarreraLogical {
 	
 	@SuppressWarnings("unchecked")
 	public List<Carrera> consultarCarreras(){
+		System.out.println("Entro a consultar carreras");
 		List<Carrera> carreras = new ArrayList<Carrera>();
 		String sql = "select c from Carrera as c order by c.idCarrera";
 		Session session = HibernateSession.getSf().getCurrentSession();
