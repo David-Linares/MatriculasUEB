@@ -25,7 +25,16 @@ public class FacultadBean implements Serializable {
 	boolean banderaEdit = false;
 	boolean estadoFacultadEditar = false;
 	String mensajeRespuesta = "";
+	String auxNombreValidacion = "";
 		
+	public String getAuxNombreValidacion() {
+		return auxNombreValidacion;
+	}
+
+	public void setAuxNombreValidacion(String auxNombreValidacion) {
+		this.auxNombreValidacion = auxNombreValidacion;
+	}
+
 	public String getMensajeRespuesta() {
 		return mensajeRespuesta;
 	}
@@ -37,6 +46,8 @@ public class FacultadBean implements Serializable {
 	public void setFacultadAux(Facultad facultadAux){
 		System.out.println("[FacultadBean] - setFacultadAux || Va a cambiar => "+facultadAux);
 		if(facultadAux != null){
+			System.out.println(facultadAux.getNombreFacultad());
+			this.setAuxNombreValidacion(facultadAux.getNombreFacultad());
 			this.facultadAux = facultadAux;
 			if(this.facultadAux.getEstadoFacultad().compareTo('1') == 0){
 				this.setEstadoFacultadEditar(true);
@@ -86,13 +97,9 @@ public class FacultadBean implements Serializable {
 	}
 	
 	public String editarFacultad(){
-		System.out.println("[FacultadBean] - editarFacultad || Entró a editar");
-		System.out.println("[FacultadBean] - editarFacultad || Nueva Facultad => "+this.getFacultadAux());
-		System.out.println("[FacultadBean] - editarFacultad || Estado => "+this.estadoFacultadEditar);
-		System.out.println("[FacultadBean] - editarFacultad || Campo nombre => "+this.getFacultadAux().getNombreFacultad().equals(""));
 		if(this.getFacultadAux().getNombreFacultad().equals("")){
+			this.getFacultadAux().setNombreFacultad(this.getAuxNombreValidacion());
 			this.setMensajeRespuesta("El campo nombre no puede estar vacío");
-			System.out.println("[FacultadBean] - editarFacultad || "+this.getMensajeRespuesta());
 			return null;
 		}
 		if(this.estadoFacultadEditar){
@@ -102,6 +109,7 @@ public class FacultadBean implements Serializable {
 		}
 		boolean guardado = fl.modificarFacultad(this.getFacultadAux());
 		if(guardado){
+			this.setMensajeRespuesta("");
 			this.getListadoFacultades();
 			return "paginaFacultad";
 		}else{
@@ -111,11 +119,17 @@ public class FacultadBean implements Serializable {
 
 	public String crearFacultad(){
 		System.out.println("[FacultadBean] - crearFacultad || Entró a crear");
+		if(this.getNombreFacultad().equals("")){
+			System.out.println("Vacio el nombre");
+			this.setMensajeRespuesta("El campo nombre no puede estar vacío");
+			return null;
+		}
 		Set<Carrera> carreras = new HashSet<Carrera>(0);
 		Facultad nuevaFacultad = new Facultad((listadoFacultades.get(listadoFacultades.size() - 1).getIdFacultad().add(new BigDecimal(1))), this.nombreFacultad, '1', carreras);
 		System.out.println("[FacultadBean] - crearFacultad || Nueva Facultad => "+nuevaFacultad);
 		boolean guardado = fl.crearNuevaFacultad(nuevaFacultad);
 		if(guardado){
+			this.setMensajeRespuesta("");
 			this.listadoFacultades.add(nuevaFacultad);
 			return "paginaFacultad";			
 		}else{

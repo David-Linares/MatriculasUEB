@@ -85,8 +85,8 @@ public class LoginBean implements Serializable {
 		PersonaLogical personaLogical = new PersonaLogical();
 		Persona nuevoUsuario;
 		try {
+			System.out.println("Persona => "+nuevaPersona);
 			nuevoUsuario = personaLogical.verificarDatos(nuevaPersona);
-			System.out.println("entr� a try 2");
 			if (nuevoUsuario != null) {
 				FacesContext.getCurrentInstance().getExternalContext()
 						.getSessionMap().put("usuario", nuevoUsuario);

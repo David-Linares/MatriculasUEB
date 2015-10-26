@@ -27,7 +27,7 @@
 			</div>
 		</div>
 		<h:panelGroup rendered="#{!facultadBean.mensajeRespuesta.equals('')}">
-			<div class="col-md-12 alert alert-dismissable alert-warning" >
+			<div class="col-md-12 alert alert-dismissable alert-danger" >
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <h4>Error!</h4>
                 <p>#{facultadBean.mensajeRespuesta}</p>
@@ -66,7 +66,7 @@
 	      <div class="modal-body">
 	      		<br></br>
 	        	<div class="form-control-wrapper">
-					<h:inputText id="nuevaFacultad" class="form-control col-sm-10 empty" required="true" value="#{facultadBean.nombreFacultad}"></h:inputText>
+					<h:inputText id="nuevaFacultad" class="form-control col-sm-10 empty" value="#{facultadBean.nombreFacultad}"></h:inputText>
 					<div class="floating-label">Nombre de la facultad</div>
 					<span class="material-input"></span>	                    
 				</div>
@@ -93,7 +93,7 @@
 		      		<br></br>
 		        	<div class="form-group">
 						<label class="control-label">Nombre de la facultad</label>             
-						<h:inputText class="form-control col-sm-10 empty" required="true" value="#{facultadBean.facultadAux.nombreFacultad}"></h:inputText>
+						<h:inputText class="form-control col-sm-10 empty" value="#{facultadBean.facultadAux.nombreFacultad}"/>
 					</div>
 					<div class="togglebutton">
 						<label>
