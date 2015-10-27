@@ -23,16 +23,37 @@ public class CarreraBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -9166065171751439973L;
-	CarreraLogical cl = new CarreraLogical();
 	String nombreCarrera = "";
 	int totalCreditos;
+	Facultad facultadCarrera = null;
+	FacultadBean facultadesList = new FacultadBean(); 
+	CarreraLogical cl = new CarreraLogical();
 	List<Carrera> listadoCarreras = cl.consultarCarreras();
+	List<Facultad> listadoFacultades = facultadesList.getListadoFacultades();
 	Carrera carreraAux = null;
 	boolean banderaEdit = false;
 	boolean estadoCarreraEditar = false;
 	String mensajeRespuesta = "";
 	String auxNombreValidacion = "";
-		
+	
+	public Facultad getFacultadCarrera() {
+		return facultadCarrera;
+	}
+	
+	public void setFacultadCarrera(Facultad facultadCarrera) {
+		this.facultadCarrera = facultadCarrera;
+	}
+	
+	public List<Facultad> getListadoFacultades() {
+		return listadoFacultades;
+	}
+	
+	public void setListadoFacultades(List<Facultad> facultades){
+		FacultadBean facultadesList = new FacultadBean(); 
+		this.listadoFacultades = facultadesList.getListadoFacultades();
+		System.out.println("[CarreraBean] - listadoFacultades => " + this.listadoFacultades);
+	}
+
 	public String getMensajeRespuesta() {
 		return mensajeRespuesta;
 	}
@@ -49,20 +70,6 @@ public class CarreraBean implements Serializable {
 		this.auxNombreValidacion = auxNombreValidacion;
 	}
 
-	public void setCarreraAux(Carrera carreraAux){
-		System.out.println("[CarreraBean] - setCarreraAux || Va a cambiar => "+carreraAux);
-		if(carreraAux != null){
-			System.out.println(carreraAux.getNombreCarrera());
-			this.setAuxNombreValidacion(carreraAux.getNombreCarrera());
-			this.carreraAux = carreraAux;
-			if(this.carreraAux.getEstadoCarrera().compareTo('1') == 0){
-				this.setEstadoCarreraEditar(true);
-			}else{
-				this.setEstadoCarreraEditar(false);
-			}
-			this.setBanderaEdit(true);
-		}
-	}
 	
 	public boolean isEstadoCarreraEditar() {
 		return estadoCarreraEditar;
@@ -101,6 +108,20 @@ public class CarreraBean implements Serializable {
 		this.nombreCarrera = nombreCarrera;
 	}
 	
+	public void setCarreraAux(Carrera carreraAux){
+		System.out.println("[CarreraBean] - setCarreraAux || Va a cambiar => "+carreraAux);
+		if(carreraAux != null){
+			System.out.println(carreraAux.getNombreCarrera());
+			this.setAuxNombreValidacion(carreraAux.getNombreCarrera());
+			this.carreraAux = carreraAux;
+			if(this.carreraAux.getEstadoCarrera().compareTo('1') == 0){
+				this.setEstadoCarreraEditar(true);
+			}else{
+				this.setEstadoCarreraEditar(false);
+			}
+		}
+	}
+
 	public int getTotalCreditos() {
 		return totalCreditos;
 	}

@@ -65,8 +65,7 @@ public class Facultad implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Facultad [idFacultad=" + idFacultad + ", nombreFacultad="
-				+ nombreFacultad + ", estadoFacultad=" + estadoFacultad + "]";
+		return nombreFacultad;
 	}
 	
 

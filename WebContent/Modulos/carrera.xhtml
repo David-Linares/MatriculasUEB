@@ -16,15 +16,15 @@
 					<h:graphicImage url="/resources/images/add.png"></h:graphicImage>
 				</button>
 			</div>
-			<div class="col-md-3" style="text-align:center">
-				<h:form>
-					<div class="form-control-wrapper">
-						<h:inputText class="form-control col-sm-10 empty"></h:inputText>
-						<div class="floating-label"><h:graphicImage url="/resources/images/search.png"></h:graphicImage> Buscar</div>
-						<span class="material-input"></span>	                    
-					</div>
-				</h:form>
-			</div>
+<!-- 			<div class="col-md-3" style="text-align:center"> -->
+<!-- 				<h:form> -->
+<!-- 					<div class="form-control-wrapper"> -->
+<!-- 						<h:inputText class="form-control col-sm-10 empty"></h:inputText> -->
+<!-- 						<div class="floating-label"><h:graphicImage url="/resources/images/search.png"></h:graphicImage> Buscar</div> -->
+<!-- 						<span class="material-input"></span>	                     -->
+<!-- 					</div> -->
+<!-- 				</h:form> -->
+<!-- 			</div> -->
 		</div>
 		<h:panelGroup rendered="#{!carreraBean.mensajeRespuesta.equals('')}">
 			<div class="col-md-12 alert alert-dismissable alert-warning" >
@@ -75,6 +75,11 @@
 					<div class="floating-label">Creditos maximos permitidos</div>
 					<span class="material-input"></span>	                    
 				</div>
+				<div class="form-control-wrapper">
+					<h:selectOneMenu value="#{carreraBean.facultadCarrera}">
+						<f:selectItems value="#{carreraBean.listadoFacultades}"/>
+					</h:selectOneMenu>                  
+				</div>
 				<br></br>
 	      </div>
 	      <div class="modal-footer">
@@ -103,6 +108,12 @@
 					<div class="form-group">
 						<label class="control-label">Creditos maximos permitidos</label>             
 						<h:inputText class="form-control col-sm-10 empty" required="true" value="#{carreraBean.carreraAux.totalCreditos}"></h:inputText>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Facultad a la que pertenece:</label>
+						<h:selectOneMenu value="#{carreraBean.facultadCarrera}">
+							<f:selectItems value="#{carreraBean.listadoFacultades}" itemValue="#{carreraBean.carreraAux.facultad}"/>
+						</h:selectOneMenu>                  
 					</div>
 					<div class="togglebutton">
 						<label>
