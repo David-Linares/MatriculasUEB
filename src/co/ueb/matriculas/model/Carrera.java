@@ -1,6 +1,6 @@
 package co.ueb.matriculas.model;
 
-// Generated Oct 15, 2015 11:01:28 AM by Hibernate Tools 4.3.1
+// Generated Nov 1, 2015 5:44:57 PM by Hibernate Tools 4.3.1
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -94,12 +94,4 @@ public class Carrera implements java.io.Serializable {
 		this.carreraMaterias = carreraMaterias;
 	}
 
-	@Override
-	public String toString() {
-		return "Carrera [idCarrera=" + idCarrera + ", facultad=" + facultad
-				+ ", nombreCarrera=" + nombreCarrera + ", totalCreditos="
-				+ totalCreditos + ", estadoCarrera=" + estadoCarrera
-				+ ", carreraEstudiantes=" + carreraEstudiantes
-				+ ", carreraMaterias=" + carreraMaterias + "]";
-	}
 }
