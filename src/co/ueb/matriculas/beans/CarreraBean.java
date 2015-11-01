@@ -12,10 +12,12 @@ import java.util.logging.Logger;
 
 
 
+
 import co.ueb.matriculas.logical.CarreraLogical;
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Facultad;
 import co.ueb.matriculas.model.Materia;
+import co.ueb.matriculas.model.Persona;
 
 public class CarreraBean implements Serializable {
 	
@@ -24,7 +26,7 @@ public class CarreraBean implements Serializable {
 	 */
 	private static final long serialVersionUID = -9166065171751439973L;
 	String nombreCarrera = "";
-	int totalCreditos;
+	BigDecimal totalCreditos;
 	Facultad facultadCarrera = null;
 	FacultadBean facultadesList = new FacultadBean(); 
 	CarreraLogical cl = new CarreraLogical();
@@ -122,11 +124,11 @@ public class CarreraBean implements Serializable {
 		}
 	}
 
-	public int getTotalCreditos() {
+	public BigDecimal getTotalCreditos() {
 		return totalCreditos;
 	}
 
-	public void setTotalCreditos(int totalCreditos) {
+	public void setTotalCreditos(BigDecimal totalCreditos) {
 		this.totalCreditos = totalCreditos;
 	}
 
@@ -162,7 +164,9 @@ public class CarreraBean implements Serializable {
 			return null;
 		}
 		Set<Materia> materias = new HashSet<Materia>(0);
-		Carrera nuevaCarrera = new Carrera((listadoCarreras.get(listadoCarreras.size() - 1).getIdCarrera().add(new BigDecimal(1))), null, this.nombreCarrera, null, '1', materias, materias);
+		Set<Persona> personas = new HashSet<Persona>(0);
+		System.out.println("Entra a construis la carrera");
+		Carrera nuevaCarrera = new Carrera((listadoCarreras.get(listadoCarreras.size() - 1).getIdCarrera().add(new BigDecimal(1))), this.getFacultadCarrera(), this.nombreCarrera, this.totalCreditos, '1', personas, materias);
 		System.out.println("[CarreraBean] - crearCarrera || Nueva Carrera => "+nuevaCarrera);
 		boolean guardado = cl.crearNuevaCarrera(nuevaCarrera);
 		if(guardado){
@@ -184,5 +188,4 @@ public class CarreraBean implements Serializable {
 			return "error";
 		}
 	}
-	
 }
