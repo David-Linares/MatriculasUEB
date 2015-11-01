@@ -2,13 +2,9 @@ package co.ueb.matriculas.beans;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.logging.Logger;
 
-
-
-
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -24,17 +20,7 @@ public class LoginBean implements Serializable {
     private boolean mostrarError;
 	private BigDecimal perfilUsuario;
 	private Persona sesionPersona;
-	
-	public void setPerfilUsuario(){
-		sesionPersona = (Persona) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-		if( sesionPersona != null){
-			perfilUsuario = sesionPersona.getPerfil().getIdPerfil();
-		}
-		System.out.println("-------------------");
-		System.out.println("El perfil de usuario es: " + perfilUsuario);
-		System.out.println("-------------------");
-			
-	}
+	final Logger log = Logger.getLogger("TestLogin");
 	
 	public boolean isMostrarError(){
 		return mostrarError;
@@ -76,16 +62,23 @@ public class LoginBean implements Serializable {
 		this.resultado = resultado;
 		this.mostrarError = true;
 	}
+	
+	public void setPerfilUsuario(){
+		sesionPersona = (Persona) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+		if( sesionPersona != null){
+			perfilUsuario = sesionPersona.getPerfil().getIdPerfil();
+		}		
+	}
 
-	public String verificarDatos() throws Exception {
-		System.out.println("entr� a verificar Datos");
-		String encript = DigestUtils.md5Hex(this.contrasena);
-		this.contrasena= encript;
+	public String verificarDatos() {
+		log.info("| Verificar Datos");
+		String encrypt = DigestUtils.md5Hex(this.contrasena);
+		this.contrasena = encrypt;
 		Persona nuevaPersona = new Persona(usuario, contrasena);
 		PersonaLogical personaLogical = new PersonaLogical();
 		Persona nuevoUsuario;
 		try {
-			System.out.println("Persona => "+nuevaPersona);
+			log.info("Persona => "+nuevaPersona);
 			nuevoUsuario = personaLogical.verificarDatos(nuevaPersona);
 			if (nuevoUsuario != null) {
 				FacesContext.getCurrentInstance().getExternalContext()
@@ -97,7 +90,7 @@ public class LoginBean implements Serializable {
 				return null;	
 			}
 		} catch (Exception e) {
-			throw e;
+			e.printStackTrace();
 		}
 		return this.resultado;
 	}

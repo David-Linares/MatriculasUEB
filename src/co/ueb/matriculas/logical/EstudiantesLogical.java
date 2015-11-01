@@ -31,5 +31,8 @@ public class EstudiantesLogical {
 		return listadoEstudiantes;
 	}
 	
+	public String obtenerNombre(String nombre){
+		return "Hola SOAP "+nombre;
+	}
 	
 }

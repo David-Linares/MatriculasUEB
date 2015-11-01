@@ -1,6 +1,6 @@
 package co.ueb.matriculas.model;
 
-// Generated Oct 15, 2015 11:01:28 AM by Hibernate Tools 4.3.1
+// Generated Nov 1, 2015 5:44:57 PM by Hibernate Tools 4.3.1
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,8 +21,8 @@ public class Persona implements java.io.Serializable {
 	private String direccion;
 	private String correoElectronico;
 	private Character estadoPersona;
-	private String contrasena;
 	private String usuario;
+	private String contrasena;
 	private Set matriculas = new HashSet(0);
 	private Set carreraEstudiantes = new HashSet(0);
 	private Set telefonoses = new HashSet(0);
@@ -33,16 +33,11 @@ public class Persona implements java.io.Serializable {
 	public Persona(BigDecimal idPersona) {
 		this.idPersona = idPersona;
 	}
-	
-	public Persona(String usuario, String contrasena ){
-		this.usuario = usuario;
-		this.contrasena = contrasena;
-	}
 
 	public Persona(BigDecimal idPersona, Perfil perfil, String nombrePersona,
 			String apellidosPersona, Date fechaNacimiento,
 			String lugarNacimiento, String direccion, String correoElectronico,
-			Character estadoPersona, String contrasena, String usuario,
+			Character estadoPersona, String usuario, String contrasena,
 			Set matriculas, Set carreraEstudiantes, Set telefonoses) {
 		this.idPersona = idPersona;
 		this.perfil = perfil;
@@ -53,8 +48,8 @@ public class Persona implements java.io.Serializable {
 		this.direccion = direccion;
 		this.correoElectronico = correoElectronico;
 		this.estadoPersona = estadoPersona;
-		this.contrasena = contrasena;
 		this.usuario = usuario;
+		this.contrasena = contrasena;
 		this.matriculas = matriculas;
 		this.carreraEstudiantes = carreraEstudiantes;
 		this.telefonoses = telefonoses;
@@ -132,20 +127,20 @@ public class Persona implements java.io.Serializable {
 		this.estadoPersona = estadoPersona;
 	}
 
-	public String getContrasena() {
-		return this.contrasena;
-	}
-
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
-	}
-
 	public String getUsuario() {
 		return this.usuario;
 	}
 
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
+	}
+
+	public String getContrasena() {
+		return this.contrasena;
+	}
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
 	public Set getMatriculas() {
@@ -172,21 +167,11 @@ public class Persona implements java.io.Serializable {
 		this.telefonoses = telefonoses;
 	}
 
-	@Override
-	public String toString() {
-		return "Persona [idPersona=" + idPersona + ", perfil=" + perfil
-				+ ", nombrePersona=" + nombrePersona + ", apellidosPersona="
-				+ apellidosPersona + ", fechaNacimiento=" + fechaNacimiento
-				+ ", lugarNacimiento=" + lugarNacimiento + ", direccion="
-				+ direccion + ", correoElectronico=" + correoElectronico
-				+ ", estadoPersona=" + estadoPersona + ", contrasena="
-				+ contrasena + ", usuario=" + usuario + ", matriculas="
-				+ matriculas + ", carreraEstudiantes=" + carreraEstudiantes
-				+ ", telefonoses=" + telefonoses + "]";
+	public Persona(String usuario, String contrasena) {
+		super();
+		this.usuario = usuario;
+		this.contrasena = contrasena;
 	}
 
 	
-	
-	
-
 }
