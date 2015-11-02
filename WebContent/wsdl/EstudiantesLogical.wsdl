@@ -4,34 +4,34 @@
 Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://logical.matriculas.ueb.co" xmlns="http://www.w3.org/2001/XMLSchema">
-   <element name="obtenerNombre">
+   <element name="obtenerPromedio">
     <complexType>
      <sequence>
-      <element name="nombre" type="xsd:string"/>
+      <element name="identificacion" type="xsd:decimal"/>
      </sequence>
     </complexType>
    </element>
-   <element name="obtenerNombreResponse">
+   <element name="obtenerPromedioResponse">
     <complexType>
      <sequence>
-      <element name="obtenerNombreReturn" type="xsd:string"/>
+      <element name="obtenerPromedioReturn" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
   </schema>
  </wsdl:types>
 
-   <wsdl:message name="obtenerNombreRequest">
+   <wsdl:message name="obtenerPromedioResponse">
 
-      <wsdl:part element="impl:obtenerNombre" name="parameters">
+      <wsdl:part element="impl:obtenerPromedioResponse" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="obtenerNombreResponse">
+   <wsdl:message name="obtenerPromedioRequest">
 
-      <wsdl:part element="impl:obtenerNombreResponse" name="parameters">
+      <wsdl:part element="impl:obtenerPromedio" name="parameters">
 
       </wsdl:part>
 
@@ -39,13 +39,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    <wsdl:portType name="EstudiantesLogical">
 
-      <wsdl:operation name="obtenerNombre">
+      <wsdl:operation name="obtenerPromedio">
 
-         <wsdl:input message="impl:obtenerNombreRequest" name="obtenerNombreRequest">
+         <wsdl:input message="impl:obtenerPromedioRequest" name="obtenerPromedioRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:obtenerNombreResponse" name="obtenerNombreResponse">
+         <wsdl:output message="impl:obtenerPromedioResponse" name="obtenerPromedioResponse">
 
        </wsdl:output>
 
@@ -57,17 +57,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
-      <wsdl:operation name="obtenerNombre">
+      <wsdl:operation name="obtenerPromedio">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="obtenerNombreRequest">
+         <wsdl:input name="obtenerPromedioRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="obtenerNombreResponse">
+         <wsdl:output name="obtenerPromedioResponse">
 
             <wsdlsoap:body use="literal"/>
 

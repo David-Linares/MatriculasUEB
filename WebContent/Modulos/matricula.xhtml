@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+	<ui:insert>
+		<ui:include src="/Modulos/header.xhtml"></ui:include>
+	</ui:insert>
+<body> 
+	<div class="container">
+		<div class="col-md-12" style="margin-bottom:30px">
+			<div class="col-md-3" style="text-align:center">
+				<button data-toggle="modal" data-target="#modalMatriculas" class="botonImg">
+					<h:graphicImage url="/resources/images/add.png"></h:graphicImage>
+				</button>
+			</div>
+			<div class="col-md-3" style="text-align:center">
+				<button class="botonImg">
+					<h:graphicImage url="/resources/images/pdf.png"></h:graphicImage>
+				</button>
+			</div>
+		</div>
+		<h:panelGroup rendered="#{!facultadBean.mensajeRespuesta.equals('')}">
+			<div class="col-md-12 alert alert-dismissable alert-danger" >
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4>Error!</h4>
+                <p>#{facultadBean.mensajeRespuesta}</p>
+            </div>
+		</h:panelGroup>
+		<div class="col-md-12">
+			<div class="col-md-6">
+				<label>Promedio Acumulado:</label>
+				<label style="font-weight: bold;">#{matriculaBean.promedio}</label>
+			</div>
+			<div class="col-md-6">
+				<label>Créditos Permitidos:</label>
+				<label style="font-weight: bold;">#{matriculaBean.creditosPermitidos}</label>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<h:form>
+			<h:dataTable value="#{facultadBean.listadoFacultades}" var="facultad" class="table table-hover table-striped" id="tablaFacultad">
+				<h:column>
+					<f:facet name="header"># Facultad </f:facet>
+					#{facultad.idFacultad}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nombre de la Facultad</f:facet>
+					#{facultad.nombreFacultad}
+				</h:column>					
+				<h:column>
+					<f:facet name="header">Acciones</f:facet>
+					<h:commandLink class="botonImg"  data-toggle="modal" data-target="#myModalEdit" actionListener="#{facultadBean.setFacultadAux(facultad)}">
+						<f:ajax execute="@form" render=":modalEditContent" onevent="function(data) { if (data.status == 'success') $('#myModalEdit').modal() ; }"/>
+						<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
+					</h:commandLink>
+				</h:column>
+			</h:dataTable>
+			</h:form>
+		</div>
+	</div>
+	<div class="modal fade" id="modalMatriculas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Agregar Facultad</h4>
+	      </div>
+        <h:form >
+	      <div class="modal-body">
+	      		<br></br>
+	        	<div class="form-control-wrapper">
+					<h:inputText id="nuevaFacultad" class="form-control col-sm-10 empty" value="#{facultadBean.nombreFacultad}"></h:inputText>
+					<div class="floating-label">Nombre de la facultad</div>
+					<span class="material-input"></span>	                    
+				</div>
+				<br></br>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	        <h:commandButton class="btn btn-primary" action="#{facultadBean.crearFacultad()}" value="Guardar Facultad" />
+	      </div>
+        </h:form>
+	    </div>
+	  </div>
+	</div>
+	<h:panelGroup>
+		<div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Modificar Facultad</h4>
+		      </div>
+	        <h:form  id="modalEditContent">
+		      <div class="modal-body">
+		      		<br></br>
+		        	<div class="form-group">
+						<label class="control-label">Nombre de la facultad</label>             
+						<h:inputText class="form-control col-sm-10 empty" value="#{facultadBean.facultadAux.nombreFacultad}"/>
+					</div>
+					<div class="togglebutton">
+						<label>
+                            Estado facultad
+                            <br/><h:selectBooleanCheckbox value="#{facultadBean.estadoFacultadEditar}" /><span class="toggle"></span>
+                        </label>
+					</div>
+					<br></br>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+		        <h:commandButton class="btn btn-primary" action="#{facultadBean.editarFacultad()}" value="Guardar Facultad" />
+		      </div>
+	        </h:form>
+		    </div>
+		  </div>
+		</div>
+	</h:panelGroup>
+</body> 
+</html>

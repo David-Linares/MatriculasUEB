@@ -20,7 +20,7 @@ public class LoginBean implements Serializable {
     private boolean mostrarError;
 	private BigDecimal perfilUsuario;
 	private Persona sesionPersona;
-	final Logger log = Logger.getLogger("TestLogin");
+	final Logger log = Logger.getLogger("LoginBean -- ");
 	
 	public boolean isMostrarError(){
 		return mostrarError;
@@ -69,8 +69,9 @@ public class LoginBean implements Serializable {
 			perfilUsuario = sesionPersona.getPerfil().getIdPerfil();
 		}		
 	}
-
+	/*Método que le envía al Logical de Persona para hacer la consulta*/
 	public String verificarDatos() {
+		long inicio = System.nanoTime();
 		log.info("| Verificar Datos");
 		String encrypt = DigestUtils.md5Hex(this.contrasena);
 		this.contrasena = encrypt;
@@ -84,7 +85,10 @@ public class LoginBean implements Serializable {
 				FacesContext.getCurrentInstance().getExternalContext()
 						.getSessionMap().put("usuario", nuevoUsuario);
 				this.setPerfilUsuario();
-				this.resultado = "paginaFacultad";
+				if(nuevoUsuario.getPerfil().getIdPerfil() == new BigDecimal(1))
+					this.resultado = "paginaFacultad";
+				else
+					this.resultado = "paginaMatricula";
 			} else {
 				this.setResultado("Usuario o Password incorrectas");
 				return null;	
@@ -92,6 +96,8 @@ public class LoginBean implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		long fin = System.nanoTime();
+		log.info("Inicio de sesión: " + (fin-inicio));
 		return this.resultado;
 	}
 

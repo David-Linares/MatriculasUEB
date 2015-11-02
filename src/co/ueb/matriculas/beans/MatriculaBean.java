@@ -1,24 +1,27 @@
 package co.ueb.matriculas.beans;
 
-import java.util.List;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 
+import javax.faces.context.FacesContext;
 
+import co.ueb.matriculas.logical.EstudiantesLogical;
 import co.ueb.matriculas.logical.FacultadLogical;
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Facultad;
+import co.ueb.matriculas.model.Persona;
 
-public class FacultadBean implements Serializable {
+public class MatriculaBean implements Serializable{
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -9166065171751439973L;
-	private final Logger log = Logger.getLogger("Facultad Bean -- ");
+	private static final long serialVersionUID = -4982995413040238168L;
+	private String promedio = "";
+	private int creditosPermitidos = 0;
 	FacultadLogical fl = new FacultadLogical();
 	String nombreFacultad = "";
 	List<Facultad> listadoFacultades = fl.consultarFacultades();
@@ -27,7 +30,25 @@ public class FacultadBean implements Serializable {
 	boolean estadoFacultadEditar = false;
 	String mensajeRespuesta = "";
 	String auxNombreValidacion = "";
-		
+	
+	public int getCreditosPermitidos() {
+		return creditosPermitidos;
+	}
+
+	public void setCreditosPermitidos(int creditosPermitidos) {
+		this.creditosPermitidos = creditosPermitidos;
+	}
+
+	public String getPromedio() {
+		return promedio;
+	}
+
+	public void setPromedio(String promedio) {
+		EstudiantesLogical el = new EstudiantesLogical();
+		Persona usuarioActual = (Persona) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+		this.promedio = el.obtenerPromedio(usuarioActual.getIdPersona());
+	}
+
 	public String getAuxNombreValidacion() {
 		return auxNombreValidacion;
 	}
@@ -42,6 +63,21 @@ public class FacultadBean implements Serializable {
 
 	public void setMensajeRespuesta(String mensajeRespuesta) {
 		this.mensajeRespuesta = mensajeRespuesta;
+	}
+
+	public void setFacultadAux(Facultad facultadAux){
+		System.out.println("[FacultadBean] - setFacultadAux || Va a cambiar => "+facultadAux);
+		if(facultadAux != null){
+			System.out.println(facultadAux.getNombreFacultad());
+			this.setAuxNombreValidacion(facultadAux.getNombreFacultad());
+			this.facultadAux = facultadAux;
+			if(this.facultadAux.getEstadoFacultad().compareTo('1') == 0){
+				this.setEstadoFacultadEditar(true);
+			}else{
+				this.setEstadoFacultadEditar(false);
+			}
+			this.setBanderaEdit(true);
+		}
 	}
 	
 	public boolean isEstadoFacultadEditar() {
@@ -82,21 +118,6 @@ public class FacultadBean implements Serializable {
 		this.nombreFacultad = nombreFacultad;
 	}
 	
-	public void setFacultadAux(Facultad facultadAux){
-		log.info("Va a cambiar => "+facultadAux);
-		if(facultadAux != null){
-			log.info("Nombre de la facultadAux: " + facultadAux.getNombreFacultad());
-			this.setAuxNombreValidacion(facultadAux.getNombreFacultad());
-			this.facultadAux = facultadAux;
-			if(this.facultadAux.getEstadoFacultad().compareTo('1') == 0){
-				this.setEstadoFacultadEditar(true);
-			}else{
-				this.setEstadoFacultadEditar(false);
-			}
-			this.setBanderaEdit(true);
-		}
-	}
-	
 	public String editarFacultad(){
 		if(this.getFacultadAux().getNombreFacultad().equals("")){
 			this.getFacultadAux().setNombreFacultad(this.getAuxNombreValidacion());
@@ -119,15 +140,15 @@ public class FacultadBean implements Serializable {
 	}
 
 	public String crearFacultad(){
-		log.info("Entró a crear");
+		System.out.println("[FacultadBean] - crearFacultad || Entró a crear");
 		if(this.getNombreFacultad().equals("")){
-			log.warning("El campo viene vacío");
+			System.out.println("Vacio el nombre");
 			this.setMensajeRespuesta("El campo nombre no puede estar vacío");
 			return null;
 		}
 		Set<Carrera> carreras = new HashSet<Carrera>(0);
 		Facultad nuevaFacultad = new Facultad(new BigDecimal(0), this.nombreFacultad, '1', carreras);
-		log.info("Nueva Facultad => "+nuevaFacultad);
+		System.out.println("[FacultadBean] - crearFacultad || Nueva Facultad => "+nuevaFacultad);
 		boolean guardado = fl.crearNuevaFacultad(nuevaFacultad);
 		if(guardado){
 			this.setMensajeRespuesta("");
@@ -149,4 +170,5 @@ public class FacultadBean implements Serializable {
 		}
 	}
 	
+
 }

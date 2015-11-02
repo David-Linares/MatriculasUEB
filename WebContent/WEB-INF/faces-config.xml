@@ -66,6 +66,11 @@
    <value/>
   </managed-property>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>matriculaBean</managed-bean-name>
+  <managed-bean-class>co.ueb.matriculas.beans.MatriculaBean</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
  <navigation-rule>
   <from-view-id>*</from-view-id>
   <navigation-case>

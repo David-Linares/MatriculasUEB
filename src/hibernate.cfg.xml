@@ -9,11 +9,11 @@
         <property name="hibernate.connection.password">proyecto20152</property>
         <property name="hibernate.connection.url">jdbc:oracle:thin:@104.197.2.43:1521:xe</property>
         <property name="hibernate.connection.username">proyectomatriculas</property>
+        <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.default_schema">PROYECTOMATRICULAS</property>
         <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
         <property name="hibernate.search.autoregister_listeners">false</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>
-        <property name="hibernate.current_session_context_class">thread</property>
         <mapping resource="co/ueb/matriculas/model/Materia.hbm.xml" />
         <mapping resource="co/ueb/matriculas/model/Perfil.hbm.xml" />
         <mapping resource="co/ueb/matriculas/model/MateriaMatricula.hbm.xml" />

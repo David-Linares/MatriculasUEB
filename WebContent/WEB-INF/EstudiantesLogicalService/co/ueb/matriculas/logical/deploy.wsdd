@@ -10,10 +10,10 @@
       <parameter name="className" value="co.ueb.matriculas.logical.EstudiantesLogical"/>
       <parameter name="wsdlPortType" value="EstudiantesLogical"/>
       <parameter name="typeMappingVersion" value="1.2"/>
-      <operation xmlns:operNS="http://logical.matriculas.ueb.co" xmlns:retNS="http://logical.matriculas.ueb.co" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="obtenerNombre" qname="operNS:obtenerNombre" returnQName="retNS:obtenerNombreReturn" returnType="rtns:string" soapAction="">
-        <parameter xmlns:pns="http://logical.matriculas.ueb.co" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:nombre" type="tns:string"/>
+      <operation xmlns:operNS="http://logical.matriculas.ueb.co" xmlns:retNS="http://logical.matriculas.ueb.co" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="obtenerPromedio" qname="operNS:obtenerPromedio" returnQName="retNS:obtenerPromedioReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://logical.matriculas.ueb.co" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:identificacion" type="tns:decimal"/>
       </operation>
-      <parameter name="allowedMethods" value="obtenerNombre"/>
+      <parameter name="allowedMethods" value="obtenerPromedio"/>
 
   </service>
 </deployment>
