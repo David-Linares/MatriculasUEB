@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 1, 2015 5:44:59 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 02-nov-2015 12:47:34 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="co.ueb.matriculas.model.Matricula" table="MATRICULA" optimistic-lock="version">
         <id name="idMatricula" type="big_decimal">
@@ -14,8 +14,8 @@
         <property name="totalCreditos" type="big_decimal">
             <column name="TOTAL_CREDITOS" precision="22" scale="0" />
         </property>
-        <property name="totalMatricula" type="big_decimal">
-            <column name="TOTAL_MATRICULA" precision="22" scale="0" />
+        <property name="costoMatricula" type="big_decimal">
+            <column name="COSTO_MATRICULA" precision="22" scale="0" />
         </property>
         <property name="estadoMatricula" type="java.lang.Character">
             <column name="ESTADO_MATRICULA" length="1" />

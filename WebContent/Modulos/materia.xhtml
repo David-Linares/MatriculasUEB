@@ -26,27 +26,27 @@
 <!-- 				</h:form> -->
 <!-- 			</div> -->
 		</div>
-		<h:panelGroup rendered="#{!carreraBean.mensajeRespuesta.equals('')}">
-			<div class="col-md-12 alert alert-dismissable alert-warning" >
+		<h:panelGroup rendered="#{!materiaBean.mensajeRespuesta.equals('')}">
+			<div class="col-md-12 alert alert-dismissable alert-danger" >
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <h4>Error!</h4>
-                <p>#{carreraBean.mensajeRespuesta}</p>
+                <p>#{materiaBean.mensajeRespuesta}</p>
             </div>
 		</h:panelGroup>
 		<div class="col-md-12">
 			<h:form>
-			<h:dataTable value="#{carreraBean.listadoCarreras}" var="carrera" class="table table-hover table-striped" id="tablaCarrera">
+			<h:dataTable value="#{materiaBean.listadoMaterias}" var="materia" class="table table-hover table-striped" id="tablaMateria">
 				<h:column>
-					<f:facet name="header"># Carrera </f:facet>
-					#{carrera.idCarrera}
+					<f:facet name="header"># Materia </f:facet>
+					#{materia.idMateria}
 				</h:column>
 				<h:column>
-					<f:facet name="header">Nombre de la Carrera</f:facet>
-					#{carrera.nombreCarrera}
+					<f:facet name="header">Nombre de la Materia</f:facet>
+					#{materia.nombreMateria}
 				</h:column>					
 				<h:column>
 					<f:facet name="header">Acciones</f:facet>
-					<h:commandLink class="botonImg"  data-toggle="modal" data-target="#myModalEdit" actionListener="#{carreraBean.setCarreraAux(carrera)}">
+					<h:commandLink class="botonImg"  data-toggle="modal" data-target="#myModalEdit" actionListener="#{materiaBean.materiaAux(materia)}">
 						<f:ajax execute="@form" render=":modalEditContent" onevent="function(data) { if (data.status == 'success') $('#myModalEdit').modal() ; }"/>
 						<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
 					</h:commandLink>
@@ -60,31 +60,21 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Agregar Carrera</h4>
+	        <h4 class="modal-title" id="myModalLabel">Agregar Materia</h4>
 	      </div>
         <h:form >
 	      <div class="modal-body">
 	      		<br></br>
 	        	<div class="form-control-wrapper">
-					<h:inputText id="nuevaCarrera" class="form-control col-sm-10 empty" required="true" value="#{carreraBean.nombreCarrera}"></h:inputText>
-					<div class="floating-label">Nombre de la Carrera</div>
+					<h:inputText id="nuevaMateria" class="form-control col-sm-10 empty" value="#{materiaBean.nombreMateria}"></h:inputText>
+					<div class="floating-label">Nombre de la materia</div>
 					<span class="material-input"></span>	                    
-				</div>
-				<div class="form-control-wrapper">
-					<h:inputText id="creditosCarrera" class="form-control col-sm-10 empty" required="true" value="#{carreraBean.totalCreditos}"></h:inputText>
-					<div class="floating-label">Creditos maximos permitidos</div>
-					<span class="material-input"></span>	                    
-				</div>
-				<div class="form-control-wrapper">
-					<h:selectOneMenu value="#{carreraBean.facultadCarrera}">
-						<f:selectItems value="#{carreraBean.listadoFacultades}"/>
-					</h:selectOneMenu>                  
 				</div>
 				<br></br>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-	        <h:commandButton class="btn btn-primary" action="#{carreraBean.crearCarrera()}" value="Guardar Carrera" />
+	        <h:commandButton class="btn btn-primary" action="#{materiaBean.crearMateria()}" value="Guardar Materia" />
 	      </div>
         </h:form>
 	    </div>
@@ -96,36 +86,26 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Modificar Carrera</h4>
+		        <h4 class="modal-title" id="myModalLabel">Modificar Materia</h4>
 		      </div>
 	        <h:form  id="modalEditContent">
 		      <div class="modal-body">
 		      		<br></br>
 		        	<div class="form-group">
-						<label class="control-label">Nombre de la carrera</label>             
-						<h:inputText class="form-control col-sm-10 empty" required="true" value="#{carreraBean.carreraAux.nombreCarrera}"></h:inputText>
-					</div>
-					<div class="form-group">
-						<label class="control-label">Creditos maximos permitidos</label>             
-						<h:inputText class="form-control col-sm-10 empty" required="true" value="#{carreraBean.carreraAux.totalCreditos}"></h:inputText>
-					</div>
-					<div class="form-group">
-						<label class="control-label">Facultad a la que pertenece:</label>
-						<h:selectOneMenu value="#{carreraBean.facultadCarrera}">
-							<f:selectItems value="#{carreraBean.listadoFacultades}" itemValue="#{facultadSelect.nombreFacultad}" var="facultadSelect"/>
-						</h:selectOneMenu>                  
+						<label class="control-label">Nombre de la materia</label>             
+						<h:inputText class="form-control col-sm-10 empty" value="#{materiaBean.materiaAux.nombreMateria}"/>
 					</div>
 					<div class="togglebutton">
 						<label>
-                            Estado Carrera
-                            <br/><h:selectBooleanCheckbox value="#{carreraBean.estadoCarreraEditar}" /><span class="toggle"></span>
+                            Estado materia
+                            <br/><h:selectBooleanCheckbox value="#{materiaBean.estadoMateriaEditar}" /><span class="toggle"></span>
                         </label>
 					</div>
 					<br></br>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-		        <h:commandButton class="btn btn-primary" action="#{carreraBean.editarCarrera()}" value="Guardar Carrera" />
+		        <h:commandButton class="btn btn-primary" action="#{materiaBean.editarFacultad()}" value="Guardar Materia" />
 		      </div>
 	        </h:form>
 		    </div>
