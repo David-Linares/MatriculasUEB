@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 1, 2015 5:44:59 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 02-nov-2015 12:47:34 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="co.ueb.matriculas.model.Carrera" table="CARRERA" optimistic-lock="version">
         <id name="idCarrera" type="big_decimal">
@@ -20,17 +20,17 @@
         <property name="estadoCarrera" type="java.lang.Character">
             <column name="ESTADO_CARRERA" length="1" />
         </property>
+        <set name="materias" table="MATERIA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_CARRERA" precision="22" scale="0" />
+            </key>
+            <one-to-many class="co.ueb.matriculas.model.Materia" />
+        </set>
         <set name="carreraEstudiantes" table="CARRERA_ESTUDIANTE" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="ID_CARRERA" precision="22" scale="0" not-null="true" />
             </key>
             <one-to-many class="co.ueb.matriculas.model.CarreraEstudiante" />
-        </set>
-        <set name="carreraMaterias" table="CARRERA_MATERIA" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="ID_CARRERA" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="co.ueb.matriculas.model.CarreraMateria" />
         </set>
     </class>
 </hibernate-mapping>
