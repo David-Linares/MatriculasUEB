@@ -4,6 +4,10 @@
  <converter>
   <converter-id>FacultadConverter</converter-id>
   <converter-class>co.uel.matriculas.converter.FacultadConverter</converter-class>
+</converter>
+ <converter>
+  <converter-id>carreraConverter</converter-id>
+  <converter-class>co.uel.matriculas.converter.CarreraConverter</converter-class>
  </converter>
  <managed-bean>
   <managed-bean-name>estudianteBean</managed-bean-name>

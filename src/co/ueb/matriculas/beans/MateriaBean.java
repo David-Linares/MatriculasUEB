@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.faces.model.SelectItem;
+
 import co.ueb.matriculas.logical.FacultadLogical;
 import co.ueb.matriculas.logical.MateriaLogical;
 import co.ueb.matriculas.model.Carrera;
@@ -17,12 +19,50 @@ public class MateriaBean {
 	MateriaLogical ml = new MateriaLogical();
 	String nombreMateria = "";
 	BigDecimal cantidadCreditos;
+	CarreraBean carreraList = new CarreraBean();
+	List<SelectItem> carreraSelect;
 	List<Materia> listadoMaterias = ml.consultarMaterias();
+	List<Carrera> listadoCarreras = carreraList.getListadoCarreras();
 	Materia materiaAux = null;
-	Carrera carreraAux = null;
+	Carrera carreraMateria = null;
 	boolean banderaEdit = false;
 	boolean estadoMateriaEditar = false;
 	String mensajeRespuesta = "";
+
+	public CarreraBean getCarreraList() {
+		return carreraList;
+	}
+
+	public void setCarreraList(CarreraBean carreraList) {
+		this.carreraList = carreraList;
+	}
+
+	public List<SelectItem> getCarreraSelect() {
+		return carreraSelect;
+	}
+
+	public void setCarreraSelect(List<SelectItem> carreraSelect) {
+		this.carreraSelect = carreraSelect;
+	}
+
+	public List<Carrera> getListadoCarreras() {
+		return listadoCarreras;
+	}
+
+	public void setListadoCarreras(List<Carrera> listadoCarreras) {
+		CarreraBean carrerasList = new CarreraBean();
+		this.listadoCarreras = carrerasList.getListadoCarreras();
+
+	}
+
+	public Carrera getCarreraMateria() {
+		return carreraMateria;
+	}
+
+	public void setCarreraMateria(Carrera carreraMateria) {
+		this.carreraMateria = carreraMateria;
+	}
+
 	String auxNombreValidacion = "";
 
 	public BigDecimal getCantidadCreditos() {
@@ -101,7 +141,7 @@ public class MateriaBean {
 		return materiaAux;
 	}
 
-	public String editarFacultad() {
+	public String editarMateria() {
 		if (this.getMateriaAux().getNombreMateria().equals("")) {
 			this.getMateriaAux()
 					.setNombreMateria(this.getAuxNombreValidacion());
@@ -130,17 +170,20 @@ public class MateriaBean {
 			this.setMensajeRespuesta("El campo nombre no puede estar vacio");
 			return null;
 		}
-		Set<MateriaMatricula> materiaMatricula = new HashSet<MateriaMatricula>(0);
-		BigDecimal idMateriaAux=new BigDecimal(1);
-		if (listadoMaterias.size()!=0) {
-			idMateriaAux = listadoMaterias.get(listadoMaterias.size() - 1).getIdMateria().add(new BigDecimal(1));
+		Set<MateriaMatricula> materiaMatricula = new HashSet<MateriaMatricula>(
+				0);
+		BigDecimal idMateriaAux = new BigDecimal(1);
+		if (listadoMaterias.size() != 0) {
+			idMateriaAux = listadoMaterias.get(listadoMaterias.size() - 1)
+					.getIdMateria().add(new BigDecimal(1));
 		}
-		Materia nuevaMateria = new Materia(idMateriaAux, this.carreraAux,
-				this.nombreMateria, this.cantidadCreditos, '1',
-				materiaMatricula);
+		Materia nuevaMateria = new Materia(idMateriaAux,
+				this.getCarreraMateria(), this.nombreMateria,
+				this.cantidadCreditos, '1', materiaMatricula);
 		System.out.println("[MateriaBean] - crearMateria || Nueva Materia => "
 				+ nuevaMateria);
 		boolean guardado = ml.crearNuevaMateria(nuevaMateria);
+		this.getCarreraMateria().getMaterias().add(nuevaMateria);
 		if (guardado) {
 			this.setMensajeRespuesta("");
 			this.listadoMaterias.add(nuevaMateria);

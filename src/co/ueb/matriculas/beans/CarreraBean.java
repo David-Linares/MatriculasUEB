@@ -35,6 +35,14 @@ public class CarreraBean implements Serializable {
 	String mensajeRespuesta = "";
 	String auxNombreValidacion = "";
 	
+	public FacultadBean getFacultadesList() {
+		return facultadesList;
+	}
+
+	public void setFacultadesList(FacultadBean facultadesList) {
+		this.facultadesList = facultadesList;
+	}
+
 	public Facultad getFacultadCarrera() {
 		return facultadCarrera;
 	}

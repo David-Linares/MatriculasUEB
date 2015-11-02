@@ -95,6 +95,10 @@ public class Carrera implements java.io.Serializable {
 	}
 
 	@Override
+	public String toString() {
+		return nombreCarrera;
+	}
+	
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -163,7 +167,4 @@ public class Carrera implements java.io.Serializable {
 			return false;
 		return true;
 	}
-	
-	
-
 }
