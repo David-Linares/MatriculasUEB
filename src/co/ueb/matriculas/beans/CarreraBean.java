@@ -176,7 +176,11 @@ public class CarreraBean implements Serializable {
 		Set<Persona> personas = new HashSet<Persona>(0);
 		System.out.println("Entra a construis la carrera");
 		System.out.println("La facultad es " + getFacultadCarrera());
-		Carrera nuevaCarrera = new Carrera(new BigDecimal(0), this.getFacultadCarrera(), this.nombreCarrera, this.totalCreditos, '1', personas, materias);
+		BigDecimal idCarreraAux=new BigDecimal(1);
+		if (listadoCarreras.size()!=0) {
+			idCarreraAux = listadoCarreras.get(listadoCarreras.size() - 1).getIdCarrera().add(new BigDecimal(1));
+		}
+		Carrera nuevaCarrera = new Carrera(idCarreraAux, this.getFacultadCarrera(), this.nombreCarrera, this.totalCreditos, '1', personas, materias);
 		System.out.println("[CarreraBean] - crearCarrera || Nueva Carrera => "+ nuevaCarrera);
 		boolean guardado = cl.crearNuevaCarrera(nuevaCarrera);
 		if(guardado){

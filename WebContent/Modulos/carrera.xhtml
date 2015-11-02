@@ -77,7 +77,7 @@
 				</div>
 				<div class="form-control-wrapper">
 					<h:selectOneMenu value="#{carreraBean.facultadCarrera}">
-						<f:selectItems value="#{carreraBean.listadoFacultades}"/>
+						<f:selectItems value="#{carreraBean.listadoFacultades}" var="facultadEst" itemLabel = "#{facultadEst.nombreFacultad}"/>
 					</h:selectOneMenu>                  
 				</div>
 				<br></br>

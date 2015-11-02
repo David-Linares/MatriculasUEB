@@ -15,7 +15,7 @@ import co.ueb.matriculas.model.Facultad;
 @ManagedBean
 @RequestScoped
 @FacesConverter(forClass = Facultad.class)
-public class FacultadConverterBean implements Converter{
+public class FacultadConverter implements Converter{
 
 	private Facultad facultad;
 	 
@@ -31,7 +31,7 @@ public class FacultadConverterBean implements Converter{
         }
     }
 	
-	 public String getAsString(FacesContext context, UIComponent component, Object modelValue) {
+	public String getAsString(FacesContext context, UIComponent component, Object modelValue) {
 	        if (modelValue == null) {
 	            return "";
 	        }
