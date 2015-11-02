@@ -94,4 +94,10 @@ public class Carrera implements java.io.Serializable {
 		this.carreraEstudiantes = carreraEstudiantes;
 	}
 
+	@Override
+	public String toString() {
+		return nombreCarrera;
+	}
+
+	
 }
