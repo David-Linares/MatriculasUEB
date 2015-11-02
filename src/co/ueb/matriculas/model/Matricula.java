@@ -1,6 +1,6 @@
 package co.ueb.matriculas.model;
 
-// Generated Nov 1, 2015 5:44:57 PM by Hibernate Tools 4.3.1
+// Generated 02-nov-2015 12:47:33 by Hibernate Tools 4.3.1
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -14,7 +14,7 @@ public class Matricula implements java.io.Serializable {
 	private BigDecimal idMatricula;
 	private Persona persona;
 	private BigDecimal totalCreditos;
-	private BigDecimal totalMatricula;
+	private BigDecimal costoMatricula;
 	private Character estadoMatricula;
 	private Set materiaMatriculas = new HashSet(0);
 
@@ -26,12 +26,12 @@ public class Matricula implements java.io.Serializable {
 	}
 
 	public Matricula(BigDecimal idMatricula, Persona persona,
-			BigDecimal totalCreditos, BigDecimal totalMatricula,
+			BigDecimal totalCreditos, BigDecimal costoMatricula,
 			Character estadoMatricula, Set materiaMatriculas) {
 		this.idMatricula = idMatricula;
 		this.persona = persona;
 		this.totalCreditos = totalCreditos;
-		this.totalMatricula = totalMatricula;
+		this.costoMatricula = costoMatricula;
 		this.estadoMatricula = estadoMatricula;
 		this.materiaMatriculas = materiaMatriculas;
 	}
@@ -60,12 +60,12 @@ public class Matricula implements java.io.Serializable {
 		this.totalCreditos = totalCreditos;
 	}
 
-	public BigDecimal getTotalMatricula() {
-		return this.totalMatricula;
+	public BigDecimal getCostoMatricula() {
+		return this.costoMatricula;
 	}
 
-	public void setTotalMatricula(BigDecimal totalMatricula) {
-		this.totalMatricula = totalMatricula;
+	public void setCostoMatricula(BigDecimal costoMatricula) {
+		this.costoMatricula = costoMatricula;
 	}
 
 	public Character getEstadoMatricula() {

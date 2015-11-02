@@ -1,6 +1,6 @@
 package co.ueb.matriculas.model;
 
-// Generated Nov 1, 2015 5:44:57 PM by Hibernate Tools 4.3.1
+// Generated 02-nov-2015 12:47:33 by Hibernate Tools 4.3.1
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,6 +21,7 @@ public class Persona implements java.io.Serializable {
 	private String direccion;
 	private String correoElectronico;
 	private Character estadoPersona;
+	private BigDecimal promedio;
 	private String usuario;
 	private String contrasena;
 	private Set matriculas = new HashSet(0);
@@ -30,6 +31,12 @@ public class Persona implements java.io.Serializable {
 	public Persona() {
 	}
 
+	public Persona(String usuario, String contrasena) {
+		super();
+		this.usuario = usuario;
+		this.contrasena = contrasena;
+	}
+
 	public Persona(BigDecimal idPersona) {
 		this.idPersona = idPersona;
 	}
@@ -37,8 +44,9 @@ public class Persona implements java.io.Serializable {
 	public Persona(BigDecimal idPersona, Perfil perfil, String nombrePersona,
 			String apellidosPersona, Date fechaNacimiento,
 			String lugarNacimiento, String direccion, String correoElectronico,
-			Character estadoPersona, String usuario, String contrasena,
-			Set matriculas, Set carreraEstudiantes, Set telefonoses) {
+			Character estadoPersona, BigDecimal promedio, String usuario,
+			String contrasena, Set matriculas, Set carreraEstudiantes,
+			Set telefonoses) {
 		this.idPersona = idPersona;
 		this.perfil = perfil;
 		this.nombrePersona = nombrePersona;
@@ -48,6 +56,7 @@ public class Persona implements java.io.Serializable {
 		this.direccion = direccion;
 		this.correoElectronico = correoElectronico;
 		this.estadoPersona = estadoPersona;
+		this.promedio = promedio;
 		this.usuario = usuario;
 		this.contrasena = contrasena;
 		this.matriculas = matriculas;
@@ -127,6 +136,14 @@ public class Persona implements java.io.Serializable {
 		this.estadoPersona = estadoPersona;
 	}
 
+	public BigDecimal getPromedio() {
+		return this.promedio;
+	}
+
+	public void setPromedio(BigDecimal promedio) {
+		this.promedio = promedio;
+	}
+
 	public String getUsuario() {
 		return this.usuario;
 	}
@@ -167,11 +184,4 @@ public class Persona implements java.io.Serializable {
 		this.telefonoses = telefonoses;
 	}
 
-	public Persona(String usuario, String contrasena) {
-		super();
-		this.usuario = usuario;
-		this.contrasena = contrasena;
-	}
-
-	
 }
