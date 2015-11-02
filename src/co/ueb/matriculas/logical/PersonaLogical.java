@@ -20,6 +20,7 @@ public class PersonaLogical {
 		log.info("verificarDatos "+persona);
 		Persona p = null;
 		try {
+			System.out.println("Sesion abierta" + HibernateSession.getSf().getCurrentSession().isOpen());
 			sesion = HibernateSession.getSf().getCurrentSession();
 			sesion.beginTransaction();
 			log.info(persona.getContrasena());
