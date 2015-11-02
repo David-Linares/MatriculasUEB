@@ -132,7 +132,7 @@ public class FacultadBean implements Serializable {
 		if(guardado){
 			this.setMensajeRespuesta("");
 			this.listadoFacultades.add(nuevaFacultad);
-			return "paginaFacultad";			
+			return "paginaFacultad";
 		}else{
 			return "error";
 		}

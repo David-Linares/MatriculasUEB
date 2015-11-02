@@ -181,6 +181,7 @@ public class CarreraBean implements Serializable {
 			idCarreraAux = listadoCarreras.get(listadoCarreras.size() - 1).getIdCarrera().add(new BigDecimal(1));
 		}
 		Carrera nuevaCarrera = new Carrera(idCarreraAux, this.getFacultadCarrera(), this.nombreCarrera, this.totalCreditos, '1', personas, materias);
+		this.getFacultadCarrera().getCarreras().add(nuevaCarrera);
 		System.out.println("[CarreraBean] - crearCarrera || Nueva Carrera => "+ nuevaCarrera);
 		boolean guardado = cl.crearNuevaCarrera(nuevaCarrera);
 		if(guardado){
