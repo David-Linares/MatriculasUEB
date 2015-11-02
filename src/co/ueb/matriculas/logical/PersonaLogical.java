@@ -19,7 +19,7 @@ public class PersonaLogical {
 		Persona p = null;
 		try {
 			System.out.println("Sesion abierta" + HibernateSession.getSf().getCurrentSession().isOpen());
-			sesion = HibernateSession.getSf().getCurrentSession();
+			sesion = HibernateSession.getSf().openSession();
 			sesion.beginTransaction();
 			log.info(persona.getContrasena());
 			String hql = "FROM Persona WHERE usuario= '" + persona.getUsuario()

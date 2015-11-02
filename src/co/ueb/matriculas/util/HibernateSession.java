@@ -11,14 +11,14 @@ public class HibernateSession {
 	private static String filename = "hibernate.cfg.xml";
 	
 	private static SessionFactory buildSessionFactory(){
-		if(sf==null){
-			sf = new Configuration().configure(filename).buildSessionFactory();
-		}
+		sf = new Configuration().configure(filename).buildSessionFactory();
 		return sf;
 	}
 
 	public static SessionFactory getSf() {
-		sf = buildSessionFactory();
+		if(sf==null){
+			sf = buildSessionFactory();
+		}
 		return sf;
 	}
 }
