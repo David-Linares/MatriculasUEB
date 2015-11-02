@@ -112,7 +112,7 @@
 					<div class="form-group">
 						<label class="control-label">Facultad a la que pertenece:</label>
 						<h:selectOneMenu value="#{carreraBean.facultadCarrera}">
-							<f:selectItems value="#{carreraBean.listadoFacultades}" itemValue="#{carreraBean.carreraAux.facultad}"/>
+							<f:selectItems value="#{carreraBean.listadoFacultades}" itemValue="#{facultadSelect.nombreFacultad}" var="facultadSelect"/>
 						</h:selectOneMenu>                  
 					</div>
 					<div class="togglebutton">

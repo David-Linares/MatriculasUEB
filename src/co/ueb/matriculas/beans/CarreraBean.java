@@ -7,11 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
-
-
-
-
-
+import javax.faces.model.SelectItem;
 
 import co.ueb.matriculas.logical.CarreraLogical;
 import co.ueb.matriculas.model.Carrera;
@@ -32,6 +28,7 @@ public class CarreraBean implements Serializable {
 	CarreraLogical cl = new CarreraLogical();
 	List<Carrera> listadoCarreras = cl.consultarCarreras();
 	List<Facultad> listadoFacultades = facultadesList.getListadoFacultades();
+	List<SelectItem> facultadSelect;
 	Carrera carreraAux = null;
 	boolean banderaEdit = false;
 	boolean estadoCarreraEditar = false;
@@ -110,6 +107,18 @@ public class CarreraBean implements Serializable {
 		this.nombreCarrera = nombreCarrera;
 	}
 	
+	public List<SelectItem> getFacultadSelect() {
+		if(this.facultadSelect == null){
+			Facultad facultad = new Facultad();
+	//		List<Facultad> listaFacultades = facultad.listar();
+		}
+		return facultadSelect;
+	}
+
+	public void setFacultadSelect(List<SelectItem> facultadSelect) {
+		this.facultadSelect = facultadSelect;
+	}
+
 	public void setCarreraAux(Carrera carreraAux){
 		System.out.println("[CarreraBean] - setCarreraAux || Va a cambiar => "+carreraAux);
 		if(carreraAux != null){
