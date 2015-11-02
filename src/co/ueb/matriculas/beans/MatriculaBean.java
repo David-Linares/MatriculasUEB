@@ -8,6 +8,8 @@ import java.util.Set;
 
 import javax.faces.context.FacesContext;
 
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+
 import co.ueb.matriculas.logical.EstudiantesLogical;
 import co.ueb.matriculas.logical.FacultadLogical;
 import co.ueb.matriculas.model.Carrera;
@@ -20,9 +22,12 @@ public class MatriculaBean implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -4982995413040238168L;
-	private String promedio = "";
-	private int creditosPermitidos = 0;
 	FacultadLogical fl = new FacultadLogical();
+	EstudiantesLogical el = new EstudiantesLogical();
+	Persona usuarioActual = (Persona) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+	private String promedio = el.obtenerPromedio(usuarioActual.getIdPersona());
+	private int creditosPermitidos = 0;
+//	(promedio > 3.5) ? fl.getFacultadById(usuarioActual);
 	String nombreFacultad = "";
 	List<Facultad> listadoFacultades = fl.consultarFacultades();
 	Facultad facultadAux = null;
@@ -44,9 +49,7 @@ public class MatriculaBean implements Serializable{
 	}
 
 	public void setPromedio(String promedio) {
-		EstudiantesLogical el = new EstudiantesLogical();
-		Persona usuarioActual = (Persona) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-		this.promedio = el.obtenerPromedio(usuarioActual.getIdPersona());
+		this.promedio = promedio;
 	}
 
 	public String getAuxNombreValidacion() {

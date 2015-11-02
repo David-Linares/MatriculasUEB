@@ -145,7 +145,7 @@ public class MateriaBean {
 		if (this.getMateriaAux().getNombreMateria().equals("")) {
 			this.getMateriaAux()
 					.setNombreMateria(this.getAuxNombreValidacion());
-			this.setMensajeRespuesta("El campo nombre no puede estar vacío");
+			this.setMensajeRespuesta("El campo nombre no puede estar vacï¿½o");
 			return null;
 		}
 		if (this.estadoMateriaEditar) {
