@@ -2,8 +2,13 @@
 <faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
  <converter>
+<<<<<<< HEAD
+  <converter-id>estudianteConverter</converter-id>
+  <converter-class>co.uel.matriculas.converter.EstudianteConverter</converter-class>
+=======
   <converter-id>carreraConverter</converter-id>
   <converter-class>co.uel.matriculas.converter.CarreraConverterBean</converter-class>
+>>>>>>> modulo carrera - agregar
  </converter>
  <managed-bean>
   <managed-bean-name>estudianteBean</managed-bean-name>
