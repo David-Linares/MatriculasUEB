@@ -24,7 +24,7 @@ public class MateriaBean {
 	boolean estadoMateriaEditar = false;
 	String mensajeRespuesta = "";
 	String auxNombreValidacion = "";
-		
+
 	public BigDecimal getCantidadCreditos() {
 		return cantidadCreditos;
 	}
@@ -57,22 +57,22 @@ public class MateriaBean {
 		this.banderaEdit = banderaEdit;
 	}
 
-	public void setMateriaAux(Materia materiaAux){
-		System.out.println("[MateriaBean] - setMateriaAux || Va a cambiar => "+materiaAux);
-		if(materiaAux != null){
+	public void setMateriaAux(Materia materiaAux) {
+		System.out.println("[MateriaBean] - setMateriaAux || Va a cambiar => "
+				+ materiaAux);
+		if (materiaAux != null) {
 			System.out.println(materiaAux.getNombreMateria());
 			this.setAuxNombreValidacion(materiaAux.getNombreMateria());
 			this.materiaAux = materiaAux;
-			if(this.materiaAux.getEstadoMateria().compareTo('1') == 0){
+			if (this.materiaAux.getEstadoMateria().compareTo('1') == 0) {
 				this.setEstadoMateriaEditar(true);
-			}else{
+			} else {
 				this.setEstadoMateriaEditar(false);
 			}
 			this.setBanderaEdit(true);
 		}
 	}
-	
-	
+
 	public String getNombreMateria() {
 		return nombreMateria;
 	}
@@ -101,58 +101,62 @@ public class MateriaBean {
 		return materiaAux;
 	}
 
-	
-	public String editarFacultad(){
-		if(this.getMateriaAux().getNombreMateria().equals("")){
-			this.getMateriaAux().setNombreMateria(this.getAuxNombreValidacion()); 
+	public String editarFacultad() {
+		if (this.getMateriaAux().getNombreMateria().equals("")) {
+			this.getMateriaAux()
+					.setNombreMateria(this.getAuxNombreValidacion());
 			this.setMensajeRespuesta("El campo nombre no puede estar vac�o");
 			return null;
 		}
-		if(this.estadoMateriaEditar){
+		if (this.estadoMateriaEditar) {
 			this.getMateriaAux().setEstadoMateria('1');
-		}else{
+		} else {
 			this.getMateriaAux().setEstadoMateria('0');
 		}
 		boolean guardado = ml.modificarMateria(this.getMateriaAux());
-		if(guardado){
+		if (guardado) {
 			this.setMensajeRespuesta("");
 			this.getListadoMaterias();
 			return "paginaMateria";
-		}else{
+		} else {
 			return "error";
 		}
 	}
 
-	public String crearMateria(){
+	public String crearMateria() {
 		System.out.println("[MateriaBean] - crearMateria || Entra a crear");
-		if(this.getNombreMateria().equals("")){
+		if (this.getNombreMateria().equals("")) {
 			System.out.println("Vacio el nombre");
 			this.setMensajeRespuesta("El campo nombre no puede estar vacio");
 			return null;
 		}
 		Set<MateriaMatricula> materiaMatricula = new HashSet<MateriaMatricula>(0);
-		Materia nuevaMateria = new Materia(new BigDecimal(1), this.carreraAux, this.nombreMateria, this.cantidadCreditos, '1', materiaMatricula);
-		System.out.println("[MateriaBean] - crearMateria || Nueva Materia => "+nuevaMateria);
+		BigDecimal idMateriaAux=new BigDecimal(1);
+		if (listadoMaterias.size()!=0) {
+			idMateriaAux = listadoMaterias.get(listadoMaterias.size() - 1).getIdMateria().add(new BigDecimal(1));
+		}
+		Materia nuevaMateria = new Materia(idMateriaAux, this.carreraAux,
+				this.nombreMateria, this.cantidadCreditos, '1',
+				materiaMatricula);
+		System.out.println("[MateriaBean] - crearMateria || Nueva Materia => "
+				+ nuevaMateria);
 		boolean guardado = ml.crearNuevaMateria(nuevaMateria);
-		if(guardado){
+		if (guardado) {
 			this.setMensajeRespuesta("");
 			this.listadoMaterias.add(nuevaMateria);
-			return "paginaMateria";			
-		}else{
-			return "error";
-		}
-	}
-	
-	
-	
-	public String eliminarMateria(){
-		boolean eliminada = ml.eliminarMateria(getMateriaAux());
-		if(eliminada){
-			return "paginaMateria";			
-		}else{
+			return "paginaMateria";
+		} else {
 			return "error";
 		}
 	}
 
+	public String eliminarMateria() {
+		boolean eliminada = ml.eliminarMateria(getMateriaAux());
+		if (eliminada) {
+			return "paginaMateria";
+		} else {
+			return "error";
+		}
+	}
 
 }

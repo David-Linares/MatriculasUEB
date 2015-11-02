@@ -17,8 +17,8 @@ import co.ueb.matriculas.model.Facultad;
 @FacesConverter(forClass = Facultad.class)
 public class FacultadConverterBean implements Converter{
 
-	 private Facultad facultad;
-	
+	private Facultad facultad;
+	 
 	public Object getAsObject(FacesContext context, UIComponent component, String submittedValue) {
         if (submittedValue == null || submittedValue.isEmpty()) {
             return null;
