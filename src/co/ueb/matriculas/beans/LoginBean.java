@@ -85,7 +85,7 @@ public class LoginBean implements Serializable {
 				FacesContext.getCurrentInstance().getExternalContext()
 						.getSessionMap().put("usuario", nuevoUsuario);
 				this.setPerfilUsuario();
-				if(nuevoUsuario.getPerfil().getIdPerfil() == new BigDecimal(1))
+				if(nuevoUsuario.getPerfil().getIdPerfil().toString().equals("2"))
 					this.resultado = "paginaFacultad";
 				else
 					this.resultado = "paginaMatricula";
