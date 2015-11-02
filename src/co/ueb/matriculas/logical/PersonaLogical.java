@@ -18,7 +18,6 @@ public class PersonaLogical {
 		log.info("verificarDatos "+persona);
 		Persona p = null;
 		try {
-			System.out.println("Sesion abierta" + HibernateSession.getSf().getCurrentSession().isOpen());
 			sesion = HibernateSession.getSf().openSession();
 			sesion.beginTransaction();
 			log.info(persona.getContrasena());
@@ -46,7 +45,7 @@ public class PersonaLogical {
 	public Persona getPersonaById(BigDecimal id_persona){
 		Persona p = null;
 		try {
-			sesion = HibernateSession.getSf().getCurrentSession();
+			sesion = HibernateSession.getSf().openSession();
 			sesion.beginTransaction();
 			String hql = "FROM Persona WHERE id_persona= '" + id_persona
 					+ "' and estadoPersona= '1'";

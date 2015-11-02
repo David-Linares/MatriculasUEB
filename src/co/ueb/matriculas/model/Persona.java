@@ -45,8 +45,7 @@ public class Persona implements java.io.Serializable {
 			String apellidosPersona, Date fechaNacimiento,
 			String lugarNacimiento, String direccion, String correoElectronico,
 			Character estadoPersona, BigDecimal promedio, String usuario,
-			String contrasena, Set matriculas, Set carreraEstudiantes,
-			Set telefonoses) {
+			String contrasena) {
 		this.idPersona = idPersona;
 		this.perfil = perfil;
 		this.nombrePersona = nombrePersona;
@@ -59,9 +58,6 @@ public class Persona implements java.io.Serializable {
 		this.promedio = promedio;
 		this.usuario = usuario;
 		this.contrasena = contrasena;
-		this.matriculas = matriculas;
-		this.carreraEstudiantes = carreraEstudiantes;
-		this.telefonoses = telefonoses;
 	}
 
 	public BigDecimal getIdPersona() {

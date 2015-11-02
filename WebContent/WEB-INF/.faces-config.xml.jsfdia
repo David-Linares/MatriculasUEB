@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:*" PATH="*" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:0" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="paginaEstudiante::Modulos#estudiante.xhtml"
+    NAME="output" PATH="Modulos/estudiante.xhtml"
+    TARGET="rules:Modulos#estudiante.xhtml" TITLE="paginaEstudiante" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="paginaCarrera::Modulos#carrera.xhtml"
+    NAME="output1" PATH="Modulos/carrera.xhtml"
+    TARGET="rules:Modulos#carrera.xhtml" TITLE="paginaCarrera" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="paginaFacultad::Modulos#facultad.xhtml"
+    NAME="output2" PATH="Modulos/facultad.xhtml"
+    TARGET="rules:Modulos#facultad.xhtml" TITLE="paginaFacultad" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="login::Modulos#login.xhtml" NAME="output3"
+    PATH="Modulos/login.xhtml" TARGET="rules:Modulos#login.xhtml"
+    TITLE="login" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="paginaMatricula::Modulos#matricula.xhtml"
+    NAME="output4" PATH="Modulos/matricula.xhtml"
+    TARGET="rules:Modulos#matricula.xhtml" TITLE="paginaMatricula" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="paginaMateria::Modulos#materia.xhtml"
+    NAME="output5" PATH="Modulos/materia.xhtml"
+    TARGET="rules:Modulos#materia.xhtml" TITLE="paginaMateria" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#error.xhtml" PATH="/error.xhtml"
+  SHAPE="304,305,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:Modulos#estudiante.xhtml"
+  PATH="Modulos/estudiante.xhtml" SHAPE="32,817,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:Modulos#facultad.xhtml"
+  PATH="Modulos/facultad.xhtml" SHAPE="32,1265,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:Modulos#login.xhtml"
+  PATH="Modulos/login.xhtml" SHAPE="32,1489,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:Modulos#matricula.xhtml"
+  PATH="Modulos/matricula.xhtml" SHAPE="32,1713,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:Modulos#carrera.xhtml"
+  PATH="Modulos/carrera.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:Modulos#materia.xhtml"
+  PATH="Modulos/materia.xhtml" SHAPE="304,305,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>

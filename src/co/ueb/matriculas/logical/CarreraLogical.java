@@ -1,4 +1,5 @@
 package co.ueb.matriculas.logical;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,6 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import co.ueb.matriculas.model.Carrera;
+import co.ueb.matriculas.model.Facultad;
 import co.ueb.matriculas.util.HibernateSession;
 
 public class CarreraLogical {
@@ -64,6 +66,25 @@ public class CarreraLogical {
 			sesion.getTransaction().rollback();
 			return false;
 		}
+	}
+	
+	public Carrera getCarreraByName(String nombre_carrera){
+		Carrera c = null;
+		Session session = HibernateSession.getSf().openSession();
+		try {
+			session.beginTransaction();
+			String hql = "FROM Carrera WHERE nombre_carrera= '" + nombre_carrera + "'";
+			Query query = session.createQuery(hql);
+			c = (Carrera) query.uniqueResult();
+			if (c == null) {
+				return null;
+			}
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
+		return c;
 	}
 	
 }

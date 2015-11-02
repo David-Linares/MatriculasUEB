@@ -26,7 +26,7 @@ public class MatriculaBean implements Serializable{
 	EstudiantesLogical el = new EstudiantesLogical();
 	Persona usuarioActual = (Persona) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
 	private String promedio = el.obtenerPromedio(usuarioActual.getIdPersona());
-	private int creditosPermitidos = 0; 
+	private int creditosPermitidos = 0;
 //	(promedio > 3.5) ? fl.getFacultadById(usuarioActual);
 	String nombreFacultad = "";
 	List<Facultad> listadoFacultades = fl.consultarFacultades();

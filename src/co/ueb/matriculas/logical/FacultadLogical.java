@@ -10,16 +10,14 @@ import org.hibernate.Session;
 import org.jboss.logging.Logger;
 
 import co.ueb.matriculas.model.Facultad;
-import co.ueb.matriculas.model.Persona;
 import co.ueb.matriculas.util.HibernateSession;
 
 public class FacultadLogical {
 	
-	private Session session = HibernateSession.getSf().getCurrentSession();
 	private final Logger log = Logger.getLogger("Facultad Logical --");
 
 	public boolean crearNuevaFacultad(Facultad nuevaFacultad){
-		Session sesion  = HibernateSession.getSf().getCurrentSession();
+		Session sesion = HibernateSession.getSf().openSession();
 		try{
 			sesion.beginTransaction();
 			sesion.persist(nuevaFacultad);
@@ -32,7 +30,7 @@ public class FacultadLogical {
 	}
 	
 	public boolean eliminarFacultad(Facultad facultad){
-		Session sesion  = HibernateSession.getSf().getCurrentSession();
+		Session sesion = HibernateSession.getSf().openSession();
 		try{
 			sesion.beginTransaction();
 			sesion.delete(facultad);
@@ -49,6 +47,7 @@ public class FacultadLogical {
 	public List<Facultad> consultarFacultades(){
 		List<Facultad> facultades = new ArrayList<Facultad>();
 		String sql = "select f from Facultad as f order by f.idFacultad";
+		Session session = HibernateSession.getSf().openSession();
 		session.beginTransaction();
 		Query query = session.createQuery(sql);
 		facultades = query.list();
@@ -58,6 +57,7 @@ public class FacultadLogical {
 	
 	public boolean modificarFacultad(Facultad editaFacultad){
 		System.out.println(editaFacultad);
+		Session session = HibernateSession.getSf().openSession();
 		try{
 			session.beginTransaction();
 			session.update(editaFacultad);
@@ -71,8 +71,8 @@ public class FacultadLogical {
 	
 	public Facultad getFacultadById(BigDecimal id_facultad){
 		Facultad f = null;
+		Session session = HibernateSession.getSf().openSession();
 		try {
-			session = HibernateSession.getSf().getCurrentSession();
 			session.beginTransaction();
 			String hql = "FROM Facultad WHERE id_facultad= " + id_facultad;
 			log.info(hql);
