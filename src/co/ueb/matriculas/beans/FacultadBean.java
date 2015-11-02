@@ -121,7 +121,7 @@ public class FacultadBean implements Serializable {
 	public String crearFacultad(){
 		log.info("Entró a crear");
 		if(this.getNombreFacultad().equals("")){
-			log.warning("El campo viene vacío");
+			log.warning("El campo viene vacio");
 			this.setMensajeRespuesta("El campo nombre no puede estar vacío");
 			return null;
 		}
