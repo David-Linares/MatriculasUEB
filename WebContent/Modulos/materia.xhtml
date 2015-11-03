@@ -57,7 +57,7 @@
 						<f:facet name="header">Acciones</f:facet>
 						<h:commandLink class="botonImg" data-toggle="modal"
 							data-target="#myModalEdit"
-							actionListener="#{materiaBean.materiaAux(materia)}">
+							actionListener="#{materiaBean.setMateriaAux(materia)}">
 							<f:ajax execute="@form" render=":modalEditContent"
 								onevent="function(data) { if (data.status == 'success') $('#myModalEdit').modal() ; }" />
 							<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
@@ -97,6 +97,7 @@
 						</div>
 						<div class="form-control-wrapper">
 							<h:selectOneMenu value="#{materiaBean.carreraMateria}" converter="carreraConverter">
+							<f:selectItem itemLabel="Seleccione una carrera" itemValue=""/>
 								<f:selectItems value="#{materiaBean.listadoCarreras}"  var="carreraMat" itemLabel="#{carreraMat.nombreCarrera}"/>
 							</h:selectOneMenu>
 						</div>
@@ -132,11 +133,26 @@
 									value="#{materiaBean.materiaAux.nombreMateria}" />
 							</div>
 							<div class="togglebutton">
+								<label> Créditos de la materia <br /> <h:inputText class="form-control col-sm-10 empty"
+										value="#{materiaBean.materiaAux.creditos}" />
+								</label>
+							</div>
+							<div class="form-control-wrapper">
+							<h:selectOneMenu value="#{materiaBean.carreraMateria}" converter="carreraConverter">
+								<f:selectItem value="#{materiaBean.materiaAux.carrera}"/>
+								<f:selectItems value="#{materiaBean.listadoCarreras}"  var="carreraMat" itemLabel="#{carreraMat.nombreCarrera}"/>
+							</h:selectOneMenu>
+						</div>
+							
+							<div class="togglebutton">
 								<label> Estado materia <br /> <h:selectBooleanCheckbox
 										value="#{materiaBean.estadoMateriaEditar}" /><span
 									class="toggle"></span>
 								</label>
 							</div>
+							
+							
+							
 							<br></br>
 						</div>
 						<div class="modal-footer">

@@ -53,7 +53,7 @@ public class MateriaLogical {
 	
 	public boolean modificarMateria(Materia editaMateria){
 		Session sesion  = HibernateSession.getSf().getCurrentSession();
-		System.out.println(editaMateria);
+		System.out.println("modificar materia entro ");
 		try{
 			sesion.beginTransaction();
 			sesion.update(editaMateria);
@@ -61,6 +61,7 @@ public class MateriaLogical {
 			return true;
 		}catch(Exception e){
 			sesion.getTransaction().rollback();
+			e.printStackTrace();
 			return false;
 		}
 	}

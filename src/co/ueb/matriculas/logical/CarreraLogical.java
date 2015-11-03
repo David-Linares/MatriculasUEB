@@ -55,8 +55,8 @@ public class CarreraLogical {
 	}
 	
 	public boolean modificarCarrera(Carrera editaCarrera){
-		Session sesion  = HibernateSession.getSf().getCurrentSession();
 		System.out.println(editaCarrera);
+		Session sesion = HibernateSession.getSf().openSession();
 		try{
 			sesion.beginTransaction();
 			sesion.update(editaCarrera);
