@@ -26,6 +26,8 @@ public class FacultadLogical {
 		}catch(Exception e){
 			sesion.getTransaction().rollback();
 			return false;
+		}finally{
+			sesion.close();
 		}
 	}
 	
@@ -40,6 +42,8 @@ public class FacultadLogical {
 			System.out.println("[Facultad Logical - Eliminar Facultad] Entró a Error");
 			sesion.getTransaction().rollback();
 			throw e;
+		}finally{
+			sesion.close();
 		}
 	}
 	
@@ -57,15 +61,17 @@ public class FacultadLogical {
 	
 	public boolean modificarFacultad(Facultad editaFacultad){
 		System.out.println(editaFacultad);
-		Session session = HibernateSession.getSf().openSession();
+		Session sesion = HibernateSession.getSf().openSession();
 		try{
-			session.beginTransaction();
-			session.update(editaFacultad);
-			session.getTransaction().commit();
+			sesion.beginTransaction();
+			sesion.update(editaFacultad);
+			sesion.getTransaction().commit();
 			return true;
 		}catch(Exception e){
-			session.getTransaction().rollback();
+			sesion.getTransaction().rollback();
 			return false;
+		}finally{
+			sesion.close();
 		}
 	}
 	
@@ -85,6 +91,8 @@ public class FacultadLogical {
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			e.printStackTrace();
+		}finally{
+			session.close();
 		}
 		return f;
 	}

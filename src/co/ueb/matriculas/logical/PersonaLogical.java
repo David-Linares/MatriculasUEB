@@ -37,6 +37,8 @@ public class PersonaLogical {
 		} catch (Exception e) {
 			e.printStackTrace();
 			sesion.getTransaction().rollback();
+		}finally{
+			sesion.close();
 		}
 		return p;
 	}
@@ -59,6 +61,8 @@ public class PersonaLogical {
 		} catch (Exception e) {
 			sesion.getTransaction().rollback();
 			e.printStackTrace();
+		}finally{
+			sesion.close();
 		}
 		return p;
 	}
