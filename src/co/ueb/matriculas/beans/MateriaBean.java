@@ -1,15 +1,17 @@
 package co.ueb.matriculas.beans;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import co.ueb.matriculas.logical.MateriaLogical;
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Materia;
 import co.ueb.matriculas.model.MateriaMatricula;
 
-public class MateriaBean {
+public class MateriaBean implements Serializable{
 
 	MateriaLogical ml = new MateriaLogical();
 	BigDecimal cantidadCreditos;
@@ -54,8 +56,6 @@ public class MateriaBean {
 	public void setCarreraList(CarreraBean carreraList) {
 		this.carreraList = carreraList;
 	}
-
-	
 
 	public List<Carrera> getListadoCarreras() {
 		return listadoCarreras;

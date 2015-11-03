@@ -138,7 +138,8 @@
 								</label>
 							</div>
 							<div class="form-control-wrapper">
-							<h:selectOneMenu value="#{materiaBean.materiaAux.carrera}" converter="carreraConverter">
+							<h:selectOneMenu value="#{materiaBean.carreraMateria}" converter="carreraConverter">
+								<f:selectItem value="#{materiaBean.materiaAux.carrera}"/>
 								<f:selectItems value="#{materiaBean.listadoCarreras}"  var="carreraMat" itemLabel="#{carreraMat.nombreCarrera}"/>
 							</h:selectOneMenu>
 						</div>

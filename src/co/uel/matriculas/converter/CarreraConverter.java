@@ -25,7 +25,7 @@ public class CarreraConverter implements Converter{
 
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stu
 		return null;
 	}
 

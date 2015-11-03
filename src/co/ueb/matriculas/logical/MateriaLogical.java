@@ -12,7 +12,7 @@ import co.ueb.matriculas.util.HibernateSession;
 public class MateriaLogical {
 
 	public boolean crearNuevaMateria(Materia nuevaMateria){
-		Session sesion  = HibernateSession.getSf().openSession();
+		Session sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
 			sesion.persist(nuevaMateria);
@@ -25,7 +25,7 @@ public class MateriaLogical {
 	}
 	
 	public boolean eliminarMateria(Materia materia){
-		Session sesion  = HibernateSession.getSf().openSession();
+		Session sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
 			sesion.delete(materia);
@@ -43,7 +43,7 @@ public class MateriaLogical {
 	public List<Materia> consultarMaterias(){
 		List<Materia> materias = new ArrayList<Materia>();
 		String sql = "select m from Materia as m order by m.idMateria";
-		Session session = HibernateSession.getSf().openSession();
+		Session session = HibernateSession.getSf().getCurrentSession();
 		session.beginTransaction();
 		Query query = session.createQuery(sql);
 		materias = query.list();
@@ -52,7 +52,7 @@ public class MateriaLogical {
 	}
 	
 	public boolean modificarMateria(Materia editaMateria){
-		Session sesion  = HibernateSession.getSf().openSession();
+		Session sesion  = HibernateSession.getSf().getCurrentSession();
 		System.out.println("modificar materia entro ");
 		try{
 			sesion.beginTransaction();
