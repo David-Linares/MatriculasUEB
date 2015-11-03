@@ -12,7 +12,6 @@ import co.ueb.matriculas.model.MateriaMatricula;
 public class MateriaBean {
 
 	MateriaLogical ml = new MateriaLogical();
-	
 	BigDecimal cantidadCreditos;
 	
 	CarreraBean carreraList = new CarreraBean();
@@ -23,13 +22,31 @@ public class MateriaBean {
 	List<Carrera> listadoCarreras = carreraList.getListadoCarreras();
 	
 	Materia materiaAux = null;
+	Materia materiaAuxEditar=null;
 	
 	boolean banderaEdit = false;
 	boolean estadoMateriaEditar = false;
-	
+		
 	String mensajeRespuesta = "";
 	String nombreMateria = "";
 	
+	
+	public BigDecimal getCantidadCreditos() {
+		return cantidadCreditos;
+	}
+
+	public void setCantidadCreditos(BigDecimal cantidadCreditos) {
+		this.cantidadCreditos = cantidadCreditos;
+	}
+
+	public Materia getMateriaAuxEditar() {
+		return materiaAuxEditar;
+	}
+
+	public void setMateriaAuxEditar(Materia materiaAuxEditar) {
+		this.materiaAuxEditar = materiaAuxEditar;
+	}
+
 	public CarreraBean getCarreraList() {
 		return carreraList;
 	}
@@ -60,13 +77,7 @@ public class MateriaBean {
 
 	String auxNombreValidacion = "";
 
-	public BigDecimal getCantidadCreditos() {
-		return cantidadCreditos;
-	}
-
-	public void setCantidadCreditos(BigDecimal cantidadCreditos) {
-		this.cantidadCreditos = cantidadCreditos;
-	}
+	
 
 	public String getAuxNombreValidacion() {
 		return auxNombreValidacion;
@@ -92,19 +103,17 @@ public class MateriaBean {
 		this.banderaEdit = banderaEdit;
 	}
 	
-	public void setMateriaAux(Materia materiaAux) {
-			System.out.println("[MateriaBean] - setMateriaAux ||Â Va a cambiar => "	+ materiaAux);
-			if (materiaAux != null) {
-				System.out.println(materiaAux.getNombreMateria());
-				this.setAuxNombreValidacion(materiaAux.getNombreMateria());
-				this.materiaAux = materiaAux;
-				
+	public void setMateriaAux(Materia copiaMateriaAux) {
+			System.out.println(" setMateriaAux || Va a cambiar => "	+ copiaMateriaAux);
+			if (copiaMateriaAux != null) {
+				System.out.println(copiaMateriaAux.getNombreMateria());
+				this.materiaAux = copiaMateriaAux;
+				materiaAuxEditar= copiaMateriaAux;
 				if (this.materiaAux.getEstadoMateria().compareTo('1') == 0) {
 					this.setEstadoMateriaEditar(true);
 				} else {
 					this.setEstadoMateriaEditar(false);
 				}
-				this.setBanderaEdit(true);
 			}
 		}
 
@@ -138,18 +147,36 @@ public class MateriaBean {
 		return materiaAux;
 	}
 
+	public boolean validarCamposMateria (Materia validarMateria){
+
+		if (validarMateria.getNombreMateria().equals("")) {
+			this.materiaAux.setNombreMateria(materiaAuxEditar.getNombreMateria());
+			this.setMensajeRespuesta("El campo nombre no puede estar vacío");
+			return false;
+		}
+		if (validarMateria.getCreditos().equals("")) {
+			this.materiaAux.setCreditos(materiaAuxEditar.getCreditos());
+			this.setMensajeRespuesta("El campo creditos no puede estar vacío");
+			return false;
+		}
+		if (validarMateria.getCarrera().equals("")) {
+			this.materiaAux.setCarrera(materiaAuxEditar.getCarrera());
+			this.setMensajeRespuesta("El campo carrera no puede estar vacío");
+			return false;
+		}
+		return true;
+	}
 	public String editarMateria() {
-		if (this.getMateriaAux().getNombreMateria().equals("")) {
-			this.getMateriaAux()
-					.setNombreMateria(this.getAuxNombreValidacion());
-			this.setMensajeRespuesta("El campo nombre no puede estar vacï¿½o");
+		System.out.println("entro a editar materia");
+		System.out.println(materiaAux);
+		if (!validarCamposMateria(materiaAux)) {
 			return null;
 		}
 		if (this.estadoMateriaEditar) {
 			this.getMateriaAux().setEstadoMateria('1');
 		} else {
 			this.getMateriaAux().setEstadoMateria('0');
-		}
+		}		
 		boolean guardado = ml.modificarMateria(this.getMateriaAux());
 		if (guardado) {
 			this.setMensajeRespuesta("");
@@ -176,7 +203,7 @@ public class MateriaBean {
 		}
 		Materia nuevaMateria = new Materia(idMateriaAux,
 				this.getCarreraMateria(), this.nombreMateria,
-				this.cantidadCreditos, '1', materiaMatricula);
+				cantidadCreditos, '1', materiaMatricula);
 		System.out.println("[MateriaBean] - crearMateria || Nueva Materia => "
 				+ nuevaMateria);
 		boolean guardado = ml.crearNuevaMateria(nuevaMateria);
@@ -190,13 +217,6 @@ public class MateriaBean {
 		}
 	}
 
-	public String eliminarMateria() {
-		boolean eliminada = ml.eliminarMateria(getMateriaAux());
-		if (eliminada) {
-			return "paginaMateria";
-		} else {
-			return "error";
-		}
-	}
+	
 
 }
