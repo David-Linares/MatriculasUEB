@@ -2,9 +2,9 @@
 <faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
  <converter>
-  <converter-id>FacultadConverter</converter-id>
+  <converter-id>facultadConverter</converter-id>
   <converter-class>co.uel.matriculas.converter.FacultadConverter</converter-class>
-</converter>
+ </converter>
  <converter>
   <converter-id>carreraConverter</converter-id>
   <converter-class>co.uel.matriculas.converter.CarreraConverter</converter-class>

@@ -9,6 +9,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.jboss.logging.Logger;
 
+import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Facultad;
 import co.ueb.matriculas.util.HibernateSession;
 
@@ -93,6 +94,25 @@ public class FacultadLogical {
 			e.printStackTrace();
 		}finally{
 			session.close();
+		}
+		return f;
+	}
+	
+	public Facultad getFacultadByName(String nombre_facultad){
+		Facultad f = null;
+		Session session = HibernateSession.getSf().openSession();
+		try {
+			session.beginTransaction();
+			String hql = "FROM Facultad WHERE nombre_facultad= '" + nombre_facultad + "'";
+			Query query = session.createQuery(hql);
+			f = (Facultad) query.uniqueResult();
+			if (f == null) {
+				return null;
+			}
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
 		}
 		return f;
 	}

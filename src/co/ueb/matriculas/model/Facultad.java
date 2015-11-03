@@ -77,6 +77,53 @@ public class Facultad implements java.io.Serializable {
 	public String toString() {
 		return nombreFacultad;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((carreras == null) ? 0 : carreras.hashCode());
+		result = prime * result
+				+ ((estadoFacultad == null) ? 0 : estadoFacultad.hashCode());
+		result = prime * result
+				+ ((idFacultad == null) ? 0 : idFacultad.hashCode());
+		result = prime * result
+				+ ((nombreFacultad == null) ? 0 : nombreFacultad.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Facultad other = (Facultad) obj;
+		if (carreras == null) {
+			if (other.carreras != null)
+				return false;
+		} else if (!carreras.equals(other.carreras))
+			return false;
+		if (estadoFacultad == null) {
+			if (other.estadoFacultad != null)
+				return false;
+		} else if (!estadoFacultad.equals(other.estadoFacultad))
+			return false;
+		if (idFacultad == null) {
+			if (other.idFacultad != null)
+				return false;
+		} else if (!idFacultad.equals(other.idFacultad))
+			return false;
+		if (nombreFacultad == null) {
+			if (other.nombreFacultad != null)
+				return false;
+		} else if (!nombreFacultad.equals(other.nombreFacultad))
+			return false;
+		return true;
+	}
 	
 	
 
