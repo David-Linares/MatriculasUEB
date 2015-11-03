@@ -106,7 +106,7 @@ public class MateriaBean {
 	public void setMateriaAux(Materia copiaMateriaAux) {
 			System.out.println(" setMateriaAux || Va a cambiar => "	+ copiaMateriaAux);
 			if (copiaMateriaAux != null) {
-				System.out.println(copiaMateriaAux.getNombreMateria());
+				System.out.println("entro a set materiaa¿ aux");
 				this.materiaAux = copiaMateriaAux;
 				materiaAuxEditar= copiaMateriaAux;
 				if (this.materiaAux.getEstadoMateria().compareTo('1') == 0) {
@@ -178,6 +178,7 @@ public class MateriaBean {
 			this.getMateriaAux().setEstadoMateria('0');
 		}		
 		boolean guardado = ml.modificarMateria(this.getMateriaAux());
+		
 		if (guardado) {
 			this.setMensajeRespuesta("");
 			this.getListadoMaterias();

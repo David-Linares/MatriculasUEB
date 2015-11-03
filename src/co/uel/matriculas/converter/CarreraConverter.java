@@ -17,7 +17,6 @@ public class CarreraConverter implements Converter{
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
 		if(arg2 != null && arg2.trim().length() > 0){
-			System.out.println(arg2);
 			CarreraLogical cl = new CarreraLogical();
 			return cl.getCarreraByName(arg2);
 		}
