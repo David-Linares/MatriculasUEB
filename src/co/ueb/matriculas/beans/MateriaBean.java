@@ -103,12 +103,16 @@ public class MateriaBean implements Serializable{
 		this.banderaEdit = banderaEdit;
 	}
 	
+	
+	
 	public void setMateriaAux(Materia copiaMateriaAux) {
 			System.out.println(" setMateriaAux || Va a cambiar => "	+ copiaMateriaAux);
 			if (copiaMateriaAux != null) {
 				System.out.println("entro a set materiaa¿ aux");
 				this.materiaAux = copiaMateriaAux;
-				materiaAuxEditar= copiaMateriaAux;
+				this.materiaAuxEditar= copiaMateriaAux;
+				System.out.println(materiaAux);
+				System.out.println(materiaAuxEditar);
 				if (this.materiaAux.getEstadoMateria().compareTo('1') == 0) {
 					this.setEstadoMateriaEditar(true);
 				} else {
@@ -170,6 +174,8 @@ public class MateriaBean implements Serializable{
 		System.out.println("entro a editar materia");
 		System.out.println(materiaAux);
 		if (!validarCamposMateria(materiaAux)) {
+			System.out.println("if de !validar campos materia");
+			System.out.println(materiaAux);
 			return null;
 		}
 		if (this.estadoMateriaEditar) {
@@ -178,8 +184,9 @@ public class MateriaBean implements Serializable{
 			this.getMateriaAux().setEstadoMateria('0');
 		}		
 		boolean guardado = ml.modificarMateria(this.getMateriaAux());
-		
+		System.out.println("no ha entrado a if de guardado");
 		if (guardado) {
+			System.out.println("entro a if de guardado");
 			this.setMensajeRespuesta("");
 			this.getListadoMaterias();
 			return "paginaMateria";
@@ -218,6 +225,14 @@ public class MateriaBean implements Serializable{
 		}
 	}
 
+	public String eliminarMateria(){
+		boolean eliminada = ml.eliminarMateria(this.getMateriaAux());
+		if(eliminada){
+			return "paginaMateria";			
+		}else{
+			return "error";
+		}
+	}
 	
 
 }

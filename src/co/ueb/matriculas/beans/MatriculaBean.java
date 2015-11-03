@@ -10,7 +10,7 @@ import javax.faces.context.FacesContext;
 
 import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 
-import co.ueb.matriculas.logical.EstudiantesLogical;
+import co.ueb.matriculas.logical.EstudianteLogical;
 import co.ueb.matriculas.logical.FacultadLogical;
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Facultad;
@@ -23,7 +23,7 @@ public class MatriculaBean implements Serializable{
 	 */
 	private static final long serialVersionUID = -4982995413040238168L;
 	FacultadLogical fl = new FacultadLogical();
-	EstudiantesLogical el = new EstudiantesLogical();
+	EstudianteLogical el = new EstudianteLogical();
 	Persona usuarioActual = (Persona) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
 	private String promedio = el.obtenerPromedio(usuarioActual.getIdPersona());
 	private int creditosPermitidos = 0;
