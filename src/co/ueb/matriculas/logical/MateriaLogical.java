@@ -21,8 +21,6 @@ public class MateriaLogical {
 		}catch(Exception e){
 			sesion.getTransaction().rollback();
 			return false;
-		}finally{
-			sesion.close();
 		}
 	}
 	
@@ -37,8 +35,6 @@ public class MateriaLogical {
 			System.out.println("[Materia Logical - Eliminar Materia] Entra� a Error");
 			sesion.getTransaction().rollback();
 			throw e;
-		}finally{
-			sesion.close();
 		}
 	}
 	
@@ -66,8 +62,6 @@ public class MateriaLogical {
 		}catch(Exception e){
 			sesion.getTransaction().rollback();
 			return false;
-		}finally{
-			sesion.close();
 		}
 	}
 

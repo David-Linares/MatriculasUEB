@@ -2,6 +2,7 @@
 package co.ueb.matriculas.logical;
 
 import java.math.BigDecimal;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class FacultadLogical {
 	private final Logger log = Logger.getLogger("Facultad Logical --");
 
 	public boolean crearNuevaFacultad(Facultad nuevaFacultad){
-		Session sesion = HibernateSession.getSf().openSession();
+		Session sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
 			sesion.persist(nuevaFacultad);
@@ -26,13 +27,11 @@ public class FacultadLogical {
 		}catch(Exception e){
 			sesion.getTransaction().rollback();
 			return false;
-		}finally{
-			sesion.close();
 		}
 	}
 	
 	public boolean eliminarFacultad(Facultad facultad){
-		Session sesion = HibernateSession.getSf().openSession();
+		Session sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
 			sesion.delete(facultad);
@@ -42,8 +41,6 @@ public class FacultadLogical {
 			System.out.println("[Facultad Logical - Eliminar Facultad] Entró a Error");
 			sesion.getTransaction().rollback();
 			throw e;
-		}finally{
-			sesion.close();
 		}
 	}
 	
@@ -61,7 +58,7 @@ public class FacultadLogical {
 	
 	public boolean modificarFacultad(Facultad editaFacultad){
 		System.out.println(editaFacultad);
-		Session sesion = HibernateSession.getSf().openSession();
+		Session sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
 			sesion.update(editaFacultad);
@@ -70,29 +67,25 @@ public class FacultadLogical {
 		}catch(Exception e){
 			sesion.getTransaction().rollback();
 			return false;
-		}finally{
-			sesion.close();
 		}
 	}
 	
 	public Facultad getFacultadById(BigDecimal id_facultad){
 		Facultad f = null;
-		Session session = HibernateSession.getSf().openSession();
+		Session sesion  = HibernateSession.getSf().getCurrentSession();
 		try {
-			session.beginTransaction();
+			sesion.beginTransaction();
 			String hql = "FROM Facultad WHERE id_facultad= " + id_facultad;
 			log.info(hql);
-			Query query = session.createQuery(hql);
+			Query query = sesion.createQuery(hql);
 			f = (Facultad) query.uniqueResult();
 			if (f == null) {
 				return null;
 			}
-			session.getTransaction().commit();
+			sesion.getTransaction().commit();
 		} catch (Exception e) {
-			session.getTransaction().rollback();
+			sesion.getTransaction().rollback();
 			e.printStackTrace();
-		}finally{
-			session.close();
 		}
 		return f;
 	}

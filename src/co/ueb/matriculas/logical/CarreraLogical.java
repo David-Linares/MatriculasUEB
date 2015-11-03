@@ -23,8 +23,6 @@ public class CarreraLogical {
 		}catch(Exception e){
 			sesion.getTransaction().rollback();
 			return false;
-		}finally{
-			sesion.close();
 		}
 	}
 	
@@ -40,8 +38,6 @@ public class CarreraLogical {
 			System.out.println("[Carrera Logical - Eliminar Carrera] Entró a Error");
 			sesion.getTransaction().rollback();
 			throw e;
-		}finally{
-			sesion.close();
 		}
 	}
 	
@@ -69,14 +65,12 @@ public class CarreraLogical {
 		}catch(Exception e){
 			sesion.getTransaction().rollback();
 			return false;
-		}finally{
-			sesion.close();
 		}
 	}
 	
 	public Carrera getCarreraByName(String nombre_carrera){
 		Carrera c = null;
-		Session sesion = HibernateSession.getSf().openSession();
+		Session sesion  = HibernateSession.getSf().getCurrentSession();
 		try {
 			sesion.beginTransaction();
 			String hql = "FROM Carrera WHERE nombre_carrera= '" + nombre_carrera + "'";
@@ -89,8 +83,6 @@ public class CarreraLogical {
 		} catch (Exception e) {
 			sesion.getTransaction().rollback();
 			e.printStackTrace();
-		}finally{
-			sesion.close();
 		}
 		return c;
 	}
