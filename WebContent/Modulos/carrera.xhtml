@@ -74,12 +74,12 @@
 	      <div class="modal-body">
 	      		<br></br>
 	        	<div class="form-control-wrapper">
-					<h:inputText id="nuevaCarrera" class="form-control col-sm-10 empty" required="true" value="#{carreraBean.nombreCarrera}"></h:inputText>
+					<h:inputText id="nuevaCarrera" class="form-control col-sm-10 empty" required="true" value="#{carreraBean.nombreCarrera}" maxlength="50"></h:inputText>
 					<div class="floating-label">Nombre de la Carrera</div>
 					<span class="material-input"></span>	                    
 				</div>
 				<div class="form-control-wrapper">
-					<h:inputText id="creditosCarrera" class="form-control col-sm-10 empty" required="true" value="#{carreraBean.totalCreditos}"></h:inputText>
+					<h:inputText id="creditosCarrera" class="form-control col-sm-10 empty" required="true" value="#{carreraBean.totalCreditos}" maxlength="3"></h:inputText>
 					<div class="floating-label">Creditos maximos permitidos</div>
 					<span class="material-input"></span>	                    
 				</div>
