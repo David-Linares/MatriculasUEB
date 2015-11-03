@@ -15,6 +15,7 @@
         <property name="hibernate.search.autoregister_listeners">false</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>
         <property name="hibernate.enable_lazy_load_no_trans">true</property>
+        <property name="hibernate.show_sql">false</property>
         <mapping resource="co/ueb/matriculas/model/Materia.hbm.xml" />
         <mapping resource="co/ueb/matriculas/model/Perfil.hbm.xml" />
         <mapping resource="co/ueb/matriculas/model/MateriaMatricula.hbm.xml" />

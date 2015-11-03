@@ -2,7 +2,6 @@
 package co.ueb.matriculas.logical;
 
 import java.math.BigDecimal;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.jboss.logging.Logger;
 
-import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Facultad;
 import co.ueb.matriculas.util.HibernateSession;
 
@@ -22,12 +20,19 @@ public class FacultadLogical {
 		Session sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
-			sesion.persist(nuevaFacultad);
+			Query query = sesion.createSQLQuery("SP_INSERT");
+			query.setParameter("nombre", nuevaFacultad.getNombreFacultad());
+			List resultList = query.list();
+			log.info(resultList);
+//			sesion.persist(nuevaFacultad);
 			sesion.getTransaction().commit();
 			return true;
 		}catch(Exception e){
 			sesion.getTransaction().rollback();
+			e.printStackTrace();
 			return false;
+		}finally{
+			HibernateSession.getSf().close();
 		}
 	}
 	

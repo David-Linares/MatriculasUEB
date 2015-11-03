@@ -28,11 +28,9 @@ public class PersonaLogical {
 			Query query = sesion.createQuery(hql);
 			if (!query.list().isEmpty()) {
 				p = (Persona) query.list().get(0);
-				System.out.println("entr� if");
 			}else{
 				return null;
 			}
-			System.out.println(p.toString());
 			sesion.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
