@@ -4,11 +4,11 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"> 
 
-<h:head></h:head> 
+<h:head></h:head>
 	<ui:insert>
 		<ui:include src="/Modulos/header.xhtml"></ui:include>
 	</ui:insert>
-<body> 
+<body>
 	<div class="container">
 		<div class="col-md-12" style="margin-bottom:30px">
 			<div class="col-md-3" style="text-align:center">
@@ -74,12 +74,12 @@
 	      <div class="modal-body">
 	      		<br></br>
 	        	<div class="form-control-wrapper">
-					<h:inputText id="nuevaCarrera" class="form-control col-sm-10 empty" required="true" value="#{carreraBean.nombreCarrera}" maxlength="50"></h:inputText>
+					<h:inputText id="nuevaCarrera" class="form-control col-sm-10 empty" required="true" value="#{carreraBean.nombreCarrera}" maxlength="50" ></h:inputText>
 					<div class="floating-label">Nombre de la Carrera</div>
 					<span class="material-input"></span>	                    
 				</div>
 				<div class="form-control-wrapper">
-					<h:inputText id="creditosCarrera" class="form-control col-sm-10 empty" required="true" value="#{carreraBean.totalCreditos}" maxlength="3"></h:inputText>
+					<h:inputText id="creditosCarrera" class="form-control col-sm-10 empty" required="true" value="#{carreraBean.totalCreditos}" maxlength="3" type="number"></h:inputText>
 					<div class="floating-label">Creditos maximos permitidos</div>
 					<span class="material-input"></span>	                    
 				</div>
