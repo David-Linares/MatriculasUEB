@@ -4,31 +4,32 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import javax.faces.model.SelectItem;
-
-import co.ueb.matriculas.logical.FacultadLogical;
 import co.ueb.matriculas.logical.MateriaLogical;
 import co.ueb.matriculas.model.Carrera;
-import co.ueb.matriculas.model.Facultad;
 import co.ueb.matriculas.model.Materia;
 import co.ueb.matriculas.model.MateriaMatricula;
 
 public class MateriaBean {
 
 	MateriaLogical ml = new MateriaLogical();
-	String nombreMateria = "";
+	
 	BigDecimal cantidadCreditos;
+	
 	CarreraBean carreraList = new CarreraBean();
-	List<SelectItem> carreraSelect;
+	Carrera carreraMateria = null;
+
+	
 	List<Materia> listadoMaterias = ml.consultarMaterias();
 	List<Carrera> listadoCarreras = carreraList.getListadoCarreras();
+	
 	Materia materiaAux = null;
-	Carrera carreraMateria = null;
+	
 	boolean banderaEdit = false;
 	boolean estadoMateriaEditar = false;
+	
 	String mensajeRespuesta = "";
-
+	String nombreMateria = "";
+	
 	public CarreraBean getCarreraList() {
 		return carreraList;
 	}
@@ -37,13 +38,7 @@ public class MateriaBean {
 		this.carreraList = carreraList;
 	}
 
-	public List<SelectItem> getCarreraSelect() {
-		return carreraSelect;
-	}
-
-	public void setCarreraSelect(List<SelectItem> carreraSelect) {
-		this.carreraSelect = carreraSelect;
-	}
+	
 
 	public List<Carrera> getListadoCarreras() {
 		return listadoCarreras;
@@ -96,22 +91,24 @@ public class MateriaBean {
 	public void setBanderaEdit(boolean banderaEdit) {
 		this.banderaEdit = banderaEdit;
 	}
-
+	
 	public void setMateriaAux(Materia materiaAux) {
-		System.out.println("[MateriaBean] - setMateriaAux || Va a cambiar => "
-				+ materiaAux);
-		if (materiaAux != null) {
-			System.out.println(materiaAux.getNombreMateria());
-			this.setAuxNombreValidacion(materiaAux.getNombreMateria());
-			this.materiaAux = materiaAux;
-			if (this.materiaAux.getEstadoMateria().compareTo('1') == 0) {
-				this.setEstadoMateriaEditar(true);
-			} else {
-				this.setEstadoMateriaEditar(false);
+			System.out.println("[MateriaBean] - setMateriaAux || Va a cambiar => "	+ materiaAux);
+			if (materiaAux != null) {
+				System.out.println(materiaAux.getNombreMateria());
+				this.setAuxNombreValidacion(materiaAux.getNombreMateria());
+				this.materiaAux = materiaAux;
+				
+				if (this.materiaAux.getEstadoMateria().compareTo('1') == 0) {
+					this.setEstadoMateriaEditar(true);
+				} else {
+					this.setEstadoMateriaEditar(false);
+				}
+				this.setBanderaEdit(true);
 			}
-			this.setBanderaEdit(true);
 		}
-	}
+
+		
 
 	public String getNombreMateria() {
 		return nombreMateria;

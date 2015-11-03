@@ -84,7 +84,7 @@
 	      		<br></br>
 				<div class="form-group">
 						<label class="control-label">Seleccione la Carrera</label>             
-						<h:selectOneMenu value="#{estudianteBean.carreraEstudiante}" converter="estudianteConverter">
+						<h:selectOneMenu value="#{estudianteBean.carreraEstudiante}" converter="carreraConverter">
 							<f:selectItems value="#{estudianteBean.listadoCarreras}" var="carreraEst" itemLabel="#{carreraEst.nombreCarrera}"></f:selectItems>
 						</h:selectOneMenu>
 					</div>
