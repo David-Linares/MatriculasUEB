@@ -14,7 +14,8 @@ public class FacultadConverter implements Converter{
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
 		if(arg2 != null && arg2.trim().length() > 0){
-			System.out.println(arg2);
+			System.out.println("[FacultadConverter] agumento2" + arg2) ;
+	//		System.out.println(arg2);
 			FacultadLogical fl = new FacultadLogical();
 			return fl.getFacultadByName(arg2);
 		}
