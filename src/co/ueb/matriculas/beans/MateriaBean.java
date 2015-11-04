@@ -29,8 +29,8 @@ public class MateriaBean implements Serializable{
 	List<Materia> listadoMaterias = ml.consultarMaterias();
 	List<Carrera> listadoCarreras = carreraList.getListadoCarreras();
 	
-	Materia materiaAux = null;
-	Materia materiaAuxEditar=null;
+	private Materia materiaAux = null;
+	private Materia materiaAuxEditar=null;
 	
 	boolean banderaEdit = false;
 	boolean estadoMateriaEditar = false;
@@ -139,16 +139,18 @@ public class MateriaBean implements Serializable{
 
 	public void setMateriaAux(Materia copiaMateriaAux) {
 		log.info("Set de materia para editar");
-		log.info(copiaMateriaAux);
+		log.info("Copia materia Aux: "+ copiaMateriaAux);
 		if (copiaMateriaAux != null) {
-			System.out.println("entro a set materiaa� aux");
 			this.materiaAux = copiaMateriaAux;
-			this.materiaAuxEditar= copiaMateriaAux;
-			if (this.materiaAux.getEstadoMateria().compareTo('1') == 0) {
+			log.info("Copia materia Aux: "+ this.getMateriaAux());
+			this.setMateriaAuxEditar(copiaMateriaAux);
+			log.info("Copia materia Aux: "+ this.getMateriaAuxEditar());
+			if (this.getMateriaAux().getEstadoMateria().compareTo('1') == 0) {
 				this.setEstadoMateriaEditar(true);
 			} else {
 				this.setEstadoMateriaEditar(false);
 			}
+			log.info("Copia materia Aux: "+ this.isEstadoMateriaEditar());
 		}
 	}
 
@@ -176,7 +178,7 @@ public class MateriaBean implements Serializable{
 		try{
 			log.info("Editando materia...");
 			log.info(this.getMateriaAux());
-			if (!validarCamposMateria(materiaAux)) {
+			if (!validarCamposMateria(this.getMateriaAux())) {
 				return null;
 			}
 			if (this.estadoMateriaEditar) {
