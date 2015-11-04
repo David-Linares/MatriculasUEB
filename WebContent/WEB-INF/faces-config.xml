@@ -13,11 +13,6 @@
   <managed-bean-name>estudianteBean</managed-bean-name>
   <managed-bean-class>co.ueb.matriculas.beans.EstudianteBean</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
-  <managed-property>
-   <property-name>nombreEstudiante</property-name>
-   <property-class>java.lang.String</property-class>
-   <value/>
-  </managed-property>
  </managed-bean>
  <managed-bean>
   <managed-bean-name>facultadBean</managed-bean-name>
