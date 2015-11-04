@@ -11,12 +11,16 @@ import java.util.Set;
  */
 public class Materia implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3582811175728351510L;
 	private BigDecimal idMateria;
 	private Carrera carrera;
 	private String nombreMateria;
 	private BigDecimal creditos;
 	private Character estadoMateria;
-	private Set materiaMatriculas = new HashSet(0);
+	private Set<?> materiaMatriculas = new HashSet<Object>(0);
 
 	public Materia() {
 	}
@@ -26,7 +30,7 @@ public class Materia implements java.io.Serializable {
 	}
 
 	public Materia(BigDecimal idMateria, Carrera carrera, String nombreMateria,
-			BigDecimal creditos, Character estadoMateria, Set materiaMatriculas) {
+			BigDecimal creditos, Character estadoMateria, Set<?> materiaMatriculas) {
 		this.idMateria = idMateria;
 		this.carrera = carrera;
 		this.nombreMateria = nombreMateria;
@@ -75,11 +79,11 @@ public class Materia implements java.io.Serializable {
 		this.estadoMateria = estadoMateria;
 	}
 
-	public Set getMateriaMatriculas() {
+	public Set<?> getMateriaMatriculas() {
 		return this.materiaMatriculas;
 	}
 
-	public void setMateriaMatriculas(Set materiaMatriculas) {
+	public void setMateriaMatriculas(Set<?> materiaMatriculas) {
 		this.materiaMatriculas = materiaMatriculas;
 	}
 
@@ -91,4 +95,65 @@ public class Materia implements java.io.Serializable {
 				+ materiaMatriculas + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((carrera == null) ? 0 : carrera.hashCode());
+		result = prime * result
+				+ ((creditos == null) ? 0 : creditos.hashCode());
+		result = prime * result
+				+ ((estadoMateria == null) ? 0 : estadoMateria.hashCode());
+		result = prime * result
+				+ ((idMateria == null) ? 0 : idMateria.hashCode());
+		result = prime
+				* result
+				+ ((materiaMatriculas == null) ? 0 : materiaMatriculas
+						.hashCode());
+		result = prime * result
+				+ ((nombreMateria == null) ? 0 : nombreMateria.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Materia other = (Materia) obj;
+		if (carrera == null) {
+			if (other.carrera != null)
+				return false;
+		} else if (!carrera.equals(other.carrera))
+			return false;
+		if (creditos == null) {
+			if (other.creditos != null)
+				return false;
+		} else if (!creditos.equals(other.creditos))
+			return false;
+		if (estadoMateria == null) {
+			if (other.estadoMateria != null)
+				return false;
+		} else if (!estadoMateria.equals(other.estadoMateria))
+			return false;
+		if (idMateria == null) {
+			if (other.idMateria != null)
+				return false;
+		} else if (!idMateria.equals(other.idMateria))
+			return false;
+		if (materiaMatriculas == null) {
+			if (other.materiaMatriculas != null)
+				return false;
+		} else if (!materiaMatriculas.equals(other.materiaMatriculas))
+			return false;
+		if (nombreMateria == null) {
+			if (other.nombreMateria != null)
+				return false;
+		} else if (!nombreMateria.equals(other.nombreMateria))
+			return false;
+		return true;
+	}
 }

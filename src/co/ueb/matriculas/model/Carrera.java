@@ -11,13 +11,17 @@ import java.util.Set;
  */
 public class Carrera implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 746290141466856029L;
 	private BigDecimal idCarrera;
 	private Facultad facultad;
 	private String nombreCarrera;
 	private BigDecimal totalCreditos;
 	private Character estadoCarrera;
-	private Set materias = new HashSet(0);
-	private Set carreraEstudiantes = new HashSet(0);
+	private Set<Materia> materias = new HashSet<Materia>(0);
+	private Set<Persona> carreraEstudiantes = new HashSet<Persona>(0);
 
 	public Carrera() {
 	}
@@ -28,7 +32,7 @@ public class Carrera implements java.io.Serializable {
 
 	public Carrera(BigDecimal idCarrera, Facultad facultad,
 			String nombreCarrera, BigDecimal totalCreditos,
-			Character estadoCarrera, Set materias, Set carreraEstudiantes) {
+			Character estadoCarrera, Set<Materia> materias, Set<Persona> carreraEstudiantes) {
 		this.idCarrera = idCarrera;
 		this.facultad = facultad;
 		this.nombreCarrera = nombreCarrera;
@@ -78,19 +82,19 @@ public class Carrera implements java.io.Serializable {
 		this.estadoCarrera = estadoCarrera;
 	}
 
-	public Set getMaterias() {
+	public Set<Materia> getMaterias() {
 		return this.materias;
 	}
 
-	public void setMaterias(Set materias) {
+	public void setMaterias(Set<Materia> materias) {
 		this.materias = materias;
 	}
 
-	public Set getCarreraEstudiantes() {
+	public Set<Persona> getCarreraEstudiantes() {
 		return this.carreraEstudiantes;
 	}
 
-	public void setCarreraEstudiantes(Set carreraEstudiantes) {
+	public void setCarreraEstudiantes(Set<Persona> carreraEstudiantes) {
 		this.carreraEstudiantes = carreraEstudiantes;
 	}
 

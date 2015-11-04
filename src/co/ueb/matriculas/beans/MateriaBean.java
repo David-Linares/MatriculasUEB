@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.jboss.logging.Logger;
+
 import co.ueb.matriculas.logical.MateriaLogical;
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Materia;
@@ -13,12 +15,16 @@ import co.ueb.matriculas.model.MateriaMatricula;
 
 public class MateriaBean implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4517717609128767575L;
 	MateriaLogical ml = new MateriaLogical();
 	BigDecimal cantidadCreditos;
 	
 	CarreraBean carreraList = new CarreraBean();
 	Carrera carreraMateria = null;
-
+	Logger log = Logger.getLogger(MateriaBean.class);
 	
 	List<Materia> listadoMaterias = ml.consultarMaterias();
 	List<Carrera> listadoCarreras = carreraList.getListadoCarreras();
@@ -106,13 +112,12 @@ public class MateriaBean implements Serializable{
 	
 	
 	public void setMateriaAux(Materia copiaMateriaAux) {
-			System.out.println(" setMateriaAux || Va a cambiar => "	+ copiaMateriaAux);
+			System.out.println(" setMateriaAux ||ï¿½Va a cambiar => "	+ copiaMateriaAux);
 			if (copiaMateriaAux != null) {
-				System.out.println("entro a set materiaa¿ aux");
+				System.out.println("entro a set materiaaï¿½ aux");
 				this.materiaAux = copiaMateriaAux;
+				System.out.println(materiaAux.getCarrera());
 				this.materiaAuxEditar= copiaMateriaAux;
-				System.out.println(materiaAux);
-				System.out.println(materiaAuxEditar);
 				if (this.materiaAux.getEstadoMateria().compareTo('1') == 0) {
 					this.setEstadoMateriaEditar(true);
 				} else {
@@ -155,42 +160,47 @@ public class MateriaBean implements Serializable{
 
 		if (validarMateria.getNombreMateria().equals("")) {
 			this.materiaAux.setNombreMateria(materiaAuxEditar.getNombreMateria());
-			this.setMensajeRespuesta("El campo nombre no puede estar vacío");
+			this.setMensajeRespuesta("El campo nombre no puede estar vacï¿½o");
 			return false;
 		}
 		if (validarMateria.getCreditos().equals("")) {
 			this.materiaAux.setCreditos(materiaAuxEditar.getCreditos());
-			this.setMensajeRespuesta("El campo creditos no puede estar vacío");
+			this.setMensajeRespuesta("El campo creditos no puede estar vacï¿½o");
 			return false;
 		}
 		if (validarMateria.getCarrera().equals("")) {
 			this.materiaAux.setCarrera(materiaAuxEditar.getCarrera());
-			this.setMensajeRespuesta("El campo carrera no puede estar vacío");
+			this.setMensajeRespuesta("El campo carrera no puede estar vacï¿½o");
 			return false;
 		}
 		return true;
 	}
 	public String editarMateria() {
-		System.out.println("entro a editar materia");
-		System.out.println(materiaAux);
-		if (!validarCamposMateria(materiaAux)) {
-			System.out.println("if de !validar campos materia");
-			System.out.println(materiaAux);
-			return null;
-		}
-		if (this.estadoMateriaEditar) {
-			this.getMateriaAux().setEstadoMateria('1');
-		} else {
-			this.getMateriaAux().setEstadoMateria('0');
-		}		
-		boolean guardado = ml.modificarMateria(this.getMateriaAux());
-		System.out.println("no ha entrado a if de guardado");
-		if (guardado) {
-			System.out.println("entro a if de guardado");
-			this.setMensajeRespuesta("");
-			this.getListadoMaterias();
-			return "paginaMateria";
-		} else {
+		try{
+			log.info("Editando materia...");
+			log.info(this.getMateriaAux());
+			if (!validarCamposMateria(materiaAux)) {
+				return null;
+			}
+			if (this.estadoMateriaEditar) {
+				this.getMateriaAux().setEstadoMateria('1');
+			} else {
+				this.getMateriaAux().setEstadoMateria('0');
+			}		
+			boolean guardado = ml.modificarMateria(this.getMateriaAux());
+			log.info("Guardo: "+guardado);
+			if (guardado) {
+				log.info("GuardÃ³");
+				this.setMensajeRespuesta("");
+				this.getListadoMaterias();
+				return "paginaMateria";
+			} else {
+				return "error";
+			}
+		}catch(Exception e){
+			log.error("OcurriÃ³ un error");
+			log.error(e);
+			e.printStackTrace();
 			return "error";
 		}
 	}

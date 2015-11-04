@@ -5,14 +5,15 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.jboss.logging.Logger;
 
-import co.ueb.matriculas.model.Carrera;
-import co.ueb.matriculas.model.Facultad;
 import co.ueb.matriculas.model.Materia;
 import co.ueb.matriculas.util.HibernateSession;
 
 public class MateriaLogical {
-
+	
+	private Logger log = Logger.getLogger(MateriaLogical.class);
+	
 	public boolean crearNuevaMateria(Materia nuevaMateria){
 		Session sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
@@ -52,13 +53,13 @@ public class MateriaLogical {
 		materias = query.list();
 		session.getTransaction().commit();
 		System.out.println("salio de consultar materias");
-System.out.println(materias);
+		System.out.println(materias);
 		return materias;
 	}
-	
+
 	public boolean modificarMateria(Materia editaMateria){
 		Session sesion  = HibernateSession.getSf().getCurrentSession();
-		System.out.println("modificar materia entro ");
+		log.info("Entró A Modificar la Materia");
 		try{
 			sesion.beginTransaction();
 			sesion.update(editaMateria);
@@ -73,7 +74,7 @@ System.out.println(materias);
 
 	public Materia getMateriaByName(String nombre_materia){
 		Materia m = null;
-		Session session = HibernateSession.getSf().openSession();
+		Session session = HibernateSession.getSf().getCurrentSession();
 		try {
 			session.beginTransaction();
 			String hql = "FROM Materia WHERE nombre_materia= '" + nombre_materia + "'";

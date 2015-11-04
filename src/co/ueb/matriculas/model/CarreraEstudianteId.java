@@ -9,6 +9,10 @@ import java.math.BigDecimal;
  */
 public class CarreraEstudianteId implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 377375716610046135L;
 	private BigDecimal idPersona;
 	private BigDecimal idCarrera;
 

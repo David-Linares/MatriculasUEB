@@ -137,6 +137,7 @@
 										value="#{materiaBean.materiaAux.creditos}" />
 								</label>
 							</div>
+							<h:outputLabel value="#{materiaBean.materiaAux.carrera}" />
 							<div class="form-control-wrapper">
 							<h:selectOneMenu value="#{materiaBean.materiaAux.carrera}" converter="carreraConverter">
 								<f:selectItems value="#{materiaBean.listadoCarreras}"  var="carreraMat" itemLabel="#{carreraMat.nombreCarrera}"/>
@@ -149,9 +150,6 @@
 									class="toggle"></span>
 								</label>
 							</div>
-							
-							
-							
 							<br></br>
 						</div>
 						<div class="modal-footer">

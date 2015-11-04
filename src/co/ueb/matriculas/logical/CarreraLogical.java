@@ -1,5 +1,5 @@
 package co.ueb.matriculas.logical;
-import java.math.BigDecimal;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +7,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import co.ueb.matriculas.model.Carrera;
-import co.ueb.matriculas.model.Facultad;
 import co.ueb.matriculas.util.HibernateSession;
 
 public class CarreraLogical {
@@ -56,7 +55,7 @@ public class CarreraLogical {
 	
 	public boolean modificarCarrera(Carrera editaCarrera){
 		System.out.println(editaCarrera);
-		Session sesion = HibernateSession.getSf().openSession();
+		Session sesion = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
 			sesion.update(editaCarrera);

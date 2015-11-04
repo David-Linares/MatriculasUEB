@@ -1,10 +1,8 @@
 package co.uel.matriculas.converter;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
 import co.ueb.matriculas.logical.CarreraLogical;
@@ -16,6 +14,8 @@ public class CarreraConverter implements Converter{
 
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
+		System.out.println("getAsObject");
+		System.out.println(arg2);
 		if(arg2 != null && arg2.trim().length() > 0){
 			CarreraLogical cl = new CarreraLogical();
 			return cl.getCarreraByName(arg2);
@@ -25,7 +25,8 @@ public class CarreraConverter implements Converter{
 
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
-		// TODO Auto-generated method stu
+		System.out.println("getAsString");
+		System.out.println(arg2);
 		return null;
 	}
 

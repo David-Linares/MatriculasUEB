@@ -20,7 +20,7 @@ public class CarreraBean implements Serializable {
 	/**
 	 * 
 	 */
-	private static long serialVersionUID = -9166065171751439973L;
+	private static final long serialVersionUID = -6396704435134939521L;
 	private final static Logger log = Logger.getLogger("CarreraBean -- ");
 	String nombreCarrera = "";
 	BigDecimal totalCreditos;
@@ -187,7 +187,7 @@ public class CarreraBean implements Serializable {
 		if (listadoCarreras.size()!=0) {
 			idCarreraAux = listadoCarreras.get(listadoCarreras.size() - 1).getIdCarrera().add(new BigDecimal(1));
 		}
-		Carrera nuevaCarrera = new Carrera(idCarreraAux, this.getFacultadCarrera(), this.nombreCarrera, this.totalCreditos, '1', personas, materias);
+		Carrera nuevaCarrera = new Carrera(idCarreraAux, this.getFacultadCarrera(), this.nombreCarrera, this.totalCreditos, '1', materias, personas);
 	//	this.getFacultadCarrera().getCarreras().add(nuevaCarrera);
 		System.out.println("[CarreraBean] - crearCarrera || Nueva Carrera => "+ nuevaCarrera);
 		boolean guardado = cl.crearNuevaCarrera(nuevaCarrera);
