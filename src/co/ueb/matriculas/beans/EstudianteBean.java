@@ -9,27 +9,47 @@ import java.util.List;
 
 import co.ueb.matriculas.logical.EstudianteLogical;
 import co.ueb.matriculas.model.Carrera;
-import co.ueb.matriculas.model.Materia;
+import co.ueb.matriculas.model.Perfil;
 import co.ueb.matriculas.model.Persona;
 
+@SuppressWarnings("serial")
 public class EstudianteBean implements Serializable {
 
-	EstudianteLogical el = new EstudianteLogical();
+	private String mensajeRespuesta = "";
+	private String auxNombreValidacion = "";
 
-	CarreraBean carreraList = new CarreraBean();
+	private boolean banderaEdit = false;
+	private boolean estadoEstudianteEditar = false;
 
-	List<Persona> listadoEstudiantes = el.consultarEstudiantes();
-	List<Carrera> listadoCarreras = carreraList.getListadoCarreras();
+	private EstudianteLogical el = new EstudianteLogical();
 
-	Persona nuevoEstudiante = null;
-	Persona estudianteAux = null;
-	Persona estudianteAuxEditar = null;
+	private Carrera carreraEstudiante = null;
+	private CarreraBean carreraList = new CarreraBean();
 
-	boolean banderaEdit = false;
-	boolean estadoEstudianteEditar = false;
+	private Persona nuevoEstudiante = null;
+	private Persona estudianteAux = null;
+	private Persona estudianteAuxEditar = null;
 
-	String mensajeRespuesta = "";
-	String auxNombreValidacion = "";
+	private Perfil perfil = new Perfil(new BigDecimal(1));
+
+	private List<Persona> listadoEstudiantes = el.consultarEstudiantes();
+	private List<Carrera> listadoCarreras = carreraList.getListadoCarreras();
+
+	public EstudianteLogical getEl() {
+		return el;
+	}
+
+	public void setEl(EstudianteLogical el) {
+		this.el = el;
+	}
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
 
 	public CarreraBean getCarreraList() {
 		return carreraList;
@@ -44,9 +64,15 @@ public class EstudianteBean implements Serializable {
 	}
 
 	public void setListadoCarreras(List<Carrera> listadoCarreras) {
-		CarreraBean carrerasList = new CarreraBean();
-		this.listadoCarreras = carrerasList.getListadoCarreras();
+		this.listadoCarreras = listadoCarreras;
+	}
 
+	public Carrera getCarreraEstudiante() {
+		return carreraEstudiante;
+	}
+
+	public void setCarreraEstudiante(Carrera carreraEstudiante) {
+		this.carreraEstudiante = carreraEstudiante;
 	}
 
 	public Persona getEstudianteAuxEditar() {
@@ -104,9 +130,9 @@ public class EstudianteBean implements Serializable {
 	public void setEstudianteAux(Persona copiaEstudianteAux) {
 		if (copiaEstudianteAux != null) {
 
-			this.estudianteAux = copiaEstudianteAux;
-			this.estudianteAuxEditar = copiaEstudianteAux;
-			if (this.estudianteAux.getEstadoPersona().compareTo('1') == 0) {
+			this.setEstudianteAux(copiaEstudianteAux);
+			this.setEstudianteAuxEditar(copiaEstudianteAux);
+			if (this.getEstudianteAux().getEstadoPersona().compareTo('1') == 0) {
 				this.setEstadoEstudianteEditar(true);
 			} else {
 				this.setEstadoEstudianteEditar(false);
@@ -125,53 +151,56 @@ public class EstudianteBean implements Serializable {
 	public boolean validarCamposEstudiante(Persona validarEstudiante) {
 
 		if (validarEstudiante.getIdPersona().equals("")) {
-			this.estudianteAux.setIdPersona(estudianteAuxEditar.getIdPersona());
+			this.getEstudianteAux().setIdPersona(
+					this.getEstudianteAuxEditar().getIdPersona());
 			this.setMensajeRespuesta("El campo identificaciòn no puede estar vacìo");
 		}
 
 		if (validarEstudiante.getNombrePersona().equals("")) {
-			this.estudianteAux.setNombrePersona(estudianteAuxEditar
-					.getNombrePersona());
+			this.getEstudianteAux().setNombrePersona(
+					this.getEstudianteAux().getNombrePersona());
 			this.setMensajeRespuesta("El campo nombres no puede estar vacío");
 			return false;
 		}
 		if (validarEstudiante.getApellidosPersona().equals("")) {
-			this.estudianteAux.setApellidosPersona(estudianteAuxEditar
-					.getApellidosPersona());
+			this.getEstudianteAux().setApellidosPersona(
+					this.getEstudianteAuxEditar().getApellidosPersona());
 			this.setMensajeRespuesta("El campo apellidos no puede estar vacío");
 			return false;
 		}
 		if (validarEstudiante.getFechaNacimiento().equals("")) {
-			this.estudianteAux.setFechaNacimiento(estudianteAuxEditar
-					.getFechaNacimiento());
+			this.getEstudianteAux().setFechaNacimiento(
+					this.getEstudianteAuxEditar().getFechaNacimiento());
 			this.setMensajeRespuesta("El campo fecha de nacimiento no puede estar vacío");
 			return false;
 		}
 		if (validarEstudiante.getLugarNacimiento().equals("")) {
-			this.estudianteAux.setLugarNacimiento(estudianteAuxEditar
-					.getLugarNacimiento());
+			this.getEstudianteAux().setLugarNacimiento(
+					this.getEstudianteAuxEditar().getLugarNacimiento());
 			this.setMensajeRespuesta("El campo lugar de nacimiento no puede estar vacío");
 			return false;
 		}
 		if (validarEstudiante.getDireccion().equals("")) {
-			this.estudianteAux.setDireccion(estudianteAuxEditar.getDireccion());
+			this.getEstudianteAux().setDireccion(
+					this.getEstudianteAuxEditar().getDireccion());
 			this.setMensajeRespuesta("El campo dirección no puede estar vacío");
 			return false;
 		}
 		if (validarEstudiante.getCorreoElectronico().equals("")) {
-			this.estudianteAux.setCorreoElectronico(estudianteAuxEditar
-					.getCorreoElectronico());
+			this.getEstudianteAux().setCorreoElectronico(
+					this.getEstudianteAuxEditar().getCorreoElectronico());
 			this.setMensajeRespuesta("El campo correo electronico no puede estar vacío");
 			return false;
 		}
 		if (validarEstudiante.getUsuario().equals("")) {
-			this.estudianteAux.setUsuario(estudianteAuxEditar.getUsuario());
+			this.getEstudianteAux().setUsuario(
+					this.getEstudianteAuxEditar().getUsuario());
 			this.setMensajeRespuesta("El campo usuario no puede estar vacío");
 			return false;
 		}
 		if (validarEstudiante.getContrasena().equals("")) {
-			this.estudianteAux.setContrasena(estudianteAuxEditar
-					.getContrasena());
+			this.getEstudianteAux().setContrasena(
+					this.getEstudianteAuxEditar().getContrasena());
 			this.setMensajeRespuesta("El campo contraseña no puede estar vacío");
 			return false;
 		}
@@ -206,34 +235,28 @@ public class EstudianteBean implements Serializable {
 
 		BigDecimal idEstudianteAux = new BigDecimal(1);
 		if (listadoEstudiantes.size() != 0) {
-			idEstudianteAux = listadoEstudiantes
+			idEstudianteAux = this.getListadoEstudiantes()
 					.get(listadoEstudiantes.size() - 1).getIdPersona()
 					.add(new BigDecimal(1));
 		}
-		/*Persona nuevoEstudiante = new Persona(idEstudianteAux,
-				new BigDecimal(1), this.nuevoEstudiante.getNombrePersona(),
-				this.nuevoEstudiante.getApellidosPersona(),
-				this.nuevoEstudiante.getFechaNacimiento(),
-				this.nuevoEstudiante.getLugarNacimiento(),
-				this.nuevoEstudiante.getDireccion(),
-				this.nuevoEstudiante.getCorreoElectronico(), '1',
-				new BigDecimal(0), this.nuevoEstudiante.getUsuario(),
-				this.nuevoEstudiante.getContrasena());
- */
+		Persona nuevoEstudiante = new Persona(idEstudianteAux, perfil, this
+				.getNuevoEstudiante().getNombrePersona(), this
+				.getNuevoEstudiante().getApellidosPersona(), this
+				.getNuevoEstudiante().getFechaNacimiento(), this
+				.getNuevoEstudiante().getLugarNacimiento(), this
+				.getNuevoEstudiante().getDireccion(), this.getNuevoEstudiante()
+				.getCorreoElectronico(), '1', new BigDecimal(0), this
+				.getNuevoEstudiante().getUsuario(), this.getNuevoEstudiante()
+				.getContrasena());
+
+		this.getCarreraEstudiante().getCarreraEstudiantes()
+				.add(nuevoEstudiante);
+
 		boolean guardado = el.crearNuevoEstudiante(nuevoEstudiante);
 
 		if (guardado) {
 			this.setMensajeRespuesta("");
-			this.listadoEstudiantes.add(nuevoEstudiante);
-			return "paginaEstudiante";
-		} else {
-			return "error";
-		}
-	}
-
-	public String eliminarMateria() {
-		boolean eliminada = el.eliminarEstudiante(this.getEstudianteAux());
-		if (eliminada) {
+			this.getListadoEstudiantes().add(nuevoEstudiante);
 			return "paginaEstudiante";
 		} else {
 			return "error";

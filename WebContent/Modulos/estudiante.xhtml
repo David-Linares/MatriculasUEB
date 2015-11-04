@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<ui:insert>
+	<ui:include src="/Modulos/header.xhtml"></ui:include>
+</ui:insert>
+<body>
+	<div class="container">
+		<div class="col-md-12" style="margin-bottom: 30px">
+			<div class="col-md-3" style="text-align: center">
+				<button data-toggle="modal" data-target="#myModal" class="botonImg">
+					<h:graphicImage url="/resources/images/add.png"></h:graphicImage>
+				</button>
+			</div>
+			<!-- 			<div class="col-md-3" style="text-align:center"> -->
+			<!-- 				<h:form> -->
+			<!-- 					<div class="form-control-wrapper"> -->
+			<!-- 						<h:inputText class="form-control col-sm-10 empty"></h:inputText> -->
+			<!-- 						<div class="floating-label"><h:graphicImage url="/resources/images/search.png"></h:graphicImage> Buscar</div> -->
+			<!-- 						<span class="material-input"></span>	                     -->
+			<!-- 					</div> -->
+			<!-- 				</h:form> -->
+			<!-- 			</div> -->
+		</div>
+		<h:panelGroup rendered="#{!estudianteBean.mensajeRespuesta.equals('')}">
+			<div class="col-md-12 alert alert-dismissable alert-danger">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<h4>Error!</h4>
+				<p>#{estudianteBean.mensajeRespuesta}</p>
+			</div>
+		</h:panelGroup>
+		<div class="col-md-12">
+			<h:form>
+				<h:dataTable value="#{estudianteBean.listadoEstudiantes}" var="estudiante"
+					class="table table-hover table-striped" id="tablaEstudiante">
+					<h:column>
+						<f:facet name="header"># Estudiante </f:facet>
+					#{estudiante.idPersona}
+				</h:column>
+					<h:column>
+						<f:facet name="header">Nombres</f:facet>
+					#{estudiante.nombrePersona}
+				</h:column>
+					<h:column>
+						<f:facet name="header">Apellidos</f:facet>
+					#{estudiante.apellidosPersona}
+				</h:column>
+					<h:column>
+						<f:facet name="header">F/Nacimiento</f:facet>
+					#{estudiante.fechaNacimiento}
+				</h:column>
+				<h:column>
+						<f:facet name="header">L/Nacimiento</f:facet>
+					#{estudiante.lugarNacimiento}
+				</h:column>
+				<h:column>
+						<f:facet name="header">Dirección</f:facet>
+					#{estudiante.direccion}
+				</h:column>
+				<h:column>
+						<f:facet name="header">Correo</f:facet>
+					#{estudiante.correoElectronico}
+				</h:column>
+				<h:column>
+						<f:facet name="header">Usuario</f:facet>
+					#{estudiante.usuario}
+				</h:column>
+				<h:column>
+						<f:facet name="header">Contraseña</f:facet>
+					#{estudiante.contrasena}
+				</h:column>
+					<h:column>
+						<f:facet name="header">Acciones</f:facet>
+						<h:commandLink class="botonImg" data-toggle="modal"
+							data-target="#myModalEdit"
+							actionListener="#{estudianteBean.setEstudianteAux(estudiante)}">
+							<f:ajax execute="@form" render=":modalEditContent"
+								onevent="function(data) { if (data.status == 'success') $('#myModalEdit').modal() ; }" />
+							<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
+						</h:commandLink>
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		</div>
+	</div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Agregar Estudiante</h4>
+				</div>
+				<h:form>
+					<div class="modal-body">
+						<br></br>
+						<div class="form-control-wrapper">
+							<h:inputText id="nombreEstudiante"
+								class="form-control col-sm-10 empty"
+								value="#{estudianteBean.nuevoEstudiante.nombrePersona}"></h:inputText>
+							<div class="floating-label">Nombre del Estudiante</div>
+							<span class="material-input"></span>
+						</div>
+						<div class="form-control-wrapper">
+							<h:inputText id="apellidosEstudiante"
+								class="form-control col-sm-10 empty" required="true"
+								value="#{estudianteBean.nuevoEstudiante.apellidosPersona}"></h:inputText>
+							<div class="floating-label">Apellidos del Estudiante</div>
+							<span class="material-input"></span>
+						</div>
+						
+<!-- 							 Aqui Fecha de Nacimiento -->
+
+						<div class="form-control-wrapper">
+							<h:inputText id="lugarNacimientoEstudiante"
+								class="form-control col-sm-10 empty" required="true"
+								value="#{estudianteBean.nuevoEstudiante.lugarNacimiento}"></h:inputText>
+							<div class="floating-label">Lugar de Nacimiento</div>
+							<span class="material-input"></span>
+						</div>
+						
+						<div class="form-control-wrapper">
+							<h:inputText id="direccionEstudiante"
+								class="form-control col-sm-10 empty" required="true"
+								value="#{estudianteBean.nuevoEstudiante.direccion}"></h:inputText>
+							<div class="floating-label">Dirección</div>
+							<span class="material-input"></span>
+						</div>
+												
+						<div class="form-control-wrapper">
+							<h:inputText id="correoElectronicoEstudiante"
+								class="form-control col-sm-10 empty" required="true"
+								value="#{estudianteBean.nuevoEstudiante.correoElectronico}"></h:inputText>
+							<div class="floating-label">Correo Electronico</div>
+							<span class="material-input"></span>
+						</div>
+						<div class="form-control-wrapper">
+							<h:inputText id="promedioEstudiante"
+								class="form-control col-sm-10 empty" required="true"
+								value="#{estudianteBean.nuevoEstudiante.promedio}"></h:inputText>
+							<div class="floating-label">Promedio</div>
+							<span class="material-input"></span>
+						</div>
+						<div class="form-control-wrapper">
+							<h:inputText id="usuarioEstudiante"
+								class="form-control col-sm-10 empty" required="true"
+								value="#{estudianteBean.nuevoEstudiante.usuario}"></h:inputText>
+							<div class="floating-label">Usuario</div>
+							<span class="material-input"></span>
+						</div>
+												
+						<div class="form-control-wrapper">
+							<h:inputText id="contrasenaEstudiante"
+								class="form-control col-sm-10 empty" required="true"
+								value="#{estudianteBean.nuevoEstudiante.contrasena}"></h:inputText>
+							<div class="floating-label">Contraseña</div>
+							<span class="material-input"></span>
+						</div>
+							
+						<div class="form-control-wrapper">
+							<h:selectOneMenu value="#{estudianteBean.carreraEstudiante}" converter="carreraConverter">
+							<f:selectItem itemLabel="Seleccione una carrera" itemValue=""/>
+								<f:selectItems value="#{estudianteBean.listadoCarreras}"  var="carreraEst" itemLabel="#{carreraBean.nombreCarrera}"/>
+							</h:selectOneMenu>
+						</div>
+						<br></br>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<h:commandButton class="btn btn-primary"
+							action="#{estudianteBean.crearEstudiante()}" value="Guardar Estudiante" />
+					</div>
+				</h:form>
+			</div>
+		</div>
+	</div>
+	<h:panelGroup>
+		<div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Modificar Estudiante</h4>
+					</div>
+					<h:form id="modalEditContent">
+						<div class="modal-body">
+							<br></br>
+							<div class="form-group">
+								<label class="control-label">Nombre del estudiante</label>
+								<h:inputText class="form-control col-sm-10 empty"
+									value="#{estudianteBean.estudianteAux.nombrePersona}" />
+							</div>
+							<div class="togglebutton">
+								<label> Apellidos del estudiante <br /> <h:inputText class="form-control col-sm-10 empty"
+										value="#{estudianteBean.estudianteAux.apellidosPersona}" />
+								</label>
+							</div>
+							<div class="form-control-wrapper">
+							<h:selectOneMenu value="#{estudianteBean.estudianteAux.carreraEstudiantes}" converter="carreraConverter">
+								<f:selectItems value="#{materiaBean.listadoCarreras}"  var="carreraEst" itemLabel="#{carreraEst.nombreCarrera}"/>
+							</h:selectOneMenu>
+						</div>
+							
+							<div class="togglebutton">
+								<label> Estado estudiante <br /> <h:selectBooleanCheckbox
+										value="#{estudianteBean.estadoEstudianteEditar}" /><span
+									class="toggle"></span>
+								</label>
+							</div>
+							
+							
+							
+							<br></br>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Cancelar</button>
+							<h:commandButton class="btn btn-primary"
+								action="#{estudianteBean.editarEstudiante()}" value="Guardar Estudiante" />
+						</div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</h:panelGroup>
+</body>
+</html>
