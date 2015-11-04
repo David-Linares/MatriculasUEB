@@ -23,6 +23,7 @@ public class FacultadLogical {
 			Query query = sesion.createSQLQuery("SP_INSERT");
 			query.setParameter("nombre", nuevaFacultad.getNombreFacultad());
 			List resultList = query.list();
+			System.out.println("[FacultadLogical] las facultades que hay son: " + resultList);
 			log.info(resultList);
 //			sesion.persist(nuevaFacultad);
 			sesion.getTransaction().commit();
@@ -31,8 +32,6 @@ public class FacultadLogical {
 			sesion.getTransaction().rollback();
 			e.printStackTrace();
 			return false;
-		}finally{
-			HibernateSession.getSf().close();
 		}
 	}
 	
@@ -44,7 +43,7 @@ public class FacultadLogical {
 			sesion.getTransaction().commit();
 			return true;
 		}catch(Exception e){
-			System.out.println("[Facultad Logical - Eliminar Facultad] Entró a Error");
+			System.out.println("[Facultad Logical] Eliminar Facultad Entro a Error");
 			sesion.getTransaction().rollback();
 			throw e;
 		}
@@ -54,7 +53,7 @@ public class FacultadLogical {
 	public List<Facultad> consultarFacultades(){
 		List<Facultad> facultades = new ArrayList<Facultad>();
 		String sql = "select f from Facultad as f order by f.idFacultad";
-		Session session = HibernateSession.getSf().openSession();
+		Session session = HibernateSession.getSf().getCurrentSession();
 		session.beginTransaction();
 		Query query = session.createQuery(sql);
 		facultades = query.list();
@@ -63,7 +62,7 @@ public class FacultadLogical {
 	}
 	
 	public boolean modificarFacultad(Facultad editaFacultad){
-		System.out.println(editaFacultad);
+		System.out.println("[FacultadLogial] modificarFacultad " + editaFacultad);
 		Session sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
@@ -82,6 +81,7 @@ public class FacultadLogical {
 		try {
 			sesion.beginTransaction();
 			String hql = "FROM Facultad WHERE id_facultad= " + id_facultad;
+			System.out.println("[FacultadLogical] getFacultadById la consulta fue" + hql);
 			log.info(hql);
 			Query query = sesion.createQuery(hql);
 			f = (Facultad) query.uniqueResult();
@@ -98,7 +98,7 @@ public class FacultadLogical {
 	
 	public Facultad getFacultadByName(String nombre_facultad){
 		Facultad f = null;
-		Session session = HibernateSession.getSf().openSession();
+		Session session = HibernateSession.getSf().getCurrentSession();
 		try {
 			session.beginTransaction();
 			String hql = "FROM Facultad WHERE nombre_facultad= '" + nombre_facultad + "'";

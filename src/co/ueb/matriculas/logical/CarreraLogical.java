@@ -13,7 +13,7 @@ import co.ueb.matriculas.util.HibernateSession;
 public class CarreraLogical {
 
 	public boolean crearNuevaCarrera(Carrera nuevaCarrera){
-		System.out.println("Entro a crear una carrera");
+		System.out.println("[CarreraLogical] Entro a crear una carrera");
 		Session sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
@@ -27,7 +27,7 @@ public class CarreraLogical {
 	}
 	
 	public boolean eliminarCarrera(Carrera carrera){
-		System.out.println("Entro a eliminar carrera");
+		System.out.println("[CarreraLogical] Entro a eliminarCarrera");
 		Session sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
@@ -35,7 +35,7 @@ public class CarreraLogical {
 			sesion.getTransaction().commit();
 			return true;
 		}catch(Exception e){
-			System.out.println("[Carrera Logical - Eliminar Carrera] Entró a Error");
+			System.out.println("[CarreraLogical] Eliminar Carrera --> Entro a Error");
 			sesion.getTransaction().rollback();
 			throw e;
 		}
@@ -43,7 +43,7 @@ public class CarreraLogical {
 	
 	@SuppressWarnings("unchecked")
 	public List<Carrera> consultarCarreras(){
-		System.out.println("Entro a consultar carreras");
+		System.out.println("[CarreraLogical] Entro a consultarCarreras");
 		List<Carrera> carreras = new ArrayList<Carrera>();
 		String sql = "select c from Carrera as c order by c.idCarrera";
 		Session session = HibernateSession.getSf().getCurrentSession();
@@ -55,8 +55,8 @@ public class CarreraLogical {
 	}
 	
 	public boolean modificarCarrera(Carrera editaCarrera){
-		System.out.println(editaCarrera);
-		Session sesion = HibernateSession.getSf().openSession();
+		System.out.println("[CarreraLogical] Entro a modificar Carrera " + editaCarrera);
+		Session sesion = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
 			sesion.update(editaCarrera);
