@@ -5,15 +5,22 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.jboss.logging.Logger;
 
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.util.HibernateSession;
 
 public class CarreraLogical {
+	
+	private Logger log = Logger.getLogger(CarreraLogical.class);
+	private Session sesion;
+	private String sql;
+	private Query query;
+	List<Carrera> carreras;
+	private Carrera carreraQuery;
 
 	public boolean crearNuevaCarrera(Carrera nuevaCarrera){
-		System.out.println("[CarreraLogical] Entro a crear una carrera");
-		Session sesion  = HibernateSession.getSf().getCurrentSession();
+		sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
 			sesion.persist(nuevaCarrera);
@@ -26,36 +33,39 @@ public class CarreraLogical {
 	}
 	
 	public boolean eliminarCarrera(Carrera carrera){
-		System.out.println("[CarreraLogical] Entro a eliminarCarrera");
-		Session sesion  = HibernateSession.getSf().getCurrentSession();
+		sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
 			sesion.delete(carrera);
 			sesion.getTransaction().commit();
 			return true;
 		}catch(Exception e){
-			System.out.println("[CarreraLogical] Eliminar Carrera --> Entro a Error");
 			sesion.getTransaction().rollback();
-			throw e;
+			log.error(e);
+			e.printStackTrace();
+			return false;
 		}
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Carrera> consultarCarreras(){
-		System.out.println("[CarreraLogical] Entro a consultarCarreras");
-		List<Carrera> carreras = new ArrayList<Carrera>();
-		String sql = "select c from Carrera as c order by c.idCarrera";
-		Session session = HibernateSession.getSf().getCurrentSession();
-		session.beginTransaction();
-		Query query = session.createQuery(sql);
-		carreras = query.list();
-		session.getTransaction().commit();
+		sql = "select c from Carrera as c order by c.idCarrera";
+		try{
+			sesion = HibernateSession.getSf().getCurrentSession();
+			sesion.beginTransaction();
+			query = sesion.createQuery(sql);
+			carreras = query.list();
+			sesion.getTransaction().commit();
+		}catch(Exception e){
+			sesion.getTransaction().rollback();
+			log.error(e);
+			e.printStackTrace();
+		}
 		return carreras;
 	}
 	
 	public boolean modificarCarrera(Carrera editaCarrera){
-		System.out.println("[CarreraLogical] Entro a modificar Carrera " + editaCarrera);
-		Session sesion = HibernateSession.getSf().getCurrentSession();
+		sesion = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
 			sesion.update(editaCarrera);
@@ -67,15 +77,14 @@ public class CarreraLogical {
 		}
 	}
 	
-	public Carrera getCarreraByName(String nombre_carrera){
-		Carrera c = null;
-		Session sesion  = HibernateSession.getSf().getCurrentSession();
+	public Carrera getCarreraByName(String nombre_carrera){		
+		sesion  = HibernateSession.getSf().getCurrentSession();
 		try {
 			sesion.beginTransaction();
 			String hql = "FROM Carrera WHERE nombre_carrera= '" + nombre_carrera + "'";
 			Query query = sesion.createQuery(hql);
-			c = (Carrera) query.uniqueResult();
-			if (c == null) {
+			carreraQuery = (Carrera) query.uniqueResult();
+			if (carreraQuery == null) {
 				return null;
 			}
 			sesion.getTransaction().commit();
@@ -83,7 +92,7 @@ public class CarreraLogical {
 			sesion.getTransaction().rollback();
 			e.printStackTrace();
 		}
-		return c;
+		return carreraQuery;
 	}
 	
 }
