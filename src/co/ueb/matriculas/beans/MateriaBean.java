@@ -2,12 +2,16 @@ package co.ueb.matriculas.beans;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.faces.model.SelectItem;
+
 import org.jboss.logging.Logger;
 
+import co.ueb.matriculas.logical.CarreraLogical;
 import co.ueb.matriculas.logical.MateriaLogical;
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Materia;
@@ -19,18 +23,20 @@ public class MateriaBean implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -4517717609128767575L;
+	private Logger log = Logger.getLogger(MateriaBean.class);
 	MateriaLogical ml = new MateriaLogical();
 	BigDecimal cantidadCreditos;
-	
+	List<SelectItem> listCarreraSelect;
+	CarreraLogical cl = new CarreraLogical();
 	CarreraBean carreraList = new CarreraBean();
 	Carrera carreraMateria = null;
-	Logger log = Logger.getLogger(MateriaBean.class);
 	
 	List<Materia> listadoMaterias = ml.consultarMaterias();
 	List<Carrera> listadoCarreras = carreraList.getListadoCarreras();
 	
 	private Materia materiaAux = null;
 	private Materia materiaAuxEditar=null;
+	String auxNombreValidacion = "";
 	
 	boolean banderaEdit = false;
 	boolean estadoMateriaEditar = false;
@@ -81,7 +87,6 @@ public class MateriaBean implements Serializable{
 		this.carreraMateria = carreraMateria;
 	}
 
-	String auxNombreValidacion = "";
 
 	
 
@@ -202,6 +207,23 @@ public class MateriaBean implements Serializable{
 			e.printStackTrace();
 			return "error";
 		}
+	}
+	
+	public List<SelectItem> getListCarreraSelect() {
+		if(this.listCarreraSelect == null){
+			
+			this.listCarreraSelect = new ArrayList<SelectItem>();
+			List<Carrera> listCarreras = cl.consultarCarreras();
+			
+			if(listCarreras != null && !listCarreras.isEmpty()){
+				SelectItem itemCarrera;
+				for (Carrera carreraList : listCarreras) {
+					itemCarrera = new SelectItem(carreraList, carreraList.getNombreCarrera());
+					listCarreraSelect.add(itemCarrera);
+				}
+			}
+		}
+		return listCarreraSelect;
 	}
 
 	public String crearMateria() {

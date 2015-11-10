@@ -51,7 +51,7 @@
 				</h:column>
 					<h:column>
 						<f:facet name="header">Carrera</f:facet>
-					#{materia.carrera}
+					#{materia.carrera.nombreCarrera}
 				</h:column>
 					<h:column>
 						<f:facet name="header">Acciones</f:facet>
@@ -138,11 +138,11 @@
 								</label>
 							</div>
 							<h:outputLabel value="#{materiaBean.materiaAux.carrera}" />
-<!-- 							<div class="form-control-wrapper"> -->
-<!-- 								<h:selectOneMenu value="#{materiaBean.materiaAux.carrera}" converter="carreraConverter"> -->
-<!-- 									<f:selectItems value="#{materiaBean.listadoCarreras}"  var="carreraMat" itemLabel="#{carreraMat.nombreCarrera}"/> -->
-<!-- 								</h:selectOneMenu> -->
-<!-- 							</div> -->
+							<div class="form-control-wrapper">
+								<h:selectOneMenu value="#{materiaBean.carreraMateria}" converter="carreraConverter">
+									<f:selectItems value="#{materiaBean.listCarreraSelect}"/>
+								</h:selectOneMenu>
+							</div>
 							<div class="togglebutton">
 								<label> Estado materia <br /> <h:selectBooleanCheckbox
 										value="#{materiaBean.estadoMateriaEditar}" /><span
