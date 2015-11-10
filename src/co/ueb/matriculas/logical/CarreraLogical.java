@@ -1,5 +1,6 @@
 package co.ueb.matriculas.logical;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -76,11 +77,11 @@ public class CarreraLogical {
 		}
 	}
 	
-	public Carrera getCarreraById(int id_carrera){		
+	public Carrera getCarreraByName(String nombre_carrera){		
 		sesion  = HibernateSession.getSf().getCurrentSession();
 		try {
 			sesion.beginTransaction();
-			String hql = "FROM Carrera WHERE id_carrera= '" + id_carrera + "'";
+			String hql = "FROM Carrera WHERE nombre_carrera= '" + nombre_carrera + "'";
 			Query query = sesion.createQuery(hql);
 			carreraQuery = (Carrera) query.uniqueResult();
 			if (carreraQuery == null) {

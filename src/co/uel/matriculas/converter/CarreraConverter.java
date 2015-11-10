@@ -11,30 +11,22 @@ import co.ueb.matriculas.model.Carrera;
 @FacesConverter(forClass= Carrera.class)
 
 public class CarreraConverter implements Converter{
-		
-	private Carrera carreraConverter;
-	
+
 	@Override
-	public Object getAsObject(FacesContext arg0, UIComponent arg1, String carreraString) {
-		if(carreraString != null && carreraString.trim().length() > 0){
+	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
+		if(arg2 != null && arg2.trim().length() > 0){
 			System.out.println("getAsObject");
-			System.out.println(carreraString);
-			int id_carrera = Integer.parseInt(carreraString);
+			System.out.println(arg2);
 			CarreraLogical cl = new CarreraLogical();
-			carreraConverter = cl.getCarreraById(id_carrera); 
-			return carreraConverter;
+			return cl.getCarreraByName(arg2);
 		}
 		return null;
 	}
 
 	@Override
-	public String getAsString(FacesContext arg0, UIComponent arg1, Object carreraObject) {
-		if(carreraObject != null){
-			carreraConverter = (Carrera) carreraObject;
-			System.out.println("getAsString");
-			System.out.println(carreraObject);
-			return carreraConverter.getIdCarrera().toString();
-		}
+	public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
+		System.out.println("getAsString");
+		System.out.println(arg2);
 		return null;
 	}
 
