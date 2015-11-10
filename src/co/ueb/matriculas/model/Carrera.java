@@ -97,12 +97,16 @@ public class Carrera implements java.io.Serializable {
 	public void setCarreraEstudiantes(Set<Persona> carreraEstudiantes) {
 		this.carreraEstudiantes = carreraEstudiantes;
 	}
-
+	
 	@Override
 	public String toString() {
-		return nombreCarrera;
+		return "Carrera [idCarrera=" + idCarrera + ", facultad=" + facultad
+				+ ", nombreCarrera=" + nombreCarrera + ", totalCreditos="
+				+ totalCreditos + ", estadoCarrera=" + estadoCarrera
+				+ ", materias=" + materias + ", carreraEstudiantes="
+				+ carreraEstudiantes + "]";
 	}
-	
+
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
