@@ -2,76 +2,101 @@
 package co.ueb.matriculas.logical;
 
 import java.math.BigDecimal;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.jdbc.Work;
 import org.jboss.logging.Logger;
 
 import co.ueb.matriculas.model.Facultad;
+import co.ueb.matriculas.util.Constants;
 import co.ueb.matriculas.util.HibernateSession;
 
+/**
+ * @author davidlinares
+ * @date Nov 11, 2015
+ * @Modificación Cambio de los métodos para usar procedimientos almacenados
+ */
 public class FacultadLogical {
 	
-	private final Logger log = Logger.getLogger("Facultad Logical --");
+	private final Logger log = Logger.getLogger(FacultadLogical.class);
+	private String msjRespuesta;
+	private String sql;
+	private List<Facultad> facultades;
+	private Session sesion;
+	private Query query;
 
-	public boolean crearNuevaFacultad(Facultad nuevaFacultad){
-		Session sesion  = HibernateSession.getSf().getCurrentSession();
+	public String crearNuevaFacultad(Facultad nuevaFacultad){
+		sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
-			Query query = sesion.createSQLQuery("SP_INSERT");
-			query.setParameter("nombre", nuevaFacultad.getNombreFacultad());
-			List resultList = query.list();
-			System.out.println("[FacultadLogical] las facultades que hay son: " + resultList);
-			log.info(resultList);
-//			sesion.persist(nuevaFacultad);
+			sesion.doWork(new Work() {
+				
+				@Override
+				public void execute(Connection connection) throws SQLException {
+					CallableStatement callableStatement = connection.prepareCall(Constants.PROCEDIMIENTO_INSERTAR_FACULTAD);	
+					callableStatement.setString(1, nuevaFacultad.getNombreFacultad());
+					callableStatement.registerOutParameter(2, java.sql.Types.VARCHAR);
+					callableStatement.executeUpdate();
+					msjRespuesta = callableStatement.getString(2);
+				}
+			});
 			sesion.getTransaction().commit();
-			return true;
+			return msjRespuesta;
 		}catch(Exception e){
 			sesion.getTransaction().rollback();
 			e.printStackTrace();
-			return false;
+			return "error";
 		}
 	}
-	
-	public boolean eliminarFacultad(Facultad facultad){
-		Session sesion  = HibernateSession.getSf().getCurrentSession();
-		try{
-			sesion.beginTransaction();
-			sesion.delete(facultad);
-			sesion.getTransaction().commit();
-			return true;
-		}catch(Exception e){
-			System.out.println("[Facultad Logical] Eliminar Facultad Entro a Error");
-			sesion.getTransaction().rollback();
-			throw e;
-		}
-	}
-	
+		
 	@SuppressWarnings("unchecked")
 	public List<Facultad> consultarFacultades(){
-		List<Facultad> facultades = new ArrayList<Facultad>();
-		String sql = "select f from Facultad as f order by f.idFacultad";
-		Session session = HibernateSession.getSf().getCurrentSession();
-		session.beginTransaction();
-		Query query = session.createQuery(sql);
-		facultades = query.list();
-		session.getTransaction().commit();
+		facultades = new ArrayList<Facultad>();
+		sql = Constants.CONSULTA_FACULTADES;
+		sesion = HibernateSession.getSf().getCurrentSession();
+		try{
+			sesion.beginTransaction();
+			query = sesion.createQuery(sql);
+			facultades = query.list();
+			sesion.getTransaction().commit();
+		}catch(Exception e){
+			sesion.getTransaction().rollback();
+			log.error(e);
+			e.printStackTrace();
+		}
 		return facultades;
 	}
 	
-	public boolean modificarFacultad(Facultad editaFacultad){
-		System.out.println("[FacultadLogial] modificarFacultad " + editaFacultad);
+	public String modificarFacultad(Facultad editaFacultad){
+		log.info("#### Modificación de Facultad ####");
 		Session sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
+			sesion.doWork(new Work() {
+				
+				@Override
+				public void execute(Connection connection) throws SQLException {
+					CallableStatement callableStatement = connection.prepareCall(Constants.PROCEDIMIENTO_MODIFICAR_FACULTAD);	
+					callableStatement.setBigDecimal(1, editaFacultad.getIdFacultad());
+					callableStatement.setString(2, editaFacultad.getNombreFacultad());
+					callableStatement.setObject(3, editaFacultad.getEstadoFacultad(), java.sql.Types.CHAR);
+					callableStatement.registerOutParameter(4, java.sql.Types.VARCHAR);
+					callableStatement.executeUpdate();
+					msjRespuesta = callableStatement.getString(4);
+				}
+			});
 			sesion.update(editaFacultad);
 			sesion.getTransaction().commit();
-			return true;
+			return msjRespuesta;
 		}catch(Exception e){
 			sesion.getTransaction().rollback();
-			return false;
+			return "error";
 		}
 	}
 	
@@ -83,7 +108,7 @@ public class FacultadLogical {
 			String hql = "FROM Facultad WHERE id_facultad= " + id_facultad;
 			System.out.println("[FacultadLogical] getFacultadById la consulta fue" + hql);
 			log.info(hql);
-			Query query = sesion.createQuery(hql);
+			query = sesion.createQuery(hql);
 			f = (Facultad) query.uniqueResult();
 			if (f == null) {
 				return null;

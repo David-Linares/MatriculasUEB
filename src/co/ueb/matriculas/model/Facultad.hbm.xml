@@ -21,7 +21,7 @@
             <one-to-many class="co.ueb.matriculas.model.Carrera" />
         </set>
     </class>
-    <sql-query name="SP_INSERT" callable="true">
+    <sql-query name="SP_INSERT">
       { call INSERTAR_FACULTAD(:nombre) }
   	</sql-query>
 </hibernate-mapping>

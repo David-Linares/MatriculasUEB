@@ -2,11 +2,11 @@ package co.ueb.matriculas.beans;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.logging.Logger;
 
 import javax.faces.context.FacesContext;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.jboss.logging.Logger;
 
 import co.ueb.matriculas.logical.PersonaLogical;
 import co.ueb.matriculas.model.Persona;
@@ -20,7 +20,7 @@ public class LoginBean implements Serializable {
     private boolean mostrarError;
 	private BigDecimal perfilUsuario;
 	private Persona sesionPersona;
-	final Logger log = Logger.getLogger("LoginBean -- ");
+	private static final Logger log = Logger.getLogger(LoginBean.class);
 	
 	public boolean isMostrarError(){
 		return mostrarError;

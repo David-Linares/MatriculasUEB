@@ -141,37 +141,4 @@ public class MatriculaBean implements Serializable{
 			return "error";
 		}
 	}
-
-	public String crearFacultad(){
-		System.out.println("[FacultadBean] - crearFacultad || Entró a crear");
-		if(this.getNombreFacultad().equals("")){
-			System.out.println("Vacio el nombre");
-			this.setMensajeRespuesta("El campo nombre no puede estar vacío");
-			return null;
-		}
-		Set<Carrera> carreras = new HashSet<Carrera>(0);
-		Facultad nuevaFacultad = new Facultad(new BigDecimal(0), this.nombreFacultad, '1', carreras);
-		System.out.println("[FacultadBean] - crearFacultad || Nueva Facultad => "+nuevaFacultad);
-		boolean guardado = fl.crearNuevaFacultad(nuevaFacultad);
-		if(guardado){
-			this.setMensajeRespuesta("");
-			this.listadoFacultades.add(nuevaFacultad);
-			return "paginaFacultad";			
-		}else{
-			return "error";
-		}
-	}
-	
-	
-	
-	public String eliminarFacultad(){
-		boolean eliminada = fl.eliminarFacultad(this.getFacultadAux());
-		if(eliminada){
-			return "paginaFacultad";			
-		}else{
-			return "error";
-		}
-	}
-	
-
 }

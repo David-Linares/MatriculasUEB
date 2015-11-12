@@ -6,7 +6,7 @@ import org.hibernate.cfg.Configuration;
 public class HibernateSession {
 	
 	private static SessionFactory sf;
-	private static String filename = Constants.hibernate_file_name;
+	private static String filename = Constants.HIBERNATE_FILE_NAME;
 	
 	private static SessionFactory buildSessionFactory(){
 		sf = new Configuration().configure(filename).buildSessionFactory();

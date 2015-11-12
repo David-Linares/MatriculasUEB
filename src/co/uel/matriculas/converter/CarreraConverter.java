@@ -21,6 +21,8 @@ public class CarreraConverter implements Converter{
 			System.out.println(carreraString);
 			CarreraLogical cl = new CarreraLogical();
 			carreraConverter = cl.getCarreraById(Integer.parseInt(carreraString));
+			System.out.println(carreraConverter.getClass().getName());
+			System.out.println(carreraConverter);
 			return carreraConverter;
 		}
 		return null;
