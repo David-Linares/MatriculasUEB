@@ -26,13 +26,23 @@
 			<!-- 				</h:form> -->
 			<!-- 			</div> -->
 		</div>
-		<h:panelGroup rendered="#{!materiaBean.mensajeRespuesta.equals('')}">
+		<h:panelGroup rendered="#{!materiaBean.mensajeError}">
 			<div class="col-md-12 alert alert-dismissable alert-danger">
 				<button type="button" class="close" data-dismiss="alert">×</button>
 				<h4>Error!</h4>
 				<p>#{materiaBean.mensajeRespuesta}</p>
 			</div>
 		</h:panelGroup>
+		<h:panelGroup rendered="#{!materiaBean.mensajeError}">
+			<h:panelGroup rendered="#{materiaBean.mensajeRespuesta != ''}">
+				<div class="col-md-12 alert alert-dismissable alert-success" >
+	                <button type="button" class="close" data-dismiss="alert">×</button>
+	                <h4>Correcto!</h4>
+	                <p>#{materiaBean.mensajeRespuesta}</p>
+	            </div>
+            </h:panelGroup>
+		</h:panelGroup>
+		
 		<div class="col-md-12">
 			<h:form>
 				<h:dataTable value="#{materiaBean.listadoMaterias}" var="materia"

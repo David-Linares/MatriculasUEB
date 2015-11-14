@@ -17,16 +17,6 @@
     <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
   </listener>
   <servlet>
-    <servlet-name>Faces Servlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>/faces/*</url-pattern>
-    <url-pattern>*.xhtml</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <display-name>Apache-Axis Servlet</display-name>
     <servlet-name>AxisServlet</servlet-name>
     <servlet-class>org.apache.axis.transport.http.AxisServlet</servlet-class>
@@ -52,5 +42,15 @@
   <servlet-mapping>
     <servlet-name>AdminServlet</servlet-name>
     <url-pattern>/servlet/AdminServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>/faces/*</url-pattern>
+    <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
 </web-app>

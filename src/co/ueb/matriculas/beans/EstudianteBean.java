@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import co.ueb.matriculas.logical.EstudianteLogical;
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Perfil;
@@ -26,7 +28,6 @@ public class EstudianteBean implements Serializable {
 	private Carrera carreraEstudiante = null;
 	private CarreraBean carreraList = new CarreraBean();
 
-	private Persona nuevoEstudiante = null;
 	private Persona estudianteAux = null;
 	private Persona estudianteAuxEditar = null;
 
@@ -119,14 +120,11 @@ public class EstudianteBean implements Serializable {
 		this.banderaEdit = banderaEdit;
 	}
 
-	public Persona getNuevoEstudiante() {
-		return nuevoEstudiante;
+	public void encriptarContrasena(String nuevaContrasena){
+		String encrypt = DigestUtils.md5Hex(nuevaContrasena);
+		this.getEstudianteAux().setContrasena(encrypt);
 	}
-
-	public void setNuevoEstudiante(Persona nuevoEstudiante) {
-		this.nuevoEstudiante = nuevoEstudiante;
-	}
-
+	
 	public void setEstudianteAux(Persona copiaEstudianteAux) {
 		if (copiaEstudianteAux != null) {
 
@@ -230,24 +228,26 @@ public class EstudianteBean implements Serializable {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public String crearEstudiante() {
-		// Falta validar campos
-
-		BigDecimal idEstudianteAux = new BigDecimal(1);
-		if (listadoEstudiantes.size() != 0) {
-			idEstudianteAux = this.getListadoEstudiantes()
-					.get(listadoEstudiantes.size() - 1).getIdPersona()
-					.add(new BigDecimal(1));
+		if (!validarCamposEstudiante(this.getEstudianteAux())) {
+			return null;
 		}
-		Persona nuevoEstudiante = new Persona(idEstudianteAux, perfil, this
-				.getNuevoEstudiante().getNombrePersona(), this
-				.getNuevoEstudiante().getApellidosPersona(), this
-				.getNuevoEstudiante().getFechaNacimiento(), this
-				.getNuevoEstudiante().getLugarNacimiento(), this
-				.getNuevoEstudiante().getDireccion(), this.getNuevoEstudiante()
-				.getCorreoElectronico(), '1', new BigDecimal(0), this
-				.getNuevoEstudiante().getUsuario(), this.getNuevoEstudiante()
-				.getContrasena());
+		if (this.isEstadoEstudianteEditar()) {
+			this.getEstudianteAux().setEstadoPersona('1');
+		} else {
+			this.getEstudianteAux().setEstadoPersona('0');
+		}
+
+		Persona nuevoEstudiante = new Persona(this.getEstudianteAux()
+				.getIdPersona(), perfil, this.getEstudianteAux()
+				.getNombrePersona(), this.getEstudianteAux()
+				.getApellidosPersona(), this.getEstudianteAux()
+				.getFechaNacimiento(), this.getEstudianteAux()
+				.getLugarNacimiento(), this.getEstudianteAux().getDireccion(),
+				this.getEstudianteAux().getCorreoElectronico(), '1',
+				new BigDecimal(0), this.getEstudianteAux().getUsuario(), this
+						.getEstudianteAux().getContrasena());
 
 		this.getCarreraEstudiante().getCarreraEstudiantes()
 				.add(nuevoEstudiante);

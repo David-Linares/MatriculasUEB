@@ -15,22 +15,22 @@ public class EstudianteLogical {
 
 	Persona personaEstudiante = new Persona();
 	List<Persona> listadoEstudiantes = new ArrayList<Persona>();
-/*
-	@SuppressWarnings("unchecked")
-	public List<Persona> getEstudiantes() {
-		String sql = "select p from Persona as p";
 
-		Session session = HibernateSession.getSf().getCurrentSession();
-		session.beginTransaction();
-
-		Query query = session.createQuery(sql);
-
-		listadoEstudiantes = query.list();
-
-		session.getTransaction().commit();
-
-		return listadoEstudiantes;
-	} */
+	/*
+	 * @SuppressWarnings("unchecked") public List<Persona> getEstudiantes() {
+	 * String sql = "select p from Persona as p";
+	 * 
+	 * Session session = HibernateSession.getSf().getCurrentSession();
+	 * session.beginTransaction();
+	 * 
+	 * Query query = session.createQuery(sql);
+	 * 
+	 * listadoEstudiantes = query.list();
+	 * 
+	 * session.getTransaction().commit();
+	 * 
+	 * return listadoEstudiantes; }
+	 */
 
 	public String obtenerPromedio(BigDecimal identificacion) {
 
@@ -47,38 +47,38 @@ public class EstudianteLogical {
 		return promedioRespuesta;
 	}
 
-	public boolean crearNuevoEstudiante(Persona nuevoEstudiante){
-		Session sesion  = HibernateSession.getSf().getCurrentSession();
-		try{
+	public boolean crearNuevoEstudiante(Persona nuevoEstudiante) {
+		Session sesion = HibernateSession.getSf().getCurrentSession();
+		try {
 			sesion.beginTransaction();
 			sesion.persist(nuevoEstudiante);
 			sesion.getTransaction().commit();
 			return true;
-		}catch(Exception e){
+		} catch (Exception e) {
 			sesion.getTransaction().rollback();
 			return false;
 		}
 	}
-	
-	public boolean eliminarEstudiante(Persona estudiante){
-		Session sesion  = HibernateSession.getSf().getCurrentSession();
-		try{
+
+	public boolean eliminarEstudiante(Persona estudiante) {
+		Session sesion = HibernateSession.getSf().getCurrentSession();
+		try {
 			sesion.beginTransaction();
 			sesion.delete(estudiante);
 			sesion.getTransaction().commit();
 			return true;
-		}catch(Exception e){
-			System.out.println("[Estudiante Logical - Eliminar Estudiante] Entra� a Error");
+		} catch (Exception e) {
+			System.out
+					.println("[Estudiante Logical - Eliminar Estudiante] Entra� a Error");
 			sesion.getTransaction().rollback();
 			throw e;
 		}
 	}
-	
 
 	@SuppressWarnings("unchecked")
-	public List<Persona> consultarEstudiantes(){
+	public List<Persona> consultarEstudiantes() {
 		List<Persona> estudiantes = new ArrayList<Persona>();
-		String sql = "select e from Persona as e order by e.idPersona";
+		String sql = "select e from Persona as e where e.perfil.idPerfil = 1 order by e.nombrePersona, e.apellidosPersona ";
 		Session session = HibernateSession.getSf().getCurrentSession();
 		session.beginTransaction();
 		Query query = session.createQuery(sql);
@@ -86,39 +86,20 @@ public class EstudianteLogical {
 		session.getTransaction().commit();
 		return estudiantes;
 	}
-	
-	public boolean modificarEstudiante(Persona editaEstudiante){
-		Session sesion  = HibernateSession.getSf().getCurrentSession();
+
+	public boolean modificarEstudiante(Persona editaEstudiante) {
+		Session sesion = HibernateSession.getSf().getCurrentSession();
 		System.out.println("modificar estudiante entro ");
-		try{
+		try {
 			sesion.beginTransaction();
 			sesion.update(editaEstudiante);
 			sesion.getTransaction().commit();
 			return true;
-		}catch(Exception e){
+		} catch (Exception e) {
 			sesion.getTransaction().rollback();
 			e.printStackTrace();
 			return false;
 		}
-	}
-
-	public Persona getEstudianteByName(String nombre_estudiante){
-		Persona e = null;
-		Session session = HibernateSession.getSf().openSession();
-		try {
-			session.beginTransaction();
-			String hql = "FROM Persona WHERE nombre_persona= '" + nombre_estudiante + "'";
-			Query query = session.createQuery(hql);
-			e = (Persona) query.uniqueResult();
-			if (e == null) {
-				return null;
-			}
-			session.getTransaction().commit();
-		} catch (Exception ex) {
-			session.getTransaction().rollback();
-			ex.printStackTrace();
-		}
-		return e;
 	}
 
 }

@@ -95,7 +95,8 @@ public class FacultadBean implements Serializable {
 		this.nombreFacultad = nombreFacultad;
 	}
 
-	//Función para asignar la facultad auxiliar que es la que sirve para editar y guardar la facultad temporal
+	//Función para asignar la facultad auxiliar 
+	//que es la que sirve para editar y guardar la facultad temporal
 	public void setFacultadAux(Facultad facultadAux) {
 		log.info("Va a cambiar => " + facultadAux);
 		if (facultadAux != null) {
