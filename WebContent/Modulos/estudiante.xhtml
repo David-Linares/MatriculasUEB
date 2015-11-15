@@ -53,10 +53,7 @@
 						<f:facet name="header">F/Nacimiento</f:facet>
 					#{estudiante.fechaNacimiento}
 				</h:column>
-				<h:column>
-						<f:facet name="header">L/Nacimiento</f:facet>
-					#{estudiante.lugarNacimiento}
-				</h:column>
+				
 				<h:column>
 						<f:facet name="header">Dirección</f:facet>
 					#{estudiante.direccion}
@@ -70,10 +67,6 @@
 					#{estudiante.usuario}
 				</h:column>
 				<h:column>
-						<f:facet name="header">Contraseña</f:facet>
-					#{estudiante.contrasena}
-				</h:column>
-					<h:column>
 						<f:facet name="header">Acciones</f:facet>
 						<h:commandLink class="botonImg" data-toggle="modal"
 							data-target="#myModalEdit"
@@ -139,13 +132,6 @@
 								class="form-control col-sm-10 empty" required="true"
 								value="#{estudianteBean.nuevoEstudiante.correoElectronico}"></h:inputText>
 							<div class="floating-label">Correo Electronico</div>
-							<span class="material-input"></span>
-						</div>
-						<div class="form-control-wrapper">
-							<h:inputText id="promedioEstudiante"
-								class="form-control col-sm-10 empty" required="true"
-								value="#{estudianteBean.nuevoEstudiante.promedio}"></h:inputText>
-							<div class="floating-label">Promedio</div>
 							<span class="material-input"></span>
 						</div>
 						<div class="form-control-wrapper">

@@ -130,6 +130,4 @@ public class Carrera implements java.io.Serializable {
 		return true;
 	}
 	
-	
-	
 }

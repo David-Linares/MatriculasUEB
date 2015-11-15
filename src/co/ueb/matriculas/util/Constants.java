@@ -26,6 +26,7 @@ public class Constants {
 	 * */
 	
 	public static final String NAVEGACION_FACULTAD = "paginaFacultad";
+	public static final String NAVEGACION_MATERIA = "paginaMateria";
 		
 	/*
 	 * Constantes de Facultad
@@ -51,7 +52,12 @@ public class Constants {
 	 * */
 	
 	public static final String MSJ_MATERIA_OK = "Materia Creada Correctamente!!";
-	
+	public static final String MATERIA_CREADA = "Materia Creada Correctamente!!";
+	public static final String MATERIA_ACTUALIZADA = "Materia Actualizada Correctamente!!";
+	public static final String CONSULTA_MATERIAS = "select m from Materia as m order by m.idMateria";
+	public static final String PROCEDIMIENTO_INSERTAR_MATERIA = "{call INSERTAR_MATERIA(?,?,?,?)}";
+	public static final String PROCEDIMIENTO_MODIFICAR_MATERIA = "{call MODIFICAR_MATERIA(?,?,?,?,?,?)}";
+
 	/*
 	 * Constantes de Estudiante
 	 * 

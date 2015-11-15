@@ -16,35 +16,40 @@ import co.ueb.matriculas.logical.MateriaLogical;
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Materia;
 import co.ueb.matriculas.model.MateriaMatricula;
+import co.ueb.matriculas.util.Constants;
 
-public class MateriaBean implements Serializable{
+public class MateriaBean implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4517717609128767575L;
+
+	// Datos de log
 	private Logger log = Logger.getLogger(MateriaBean.class);
-	MateriaLogical ml = new MateriaLogical();
-	BigDecimal cantidadCreditos;
-	List<SelectItem> listCarreraSelect;
-	CarreraLogical cl = new CarreraLogical();
-	CarreraBean carreraList = new CarreraBean();
-	Carrera carreraMateria = null;
-	
-	List<Materia> listadoMaterias = ml.consultarMaterias();
-	List<Carrera> listadoCarreras = carreraList.getListadoCarreras();
-	
+
+	private MateriaLogical ml = new MateriaLogical();
+
+	// Atributos de materia para la vista
+	private String mensajeRespuesta = "";
+	private String nombreMateria = "";
+	private CarreraLogical cl = new CarreraLogical();
+	private Carrera carreraMateria = new Carrera();
+	private List<SelectItem> listCarreraSelect;
+	private List<Materia> listadoMaterias = ml.consultarMaterias();
+	private List<Carrera> listadoCarreras = cl.consultarCarreras();
+
+	// Atributos Auxiliares
 	private Materia materiaAux = null;
-	private Materia materiaAuxEditar=null;
-	String auxNombreValidacion = "";
-	
-	boolean banderaEdit = false;
-	boolean estadoMateriaEditar = false;
-		
-	String mensajeRespuesta = "";
-	String nombreMateria = "";
-	
-	
+	private Materia materiaAuxEditar = null;
+	private BigDecimal cantidadCreditos;
+	private boolean banderaEdit = false;
+	private boolean estadoMateriaEditar = false;
+	private boolean mensajeError = false;
+	private String auxNombreValidacion = "";
+
+	// Getters y Setters
+
 	public BigDecimal getCantidadCreditos() {
 		return cantidadCreditos;
 	}
@@ -61,16 +66,21 @@ public class MateriaBean implements Serializable{
 		this.materiaAuxEditar = materiaAuxEditar;
 	}
 
-	public CarreraBean getCarreraList() {
-		return carreraList;
-	}
-
-	public void setCarreraList(CarreraBean carreraList) {
-		this.carreraList = carreraList;
-	}
-
 	public List<Carrera> getListadoCarreras() {
 		return listadoCarreras;
+	}
+
+	public MateriaBean() {
+		this.setListCarreraSelect(new ArrayList<SelectItem>());
+		List<Carrera> listCarreras = cl.consultarCarreras();
+
+		if (listCarreras != null && !listCarreras.isEmpty()) {
+			SelectItem itemCarrera;
+			for (Carrera carreraList : listCarreras) {
+				itemCarrera = new SelectItem(carreraList.getIdCarrera(),carreraList.getNombreCarrera());
+				listCarreraSelect.add(itemCarrera);
+			}
+		}
 	}
 
 	public void setListadoCarreras(List<Carrera> listadoCarreras) {
@@ -86,9 +96,6 @@ public class MateriaBean implements Serializable{
 	public void setCarreraMateria(Carrera carreraMateria) {
 		this.carreraMateria = carreraMateria;
 	}
-
-
-	
 
 	public String getAuxNombreValidacion() {
 		return auxNombreValidacion;
@@ -142,96 +149,44 @@ public class MateriaBean implements Serializable{
 		return materiaAux;
 	}
 
+	public void setListCarreraSelect(List<SelectItem> listCarreraSelect) {
+		this.listCarreraSelect = listCarreraSelect;
+	}
+
+	public boolean isMensajeError() {
+		return mensajeError;
+	}
+
+	public void setMensajeError(boolean mensajeError) {
+		this.mensajeError = mensajeError;
+	}
+
+	// Funcion para asignar la materia auxiliar
+	// que es la que sirve para editar y guardar la materia temporal
 	public void setMateriaAux(Materia copiaMateriaAux) {
 		log.info("Set de materia para editar");
-		log.info("Copia materia Aux: "+ copiaMateriaAux);
+		log.info("Copia materia Aux: " + copiaMateriaAux);
 		if (copiaMateriaAux != null) {
-			this.materiaAux = copiaMateriaAux;
-			log.info("Copia materia Aux: "+ this.getMateriaAux());
+			this.setMateriaAux(copiaMateriaAux);
+			log.info("Copia materia Aux: " + this.getMateriaAux());
 			this.setMateriaAuxEditar(copiaMateriaAux);
-			log.info("Copia materia Aux: "+ this.getMateriaAuxEditar());
+			log.info("Copia materia Aux: " + this.getMateriaAuxEditar());
 			if (this.getMateriaAux().getEstadoMateria().compareTo('1') == 0) {
 				this.setEstadoMateriaEditar(true);
 			} else {
 				this.setEstadoMateriaEditar(false);
 			}
-			log.info("Copia materia Aux: "+ this.isEstadoMateriaEditar());
+			log.info("Copia materia Aux: " + this.isEstadoMateriaEditar());
 		}
 	}
 
-	public boolean validarCamposMateria (Materia validarMateria){
-
-		if (validarMateria.getNombreMateria().equals("")) {
-			this.materiaAux.setNombreMateria(materiaAuxEditar.getNombreMateria());
-			this.setMensajeRespuesta("El campo nombre no puede estar vac�o");
-			return false;
-		}
-		if (validarMateria.getCreditos().equals("")) {
-			this.materiaAux.setCreditos(materiaAuxEditar.getCreditos());
-			this.setMensajeRespuesta("El campo creditos no puede estar vac�o");
-			return false;
-		}
-		if (validarMateria.getCarrera().equals("")) {
-			this.materiaAux.setCarrera(materiaAuxEditar.getCarrera());
-			this.setMensajeRespuesta("El campo carrera no puede estar vac�o");
-			return false;
-		}
-		return true;
-	}
-	
-	public String editarMateria() {
-		try{
-			log.info("Editando materia...");
-			log.info(this.getMateriaAux());
-			if (!validarCamposMateria(this.getMateriaAux())) {
-				return null;
-			}
-			if (this.estadoMateriaEditar) {
-				this.getMateriaAux().setEstadoMateria('1');
-			} else {
-				this.getMateriaAux().setEstadoMateria('0');
-			}		
-			boolean guardado = ml.modificarMateria(this.getMateriaAux());
-			log.info("Guardo: "+guardado);
-			if (guardado) {
-				log.info("Guardó");
-				this.setMensajeRespuesta("");
-				this.getListadoMaterias();
-				return "paginaMateria";
-			} else {
-				return "error";
-			}
-		}catch(Exception e){
-			log.error("Ocurrió un error");
-			log.error(e);
-			e.printStackTrace();
-			return "error";
-		}
-	}
-	
-	public List<SelectItem> getListCarreraSelect() {
-		if(this.listCarreraSelect == null){
-			
-			this.listCarreraSelect = new ArrayList<SelectItem>();
-			
-			List<Carrera> listCarreras = cl.consultarCarreras();
-			
-			if(listCarreras != null && !listCarreras.isEmpty()){
-				SelectItem itemCarrera;
-				for (Carrera carreraList : listCarreras) {
-					itemCarrera = new SelectItem(carreraList, carreraList.getNombreCarrera());
-					listCarreraSelect.add(itemCarrera);
-				}
-			}
-		}
-		return listCarreraSelect;
-	}
-
+	// funcion para crear una materia
 	public String crearMateria() {
 		System.out.println("[MateriaBean] - crearMateria || Entra a crear");
 		if (this.getNombreMateria().equals("")) {
 			System.out.println("Vacio el nombre");
-			this.setMensajeRespuesta("El campo nombre no puede estar vacio");
+			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_VACIO);
+			this.setMensajeError(true);
 			return null;
 		}
 		Set<MateriaMatricula> materiaMatricula = new HashSet<MateriaMatricula>(
@@ -242,27 +197,111 @@ public class MateriaBean implements Serializable{
 					.getIdMateria().add(new BigDecimal(1));
 		}
 		Materia nuevaMateria = new Materia(idMateriaAux,
-				this.getCarreraMateria(), this.nombreMateria,
-				cantidadCreditos, '1', materiaMatricula);
-		System.out.println("[MateriaBean] - crearMateria || Nueva Materia => "
-				+ nuevaMateria);
-		boolean guardado = ml.crearNuevaMateria(nuevaMateria);
+				this.getCarreraMateria(), this.getNombreMateria(),
+				this.getCantidadCreditos(), '1', materiaMatricula);
+
 		this.getCarreraMateria().getMaterias().add(nuevaMateria);
-		if (guardado) {
-			this.setMensajeRespuesta("");
+		String respuesta = ml.crearNuevaMateria(nuevaMateria);
+		switch (respuesta) {
+		case "ok": // Respuesta guardado correctamente
+			this.setMensajeRespuesta(Constants.MATERIA_CREADA);
+			this.setMensajeError(false);
 			this.listadoMaterias.add(nuevaMateria);
-			return "paginaMateria";
-		} else {
-			return "error";
+			break;
+
+		case "duplicado":
+			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_REPETIDO + " "
+					+ nuevaMateria.getNombreMateria() + ". "
+					+ Constants.MSJ_INTENTO);
+			this.setMensajeError(true);
+			break;
+		default:
+			this.setMensajeRespuesta(Constants.MSJ_ERROR_GUARDADO + " "
+					+ respuesta + ". " + Constants.MSJ_INTENTO);
+			this.setMensajeError(true);
+			break;
 		}
+		return Constants.NAVEGACION_MATERIA;
 	}
 
-	public String eliminarMateria(){
-		boolean eliminada = ml.eliminarMateria(this.getMateriaAux());
-		if(eliminada){
-			return "paginaMateria";			
-		}else{
-			return "error";
+	// Funcion para editar una materia
+	public String editarMateria() {
+
+		log.info("Editando materia...");
+		log.info(this.getMateriaAux());
+		if (!validarCamposMateria(this.getMateriaAux())) {
+			return null;
 		}
+		if (this.isEstadoMateriaEditar()) {
+			this.getMateriaAux().setEstadoMateria('1');
+		} else {
+			this.getMateriaAux().setEstadoMateria('0');
+		}
+		String respuesta = ml.modificarMateria(this.getMateriaAux());
+		switch (respuesta) {
+		case "ok": // Respuesta guardado correctamente
+			this.setMensajeRespuesta(Constants.MATERIA_ACTUALIZADA);
+			break;
+		case "duplicado":
+			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_REPETIDO + ": "
+					+ this.getMateriaAux().getNombreMateria() + " "
+					+ Constants.MSJ_INTENTO);
+			this.setMensajeError(true);
+			this.getMateriaAux().setNombreMateria(
+					this.getMateriaAuxEditar().getNombreMateria());
+			break;
+		default:
+			this.setMensajeRespuesta(Constants.MSJ_ERROR_GUARDADO + " "
+					+ respuesta + ". " + Constants.MSJ_INTENTO);
+			this.setMensajeError(true);
+			break;
+		}
+		return Constants.NAVEGACION_MATERIA;
+
 	}
+
+	// no se para que funciona
+	public List<SelectItem> getListCarreraSelect() {
+		
+		if(this.listCarreraSelect == null){
+			
+			this.listCarreraSelect = new ArrayList<SelectItem>();
+
+			List<Carrera> listCarreras = cl.consultarCarreras();
+
+			if (listCarreras != null && !listCarreras.isEmpty()) {
+				SelectItem itemCarrera;
+				for (Carrera carreraList : listCarreras) {
+					itemCarrera = new SelectItem(carreraList.getIdCarrera(),
+							carreraList.getNombreCarrera());
+					listCarreraSelect.add(itemCarrera);
+				}
+			}
+		}
+
+		return listCarreraSelect;
+	}
+
+	// Funcion para verificar que los campos no queden vacios
+	public boolean validarCamposMateria(Materia validarMateria) {
+
+		if (validarMateria.getNombreMateria().equals("")) {
+			this.getMateriaAux().setNombreMateria(
+					materiaAuxEditar.getNombreMateria());
+			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_VACIO);
+			return false;
+		}
+		if (validarMateria.getCreditos().equals("")) {
+			this.getMateriaAux().setCreditos(materiaAuxEditar.getCreditos());
+			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_VACIO);
+			return false;
+		}
+		if (validarMateria.getCarrera().equals("")) {
+			this.getMateriaAux().setCarrera(materiaAuxEditar.getCarrera());
+			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_VACIO);
+			return false;
+		}
+		return true;
+	}
+
 }
