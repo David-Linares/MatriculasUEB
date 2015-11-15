@@ -33,12 +33,11 @@ public class MateriaBean implements Serializable {
 	// Atributos de materia para la vista
 	private String mensajeRespuesta = "";
 	private String nombreMateria = "";
-	private CarreraBean carreraList = new CarreraBean();
 	private CarreraLogical cl = new CarreraLogical();
 	private Carrera carreraMateria = null;
 	private List<SelectItem> listCarreraSelect;
 	private List<Materia> listadoMaterias = ml.consultarMaterias();
-	private List<Carrera> listadoCarreras = carreraList.getListadoCarreras();
+	private List<Carrera> listadoCarreras = cl.consultarCarreras();
 
 	// Atributos Auxiliares
 	private Materia materiaAux = null;
@@ -65,14 +64,6 @@ public class MateriaBean implements Serializable {
 
 	public void setMateriaAuxEditar(Materia materiaAuxEditar) {
 		this.materiaAuxEditar = materiaAuxEditar;
-	}
-
-	public CarreraBean getCarreraList() {
-		return carreraList;
-	}
-
-	public void setCarreraList(CarreraBean carreraList) {
-		this.carreraList = carreraList;
 	}
 
 	public List<Carrera> getListadoCarreras() {
@@ -258,7 +249,7 @@ public class MateriaBean implements Serializable {
 
 	// no se para que funciona
 	public List<SelectItem> getListCarreraSelect() {
-		if (this.getListCarreraSelect() == null) {
+		if (this.listCarreraSelect == null) {
 
 			this.setListCarreraSelect(new ArrayList<SelectItem>());
 			List<Carrera> listCarreras = cl.consultarCarreras();
@@ -266,7 +257,7 @@ public class MateriaBean implements Serializable {
 			if (listCarreras != null && !listCarreras.isEmpty()) {
 				SelectItem itemCarrera;
 				for (Carrera carreraList : listCarreras) {
-					itemCarrera = new SelectItem(carreraList,
+					itemCarrera = new SelectItem(carreraList.getIdCarrera(),
 							carreraList.getNombreCarrera());
 					listCarreraSelect.add(itemCarrera);
 				}
@@ -281,17 +272,17 @@ public class MateriaBean implements Serializable {
 		if (validarMateria.getNombreMateria().equals("")) {
 			this.getMateriaAux().setNombreMateria(
 					materiaAuxEditar.getNombreMateria());
-			this.setMensajeRespuesta("El campo nombre no puede estar vac�o");
+			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_VACIO);
 			return false;
 		}
 		if (validarMateria.getCreditos().equals("")) {
 			this.getMateriaAux().setCreditos(materiaAuxEditar.getCreditos());
-			this.setMensajeRespuesta("El campo creditos no puede estar vac�o");
+			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_VACIO);
 			return false;
 		}
 		if (validarMateria.getCarrera().equals("")) {
 			this.getMateriaAux().setCarrera(materiaAuxEditar.getCarrera());
-			this.setMensajeRespuesta("El campo carrera no puede estar vac�o");
+			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_VACIO);
 			return false;
 		}
 		return true;
