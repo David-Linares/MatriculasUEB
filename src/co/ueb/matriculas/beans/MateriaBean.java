@@ -34,7 +34,7 @@ public class MateriaBean implements Serializable {
 	private String mensajeRespuesta = "";
 	private String nombreMateria = "";
 	private CarreraLogical cl = new CarreraLogical();
-	private Carrera carreraMateria = null;
+	private Carrera carreraMateria = new Carrera();
 	private List<SelectItem> listCarreraSelect;
 	private List<Materia> listadoMaterias = ml.consultarMaterias();
 	private List<Carrera> listadoCarreras = cl.consultarCarreras();
@@ -68,6 +68,19 @@ public class MateriaBean implements Serializable {
 
 	public List<Carrera> getListadoCarreras() {
 		return listadoCarreras;
+	}
+
+	public MateriaBean() {
+		this.setListCarreraSelect(new ArrayList<SelectItem>());
+		List<Carrera> listCarreras = cl.consultarCarreras();
+
+		if (listCarreras != null && !listCarreras.isEmpty()) {
+			SelectItem itemCarrera;
+			for (Carrera carreraList : listCarreras) {
+				itemCarrera = new SelectItem(carreraList.getIdCarrera(),carreraList.getNombreCarrera());
+				listCarreraSelect.add(itemCarrera);
+			}
+		}
 	}
 
 	public void setListadoCarreras(List<Carrera> listadoCarreras) {
@@ -249,6 +262,7 @@ public class MateriaBean implements Serializable {
 
 	// no se para que funciona
 	public List<SelectItem> getListCarreraSelect() {
+
 		if (this.listCarreraSelect == null) {
 
 			this.setListCarreraSelect(new ArrayList<SelectItem>());
@@ -263,6 +277,7 @@ public class MateriaBean implements Serializable {
 				}
 			}
 		}
+
 		return listCarreraSelect;
 	}
 

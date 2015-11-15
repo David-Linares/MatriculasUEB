@@ -3,6 +3,9 @@ package co.ueb.matriculas.beans;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+
+
+
 import javax.faces.context.FacesContext;
 
 import org.apache.commons.codec.digest.DigestUtils;

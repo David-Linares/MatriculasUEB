@@ -3,8 +3,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core"
-	>
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head></h:head>
 <ui:insert>
@@ -37,14 +36,14 @@
 		</h:panelGroup>
 		<h:panelGroup rendered="#{!materiaBean.mensajeError}">
 			<h:panelGroup rendered="#{materiaBean.mensajeRespuesta != ''}">
-				<div class="col-md-12 alert alert-dismissable alert-success" >
-	                <button type="button" class="close" data-dismiss="alert">×</button>
-	                <h4>Correcto!</h4>
-	                <p>#{materiaBean.mensajeRespuesta}</p>
-	            </div>
-            </h:panelGroup>
+				<div class="col-md-12 alert alert-dismissable alert-success">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<h4>Correcto!</h4>
+					<p>#{materiaBean.mensajeRespuesta}</p>
+				</div>
+			</h:panelGroup>
 		</h:panelGroup>
-		
+
 		<div class="col-md-12">
 			<h:form>
 				<h:dataTable value="#{materiaBean.listadoMaterias}" var="materia"
@@ -111,22 +110,13 @@
 							<span class="material-input"></span>
 						</div>
 						<div class="form-control-wrapper">
-						 <p:selectOneMenu id="carreraM" value="#{materiaBean.carreraMateria}">
-            <f:selectItem itemLabel="Seleccione una carrera" itemValue="" />
-            <f:selectItems value="#{materiaBean.listCarreraSelect}"  />
-        </p:selectOneMenu>
-         <p:selectOneMenu id="console" value="#{materiaBean.carreraMateria}" style="width:125px">
-            <f:selectItem itemLabel="Select One" itemValue="" />
-            <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-            <f:selectItem itemLabel="PS4" itemValue="PS4" />
-            <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
-        </p:selectOneMenu>
-<!-- 						<p:selectOneMenu value="#{materiaBean.carreraMateria}" effect="fold" editable="true">     -->
-<!--                                 <f:selectItems value="#{materiaBean.listCarreraSelect}" var="carreraMat" itemLabel="#{carreraMat.nombreCarrera}" itemValue="#{carreraMat.nombreCarrera}"/>   -->
-<!--                             </p:selectOneMenu> -->
-						<br></br>	
+							<h:selectOneMenu value="#{materiaBean.carreraMateria.idCarrera}"
+								converter="carreraConverter">
+								<f:selectItem itemLabel="Seleccione una carrera" itemValue="" />
+								<f:selectItems value="#{materiaBean.listCarreraSelect}" />
+							</h:selectOneMenu>
 						</div>
-						 
+
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -158,16 +148,17 @@
 									value="#{materiaBean.materiaAux.nombreMateria}" />
 							</div>
 							<div class="togglebutton">
-								<label> Créditos de la materia <br /> <h:inputText class="form-control col-sm-10 empty"
+								<label> Créditos de la materia <br /> <h:inputText
+										class="form-control col-sm-10 empty"
 										value="#{materiaBean.materiaAux.creditos}" />
 								</label>
 							</div>
 							<h:outputLabel value="#{materiaBean.materiaAux.carrera}" />
-<!-- 							<div class="form-control-wrapper"> -->
-<!-- 								<h:selectOneMenu value="#{materiaBean.carreraMateria}" converter="carreraConverter"> -->
-<!-- 									<f:selectItems value="#{materiaBean.listCarreraSelect}"/> -->
-<!-- 								</h:selectOneMenu> -->
-<!-- 							</div> -->
+							<!-- 							<div class="form-control-wrapper"> -->
+							<!-- 								<h:selectOneMenu value="#{materiaBean.carreraMateria}" converter="carreraConverter"> -->
+							<!-- 									<f:selectItems value="#{materiaBean.listCarreraSelect}"/> -->
+							<!-- 								</h:selectOneMenu> -->
+							<!-- 							</div> -->
 							<div class="togglebutton">
 								<label> Estado materia <br /> <h:selectBooleanCheckbox
 										value="#{materiaBean.estadoMateriaEditar}" /><span
