@@ -213,12 +213,13 @@ public class MateriaBean implements Serializable{
 		if(this.listCarreraSelect == null){
 			
 			this.listCarreraSelect = new ArrayList<SelectItem>();
+			
 			List<Carrera> listCarreras = cl.consultarCarreras();
 			
 			if(listCarreras != null && !listCarreras.isEmpty()){
 				SelectItem itemCarrera;
 				for (Carrera carreraList : listCarreras) {
-					itemCarrera = new SelectItem(carreraList.getIdCarrera(), carreraList.getNombreCarrera());
+					itemCarrera = new SelectItem(carreraList, carreraList.getNombreCarrera());
 					listCarreraSelect.add(itemCarrera);
 				}
 			}

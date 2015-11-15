@@ -13,20 +13,28 @@ import co.ueb.matriculas.model.Carrera;
 public class CarreraConverter implements Converter{
 
 	@Override
-	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
-		if(arg2 != null && arg2.trim().length() > 0){
-			System.out.println("getAsObject");
-			System.out.println(arg2);
+	public Object getAsObject(FacesContext arg0, UIComponent arg1, String idCarrera) {
+		System.out.println("getAsObject");
+		System.out.println(idCarrera);
+		if(idCarrera != null && idCarrera.trim().length() > 0){
+			System.out.println("Entró al If GAO");
+			System.out.println(idCarrera);
 			CarreraLogical cl = new CarreraLogical();
-			return cl.getCarreraById(Integer.parseInt(arg2));
+			Carrera carreraConsultada = cl.getCarreraById(Integer.parseInt(idCarrera));
+			System.out.println(carreraConsultada);
+			return carreraConsultada;
 		}
 		return null;
 	}
 
 	@Override
-	public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
+	public String getAsString(FacesContext arg0, UIComponent arg1, Object carreraValue) {
 		System.out.println("getAsString");
-		System.out.println(arg2);
+		System.out.println(carreraValue);
+		Carrera carreraParam = (Carrera) carreraValue;
+		if (carreraParam != null) {			
+			return carreraParam.getIdCarrera().toString();
+		}
 		return null;
 	}
 

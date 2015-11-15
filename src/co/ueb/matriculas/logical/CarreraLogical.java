@@ -88,14 +88,13 @@ public class CarreraLogical implements Serializable {
 			String hql = "FROM Carrera WHERE idCarrera = '" + id_carrera + "'";
 			query = sesion.createQuery(hql);
 			carreraQuery = (Carrera) query.uniqueResult();
-			if (carreraQuery == null) {
-				return null;
-			}
 			sesion.getTransaction().commit();
 		} catch (Exception e) {
 			sesion.getTransaction().rollback();
 			e.printStackTrace();
 		}
+		log.info("## Devuelve carrera ##");
+		log.info(carreraQuery);
 		return carreraQuery;
 	}
 	
