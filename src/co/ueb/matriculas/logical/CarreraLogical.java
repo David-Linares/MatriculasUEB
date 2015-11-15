@@ -1,5 +1,6 @@
 package co.ueb.matriculas.logical;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -9,8 +10,12 @@ import org.jboss.logging.Logger;
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.util.HibernateSession;
 
-public class CarreraLogical {
+public class CarreraLogical implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1760467828935283002L;
 	private Logger log = Logger.getLogger(CarreraLogical.class);
 	private Session sesion;
 	private String sql;

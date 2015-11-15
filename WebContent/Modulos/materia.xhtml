@@ -55,11 +55,8 @@
 				</h:column>
 					<h:column>
 						<f:facet name="header">Acciones</f:facet>
-						<h:commandLink class="botonImg" data-toggle="modal"
-							data-target="#myModalEdit"
-							actionListener="#{materiaBean.setMateriaAux(materia)}">
-							<f:ajax execute="@form" render=":modalEditContent"
-								onevent="function(data) { if (data.status == 'success') $('#myModalEdit').modal() ; }" />
+						<h:commandLink class="botonImg" data-toggle="modal" data-target="#myModalEdit" actionListener="#{materiaBean.setMateriaAux(materia)}">
+							<f:ajax execute="@form" render=":modalEditContent" onevent="function(data) { if (data.status == 'success') $('#myModalEdit').modal() ; }" />
 							<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
 						</h:commandLink>
 					</h:column>
@@ -101,7 +98,7 @@
 						<div class="form-control-wrapper">
 							<h:selectOneMenu value="#{materiaBean.carreraMateria}" converter="carreraConverter">
 							<f:selectItem itemLabel="Seleccione una carrera" itemValue=""/>
-								<f:selectItems value="#{materiaBean.listadoCarreras}"  var="carreraMat" itemLabel="#{carreraMat.nombreCarrera}"/>
+								<f:selectItems value="#{materiaBean.listCarreraSelect}"/>
 							</h:selectOneMenu>
 						</div>
 						<br></br>
@@ -142,7 +139,7 @@
 							</div>
 							<h:outputLabel value="#{materiaBean.materiaAux.carrera}" />
 							<div class="form-control-wrapper">
-								<h:selectOneMenu value="#{materiaBean.carreraMateria}" converter="carreraConverter">
+								<h:selectOneMenu value="#{materiaBean.carreraMateria}">
 									<f:selectItems value="#{materiaBean.listCarreraSelect}"/>
 								</h:selectOneMenu>
 							</div>

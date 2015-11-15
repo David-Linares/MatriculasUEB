@@ -218,7 +218,7 @@ public class MateriaBean implements Serializable{
 			if(listCarreras != null && !listCarreras.isEmpty()){
 				SelectItem itemCarrera;
 				for (Carrera carreraList : listCarreras) {
-					itemCarrera = new SelectItem(carreraList, carreraList.getNombreCarrera());
+					itemCarrera = new SelectItem(carreraList.getIdCarrera(), carreraList.getNombreCarrera());
 					listCarreraSelect.add(itemCarrera);
 				}
 			}
