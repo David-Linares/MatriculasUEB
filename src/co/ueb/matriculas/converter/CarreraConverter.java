@@ -31,8 +31,8 @@ public class CarreraConverter implements Converter{
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object carreraValue) {
 		System.out.println("getAsString");
 		System.out.println(carreraValue);
-		Carrera carreraParam = (Carrera) carreraValue;
-		if (carreraParam != null) {			
+		if (carreraValue != null) {
+			Carrera carreraParam = (Carrera) carreraValue;
 			return carreraParam.getIdCarrera().toString();
 		}
 		return null;

@@ -16,6 +16,8 @@ public class Constants {
 	public static final String MSJ_INTENTO = "Por favor Inténtalo de nuevo";
 	public static final String MSJ_ERROR_GUARDADO = "Ups, parece que ocurrió un error al momento de guardar el registro";
 	public static final String MSJ_NOMBRE_REPETIDO = "Ya existe un registro con el nombre";
+	public static final String MSJ_USUARIO_REPETIDO = "Ya existe un registro con este nombre de usuario";
+	public static final String MSJ_IDENTIFICACION_REPETIDO = "Ya existe un registro con este número de identificación";
 	public static final String MSJ_NOMBRE_VACIO = "El campo nombre no puede estar vacío";
 	
 	
@@ -27,6 +29,7 @@ public class Constants {
 	
 	public static final String NAVEGACION_FACULTAD = "paginaFacultad";
 	public static final String NAVEGACION_MATERIA = "paginaMateria";
+	public static final String NAVEGACION_ESTUDIANTE = "paginaEstudiante";
 		
 	/*
 	 * Constantes de Facultad
@@ -51,7 +54,6 @@ public class Constants {
 	 * 
 	 * */
 	
-	public static final String MSJ_MATERIA_OK = "Materia Creada Correctamente!!";
 	public static final String MATERIA_CREADA = "Materia Creada Correctamente!!";
 	public static final String MATERIA_ACTUALIZADA = "Materia Actualizada Correctamente!!";
 	public static final String CONSULTA_MATERIAS = "select m from Materia as m order by m.idMateria";
@@ -64,4 +66,6 @@ public class Constants {
 	 * */
 	
 	public static final String MSJ_ESTUDIANTE_OK = "Estudiante Creado Correctamente!!";
+	public static final String ESTUDIANTE_CREADO = "Estudiante Creado Correctamente!!";
+	public static final String PROCEDIMIENTO_INSERTAR_ESTUDIANTE = "{call INSERTAR_PERSONA(?,?,?,?,?,?,?,?,?,?,?,?)}";
 }

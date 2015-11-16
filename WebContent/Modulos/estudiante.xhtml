@@ -4,7 +4,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 
-<h:head></h:head>
+<h:head>
+</h:head>
 <ui:insert>
 	<ui:include src="/Modulos/header.xhtml"></ui:include>
 </ui:insert>
@@ -12,7 +13,7 @@
 	<div class="container">
 		<div class="col-md-12" style="margin-bottom: 30px">
 			<div class="col-md-3" style="text-align: center">
-				<button data-toggle="modal" data-target="#myModal" class="botonImg">
+				<button data-toggle="modal" data-target="#modalAgregarEstudiante" class="botonImg">
 					<h:graphicImage url="/resources/images/add.png"></h:graphicImage>
 				</button>
 			</div>
@@ -68,8 +69,7 @@
 				</h:column>
 				<h:column>
 						<f:facet name="header">Acciones</f:facet>
-						<h:commandLink class="botonImg" data-toggle="modal"
-							data-target="#myModalEdit"
+						<h:commandLink class="botonImg" data-toggle="modal" data-target="#myModalEdit"
 							actionListener="#{estudianteBean.setEstudianteAux(estudiante)}">
 							<f:ajax execute="@form" render=":modalEditContent"
 								onevent="function(data) { if (data.status == 'success') $('#myModalEdit').modal() ; }" />
@@ -79,97 +79,7 @@
 				</h:dataTable>
 			</h:form>
 		</div>
-	</div>
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">Agregar Estudiante</h4>
-				</div>
-				<h:form>
-					<div class="modal-body">
-						<br></br>
-						<div class="form-control-wrapper">
-							<h:inputText id="nombreEstudiante"
-								class="form-control col-sm-10 empty"
-								value="#{estudianteBean.nuevoEstudiante.nombrePersona}"></h:inputText>
-							<div class="floating-label">Nombre del Estudiante</div>
-							<span class="material-input"></span>
-						</div>
-						<div class="form-control-wrapper">
-							<h:inputText id="apellidosEstudiante"
-								class="form-control col-sm-10 empty" required="true"
-								value="#{estudianteBean.nuevoEstudiante.apellidosPersona}"></h:inputText>
-							<div class="floating-label">Apellidos del Estudiante</div>
-							<span class="material-input"></span>
-						</div>
-						
-<!-- 							 Aqui Fecha de Nacimiento -->
-
-						<div class="form-control-wrapper">
-							<h:inputText id="lugarNacimientoEstudiante"
-								class="form-control col-sm-10 empty" required="true"
-								value="#{estudianteBean.nuevoEstudiante.lugarNacimiento}"></h:inputText>
-							<div class="floating-label">Lugar de Nacimiento</div>
-							<span class="material-input"></span>
-						</div>
-						
-						<div class="form-control-wrapper">
-							<h:inputText id="direccionEstudiante"
-								class="form-control col-sm-10 empty" required="true"
-								value="#{estudianteBean.nuevoEstudiante.direccion}"></h:inputText>
-							<div class="floating-label">Dirección</div>
-							<span class="material-input"></span>
-						</div>
-												
-						<div class="form-control-wrapper">
-							<h:inputText id="correoElectronicoEstudiante"
-								class="form-control col-sm-10 empty" required="true"
-								value="#{estudianteBean.nuevoEstudiante.correoElectronico}"></h:inputText>
-							<div class="floating-label">Correo Electronico</div>
-							<span class="material-input"></span>
-						</div>
-						<div class="form-control-wrapper">
-							<h:inputText id="usuarioEstudiante"
-								class="form-control col-sm-10 empty" required="true"
-								value="#{estudianteBean.nuevoEstudiante.usuario}"></h:inputText>
-							<div class="floating-label">Usuario</div>
-							<span class="material-input"></span>
-						</div>
-												
-						<div class="form-control-wrapper">
-							<h:inputText id="contrasenaEstudiante"
-								class="form-control col-sm-10 empty" required="true"
-								value="#{estudianteBean.nuevoEstudiante.contrasena}"></h:inputText>
-							<div class="floating-label">Contraseña</div>
-							<span class="material-input"></span>
-						</div>
-							
-						<div class="form-control-wrapper">
-							<h:selectOneMenu value="#{estudianteBean.carreraEstudiante}" converter="carreraConverter">
-							<f:selectItem itemLabel="Seleccione una carrera" itemValue=""/>
-								<f:selectItems value="#{estudianteBean.listadoCarreras}"  var="carreraEst" itemLabel="#{carreraBean.nombreCarrera}"/>
-							</h:selectOneMenu>
-						</div>
-						<br></br>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-						<h:commandButton class="btn btn-primary"
-							action="#{estudianteBean.crearEstudiante()}" value="Guardar Estudiante" />
-					</div>
-				</h:form>
-			</div>
-		</div>
-	</div>
-	<h:panelGroup>
-		<div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel">
+		<div class="modal fade" id="modalAgregarEstudiante" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -177,48 +87,64 @@
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h4 class="modal-title" id="myModalLabel">Modificar Estudiante</h4>
+						<h4 class="modal-title" id="myModalLabel">Agregar Estudiante</h4>
 					</div>
-					<h:form id="modalEditContent">
+					<h:form id="formEstudiante">
 						<div class="modal-body">
 							<br></br>
 							<div class="form-group">
-								<label class="control-label">Nombre del estudiante</label>
-								<h:inputText class="form-control col-sm-10 empty"
-									value="#{estudianteBean.estudianteAux.nombrePersona}" />
+								<label class="control-label">Número de Identificación</label>             
+								<h:inputText id="identificacionEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.nuevoEstudiante.idPersona}"></h:inputText>
 							</div>
-							<div class="togglebutton">
-								<label> Apellidos del estudiante <br /> <h:inputText class="form-control col-sm-10 empty"
-										value="#{estudianteBean.estudianteAux.apellidosPersona}" />
-								</label>
+							<div class="form-group">
+								<label class="control-label">Nombre del Estudiante</label>             
+								<h:inputText id="nombreEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.nuevoEstudiante.nombrePersona}"></h:inputText>
 							</div>
-							<div class="form-control-wrapper">
-							<h:selectOneMenu value="#{estudianteBean.estudianteAux.carreraEstudiantes}" converter="carreraConverter">
-								<f:selectItems value="#{materiaBean.listadoCarreras}"  var="carreraEst" itemLabel="#{carreraEst.nombreCarrera}"/>
-							</h:selectOneMenu>
-						</div>
-							
-							<div class="togglebutton">
-								<label> Estado estudiante <br /> <h:selectBooleanCheckbox
-										value="#{estudianteBean.estadoEstudianteEditar}" /><span
-									class="toggle"></span>
-								</label>
+							<div class="form-group">
+								<label class="control-label">Apellidos del Estudiante</label>             
+								<h:inputText id="apellidosEstudiante" class="form-control col-sm-10 empty" required="true" value="#{estudianteBean.nuevoEstudiante.apellidosPersona}"></h:inputText>
 							</div>
-							
-							
-							
+							<div class="form-group">
+								<label class="control-label">Lugar de nacimiento</label>
+								<h:inputText id="lugarNacimientoEstudiante" class="form-control col-sm-10 empty" required="true" value="#{estudianteBean.nuevoEstudiante.lugarNacimiento}"></h:inputText>
+							</div>
+							<div class="form-group">
+								<label class="control-label">Fecha de nacimiento</label>
+								<h:inputText id="fechaNacimientoEstudiante" class="form-control col-sm-10 empty" required="true" value="#{estudianteBean.fechaNacimiento}"></h:inputText>
+							</div>
+							<div class="form-group">
+								<label class="control-label">Dirección</label>
+								<h:inputText id="direccionEstudiante" value="#{estudianteBean.nuevoEstudiante.direccion}" class="form-control col-sm-10 empty" required="true"></h:inputText>
+							</div>
+							<div class="form-group">
+								<label class="control-label">Correo Electrónico</label>
+								<h:inputText id="correoElectronicoEstudiante" class="form-control col-sm-10 empty" required="true" value="#{estudianteBean.nuevoEstudiante.correoElectronico}"></h:inputText>
+							</div>
+							<div class="form-group">
+								<label class="control-label">Usuario</label>
+								<h:inputText id="usuarioEstudiante" class="form-control col-sm-10 empty" required="true" value="#{estudianteBean.nuevoEstudiante.usuario}"></h:inputText>
+							</div>
+							<div class="form-group">
+								<label class="control-label">Contraseña</label>
+								<h:inputSecret id="contrasenaEstudiante" class="form-control col-sm-10 empty" required="true" value="#{estudianteBean.nuevoEstudiante.contrasena}"></h:inputSecret>
+							</div>
+														
+<!-- 							<div class="form-control-wrapper"> -->
+<!-- 								<h:selectOneMenu value="#{estudianteBean.carreraEstudiante}" converter="carreraConverter"> -->
+<!-- 								<f:selectItem itemLabel="Seleccione una carrera" itemValue=""/> -->
+<!-- 									<f:selectItems value="#{estudianteBean.listadoCarreras}"  var="carreraEst" itemLabel="#{carreraEst.nombreCarrera}" itemValue="#{carreraEst.idCarrera}"/> -->
+<!-- 								</h:selectOneMenu> -->
+<!-- 							</div> -->
 							<br></br>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Cancelar</button>
-							<h:commandButton class="btn btn-primary"
-								action="#{estudianteBean.editarEstudiante()}" value="Guardar Estudiante" />
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+							<h:commandButton class="btn btn-primary" action="#{estudianteBean.crearEstudiante()}" value="Guardar Estudiante" />
 						</div>
 					</h:form>
 				</div>
 			</div>
 		</div>
-	</h:panelGroup>
+	</div>
 </body>
 </html>
