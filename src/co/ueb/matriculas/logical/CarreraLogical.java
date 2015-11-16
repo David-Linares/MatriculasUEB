@@ -76,11 +76,11 @@ public class CarreraLogical {
 		}
 	}
 	
-	public Carrera getCarreraById(int id_carrera){		
+	public Carrera getCarreraByName(String nombre_carrera){		
 		sesion  = HibernateSession.getSf().getCurrentSession();
 		try {
 			sesion.beginTransaction();
-			String hql = "FROM Carrera WHERE idCarrera = '" + id_carrera + "'";
+			String hql = "FROM Carrera WHERE nombreCarrera = '" + nombre_carrera + "'";
 			query = sesion.createQuery(hql);
 			carreraQuery = (Carrera) query.uniqueResult();
 			if (carreraQuery == null) {
