@@ -259,7 +259,10 @@ public class CarreraBean implements Serializable {
 				this.totalCreditos, '1', materias, personas);
 		// this.getFacultadCarrera().getCarreras().add(nuevaCarrera);
 		String respuesta = cl.crearNuevaCarrera(nuevaCarrera);
-		System.out.println(respuesta);
+		System.out.println("[CarreraLogical] crearCarrera - el nombre de la nueva carrera es: " + this.nombreCarrera);
+		System.out.println("[CarreraLogical] crearCarrera - la cantidad de creditos de la nueva carrera es: " + this.totalCreditos);
+		System.out.println("[CarreraLogical] crearCarrera - la nueva carrera es: " + nuevaCarrera);
+		System.out.println("[CarreraBean] crearCarrera - respuesta "+ respuesta);
 		switch (respuesta) {
 		case "ok": // Respuesta guardado correctamente
 			this.setMensajeRespuesta(Constants.MATERIA_CREADA);

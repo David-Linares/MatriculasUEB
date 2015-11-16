@@ -32,6 +32,7 @@ public class CarreraLogical implements Serializable {
 	private Carrera carreraQuery;
 
 	public String crearNuevaCarrera(Carrera nuevaCarrera){
+		System.out.println("[CarreraLogical] crearNuevaCarrera");
 		sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
@@ -44,20 +45,22 @@ public class CarreraLogical implements Serializable {
 					callableStatement.setBigDecimal(2, nuevaCarrera.getTotalCreditos());
 					callableStatement.setBigDecimal(3, new BigDecimal(1));
 					callableStatement.registerOutParameter(4, java.sql.Types.VARCHAR);
-					callableStatement.registerOutParameter(5, java.sql.Types.VARCHAR); //creo que aca esta el error
 					callableStatement.executeUpdate();
 					msjRespuesta= callableStatement.getString(4);
 				}
 				
 			});
 			sesion.getTransaction().commit();
+			
 			return msjRespuesta;
 		}catch(Exception e){
+			System.out.println("[CarreraLogical] crearNuevaCarrera - entro al error ");
 			sesion.getTransaction().rollback();
 			e.printStackTrace();
 			return "error";
 		}
 	}
+	
 	
 	@SuppressWarnings("unchecked")
 	public List<Carrera> consultarCarreras(){

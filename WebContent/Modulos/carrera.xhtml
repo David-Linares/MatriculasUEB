@@ -26,12 +26,21 @@
 			<!-- 				</h:form> -->
 			<!-- 			</div> -->
 		</div>
-		<h:panelGroup rendered="#{!carreraBean.mensajeRespuesta.equals('')}">
+		<h:panelGroup rendered="#{CarreraBean.mensajeError}">
 			<div class="col-md-12 alert alert-dismissable alert-warning">
 				<button type="button" class="close" data-dismiss="alert">×</button>
 				<h4>Error!</h4>
 				<p>#{carreraBean.mensajeRespuesta}</p>
 			</div>
+		</h:panelGroup>
+		<h:panelGroup rendered="#{!materiaBean.mensajeError}">
+			<h:panelGroup rendered="#{materiaBean.mensajeRespuesta != ''}">
+				<div class="col-md-12 alert alert-dismissable alert-success">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<h4>Correcto!</h4>
+					<p>#{materiaBean.mensajeRespuesta}</p>
+				</div>
+			</h:panelGroup>
 		</h:panelGroup>
 		<div class="col-md-12">
 			<h:form>
@@ -132,19 +141,18 @@
 									required="true" value="#{carreraBean.carreraAux.totalCreditos}"></h:inputText>
 							</div>
 							<div class="togglebutton">
-								<label> Estado Carrera <br />
-								<h:selectBooleanCheckbox
+								<label> Estado Carrera <br /> <h:selectBooleanCheckbox
 										value="#{carreraBean.estadoCarreraEditar}" /><span
 									class="toggle"></span>
 								</label>
 							</div>
 							<br></br>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Cancelar</button>
-							<h:commandButton class="btn btn-primary"
-								action="#{carreraBean.editarCarrera()}" value="Guardar Carrera" />
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Cancelar</button>
+								<h:commandButton class="btn btn-primary"
+									action="#{carreraBean.editarCarrera()}" value="Guardar Carrera" />
+							</div>
 						</div>
 					</h:form>
 				</div>
