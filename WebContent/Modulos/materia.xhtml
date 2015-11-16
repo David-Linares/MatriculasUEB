@@ -69,22 +69,11 @@
 					</h:commandLink>
 					
 				</h:column>
-<<<<<<< HEAD
 			</h:dataTable>
-=======
-					<h:column>
-						<f:facet name="header">Acciones</f:facet>
-						<h:commandLink class="botonImg" data-toggle="modal" data-target="#myModalEdit" actionListener="#{materiaBean.setMateriaAux(materia)}">
-							<f:ajax execute="@form" render=":modalEditContent" onevent="function(data) { if (data.status == 'success') $('#myModalEdit').modal() ; }" />
-							<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
-						</h:commandLink>
-					</h:column>
-				</h:dataTable>
->>>>>>> origin/master
+
 			</h:form>
 		</div>
 	</div>
-<<<<<<< HEAD
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
@@ -99,17 +88,6 @@
 					<h:inputText id="nuevaMateria" class="form-control col-sm-10 empty" required="true" value="#{materiaBean.nombreMateria}" maxlength="50" ></h:inputText>
 					<div class="floating-label">Nombre de la Carrera</div>
 					<span class="material-input"></span>	                    
-=======
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">Agregar Materia</h4>
->>>>>>> origin/master
 				</div>
 				<div class="form-control-wrapper">
 					<h:inputText id="creditosMateria" class="form-control col-sm-10 empty" required="true" value="#{materiaBean.cantidadCreditos}" maxlength="3" type="number"></h:inputText>
@@ -141,7 +119,6 @@
 						<label class="control-label">Nombre de la materia</label>             
 						<h:inputText class="form-control col-sm-10 empty" required="true" value="#{materiaBean.materiaAux.nombreMateria}"></h:inputText>
 					</div>
-<<<<<<< HEAD
 					<div class="form-group">
 						<label class="control-label">Creditos</label>             
 						<h:inputText class="form-control col-sm-10 empty" required="true" value="#{materiaBean.materiaAux.creditos}"></h:inputText>
@@ -161,46 +138,6 @@
 	        </h:form>
 		    </div>
 		  </div>
-=======
-					<h:form id="modalEditContent">
-						<div class="modal-body">
-							<br></br>
-							<div class="form-group">
-								<label class="control-label">Nombre de la materia</label>
-								<h:inputText class="form-control col-sm-10 empty"
-									value="#{materiaBean.materiaAux.nombreMateria}" />
-							</div>
-							<div class="togglebutton">
-								<label> Créditos de la materia <br /> <h:inputText
-										class="form-control col-sm-10 empty"
-										value="#{materiaBean.materiaAux.creditos}" />
-								</label>
-							</div>
-							<h:outputLabel value="#{materiaBean.materiaAux.carrera}" />
-							<!-- 							<div class="form-control-wrapper"> -->
-							<!-- 								<h:selectOneMenu value="#{materiaBean.carreraMateria}" converter="carreraConverter"> -->
-							<!-- 									<f:selectItems value="#{materiaBean.listCarreraSelect}"/> -->
-							<!-- 								</h:selectOneMenu> -->
-							<!-- 							</div> -->
-
-							<div class="togglebutton">
-								<label> Estado materia <br /> <h:selectBooleanCheckbox
-										value="#{materiaBean.estadoMateriaEditar}" /><span
-									class="toggle"></span>
-								</label>
-							</div>
-							<br></br>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Cancelar</button>
-							<h:commandButton class="btn btn-primary"
-								action="#{materiaBean.editarMateria()}" value="Guardar Materia" />
-						</div>
-					</h:form>
-				</div>
-			</div>
->>>>>>> origin/master
 		</div>
 	</h:panelGroup>
 	
