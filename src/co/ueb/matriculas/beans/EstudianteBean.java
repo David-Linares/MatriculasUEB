@@ -161,7 +161,7 @@ public class EstudianteBean implements Serializable {
 	public void setEstudianteAux(Persona copiaEstudianteAux) {
 		log.info(copiaEstudianteAux);
 		if (copiaEstudianteAux != null) {
-
+			this.fechaNacimiento = copiaEstudianteAux.getFechaNacimiento().toString();
 			this.estudianteAux = copiaEstudianteAux;
 			this.setEstudianteAuxEditar(copiaEstudianteAux);
 			if (this.getEstudianteAux().getEstadoPersona().compareTo('1') == 0) {
@@ -180,87 +180,25 @@ public class EstudianteBean implements Serializable {
 		this.listadoEstudiantes = listadoEstudiantes;
 	}
 
-//	public boolean validarCamposEstudiante(Persona validarEstudiante) {
-//
-//		if (validarEstudiante.getIdPersona().equals("")) {
-//			this.getEstudianteAux().setIdPersona(
-//					this.getEstudianteAuxEditar().getIdPersona());
-//			this.setMensajeRespuesta("El campo identificaci�n no puede estar vac�o");
-//		}
-//
-//		if (validarEstudiante.getNombrePersona().equals("")) {
-//			this.getEstudianteAux().setNombrePersona(
-//					this.getEstudianteAux().getNombrePersona());
-//			this.setMensajeRespuesta("El campo nombres no puede estar vac�o");
-//			return false;
-//		}
-//		if (validarEstudiante.getApellidosPersona().equals("")) {
-//			this.getEstudianteAux().setApellidosPersona(
-//					this.getEstudianteAuxEditar().getApellidosPersona());
-//			this.setMensajeRespuesta("El campo apellidos no puede estar vac�o");
-//			return false;
-//		}
-//		if (validarEstudiante.getFechaNacimiento().equals("")) {
-//			this.getEstudianteAux().setFechaNacimiento(
-//					this.getEstudianteAuxEditar().getFechaNacimiento());
-//			this.setMensajeRespuesta("El campo fecha de nacimiento no puede estar vac�o");
-//			return false;
-//		}
-//		if (validarEstudiante.getLugarNacimiento().equals("")) {
-//			this.getEstudianteAux().setLugarNacimiento(
-//					this.getEstudianteAuxEditar().getLugarNacimiento());
-//			this.setMensajeRespuesta("El campo lugar de nacimiento no puede estar vac�o");
-//			return false;
-//		}
-//		if (validarEstudiante.getDireccion().equals("")) {
-//			this.getEstudianteAux().setDireccion(
-//					this.getEstudianteAuxEditar().getDireccion());
-//			this.setMensajeRespuesta("El campo direcci�n no puede estar vac�o");
-//			return false;
-//		}
-//		if (validarEstudiante.getCorreoElectronico().equals("")) {
-//			this.getEstudianteAux().setCorreoElectronico(
-//					this.getEstudianteAuxEditar().getCorreoElectronico());
-//			this.setMensajeRespuesta("El campo correo electronico no puede estar vac�o");
-//			return false;
-//		}
-//		if (validarEstudiante.getUsuario().equals("")) {
-//			this.getEstudianteAux().setUsuario(
-//					this.getEstudianteAuxEditar().getUsuario());
-//			this.setMensajeRespuesta("El campo usuario no puede estar vac�o");
-//			return false;
-//		}
-//		if (validarEstudiante.getContrasena().equals("")) {
-//			this.getEstudianteAux().setContrasena(
-//					this.getEstudianteAuxEditar().getContrasena());
-//			this.setMensajeRespuesta("El campo contrase�a no puede estar vac�o");
-//			return false;
-//		}
-//
-//		return true;
-//	}
+	public String editarEstudiante() {
 
-//	public String editarEstudiante() {
-//
-//		if (!validarCamposEstudiante(estudianteAux)) {
-//			return null;
-//		}
-//		if (this.estadoEstudianteEditar) {
-//			this.getEstudianteAux().setEstadoPersona('1');
-//		} else {
-//			this.getEstudianteAux().setEstadoPersona('0');
-//		}
-//		boolean guardado = el.modificarEstudiante(this.getEstudianteAux());
-//		System.out.println("no ha entrado a if de guardado");
-//		if (guardado) {
-//			System.out.println("entro a if de guardado");
-//			this.setMensajeRespuesta("");
-//			this.getListadoEstudiantes();
-//			return "paginaEstudiante";
-//		} else {
-//			return "error";
-//		}
-//	}
+		if (this.estadoEstudianteEditar) {
+			this.getEstudianteAux().setEstadoPersona('1');
+		} else {
+			this.getEstudianteAux().setEstadoPersona('0');
+		}
+		this.getEstudianteAux().setContrasena(encriptarContrasena(this.estudianteAux.getContrasena()));
+		boolean guardado = el.modificarEstudiante(this.getEstudianteAux());
+		System.out.println("no ha entrado a if de guardado");
+		if (guardado) {
+			System.out.println("entro a if de guardado");
+			this.setMensajeRespuesta("");
+			this.getListadoEstudiantes();
+			return "paginaEstudiante";
+		} else {
+			return "error";
+		}
+	}
 
 	public String crearEstudiante() {
 
