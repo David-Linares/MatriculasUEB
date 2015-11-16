@@ -119,11 +119,16 @@
 						<label class="control-label">Nombre de la materia</label>             
 						<h:inputText class="form-control col-sm-10 empty" required="true" value="#{materiaBean.materiaAux.nombreMateria}"></h:inputText>
 					</div>
-					<div class="togglebutton">
-	 				<label> Créditos de la materia <br />
-	 					<h:inputText class="form-control col-sm-10 empty" value="#{materiaBean.materiaAux.creditos}" />
-					</label>
-				</div>
+					<div class="form-group">
+						<label class="control-label">Creditos</label>             
+						<h:inputText class="form-control col-sm-10 empty" required="true" value="#{materiaBean.materiaAux.creditos}"></h:inputText>
+					</div>
+
+	<!-- 	Daniel			<div class="togglebutton"> -->
+	<!--  				<label> Créditos de la materia <br /> -->
+	<!--  					<h:inputText class="form-control col-sm-10 empty" value="#{materiaBean.materiaAux.creditos}" /> -->
+	<!-- 				</label> -->
+	<!-- 		</div> Daniel -->
 				<h:outputLabel value="#{materiaBean.materiaAux.carrera}" />
 						<label>Estado materia
                             <br/><h:selectBooleanCheckbox value="#{materiaBean.estadoMateriaEditar}" /><span class="toggle"></span>
@@ -137,14 +142,11 @@
 	        </h:form>
 		    </div>
 		  </div>
-
 						<!-- 							<div class="form-control-wrapper"> -->
 						<!-- 								<h:selectOneMenu value="#{materiaBean.carreraMateria}" converter="carreraConverter"> -->
 						<!-- 									<f:selectItems value="#{materiaBean.listCarreraSelect}"/> -->
 						<!-- 								</h:selectOneMenu> -->
 						<!-- 							</div> -->
-
-
 		</div>
 	</h:panelGroup>
 	
