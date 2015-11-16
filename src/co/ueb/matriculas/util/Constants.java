@@ -46,6 +46,12 @@ public class Constants {
 	 * */
 	
 	public static final String MSJ_CARRERA_OK = "Carrera Creada Correctamente!!";
+	public static final String CARRERA_CREADA = "Carrera Creada Correctamente!!";
+	public static final String CARRERA_ACTUALIZADA = "Carrera Actualizada Correctamente!!";
+	public static final String CONSULTA_CARRERAS = "select m from Carrera as m order by m.idCarrera";
+	public static final String PROCEDIMIENTO_INSERTAR_CARRERA = "{call INSERTAR_CARRERA(?,?,?,?)}";
+	public static final String PROCEDIMIENTO_MODIFICAR_CARRERA = "{call MODIFICAR_CARRERA(?,?,?,?,?,?)}";
+
 	
 	/*
 	 * Constantes de Materia
