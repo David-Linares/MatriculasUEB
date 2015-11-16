@@ -30,6 +30,7 @@ public class Constants {
 	public static final String NAVEGACION_FACULTAD = "paginaFacultad";
 	public static final String NAVEGACION_MATERIA = "paginaMateria";
 	public static final String NAVEGACION_ESTUDIANTE = "paginaEstudiante";
+	public static final String NAVEGACION_CARRERA = "paginaCarrera";
 		
 	/*
 	 * Constantes de Facultad

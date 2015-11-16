@@ -3,7 +3,7 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
  <converter>
   <converter-id>facultadConverter</converter-id>
-  <converter-class>co.uel.matriculas.converter.FacultadConverter</converter-class>
+  <converter-class>co.ueb.matriculas.converter.FacultadConverter</converter-class>
  </converter>
  <converter>
   <converter-id>carreraConverter</converter-id>

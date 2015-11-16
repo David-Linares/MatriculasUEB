@@ -100,16 +100,29 @@ public class Carrera implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Carrera [idCarrera=" + idCarrera + ", nombreCarrera="
-				+ nombreCarrera + "]";
+		return "Carrera [nombreCarrera=" + nombreCarrera + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime
+				* result
+				+ ((carreraEstudiantes == null) ? 0 : carreraEstudiantes
+						.hashCode());
+		result = prime * result
+				+ ((estadoCarrera == null) ? 0 : estadoCarrera.hashCode());
+		result = prime * result
+				+ ((facultad == null) ? 0 : facultad.hashCode());
 		result = prime * result
 				+ ((idCarrera == null) ? 0 : idCarrera.hashCode());
+		result = prime * result
+				+ ((materias == null) ? 0 : materias.hashCode());
+		result = prime * result
+				+ ((nombreCarrera == null) ? 0 : nombreCarrera.hashCode());
+		result = prime * result
+				+ ((totalCreditos == null) ? 0 : totalCreditos.hashCode());
 		return result;
 	}
 
@@ -122,12 +135,45 @@ public class Carrera implements java.io.Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Carrera other = (Carrera) obj;
+		if (carreraEstudiantes == null) {
+			if (other.carreraEstudiantes != null)
+				return false;
+		} else if (!carreraEstudiantes.equals(other.carreraEstudiantes))
+			return false;
+		if (estadoCarrera == null) {
+			if (other.estadoCarrera != null)
+				return false;
+		} else if (!estadoCarrera.equals(other.estadoCarrera))
+			return false;
+		if (facultad == null) {
+			if (other.facultad != null)
+				return false;
+		} else if (!facultad.equals(other.facultad))
+			return false;
 		if (idCarrera == null) {
 			if (other.idCarrera != null)
 				return false;
 		} else if (!idCarrera.equals(other.idCarrera))
 			return false;
+		if (materias == null) {
+			if (other.materias != null)
+				return false;
+		} else if (!materias.equals(other.materias))
+			return false;
+		if (nombreCarrera == null) {
+			if (other.nombreCarrera != null)
+				return false;
+		} else if (!nombreCarrera.equals(other.nombreCarrera))
+			return false;
+		if (totalCreditos == null) {
+			if (other.totalCreditos != null)
+				return false;
+		} else if (!totalCreditos.equals(other.totalCreditos))
+			return false;
 		return true;
 	}
 	
+	
+
+		
 }
