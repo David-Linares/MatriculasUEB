@@ -96,8 +96,6 @@ public class MateriaBean implements Serializable {
 		this.materiaValidacion = copiaMateria;
 	}
 
-
-
 	public boolean isEstadoMateriaEditar() {
 		return estadoMateriaEditar;
 	}
@@ -204,7 +202,7 @@ public class MateriaBean implements Serializable {
 		//	this.getFacultadCarrera().getCarreras().add(nuevaCarrera);
 	
 		String respuesta = ml.crearNuevaMateria(nuevaMateria);
-		switch (respuesta) {
+		switch (respuesta) {	
 		case "ok": //Respuesta guardado correctamente
 			this.setMensajeRespuesta(Constants.MATERIA_CREADA);
 			this.setMensajeError(false);
@@ -223,26 +221,4 @@ public class MateriaBean implements Serializable {
 		return Constants.NAVEGACION_MATERIA;
 
 	}
-/*
-	// no se para que funciona
-	public List<SelectItem> getListCarreraSelect() {
-		
-		if(this.listCarreraSelect == null){
-			
-			this.listCarreraSelect = new ArrayList<SelectItem>();
-
-			List<Carrera> listCarreras = cl.consultarCarreras();
-
-			if (listCarreras != null && !listCarreras.isEmpty()) {
-				SelectItem itemCarrera;
-				for (Carrera carreraList : listCarreras) {
-					itemCarrera = new SelectItem(carreraList.getIdCarrera(),
-							carreraList.getNombreCarrera());
-					listCarreraSelect.add(itemCarrera);
-				}
-			}
-		}
-
-		return listCarreraSelect;
-	}
-*/}
+}

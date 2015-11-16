@@ -75,7 +75,7 @@ public class Facultad implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return nombreFacultad;
+		return "Facultad [nombreFacultad=" + nombreFacultad + "]";
 	}
 
 	@Override

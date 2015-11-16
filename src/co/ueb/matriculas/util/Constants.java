@@ -13,8 +13,8 @@ public class Constants {
 	 * */
 	
 	public static final String HIBERNATE_FILE_NAME = "hibernate.cfg.xml";
-	public static final String MSJ_INTENTO = "Por favor Inténtalo de nuevo";
-	public static final String MSJ_ERROR_GUARDADO = "Ups, parece que ocurrió un error al momento de guardar el registro";
+	public static final String MSJ_INTENTO = "Por favor Int�ntalo de nuevo";
+	public static final String MSJ_ERROR_GUARDADO = "Ups, parece que ocurri� un error al momento de guardar el registro";
 	public static final String MSJ_NOMBRE_REPETIDO = "Ya existe un registro con el nombre";
 	public static final String MSJ_USUARIO_REPETIDO = "Ya existe un registro con este nombre de usuario";
 	public static final String MSJ_IDENTIFICACION_REPETIDO = "Ya existe un registro con este número de identificación";
@@ -49,6 +49,12 @@ public class Constants {
 	 * */
 	
 	public static final String MSJ_CARRERA_OK = "Carrera Creada Correctamente!!";
+	public static final String CARRERA_CREADA = "Carrera Creada Correctamente!!";
+	public static final String CARRERA_ACTUALIZADA = "Carrera Actualizada Correctamente!!";
+	public static final String CONSULTA_CARRERAS = "select m from Carrera as m order by m.idCarrera";
+	public static final String PROCEDIMIENTO_INSERTAR_CARRERA = "{call INSERTAR_CARRERA(?,?,?,?)}";
+	public static final String PROCEDIMIENTO_MODIFICAR_CARRERA = "{call MODIFICAR_CARRERA(?,?,?,?,?,?)}";
+
 	
 	/*
 	 * Constantes de Materia
