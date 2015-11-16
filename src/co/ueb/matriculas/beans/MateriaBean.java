@@ -221,6 +221,28 @@ public class MateriaBean implements Serializable {
 			break;
 		}
 		return Constants.NAVEGACION_MATERIA;
-	}
 
-}
+	}
+/*
+	// no se para que funciona
+	public List<SelectItem> getListCarreraSelect() {
+		
+		if(this.listCarreraSelect == null){
+			
+			this.listCarreraSelect = new ArrayList<SelectItem>();
+
+			List<Carrera> listCarreras = cl.consultarCarreras();
+
+			if (listCarreras != null && !listCarreras.isEmpty()) {
+				SelectItem itemCarrera;
+				for (Carrera carreraList : listCarreras) {
+					itemCarrera = new SelectItem(carreraList.getIdCarrera(),
+							carreraList.getNombreCarrera());
+					listCarreraSelect.add(itemCarrera);
+				}
+			}
+		}
+
+		return listCarreraSelect;
+	}
+*/}

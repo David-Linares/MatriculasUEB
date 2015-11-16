@@ -3,17 +3,25 @@ package co.ueb.matriculas.beans;
 import java.util.List;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
 
 
+
+
+
+import javax.faces.model.SelectItem;
+
 import co.ueb.matriculas.logical.CarreraLogical;
+import co.ueb.matriculas.logical.FacultadLogical;
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Facultad;
 import co.ueb.matriculas.model.Materia;
 import co.ueb.matriculas.model.Persona;
+import co.ueb.matriculas.util.Constants;
 
 public class CarreraBean implements Serializable {
 	
@@ -22,18 +30,22 @@ public class CarreraBean implements Serializable {
 	 */
 	private static final long serialVersionUID = -6396704435134939521L;
 	private final static Logger log = Logger.getLogger("CarreraBean -- ");
-	String nombreCarrera = "";
-	BigDecimal totalCreditos;
-	Facultad facultadCarrera = null;
-	FacultadBean facultadesList = new FacultadBean(); 
-	CarreraLogical cl = new CarreraLogical();
-	List<Carrera> listadoCarreras = cl.consultarCarreras();
-	List<Facultad> listadoFacultades = facultadesList.getListadoFacultades();
-	Carrera carreraAux = null;
-	Carrera copiaCarrera = null;
-	boolean banderaEdit = false;
-	boolean estadoCarreraEditar = false;
-	String mensajeRespuesta = "";
+	private String nombreCarrera = "";
+	private BigDecimal totalCreditos;
+	private Facultad facultadCarrera = null;
+	private Materia materiaCarrera = null;
+	private Persona personaCarrera = null;
+	private FacultadBean facultadesList = new FacultadBean(); 
+	private CarreraLogical cl = new CarreraLogical();
+	private FacultadLogical fl = new FacultadLogical();
+	private List<SelectItem> listFacultadSelect;
+	private List<Carrera> listadoCarreras = cl.consultarCarreras();
+	private List<Facultad> listadoFacultades = facultadesList.getListadoFacultades();
+	private Carrera carreraAux = null;
+	private Carrera copiaCarrera = null;
+	private boolean banderaEdit = false;
+	private boolean estadoCarreraEditar = false;
+	private String mensajeRespuesta = "";
 	
 	public FacultadBean getFacultadesList() {
 		return facultadesList;
@@ -51,6 +63,24 @@ public class CarreraBean implements Serializable {
 		this.facultadCarrera = facultadCarrera;
 	}
 	
+	public List<SelectItem> getListFacultadSelect() {
+		return listFacultadSelect;
+	}
+	
+	public CarreraBean() {
+		this.setListFacultadSelect(new ArrayList<SelectItem>());
+		List<Facultad> listFacultades = fl.consultarFacultades();
+
+		if (listFacultades != null && !listFacultades.isEmpty()) {
+			SelectItem itemFacultad;
+			for (Facultad facultadList : listFacultades) {
+				itemFacultad = new SelectItem(facultadList.getIdFacultad(),facultadList.getNombreFacultad());
+				listFacultadSelect.add(itemFacultad);
+		}
+	}
+
+	}
+
 	public List<Facultad> getListadoFacultades() {
 		return listadoFacultades;
 	}
@@ -88,6 +118,10 @@ public class CarreraBean implements Serializable {
 	public Carrera getCarreraAux(){
 		return this.carreraAux;
 	}
+	
+	public void setListFacultadSelect(List<SelectItem> listFacultadSelect) {
+		this.listFacultadSelect = listFacultadSelect;
+	}
 
 	public Carrera getCopiaCarrera() {
 		return copiaCarrera;
@@ -113,6 +147,22 @@ public class CarreraBean implements Serializable {
 		this.nombreCarrera = nombreCarrera;
 	}
 	
+	public Materia getMateriaCarrera() {
+		return materiaCarrera;
+	}
+
+	public void setMateriaCarrera(Materia materiaCarrera) {
+		this.materiaCarrera = materiaCarrera;
+	}
+
+	public Persona getPersonaCarrera() {
+		return personaCarrera;
+	}
+
+	public void setPersonaCarrera(Persona personaCarrera) {
+		this.personaCarrera = personaCarrera;
+	}
+
 	public void setCarreraAux(Carrera carreraAux){
 		System.out.println("[CarreraBean] - setCarreraAux ||a Va a cambiar => "+ carreraAux);
 		if(carreraAux != null){
@@ -136,6 +186,8 @@ public class CarreraBean implements Serializable {
 	public void setTotalCreditos(BigDecimal totalCreditos) {
 		this.totalCreditos = totalCreditos;
 	}
+	
+	
 
 	public String editarCarrera(){
 		System.out.println("[CarreraBean] Entro a editarCarrera");
@@ -163,7 +215,7 @@ public class CarreraBean implements Serializable {
 	}
 
 	public String crearCarrera(){
-		System.out.println("[CarreraBean] crearCarrera || Entro a crear");
+/*		System.out.println("[CarreraBean] crearCarrera || Entro a crear");
 		if(this.getNombreCarrera().equals("")){
 			System.out.println("[CarreraBean] vacio el nombre");
 			this.setMensajeRespuesta("El campo nombre no puede estar vacio");
@@ -187,7 +239,41 @@ public class CarreraBean implements Serializable {
 			return "paginaCarrera";			
 		}else{
 			return "error";
+		} */
+		System.out.println("[MateriaBean] - crearMateria || Entra a crear");
+		BigDecimal idCarreraAux = new BigDecimal(1);
+		if (listadoCarreras.size() != 0) {
+			idCarreraAux = listadoCarreras.get(listadoCarreras.size() - 1)
+					.getIdCarrera().add(new BigDecimal(1));
 		}
+		Set<Materia> materias = new HashSet<Materia>(0);
+		Set<Persona> personas = new HashSet<Persona>(0);
+		Carrera nuevaCarrera = new Carrera(idCarreraAux,
+				this.getFacultadCarrera(), this.nombreCarrera, this.totalCreditos, '1', 
+				 materias, personas);
+			this.getFacultadCarrera().getCarreras().add(nuevaCarrera);
+/*			String respuesta = cl.crearNuevaCarrera(nuevaCarrera);
+			switch (respuesta) {
+			case "ok": // Respuesta guardado correctamente
+				this.setMensajeRespuesta(Constants.MATERIA_CREADA);
+				this.setMensajeError(false);
+				this.listadoMaterias.add(nuevaMateria);
+				break;
+
+			case "duplicado":
+				this.setMensajeRespuesta(Constants.MSJ_NOMBRE_REPETIDO + " "
+						+ nuevaCarrera.getNombreCarrera() + ". "
+						+ Constants.MSJ_INTENTO);
+				this.setMensajeError(true);
+				break;
+			default:
+				this.setMensajeRespuesta(Constants.MSJ_ERROR_GUARDADO + " "
+						+ respuesta + ". " + Constants.MSJ_INTENTO);
+				this.setMensajeError(true);
+				break;  
+			} */
+			return Constants.NAVEGACION_CARRERA; 
+		
 	}
 	
 	

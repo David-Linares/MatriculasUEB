@@ -85,7 +85,7 @@ public class FacultadLogical {
 					CallableStatement callableStatement = connection.prepareCall(Constants.PROCEDIMIENTO_MODIFICAR_FACULTAD);	
 					callableStatement.setBigDecimal(1, editaFacultad.getIdFacultad());
 					callableStatement.setString(2, editaFacultad.getNombreFacultad());
-					callableStatement.setObject(3, editaFacultad.getEstadoFacultad(), java.sql.Types.CHAR);
+					callableStatement.setString(3, editaFacultad.getEstadoFacultad().toString());
 					callableStatement.registerOutParameter(4, java.sql.Types.VARCHAR);
 					callableStatement.executeUpdate();
 					msjRespuesta = callableStatement.getString(4);
@@ -96,6 +96,8 @@ public class FacultadLogical {
 			return msjRespuesta;
 		}catch(Exception e){
 			sesion.getTransaction().rollback();
+			log.error(e);
+			e.printStackTrace();
 			return "error";
 		}
 	}

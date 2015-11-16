@@ -135,6 +135,10 @@ public class MatriculaBean implements Serializable{
 		}else{
 			this.getFacultadAux().setEstadoFacultad('0');
 		}
+		String guardado = fl.modificarFacultad(this.getFacultadAux());
+		if(guardado != ""){
+			return "";
+		}
 		return "";
 		/*boolean guardado = fl.modificarFacultad(this.getFacultadAux());
 		if(guardado){

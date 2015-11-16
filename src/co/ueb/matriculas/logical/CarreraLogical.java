@@ -1,5 +1,6 @@
 package co.ueb.matriculas.logical;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -9,8 +10,12 @@ import org.jboss.logging.Logger;
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.util.HibernateSession;
 
-public class CarreraLogical {
+public class CarreraLogical implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1760467828935283002L;
 	private Logger log = Logger.getLogger(CarreraLogical.class);
 	private Session sesion;
 	private String sql;
@@ -83,14 +88,13 @@ public class CarreraLogical {
 			String hql = "FROM Carrera WHERE nombreCarrera = '" + nombre_carrera + "'";
 			query = sesion.createQuery(hql);
 			carreraQuery = (Carrera) query.uniqueResult();
-			if (carreraQuery == null) {
-				return null;
-			}
 			sesion.getTransaction().commit();
 		} catch (Exception e) {
 			sesion.getTransaction().rollback();
 			e.printStackTrace();
 		}
+		log.info("## Devuelve carrera ##");
+		log.info(carreraQuery);
 		return carreraQuery;
 	}
 	
