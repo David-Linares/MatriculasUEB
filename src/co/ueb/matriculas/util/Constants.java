@@ -81,8 +81,9 @@ public class Constants {
 	public static final String ESTUDIANTE_CREADO = "Estudiante Creado Correctamente!!";
 	public static final String ESTUDIANTE_ACTUALIZADO = "Estudiante Actualizado Correctamente!!";
 	public static final String CONSULTA_ESTUDIANTES= "select e from Persona as e where e.perfil.idPerfil = 1 order by e.nombrePersona, e.apellidosPersona";
+	public static final String ESTUDIANTE_MODIFICADO = "Estudiante modificado Correctamente!!";
 	public static final String PROCEDIMIENTO_INSERTAR_ESTUDIANTE = "{call INSERTAR_PERSONA(?,?,?,?,?,?,?,?,?,?,?,?)}";
-	public static final String FUNCION_MODIFICAR_ESTUDIANTE= "{call MODIFICAR_ESTUDIANTE(?,?,?,?,?,?,?,?,?,?,?,?,)}";
+	public static final String FUNCION_MODIFICAR_ESTUDIANTE = "{? = modificar_estudiante(?,?,?,?,?,?,?,?,?,?,?,?)}";
 	
 	/*
 	 * Constantes de Matricula
