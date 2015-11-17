@@ -128,6 +128,7 @@ public class FacultadBean implements Serializable {
 		switch (respuesta) {
 		case "ok": // Respuesta guardado correctamente
 			this.setMensajeRespuesta(Constants.FACULTAD_ACTUALIZADA);
+			this.setMensajeError(false);
 			break;
 		case "duplicado":
 			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_REPETIDO + ": "

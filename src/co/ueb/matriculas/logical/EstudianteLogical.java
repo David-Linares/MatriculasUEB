@@ -22,10 +22,12 @@ public class EstudianteLogical {
 	
 	private Persona personaEstudiante = new Persona();
 	List<Persona> listadoEstudiantes = new ArrayList<Persona>();
-	
+	private List<Persona> estudiantes;
 	private Session sesion;
 	private String msjRespuesta;
-
+	private String sql;
+	private Query query; 
+	
 	/*
 	 * @SuppressWarnings("unchecked") public List<Persona> getEstudiantes() {
 	 * String sql = "select p from Persona as p";
@@ -113,28 +115,61 @@ public class EstudianteLogical {
 
 	@SuppressWarnings("unchecked")
 	public List<Persona> consultarEstudiantes() {
-		List<Persona> estudiantes = new ArrayList<Persona>();
-		String sql = "select e from Persona as e where e.perfil.idPerfil = 1 order by e.nombrePersona, e.apellidosPersona ";
+		estudiantes = new ArrayList<Persona>();
+		sql = Constants.CONSULTA_ESTUDIANTES;
 		Session session = HibernateSession.getSf().getCurrentSession();
-		session.beginTransaction();
-		Query query = session.createQuery(sql);
-		estudiantes = query.list();
-		session.getTransaction().commit();
+		try {
+			session.beginTransaction();
+			query = session.createQuery(sql);
+			estudiantes = query.list();
+			session.getTransaction().commit();
+			
+		} catch (Exception e) {
+			sesion.getTransaction().rollback();
+			log.error(e);
+			e.printStackTrace();
+			
+		}
 		return estudiantes;
 	}
 
-	public boolean modificarEstudiante(Persona editaEstudiante) {
+	public String modificarEstudiante(Persona editaEstudiante) {
 		Session sesion = HibernateSession.getSf().getCurrentSession();
 		System.out.println("modificar estudiante entro ");
 		try {
 			sesion.beginTransaction();
-			sesion.update(editaEstudiante);
+			java.util.Date utilStartDate = editaEstudiante.getFechaNacimiento();
+			java.sql.Date sqlFechaNacimiento = new java.sql.Date(utilStartDate.getTime());
+			sesion.doWork(new Work(){
+
+				@Override
+				public void execute(Connection conexion) throws SQLException {
+					CallableStatement callableStatement = conexion.prepareCall(Constants.FUNCION_MODIFICAR_ESTUDIANTE);
+					callableStatement.setBigDecimal(1, editaEstudiante.getIdPersona());
+					callableStatement.setString(2, editaEstudiante.getNombrePersona());
+					callableStatement.setString(3, editaEstudiante.getApellidosPersona());
+					callableStatement.setDate(4,sqlFechaNacimiento );
+					callableStatement.setString(5, editaEstudiante.getLugarNacimiento());
+					callableStatement.setString(6, editaEstudiante.getDireccion());
+					callableStatement.setString(7, editaEstudiante.getCorreoElectronico());
+					callableStatement.setString(8, editaEstudiante.getEstadoPersona().toString());
+					callableStatement.setBigDecimal(9, editaEstudiante.getPromedio());
+					callableStatement.setString(10, editaEstudiante.getUsuario());
+					callableStatement.setString(11, editaEstudiante.getContrasena());
+					callableStatement.registerOutParameter(12, java.sql.Types.VARCHAR);
+					callableStatement.executeUpdate();
+					msjRespuesta = callableStatement.getString(12);
+				
+				}
+				
+			});
 			sesion.getTransaction().commit();
-			return true;
+			return msjRespuesta;
 		} catch (Exception e) {
 			sesion.getTransaction().rollback();
 			e.printStackTrace();
-			return false;
+			log.error(e);
+			return "error";
 		}
 	}
 

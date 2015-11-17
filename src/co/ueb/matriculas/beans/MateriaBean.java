@@ -166,13 +166,6 @@ public class MateriaBean implements Serializable {
 					+ this.getMateriaAux().getNombreMateria() + " "
 					+ Constants.MSJ_INTENTO);
 			this.setMensajeError(true);
-			for (Materia materia : listadoMaterias) {
-				if (materia.getIdMateria().equals(
-						this.getMateriaAux().getIdMateria())) {
-					materia.setNombreMateria(this.getMateriaValidacion()
-							.getNombreMateria());
-				}
-			}
 			this.getMateriaAux().setNombreMateria(
 					this.getMateriaValidacion().getNombreMateria());
 			break;

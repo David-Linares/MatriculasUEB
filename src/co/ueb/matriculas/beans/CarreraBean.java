@@ -237,6 +237,7 @@ public class CarreraBean implements Serializable {
 		switch (respuesta) {
 		case "ok": // Respuesta guardado correctamente
 			this.setMensajeRespuesta(Constants.CARRERA_ACTUALIZADA);
+			this.setMensajeError(false);
 			break;
 		case "duplicado":
 			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_REPETIDO + ": "
