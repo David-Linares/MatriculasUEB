@@ -38,16 +38,6 @@
   <managed-bean-name>loginBean</managed-bean-name>
   <managed-bean-class>co.ueb.matriculas.beans.LoginBean</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
-  <managed-property>
-   <property-name>usuario</property-name>
-   <property-class>java.lang.String</property-class>
-   <value/>
-  </managed-property>
-  <managed-property>
-   <property-name>contrasena</property-name>
-   <property-class>java.lang.String</property-class>
-   <value/>
-  </managed-property>
  </managed-bean>
  <managed-bean>
   <managed-bean-name>carreraBean</managed-bean-name>

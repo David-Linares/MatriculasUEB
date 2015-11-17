@@ -72,11 +72,8 @@
 				</h:column>
 					<h:column>
 						<f:facet name="header">Acciones</f:facet>
-						<h:commandLink class="botonImg" data-toggle="modal"
-							data-target="#myModalEdit"
-							actionListener="#{materiaBean.setMateriaAux(materia)}">
-							<f:ajax execute="@form" render=":modalEditContent"
-								onevent="function(data) { if (data.status == 'success') $('#myModalEdit').modal() ; }" />
+						<h:commandLink class="botonImg" data-toggle="modal" data-target="#myModalEdit" actionListener="#{materiaBean.setMateriaAux(materia)}">
+							<f:ajax execute="@form" render=":modalEditContent" onevent="function(data) { if (data.status == 'success') $('#myModalEdit').modal() ; }" />
 							<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
 						</h:commandLink>
 					</h:column>
