@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head></h:head>
+<ui:insert>
+	<ui:include src="/Modulos/header.xhtml"></ui:include>
+</ui:insert>
+<body>
+	<div class="container">
+		<div class="col-md-offset-9 col-md-3" style="text-align:center">
+			<h:form>
+				<h:commandLink action="#{matriculaBean.hacerMatricula()}" class="botonImg">
+					<h:graphicImage url="/resources/images/go.png"></h:graphicImage>
+				</h:commandLink>
+			</h:form>
+		</div>
+		<div class="col-md-6">
+			<label>Créditos Permitidos:</label> <label style="font-weight: bold;">#{matriculaBean.creditosPermitidos}</label>
+		</div>
+		<div class="col-md-offset-2 col-md-8">
+		<h:dataTable value="#{matriculaBean.materiasListado}" var="materia" class="table table-hover table-striped" id="tablaDatosMaterias">
+			<h:column>
+				<f:facet name="header">Nombre de Materia</f:facet>
+				#{materia.nombreMateria}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Créditos de Materia</f:facet>
+				#{materia.creditos}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Seleccionar</f:facet>
+				<h:selectBooleanCheckbox value="#{materia.seleccionadaMatricula}" immediate="true" >
+					<f:ajax listener="#{matriculaBean.valueChangeMethod(materia)}" event="click"></f:ajax>
+				</h:selectBooleanCheckbox>
+			</h:column>
+		</h:dataTable>			
+		</div>
+	</div>
+</body>
+
+</html>

@@ -84,4 +84,13 @@ public class Matricula implements java.io.Serializable {
 		this.materiaMatriculas = materiaMatriculas;
 	}
 
+	@Override
+	public String toString() {
+		return "Matricula [idMatricula=" + idMatricula + ", persona=" + persona
+				+ ", totalCreditos=" + totalCreditos + ", costoMatricula="
+				+ costoMatricula + ", estadoMatricula=" + estadoMatricula
+				+ ", materiaMatriculas=" + materiaMatriculas + "]";
+	}
+	
+	
 }
