@@ -11,6 +11,7 @@ import org.jboss.logging.Logger;
 import co.ueb.matriculas.logical.FacultadLogical;
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Facultad;
+import co.ueb.matriculas.model.Materia;
 import co.ueb.matriculas.util.Constants;
 
 /**
@@ -143,14 +144,15 @@ public class FacultadBean implements Serializable {
 		return Constants.NAVEGACION_FACULTAD;
 	}
 
+	//Funcion para crear una nueva facultad 
 	public String crearFacultad() {
 		log.info("===Crear Facultad===");
-		if (this.getNombreFacultad().equals("")) {
-			log.error("El campo viene vacio");
-			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_VACIO);
+		if (!validarCampos(this.getNombreFacultad())) {
 			this.setMensajeError(true);
-			return null;
-		}
+			this.setMensajeRespuesta(Constants.MSJ_CAMPOS_VACIOS);
+			return Constants.NAVEGACION_FACULTAD;
+		} 
+		
 		Set<Carrera> carreras = new HashSet<Carrera>(0);
 		BigDecimal idFacultadAux = new BigDecimal(1);
 		if (this.getListadoFacultades().size() != 0) {
@@ -181,4 +183,17 @@ public class FacultadBean implements Serializable {
 		return Constants.NAVEGACION_FACULTAD;
 	}
 
+	//Funcion para validar que los campos no esten vacios
+		public boolean validarCampos(String nombreFacultadCampos) {
+			if (nombreFacultadCampos == null
+					|| nombreFacultadCampos.equals(""))
+				return false;
+			return true;
+		}
+
+		//Funcion para vaciar el formulario de crear facultad
+		public void vaciarCampos() {
+			this.setNombreFacultad("");
+		}
+	//
 }

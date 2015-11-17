@@ -91,7 +91,9 @@
 	      		<br></br>
 	      		<br></br>
 	        	<div class="form-control-wrapper">
-					<h:inputText id="nombreMateria" name="nombreMateria" class="form-control col-sm-10 empty" value="#{materiaBean.nuevaMateria.nombreMateria}" maxlength="50"  > 
+					<h:inputText id="nombreMateria" name="nombreMateria" class="form-control col-sm-10 empty" value="#{materiaBean.nuevaMateria.nombreMateria}" 
+					onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+					onkeyup="this.value=this.value.toLowerCase()" maxlength="50"  > 
 					
 					</h:inputText>
 					<div class="floating-label">Nombre de la Materia</div>
@@ -101,7 +103,9 @@
 					                   
 				</div>
 				<div class="form-control-wrapper">
-					<h:inputText id="creditosMateria" name="creditosMateria" class="form-control col-sm-10 empty" value="#{materiaBean.nuevaMateria.creditos}" maxlength="1" >
+					<h:inputText id="creditosMateria" name="creditosMateria" class="form-control col-sm-10 empty" value="#{materiaBean.nuevaMateria.creditos}" 
+					onkeypress="if(event.which  != 08) if(event.which  != 09) if(event.which  &lt; 49 || event.which  &gt; 53) return false;"
+								onpaste="return false" maxlength="1" >
 					
 					</h:inputText>
 					<div class="floating-label">Creditos maximos permitidos</div>
@@ -133,11 +137,15 @@
 		      		<br></br>
 		        	<div class="form-group">
 						<label class="control-label">Nombre de la materia</label>             
-						<h:inputText class="form-control col-sm-10 empty" required="true" maxlength="50" value="#{materiaBean.materiaAux.nombreMateria}"></h:inputText>
+						<h:inputText class="form-control col-sm-10 empty"  maxlength="50" value="#{materiaBean.materiaAux.nombreMateria}"
+						onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+					onkeyup="this.value=this.value.toLowerCase()"	></h:inputText>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Creditos</label>             
-						<h:inputText class="form-control col-sm-10 empty" required="true" maxlength="1" value="#{materiaBean.materiaAux.creditos}"></h:inputText>
+						<h:inputText class="form-control col-sm-10 empty"  maxlength="1" value="#{materiaBean.materiaAux.creditos}"
+						onkeypress="if(event.which  != 08) if(event.which  != 09) if(event.which  &lt; 49 || event.which  &gt; 53) return false;"
+								onpaste="return false"	></h:inputText>
 					</div>
 					<div class="togglebutton">
 						<label>
