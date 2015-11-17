@@ -96,21 +96,6 @@ public class EstudianteLogical {
 		}
 	}
 
-	public boolean eliminarEstudiante(Persona estudiante) {
-		Session sesion = HibernateSession.getSf().getCurrentSession();
-		try {
-			sesion.beginTransaction();
-			sesion.delete(estudiante);
-			sesion.getTransaction().commit();
-			return true;
-		} catch (Exception e) {
-			System.out
-					.println("[Estudiante Logical - Eliminar Estudiante] Entra� a Error");
-			sesion.getTransaction().rollback();
-			throw e;
-		}
-	}
-
 	@SuppressWarnings("unchecked")
 	public List<Persona> consultarEstudiantes() {
 		List<Persona> estudiantes = new ArrayList<Persona>();
@@ -123,18 +108,40 @@ public class EstudianteLogical {
 		return estudiantes;
 	}
 
-	public boolean modificarEstudiante(Persona editaEstudiante) {
+	public String modificarEstudiante(Persona editaEstudiante) {
 		Session sesion = HibernateSession.getSf().getCurrentSession();
-		System.out.println("modificar estudiante entro ");
 		try {
 			sesion.beginTransaction();
-			sesion.update(editaEstudiante);
+			java.util.Date utilStartDate = editaEstudiante.getFechaNacimiento();
+			java.sql.Date sqlFechaNacimiento = new java.sql.Date(utilStartDate.getTime());
+			sesion.doWork(new Work() {
+				
+				@Override
+				public void execute(Connection connection) throws SQLException {
+					CallableStatement callableStatement = connection.prepareCall(Constants.FUNCION_MODIFICAR_ESTUDIANTE);	
+					callableStatement.registerOutParameter(1, java.sql.Types.VARCHAR);
+					callableStatement.setBigDecimal(2, editaEstudiante.getIdPersona());
+					callableStatement.setString(3, editaEstudiante.getNombrePersona());
+					callableStatement.setString(4, editaEstudiante.getApellidosPersona());
+					callableStatement.setDate(5, sqlFechaNacimiento);
+					callableStatement.setString(6, editaEstudiante.getLugarNacimiento());
+					callableStatement.setString(7, editaEstudiante.getDireccion());
+					callableStatement.setString(8, editaEstudiante.getCorreoElectronico());
+					callableStatement.setString(9, editaEstudiante.getEstadoPersona().toString());
+					callableStatement.setBigDecimal(10, editaEstudiante.getPromedio());
+					callableStatement.setString(11, editaEstudiante.getUsuario());
+					callableStatement.setString(12, editaEstudiante.getContrasena());
+					callableStatement.setBigDecimal(13, editaEstudiante.getPerfil().getIdPerfil());
+					callableStatement.executeUpdate();
+					msjRespuesta = callableStatement.getString(12);
+				}
+			});
 			sesion.getTransaction().commit();
-			return true;
+			return msjRespuesta;
 		} catch (Exception e) {
 			sesion.getTransaction().rollback();
 			e.printStackTrace();
-			return false;
+			return "error";
 		}
 	}
 

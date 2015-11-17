@@ -79,7 +79,10 @@ public class Constants {
 	
 	public static final String MSJ_ESTUDIANTE_OK = "Estudiante Creado Correctamente!!";
 	public static final String ESTUDIANTE_CREADO = "Estudiante Creado Correctamente!!";
+	public static final String ESTUDIANTE_MODIFICADO = "Estudiante modificado Correctamente!!";
 	public static final String PROCEDIMIENTO_INSERTAR_ESTUDIANTE = "{call INSERTAR_PERSONA(?,?,?,?,?,?,?,?,?,?,?,?)}";
+	public static final String FUNCION_MODIFICAR_ESTUDIANTE = "{? = modificar_estudiante(?,?,?,?,?,?,?,?,?,?,?,?)}";
+	
 	
 	/*
 	 * Constantes de Matricula

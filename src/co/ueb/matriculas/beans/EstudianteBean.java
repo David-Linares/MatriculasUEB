@@ -188,16 +188,30 @@ public class EstudianteBean implements Serializable {
 			this.getEstudianteAux().setEstadoPersona('0');
 		}
 		this.getEstudianteAux().setContrasena(encriptarContrasena(this.estudianteAux.getContrasena()));
-		boolean guardado = el.modificarEstudiante(this.getEstudianteAux());
-		System.out.println("no ha entrado a if de guardado");
-		if (guardado) {
-			System.out.println("entro a if de guardado");
-			this.setMensajeRespuesta("");
-			this.getListadoEstudiantes();
-			return "paginaEstudiante";
-		} else {
-			return "error";
+		String respuesta= el.modificarEstudiante(this.getEstudianteAux());
+		switch (respuesta) {
+		case "ok": // Respuesta guardado correctamente
+			this.setMensajeRespuesta(Constants.ESTUDIANTE_MODIFICADO);
+			this.setMensajeError(false);
+			this.listadoEstudiantes.add(nuevoEstudiante);
+			break;
+		case "duplicado":
+			this.setMensajeRespuesta(Constants.MSJ_IDENTIFICACION_REPETIDO + " "
+					+ nuevoEstudiante.getIdPersona() + ". "+ Constants.MSJ_INTENTO);
+			this.setMensajeError(true);
+			break;
+		case "usuario_duplicado":
+			this.setMensajeRespuesta(Constants.MSJ_USUARIO_REPETIDO + " "
+					+ nuevoEstudiante.getUsuario() + ". "+ Constants.MSJ_INTENTO);
+			this.setMensajeError(true);
+			break;
+		default:
+			this.setMensajeRespuesta(Constants.MSJ_ERROR_GUARDADO + " "
+					+ respuesta + ". "+ Constants.MSJ_INTENTO);
+			this.setMensajeError(true);
+			break;
 		}
+		return Constants.NAVEGACION_ESTUDIANTE;
 	}
 
 	public String crearEstudiante() {
