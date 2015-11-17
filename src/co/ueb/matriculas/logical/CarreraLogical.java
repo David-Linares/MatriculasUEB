@@ -1,13 +1,22 @@
 package co.ueb.matriculas.logical;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.jdbc.Work;
 import org.jboss.logging.Logger;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import co.ueb.matriculas.model.Carrera;
+import co.ueb.matriculas.util.Constants;
 import co.ueb.matriculas.util.HibernateSession;
 
 public class CarreraLogical implements Serializable {
@@ -18,44 +27,49 @@ public class CarreraLogical implements Serializable {
 	private static final long serialVersionUID = 1760467828935283002L;
 	private Logger log = Logger.getLogger(CarreraLogical.class);
 	private Session sesion;
+	private String msjRespuesta;
 	private String sql;
 	private Query query;
-	List<Carrera> carreras;
+	private List<Carrera> carreras;
 	private Carrera carreraQuery;
 
-	public boolean crearNuevaCarrera(Carrera nuevaCarrera){
+	public String crearNuevaCarrera(Carrera nuevaCarrera){
+		System.out.println("[CarreraLogical] crearNuevaCarrera");
 		sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
-			sesion.persist(nuevaCarrera);
+			sesion.doWork(new Work(){
+
+				@Override
+				public void execute(Connection conexion) throws SQLException {
+					CallableStatement callableStatement = conexion.prepareCall(Constants.PROCEDIMIENTO_INSERTAR_CARRERA);
+					callableStatement.setString(1, nuevaCarrera.getNombreCarrera());
+					callableStatement.setBigDecimal(2, nuevaCarrera.getTotalCreditos());
+					callableStatement.setBigDecimal(3, new BigDecimal(1));
+					callableStatement.registerOutParameter(4, java.sql.Types.VARCHAR);
+					callableStatement.executeUpdate();
+					msjRespuesta= callableStatement.getString(4);
+				}
+				
+			});
 			sesion.getTransaction().commit();
-			return true;
+			
+			return msjRespuesta;
 		}catch(Exception e){
+			System.out.println("[CarreraLogical] crearNuevaCarrera - entro al error ");
 			sesion.getTransaction().rollback();
-			return false;
+			e.printStackTrace();
+			return "error";
 		}
 	}
 	
-	public boolean eliminarCarrera(Carrera carrera){
-		sesion  = HibernateSession.getSf().getCurrentSession();
-		try{
-			sesion.beginTransaction();
-			sesion.delete(carrera);
-			sesion.getTransaction().commit();
-			return true;
-		}catch(Exception e){
-			sesion.getTransaction().rollback();
-			log.error(e);
-			e.printStackTrace();
-			return false;
-		}
-	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Carrera> consultarCarreras(){
-		sql = "select c from Carrera as c order by c.idCarrera";
+		carreras = new ArrayList<Carrera>();
+		sql = Constants.CONSULTA_CARRERAS;
+		sesion = HibernateSession.getSf().getCurrentSession();
 		try{
-			sesion = HibernateSession.getSf().getCurrentSession();
 			sesion.beginTransaction();
 			query = sesion.createQuery(sql);
 			carreras = query.list();
@@ -67,17 +81,37 @@ public class CarreraLogical implements Serializable {
 		}
 		return carreras;
 	}
-	
-	public boolean modificarCarrera(Carrera editaCarrera){
+
+	public String modificarCarrera(Carrera editaCarrera){
+		log.info(editaCarrera);
 		sesion = HibernateSession.getSf().getCurrentSession();
 		try{
 			sesion.beginTransaction();
-			sesion.update(editaCarrera);
+			sesion.doWork(new Work(){
+				
+				@Override
+				public void execute(Connection conexion) throws SQLException {
+					System.out.println("[CarreraLogical] modificarCarrera - entro al metodo execute");
+					CallableStatement callableStatement = conexion.prepareCall(Constants.PROCEDIMIENTO_MODIFICAR_CARRERA);
+					callableStatement.setBigDecimal(1, editaCarrera.getIdCarrera());
+					callableStatement.setString(2, editaCarrera.getNombreCarrera());
+					callableStatement.setBigDecimal(3, editaCarrera.getTotalCreditos());
+					callableStatement.setBigDecimal(4, new BigDecimal(1));
+					callableStatement.setString(5, editaCarrera.getEstadoCarrera().toString());				
+					callableStatement.registerOutParameter(6, java.sql.Types.VARCHAR);
+					callableStatement.executeUpdate();
+					msjRespuesta= callableStatement.getString(6);
+				}
+				
+			});
 			sesion.getTransaction().commit();
-			return true;
+			return msjRespuesta;
 		}catch(Exception e){
+			System.out.println("[CarreraLogical] modificarCarrera - entro al error");
 			sesion.getTransaction().rollback();
-			return false;
+			e.printStackTrace();
+			log.error(e);
+			return "error";
 		}
 	}
 	
@@ -88,14 +122,15 @@ public class CarreraLogical implements Serializable {
 			String hql = "FROM Carrera WHERE nombreCarrera = '" + nombre_carrera + "'";
 			query = sesion.createQuery(hql);
 			carreraQuery = (Carrera) query.uniqueResult();
+			if (carreraQuery == null) {
+				return null;
+			}
 			sesion.getTransaction().commit();
 		} catch (Exception e) {
 			sesion.getTransaction().rollback();
 			e.printStackTrace();
 		}
-		log.info("## Devuelve carrera ##");
-		log.info(carreraQuery);
 		return carreraQuery;
 	}
-	
+
 }

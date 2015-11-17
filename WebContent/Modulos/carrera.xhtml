@@ -1,144 +1,193 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 
-<h:head></h:head>
-	<ui:insert>
-		<ui:include src="/Modulos/header.xhtml"></ui:include>
-	</ui:insert>
+<h:head>
+
+	<script>
+  	function soloNumeros(e){
+    	key = e.keyCode || e.which;
+    	teclado = String.fromCharCode(key);
+    	numeros="0123456789";
+    	especiales="8-37-38-46"; //array
+    	teclado_especial=false;
+
+    	for(var i in especiales){
+			if(key==especiales[i]){
+				teclado_especial=true;
+				}	
+        	}
+    	if(numeros.indexOf(teclado)==-1 &amp;&amp; !teclado_especial)){
+			return false;
+        	}
+	}
+	</script>
+
+</h:head>
+<ui:insert>
+	<ui:include src="/Modulos/header.xhtml"></ui:include>
+</ui:insert>
 <body>
 	<div class="container">
-		<div class="col-md-12" style="margin-bottom:30px">
-			<div class="col-md-3" style="text-align:center">
+		<div class="col-md-12" style="margin-bottom: 30px">
+			<div class="col-md-3" style="text-align: center">
 				<button data-toggle="modal" data-target="#myModal" class="botonImg">
 					<h:graphicImage url="/resources/images/add.png"></h:graphicImage>
 				</button>
 			</div>
-<!-- 			<div class="col-md-3" style="text-align:center"> -->
-<!-- 				<h:form> -->
-<!-- 					<div class="form-control-wrapper"> -->
-<!-- 						<h:inputText class="form-control col-sm-10 empty"></h:inputText> -->
-<!-- 						<div class="floating-label"><h:graphicImage url="/resources/images/search.png"></h:graphicImage> Buscar</div> -->
-<!-- 						<span class="material-input"></span>	                     -->
-<!-- 					</div> -->
-<!-- 				</h:form> -->
-<!-- 			</div> -->
+			<!-- 			<div class="col-md-3" style="text-align:center"> -->
+			<!-- 				<h:form> -->
+			<!-- 					<div class="form-control-wrapper"> -->
+			<!-- 						<h:inputText class="form-control col-sm-10 empty"></h:inputText> -->
+			<!-- 						<div class="floating-label"><h:graphicImage url="/resources/images/search.png"></h:graphicImage> Buscar</div> -->
+			<!-- 						<span class="material-input"></span>	                     -->
+			<!-- 					</div> -->
+			<!-- 				</h:form> -->
+			<!-- 			</div> -->
 		</div>
-		<h:panelGroup rendered="#{!carreraBean.mensajeRespuesta.equals('')}">
-			<div class="col-md-12 alert alert-dismissable alert-warning" >
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4>Error!</h4>
-                <p>#{carreraBean.mensajeRespuesta}</p>
-            </div>
+		<h:panelGroup rendered="#{CarreraBean.mensajeError}">
+			<div class="col-md-12 alert alert-dismissable alert-warning">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<h4>Error!</h4>
+				<p>#{carreraBean.mensajeRespuesta}</p>
+			</div>
+		</h:panelGroup>
+		<h:panelGroup rendered="#{!carreraBean.mensajeError}">
+			<h:panelGroup rendered="#{carreraBean.mensajeRespuesta != ''}">
+				<div class="col-md-12 alert alert-dismissable alert-success">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<h4>Correcto!</h4>
+					<p>#{carreraBean.mensajeRespuesta}</p>
+				</div>
+			</h:panelGroup>
 		</h:panelGroup>
 		<div class="col-md-12">
 			<h:form>
-			<h:dataTable value="#{carreraBean.listadoCarreras}" var="carrera" class="table table-hover table-striped" id="tablaCarrera">
-				<h:column>
-					<f:facet name="header"># Carrera </f:facet>
+				<h:dataTable value="#{carreraBean.listadoCarreras}" var="carrera"
+					class="table table-hover table-striped" id="tablaCarrera">
+					<h:column>
+						<f:facet name="header"># Carrera </f:facet>
 					#{carrera.idCarrera}
 				</h:column>
-				<h:column>
-					<f:facet name="header">Nombre de la Carrera</f:facet>
+					<h:column>
+						<f:facet name="header">Nombre de la Carrera</f:facet>
 					#{carrera.nombreCarrera}
 				</h:column>
-				<h:column>
-					<f:facet name="header">Facultad</f:facet>
-					#{carrera.facultad}
+					<h:column>
+						<f:facet name="header">Facultad</f:facet>
+					#{carrera.facultad.nombreFacultad}
 				</h:column>
-				<h:column>
-					<f:facet name="header">Creditos</f:facet>
+					<h:column>
+						<f:facet name="header">Creditos</f:facet>
 					#{carrera.totalCreditos}
-				</h:column>							
-				<h:column>
-					<f:facet name="header">Acciones</f:facet>
-					<h:commandLink class="botonImg"  data-toggle="modal" data-target="#myModalEdit" actionListener="#{carreraBean.setCarreraAux(carrera)}">
-						<f:ajax execute="@form" render=":modalEditContent" onevent="function(data) { if (data.status == 'success') $('#myModalEdit').modal() ; }"/>
-						<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
-					</h:commandLink>
 				</h:column>
-			</h:dataTable>
+					<h:column>
+						<f:facet name="header">Acciones</f:facet>
+						<h:commandLink class="botonImg" data-toggle="modal"
+							data-target="#myModalEdit"
+							actionListener="#{carreraBean.setCarreraAux(carrera)}">
+							<f:ajax execute="@form" render=":modalEditContent"
+								onevent="function(data) { if (data.status == 'success') $('#myModalEdit').modal() ; }" />
+							<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
+						</h:commandLink>
+					</h:column>
+				</h:dataTable>
 			</h:form>
 		</div>
 	</div>
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Agregar Carrera</h4>
-	      </div>
-        <h:form >
-	      <div class="modal-body">
-	      		<br></br>
-	        	<div class="form-control-wrapper">
-					<h:inputText id="nuevaCarrera" class="form-control col-sm-10 empty" required="true" value="#{carreraBean.nombreCarrera}" maxlength="50" ></h:inputText>
-					<div class="floating-label">Nombre de la Carrera</div>
-					<span class="material-input"></span>	                    
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Agregar Carrera</h4>
 				</div>
-				<div class="form-control-wrapper">
-					<h:inputText id="creditosCarrera" class="form-control col-sm-10 empty" required="true" value="#{carreraBean.totalCreditos}" maxlength="3" type="number"></h:inputText>
-					<div class="floating-label">Creditos maximos permitidos</div>
-					<span class="material-input"></span>	                    
-				</div>
-				<div class="form-control-wrapper">
-							<h:selectOneMenu value="#{carreraBean.facultadCarrera.idFacultad}" converter="facultadConverter">
-								<f:selectItems value="#{carreraBean.listFacultadSelect}" />
-							</h:selectOneMenu>
+				<h:form>
+					<div class="modal-body">
+						<br></br>
+						<div class="form-control-wrapper">
+							<h:inputText id="nuevaCarrera"
+								class="form-control col-sm-10 empty" required="true"
+								value="#{carreraBean.nombreCarrera}"
+								onkeyup="this.value=this.value.toLowerCase()" maxlength="50"></h:inputText>
+							<div class="floating-label">Nombre de la Carrera</div>
+							<span class="material-input"></span>
 						</div>
-				<br></br>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-	        <h:commandButton class="btn btn-primary" action="#{carreraBean.crearCarrera()}" value="Guardar Carrera" />
-	      </div>
-        </h:form>
-	    </div>
-	  </div>
+						<div class="form-control-wrapper">
+							<h:inputText id="creditosCarrera"
+								class="form-control col-sm-10 empty" required="true"
+								onkeypress="if(event.which  != 38) if(event.which  != 37) if(event.which  != 08) if(event.which  != 09) if(event.which  != 46) if(event.which  &lt; 48 || event.which  &gt; 57) return false;"
+								onpaste="return false" value="#{carreraBean.totalCreditos}"
+								maxlength="3">
+							</h:inputText>
+							<div class="floating-label">Creditos maximos permitidos</div>
+							<span class="material-input"></span>
+						</div>
+						<br></br>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<h:commandButton class="btn btn-primary"
+							action="#{carreraBean.crearCarrera()}" value="Guardar Carrera" />
+					</div>
+				</h:form>
+			</div>
+		</div>
 	</div>
 	<h:panelGroup>
-		<div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Modificar Carrera</h4>
-		      </div>
-	        <h:form  id="modalEditContent">
-		      <div class="modal-body">
-		      		<br></br>
-		        	<div class="form-group">
-						<label class="control-label">Nombre de la carrera</label>             
-						<h:inputText class="form-control col-sm-10 empty" required="true" value="#{carreraBean.carreraAux.nombreCarrera}"></h:inputText>
+		<div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Modificar Carrera</h4>
 					</div>
-					<div class="form-group">
-						<label class="control-label">Creditos maximos permitidos</label>             
-						<h:inputText class="form-control col-sm-10 empty" required="true" value="#{carreraBean.carreraAux.totalCreditos}"></h:inputText>
-					</div>
-					<div class="form-group">
-						<label class="control-label">Facultad a la que pertenece:</label>
-						<h:selectOneMenu value="#{carreraBean.facultadCarrera}" converter="facultadConverter">
-							<f:selectItems value="#{carreraBean.listadoFacultades}" itemValue="#{facultadSelect.nombreFacultad}" var="facultadSelect"/>
-						</h:selectOneMenu>                  
-					</div>
-					<div class="togglebutton">
-						<label>
-                            Estado Carrera
-                            <br/><h:selectBooleanCheckbox value="#{carreraBean.estadoCarreraEditar}" /><span class="toggle"></span>
-                        </label>
-					</div>
-					<br></br>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-		        <h:commandButton class="btn btn-primary" action="#{carreraBean.editarCarrera()}" value="Guardar Carrera" />
-		      </div>
-	        </h:form>
-		    </div>
-		  </div>
+					<h:form id="modalEditContent">
+						<div class="modal-body">
+							<br></br>
+							<div class="form-group">
+								<label class="control-label">Nombre de la carrera</label>
+								<h:inputText class="form-control col-sm-10 empty"
+									onkeypress="if(event.which  = 239 ) return false"
+									
+									required="true" onkeyup="this.value=this.value.toLowerCase()"
+									value="#{carreraBean.carreraAux.nombreCarrera}"></h:inputText>
+							</div>
+							<div class="form-group">
+								<label class="control-label">Creditos maximos permitidos</label>
+								<h:inputText class="form-control col-sm-10 empty"
+									onkeypress="if(event.which  != 38) if(event.which  != 37) if(event.which  != 08) if(event.which  != 09) if(event.which  != 46) if(event.which  &lt; 48 || event.which  &gt; 57) return false;"
+									onpaste="return false" required="true" maxlength="3"
+									value="#{carreraBean.carreraAux.totalCreditos}"></h:inputText>
+							</div>
+							<div class="togglebutton">
+								<label> Estado Carrera <br /> <h:selectBooleanCheckbox
+										value="#{carreraBean.estadoCarreraEditar}" /><span
+									class="toggle"></span>
+								</label>
+							</div>
+							<br></br>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Cancelar</button>
+								<h:commandButton class="btn btn-primary"
+									action="#{carreraBean.editarCarrera()}" value="Guardar Carrera" />
+							</div>
+						</div>
+					</h:form>
+				</div>
+			</div>
 		</div>
 	</h:panelGroup>
-</body> 
+</body>
 </html>
