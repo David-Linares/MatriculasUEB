@@ -96,20 +96,13 @@ public class Materia implements java.io.Serializable {
 				+ materiaMatriculas + "]";
 	}
 
-	/**
-	 * @return the seleccionadaMatricula
-	 */
 	public Boolean getSeleccionadaMatricula() {
 		return seleccionadaMatricula;
 	}
 
-	/**
-	 * @param seleccionadaMatricula the seleccionadaMatricula to set
-	 */
 	public void setSeleccionadaMatricula(Boolean seleccionadaMatricula) {
 		this.seleccionadaMatricula = seleccionadaMatricula;
 	}
-
 
 	
 }

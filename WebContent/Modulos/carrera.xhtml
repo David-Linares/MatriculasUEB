@@ -4,7 +4,9 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 
-<h:head></h:head>
+<h:head>
+
+</h:head>
 <ui:insert>
 	<ui:include src="/Modulos/header.xhtml"></ui:include>
 </ui:insert>
@@ -33,12 +35,12 @@
 				<p>#{carreraBean.mensajeRespuesta}</p>
 			</div>
 		</h:panelGroup>
-		<h:panelGroup rendered="#{!materiaBean.mensajeError}">
-			<h:panelGroup rendered="#{materiaBean.mensajeRespuesta != ''}">
+		<h:panelGroup rendered="#{!carreraBean.mensajeError}">
+			<h:panelGroup rendered="#{carreraBean.mensajeRespuesta != ''}">
 				<div class="col-md-12 alert alert-dismissable alert-success">
 					<button type="button" class="close" data-dismiss="alert">×</button>
 					<h4>Correcto!</h4>
-					<p>#{materiaBean.mensajeRespuesta}</p>
+					<p>#{carreraBean.mensajeRespuesta}</p>
 				</div>
 			</h:panelGroup>
 		</h:panelGroup>
@@ -93,14 +95,19 @@
 						<div class="form-control-wrapper">
 							<h:inputText id="nuevaCarrera"
 								class="form-control col-sm-10 empty" required="true"
-								value="#{carreraBean.nombreCarrera}" maxlength="50"></h:inputText>
+								value="#{carreraBean.nombreCarrera}"
+								onkeypress="if(event.which  != 38) if(event.which  != 37) if(event.which  != 08) if(event.which  != 09) if(event.which  != 46) if(event.which  != 32) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+								onkeyup="this.value=this.value.toLowerCase()" maxlength="50"></h:inputText>
 							<div class="floating-label">Nombre de la Carrera</div>
 							<span class="material-input"></span>
 						</div>
 						<div class="form-control-wrapper">
 							<h:inputText id="creditosCarrera"
 								class="form-control col-sm-10 empty" required="true"
-								value="#{carreraBean.totalCreditos}" maxlength="3" type="number"></h:inputText>
+								onkeypress="if(event.which  != 38) if(event.which  != 37) if(event.which  != 08) if(event.which  != 09) if(event.which  != 46) if(event.which  &lt; 48 || event.which  &gt; 57) return false;"
+								onpaste="return false" value="#{carreraBean.totalCreditos}"
+								maxlength="3">
+							</h:inputText>
 							<div class="floating-label">Creditos maximos permitidos</div>
 							<span class="material-input"></span>
 						</div>
@@ -133,12 +140,17 @@
 							<div class="form-group">
 								<label class="control-label">Nombre de la carrera</label>
 								<h:inputText class="form-control col-sm-10 empty"
-									required="true" value="#{carreraBean.carreraAux.nombreCarrera}"></h:inputText>
+									onkeypress="if(event.which  = 239 ) return false"
+									
+									required="true" onkeyup="this.value=this.value.toLowerCase()"
+									value="#{carreraBean.carreraAux.nombreCarrera}"></h:inputText>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Creditos maximos permitidos</label>
 								<h:inputText class="form-control col-sm-10 empty"
-									required="true" value="#{carreraBean.carreraAux.totalCreditos}"></h:inputText>
+									onkeypress="if(event.which  != 38) if(event.which  != 37) if(event.which  != 08) if(event.which  != 09) if(event.which  != 46) if(event.which  &lt; 48 || event.which  &gt; 57) return false;"
+									onpaste="return false" required="true" maxlength="3"
+									value="#{carreraBean.carreraAux.totalCreditos}"></h:inputText>
 							</div>
 							<div class="togglebutton">
 								<label> Estado Carrera <br /> <h:selectBooleanCheckbox

@@ -13,6 +13,8 @@ import org.hibernate.Session;
 import org.hibernate.jdbc.Work;
 import org.jboss.logging.Logger;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.util.Constants;
 import co.ueb.matriculas.util.HibernateSession;
@@ -86,15 +88,16 @@ public class CarreraLogical implements Serializable {
 		try{
 			sesion.beginTransaction();
 			sesion.doWork(new Work(){
-
+				
 				@Override
 				public void execute(Connection conexion) throws SQLException {
+					System.out.println("[CarreraLogical] modificarCarrera - entro al metodo execute");
 					CallableStatement callableStatement = conexion.prepareCall(Constants.PROCEDIMIENTO_MODIFICAR_CARRERA);
 					callableStatement.setBigDecimal(1, editaCarrera.getIdCarrera());
 					callableStatement.setString(2, editaCarrera.getNombreCarrera());
 					callableStatement.setBigDecimal(3, editaCarrera.getTotalCreditos());
-					callableStatement.setString(4, editaCarrera.getEstadoCarrera().toString());
-					callableStatement.setBigDecimal(5, new BigDecimal(1));
+					callableStatement.setBigDecimal(4, new BigDecimal(1));
+					callableStatement.setString(5, editaCarrera.getEstadoCarrera().toString());				
 					callableStatement.registerOutParameter(6, java.sql.Types.VARCHAR);
 					callableStatement.executeUpdate();
 					msjRespuesta= callableStatement.getString(6);
@@ -104,6 +107,7 @@ public class CarreraLogical implements Serializable {
 			sesion.getTransaction().commit();
 			return msjRespuesta;
 		}catch(Exception e){
+			System.out.println("[CarreraLogical] modificarCarrera - entro al error");
 			sesion.getTransaction().rollback();
 			e.printStackTrace();
 			log.error(e);
