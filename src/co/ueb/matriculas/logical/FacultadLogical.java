@@ -31,6 +31,7 @@ public class FacultadLogical {
 	private Session sesion;
 	private Query query;
 
+	//Funcion para crear una facultad  - invoca un procedimiento de la base de datos 
 	public String crearNuevaFacultad(Facultad nuevaFacultad){
 		sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
@@ -54,7 +55,8 @@ public class FacultadLogical {
 			return "error";
 		}
 	}
-		
+	
+	//Funcion para consultar las facultades en la base de datos
 	@SuppressWarnings("unchecked")
 	public List<Facultad> consultarFacultades(){
 		facultades = new ArrayList<Facultad>();
@@ -73,6 +75,7 @@ public class FacultadLogical {
 		return facultades;
 	}
 	
+	//Funcion para editar una facultad - invoca un procedimiento en la base de datos
 	public String modificarFacultad(Facultad editaFacultad){
 		log.info("#### Modificación de Facultad ####");
 		Session sesion  = HibernateSession.getSf().getCurrentSession();

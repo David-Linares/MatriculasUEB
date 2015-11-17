@@ -12,9 +12,15 @@
 	<div class="container">
 		<div class="col-md-12" style="margin-bottom:30px">
 			<div class="col-md-3" style="text-align:center">
-				<button data-toggle="modal" data-target="#myModal" class="botonImg">
-					<h:graphicImage url="/resources/images/add.png"></h:graphicImage>
-				</button>
+				<h:form>
+				<h:commandLink class="botonImg"  data-toggle="modal" data-target="#myModal" actionListener="#{facultadBean.vaciarCampos()}">
+						<f:ajax execute="@form" render=":modalAgregar" onevent="function(data) { if (data.status == 'success') $('#myModal').modal() ; }"/>
+						<h:graphicImage url="/resources/images/add.png"></h:graphicImage>
+					</h:commandLink>
+				</h:form>
+				
+				
+				
 			</div>
 <!-- 			<div class="col-md-3" style="text-align:center"> -->
 <!-- 				<h:form> -->
@@ -71,12 +77,15 @@
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title" id="myModalLabel">Agregar Facultad</h4>
 	      </div>
-        <h:form >
+        <h:form id="modalAgregar" >
 	      <div class="modal-body">
 	      		<br></br>
 	      		<div class="form-group">
 					<label class="control-label">Nombre de la facultad</label>             
-					<h:inputText class="form-control col-sm-10 empty" value="#{facultadBean.nombreFacultad}" maxlength="50"/>
+					<h:inputText class="form-control col-sm-10 empty" value="#{facultadBean.nombreFacultad}" maxlength="50"
+					onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+					onkeyup="this.value=this.value.toLowerCase()"
+					/>
 				</div>
 				<br></br>
 	      </div>
@@ -101,7 +110,10 @@
 		      		<br></br>
 		        	<div class="form-group">
 						<label class="control-label">Nombre de la facultad</label>             
-						<h:inputText class="form-control col-sm-10 empty" value="#{facultadBean.facultadAux.nombreFacultad}" maxlength="50"/>
+						<h:inputText class="form-control col-sm-10 empty" value="#{facultadBean.facultadAux.nombreFacultad}" maxlength="50"
+						onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+					onkeyup="this.value=this.value.toLowerCase()"
+						/>
 					</div>
 					<div class="togglebutton">
 						<label>

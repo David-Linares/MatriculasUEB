@@ -39,7 +39,6 @@ public class MateriaBean implements Serializable {
 	private List<Carrera> listadoCarreras = carrerasList.getListadoCarreras();
 
 	// Getters y Setters
-
 	public Materia getNuevaMateria() {
 		return nuevaMateria;
 	}
@@ -127,6 +126,7 @@ public class MateriaBean implements Serializable {
 		this.mensajeError = mensajeError;
 	}
 
+	//Funcion para cargar los datos de la materia que se va a actualizar
 	public void setMateriaAux(Materia materiaAuxEditar) {
 		log.info(materiaAuxEditar);
 		if (materiaAuxEditar != null) {
@@ -141,8 +141,14 @@ public class MateriaBean implements Serializable {
 		}
 	}
 
+	//Funcion para editar una materia
 	public String editarMateria() {
-
+		if (!validarCampos(this.getNuevaMateria())) {
+			this.setMensajeError(true);
+			this.setMensajeRespuesta(Constants.MSJ_CAMPOS_VACIOS);
+			return Constants.NAVEGACION_MATERIA;
+		} 
+		
 		if (this.estadoMateriaEditar) {
 			this.getMateriaAux().setEstadoMateria('1');
 		} else {
@@ -179,6 +185,7 @@ public class MateriaBean implements Serializable {
 		return Constants.NAVEGACION_MATERIA;
 	}
 
+	//Funcion para crear una nueva materia
 	public String crearMateria() {
 		if (!validarCampos(this.getNuevaMateria())) {
 			this.setMensajeError(true);
@@ -226,6 +233,7 @@ public class MateriaBean implements Serializable {
 
 	}
 
+	//Funcion para validar que los campos no esten vacios
 	public boolean validarCampos(Materia materiaCampos) {
 		if (materiaCampos.getNombreMateria() == null
 				|| materiaCampos.getNombreMateria().equals(""))
@@ -236,6 +244,7 @@ public class MateriaBean implements Serializable {
 		return true;
 	}
 
+	//Funcion para vaciar el formulario de crear materia
 	public void vaciarCampos() {
 		this.setNuevaMateria(new Materia());
 	}

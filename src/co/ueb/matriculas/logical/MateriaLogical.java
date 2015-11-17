@@ -32,6 +32,7 @@ public class MateriaLogical {
 	
 	
 
+	//Funcion para crear nueva materia - invoca el procedimiento en la base de datos
 	public String crearNuevaMateria(Materia nuevaMateria){
 		sesion  = HibernateSession.getSf().getCurrentSession();
 		try{
@@ -59,7 +60,7 @@ public class MateriaLogical {
 		}
 	}
 	
-	
+	//Funcion para consultar las materias en la base de datos
 	@SuppressWarnings("unchecked")
 	public List<Materia> consultarMaterias(){
 		materias = new ArrayList<Materia>();
@@ -78,6 +79,7 @@ public class MateriaLogical {
 		return materias;
 	}
 
+	//Funcion para crear editar una materia - invoca el procedimiento en la base de datos
 	public String modificarMateria(Materia editaMateria){
 		log.info(editaMateria);
 		sesion = HibernateSession.getSf().getCurrentSession();
