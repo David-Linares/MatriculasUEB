@@ -13,6 +13,7 @@ import java.util.List;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.jboss.logging.Logger;
 
+import co.ueb.matriculas.logical.CarreraLogical;
 import co.ueb.matriculas.logical.EstudianteLogical;
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Perfil;
@@ -37,9 +38,9 @@ public class EstudianteBean implements Serializable {
 	private boolean estadoEstudianteEditar = false;
 
 	private EstudianteLogical el = new EstudianteLogical();
+	private CarreraLogical cl = new CarreraLogical();
 
 	private Carrera carreraEstudiante = null;
-	private CarreraBean carreraList = new CarreraBean();
 
 	private Persona nuevoEstudiante = new Persona();
 	private Persona estudianteAux = null;
@@ -48,7 +49,7 @@ public class EstudianteBean implements Serializable {
 	private Perfil perfil = new Perfil(new BigDecimal(1));
 
 	private List<Persona> listadoEstudiantes = el.consultarEstudiantes();
-	private List<Carrera> listadoCarreras = carreraList.getListadoCarreras();
+	private List<Carrera> listadoCarreras = cl.consultarCarreras();
 	
 	private String fechaNacimiento;
 	
@@ -83,14 +84,6 @@ public class EstudianteBean implements Serializable {
 
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
-	}
-
-	public CarreraBean getCarreraList() {
-		return carreraList;
-	}
-
-	public void setCarreraList(CarreraBean carreraList) {
-		this.carreraList = carreraList;
 	}
 
 	public List<Carrera> getListadoCarreras() {
@@ -159,6 +152,7 @@ public class EstudianteBean implements Serializable {
 	}
 	
 	public void setEstudianteAux(Persona copiaEstudianteAux) {
+		log.info("##Entro a setEstudianteAux##");
 		log.info(copiaEstudianteAux);
 		if (copiaEstudianteAux != null) {
 			this.fechaNacimiento = copiaEstudianteAux.getFechaNacimiento().toString();

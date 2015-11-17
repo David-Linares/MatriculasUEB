@@ -98,13 +98,22 @@ public class EstudianteLogical {
 
 	@SuppressWarnings("unchecked")
 	public List<Persona> consultarEstudiantes() {
+		log.info("Entró a consultar Estudiantes");
 		List<Persona> estudiantes = new ArrayList<Persona>();
-		String sql = "select e from Persona as e where e.perfil.idPerfil = 1 order by e.nombrePersona, e.apellidosPersona ";
+		String sql = "select e from Persona as e where e.perfil.idPerfil = 1 order by e.nombrePersona, e.apellidosPersona";
 		Session session = HibernateSession.getSf().getCurrentSession();
-		session.beginTransaction();
-		Query query = session.createQuery(sql);
-		estudiantes = query.list();
-		session.getTransaction().commit();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(sql);
+			estudiantes = query.list();
+			session.getTransaction().commit();			
+		}catch(Exception e){
+			log.error("##Ocurrió un error en la consulta de estudiantes##");
+			log.error(e);
+			e.printStackTrace();
+		}
+		log.info("## Salió de consultar Estudiantes ##");
+		log.info(estudiantes);
 		return estudiantes;
 	}
 

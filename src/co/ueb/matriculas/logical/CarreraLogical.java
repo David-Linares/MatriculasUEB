@@ -66,6 +66,7 @@ public class CarreraLogical implements Serializable {
 	
 	@SuppressWarnings("unchecked")
 	public List<Carrera> consultarCarreras(){
+		log.info("## Entro a consultar carreras ##");
 		carreras = new ArrayList<Carrera>();
 		sql = Constants.CONSULTA_CARRERAS;
 		sesion = HibernateSession.getSf().getCurrentSession();
@@ -79,6 +80,8 @@ public class CarreraLogical implements Serializable {
 			log.error(e);
 			e.printStackTrace();
 		}
+		log.info("## Salió de consultar carreras ##");
+		log.info(carreras);
 		return carreras;
 	}
 

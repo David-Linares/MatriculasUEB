@@ -41,41 +41,41 @@
 					<h:column>
 						<f:facet name="header"># Estudiante </f:facet>
 					#{estudiante.idPersona}
-				</h:column>
-					<h:column>
-						<f:facet name="header">Nombres</f:facet>
-					#{estudiante.nombrePersona}
-				</h:column>
-					<h:column>
-						<f:facet name="header">Apellidos</f:facet>
-					#{estudiante.apellidosPersona}
-				</h:column>
-					<h:column>
-						<f:facet name="header">F/Nacimiento</f:facet>
-					#{estudiante.fechaNacimiento}
-				</h:column>
-				
-				<h:column>
-						<f:facet name="header">Dirección</f:facet>
-					#{estudiante.direccion}
-				</h:column>
-				<h:column>
-						<f:facet name="header">Correo</f:facet>
-					#{estudiante.correoElectronico}
-				</h:column>
-				<h:column>
-						<f:facet name="header">Usuario</f:facet>
-					#{estudiante.usuario}
-				</h:column>
-				<h:column>
-						<f:facet name="header">Acciones</f:facet>
-						<h:commandLink class="botonImg" data-toggle="modal" data-target="#modalEditarEstudiante"
-							actionListener="#{estudianteBean.setEstudianteAux(estudiante)}">
-							<f:ajax execute="@form" render=":modalEditContent"
-								onevent="function(data) { if (data.status == 'success') $('#modalEditarEstudiante').modal() ; }" />
-							<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
-						</h:commandLink>
 					</h:column>
+						<h:column>
+							<f:facet name="header">Nombres</f:facet>
+						#{estudiante.nombrePersona}
+					</h:column>
+						<h:column>
+							<f:facet name="header">Apellidos</f:facet>
+						#{estudiante.apellidosPersona}
+					</h:column>
+						<h:column>
+							<f:facet name="header">F/Nacimiento</f:facet>
+						#{estudiante.fechaNacimiento}
+					</h:column>
+					
+					<h:column>
+							<f:facet name="header">Dirección</f:facet>
+						#{estudiante.direccion}
+					</h:column>
+					<h:column>
+							<f:facet name="header">Correo</f:facet>
+						#{estudiante.correoElectronico}
+					</h:column>
+					<h:column>
+							<f:facet name="header">Usuario</f:facet>
+						#{estudiante.usuario}
+					</h:column>
+					<h:column>
+							<f:facet name="header">Acciones</f:facet>
+							<h:commandLink class="botonImg" data-toggle="modal" data-target="#modalEditarEstudiante"
+								actionListener="#{estudianteBean.setEstudianteAux(estudiante)}">
+								<f:ajax execute="@form" render=":modalEditContent"
+									onevent="function(data) { if (data.status == 'success') $('#modalEditarEstudiante').modal() ; }" />
+								<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
+							</h:commandLink>
+						</h:column>
 				</h:dataTable>
 			</h:form>
 		</div>
