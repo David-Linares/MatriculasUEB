@@ -5,20 +5,33 @@ package co.ueb.matriculas.beans;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.jboss.logging.Logger;
 
 import co.ueb.matriculas.logical.EstudianteLogical;
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Perfil;
 import co.ueb.matriculas.model.Persona;
+import co.ueb.matriculas.util.Constants;
 
-@SuppressWarnings("serial")
 public class EstudianteBean implements Serializable {
 
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6961145382541935022L;
+	private static final Logger log = Logger.getLogger(EstudianteBean.class);
+	
 	private String mensajeRespuesta = "";
 	private String auxNombreValidacion = "";
+	private boolean mensajeError = false;
 
 	private boolean banderaEdit = false;
 	private boolean estadoEstudianteEditar = false;
@@ -28,6 +41,7 @@ public class EstudianteBean implements Serializable {
 	private Carrera carreraEstudiante = null;
 	private CarreraBean carreraList = new CarreraBean();
 
+	private Persona nuevoEstudiante = new Persona();
 	private Persona estudianteAux = null;
 	private Persona estudianteAuxEditar = null;
 
@@ -35,13 +49,32 @@ public class EstudianteBean implements Serializable {
 
 	private List<Persona> listadoEstudiantes = el.consultarEstudiantes();
 	private List<Carrera> listadoCarreras = carreraList.getListadoCarreras();
-
-	public EstudianteLogical getEl() {
-		return el;
+	
+	private String fechaNacimiento;
+	
+	
+	public boolean isMensajeError() {
+		return mensajeError;
 	}
 
-	public void setEl(EstudianteLogical el) {
-		this.el = el;
+	public void setMensajeError(boolean mensajeError) {
+		this.mensajeError = mensajeError;
+	}
+
+	public String getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(String fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public Persona getNuevoEstudiante() {
+		return nuevoEstudiante;
+	}
+
+	public void setNuevoEstudiante(Persona nuevoEstudiante) {
+		this.nuevoEstudiante = nuevoEstudiante;
 	}
 
 	public Perfil getPerfil() {
@@ -120,15 +153,16 @@ public class EstudianteBean implements Serializable {
 		this.banderaEdit = banderaEdit;
 	}
 
-	public void encriptarContrasena(String nuevaContrasena){
-		String encrypt = DigestUtils.md5Hex(nuevaContrasena);
-		this.getEstudianteAux().setContrasena(encrypt);
+	public String encriptarContrasena(String contrasenaToEncrypt){
+		String encrypt = DigestUtils.md5Hex(contrasenaToEncrypt);
+		return encrypt;
 	}
 	
 	public void setEstudianteAux(Persona copiaEstudianteAux) {
+		log.info(copiaEstudianteAux);
 		if (copiaEstudianteAux != null) {
-
-			this.setEstudianteAux(copiaEstudianteAux);
+			this.fechaNacimiento = copiaEstudianteAux.getFechaNacimiento().toString();
+			this.estudianteAux = copiaEstudianteAux;
 			this.setEstudianteAuxEditar(copiaEstudianteAux);
 			if (this.getEstudianteAux().getEstadoPersona().compareTo('1') == 0) {
 				this.setEstadoEstudianteEditar(true);
@@ -146,76 +180,14 @@ public class EstudianteBean implements Serializable {
 		this.listadoEstudiantes = listadoEstudiantes;
 	}
 
-	public boolean validarCamposEstudiante(Persona validarEstudiante) {
-
-		if (validarEstudiante.getIdPersona().equals("")) {
-			this.getEstudianteAux().setIdPersona(
-					this.getEstudianteAuxEditar().getIdPersona());
-			this.setMensajeRespuesta("El campo identificaciòn no puede estar vacìo");
-		}
-
-		if (validarEstudiante.getNombrePersona().equals("")) {
-			this.getEstudianteAux().setNombrePersona(
-					this.getEstudianteAux().getNombrePersona());
-			this.setMensajeRespuesta("El campo nombres no puede estar vacío");
-			return false;
-		}
-		if (validarEstudiante.getApellidosPersona().equals("")) {
-			this.getEstudianteAux().setApellidosPersona(
-					this.getEstudianteAuxEditar().getApellidosPersona());
-			this.setMensajeRespuesta("El campo apellidos no puede estar vacío");
-			return false;
-		}
-		if (validarEstudiante.getFechaNacimiento().equals("")) {
-			this.getEstudianteAux().setFechaNacimiento(
-					this.getEstudianteAuxEditar().getFechaNacimiento());
-			this.setMensajeRespuesta("El campo fecha de nacimiento no puede estar vacío");
-			return false;
-		}
-		if (validarEstudiante.getLugarNacimiento().equals("")) {
-			this.getEstudianteAux().setLugarNacimiento(
-					this.getEstudianteAuxEditar().getLugarNacimiento());
-			this.setMensajeRespuesta("El campo lugar de nacimiento no puede estar vacío");
-			return false;
-		}
-		if (validarEstudiante.getDireccion().equals("")) {
-			this.getEstudianteAux().setDireccion(
-					this.getEstudianteAuxEditar().getDireccion());
-			this.setMensajeRespuesta("El campo dirección no puede estar vacío");
-			return false;
-		}
-		if (validarEstudiante.getCorreoElectronico().equals("")) {
-			this.getEstudianteAux().setCorreoElectronico(
-					this.getEstudianteAuxEditar().getCorreoElectronico());
-			this.setMensajeRespuesta("El campo correo electronico no puede estar vacío");
-			return false;
-		}
-		if (validarEstudiante.getUsuario().equals("")) {
-			this.getEstudianteAux().setUsuario(
-					this.getEstudianteAuxEditar().getUsuario());
-			this.setMensajeRespuesta("El campo usuario no puede estar vacío");
-			return false;
-		}
-		if (validarEstudiante.getContrasena().equals("")) {
-			this.getEstudianteAux().setContrasena(
-					this.getEstudianteAuxEditar().getContrasena());
-			this.setMensajeRespuesta("El campo contraseña no puede estar vacío");
-			return false;
-		}
-
-		return true;
-	}
-
 	public String editarEstudiante() {
 
-		if (!validarCamposEstudiante(estudianteAux)) {
-			return null;
-		}
 		if (this.estadoEstudianteEditar) {
 			this.getEstudianteAux().setEstadoPersona('1');
 		} else {
 			this.getEstudianteAux().setEstadoPersona('0');
 		}
+		this.getEstudianteAux().setContrasena(encriptarContrasena(this.estudianteAux.getContrasena()));
 		boolean guardado = el.modificarEstudiante(this.getEstudianteAux());
 		System.out.println("no ha entrado a if de guardado");
 		if (guardado) {
@@ -228,39 +200,51 @@ public class EstudianteBean implements Serializable {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public String crearEstudiante() {
-		if (!validarCamposEstudiante(this.getEstudianteAux())) {
-			return null;
+
+		log.info(nuevoEstudiante);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		nuevoEstudiante.setPerfil(perfil); //Cambiar por Select
+		nuevoEstudiante.setPromedio(new BigDecimal(5.0));
+		log.info(this.getFechaNacimiento());
+		nuevoEstudiante.setContrasena(encriptarContrasena(nuevoEstudiante.getContrasena()));
+		nuevoEstudiante.setEstadoPersona('1');
+		try {
+			Date nfecha = dateFormat.parse(this.getFechaNacimiento());
+			nuevoEstudiante.setFechaNacimiento(nfecha);
+		} catch (ParseException e) {
+			log.error("Error al momento de convertir la fecha");
+			log.error(e);
+			e.printStackTrace();
 		}
-		if (this.isEstadoEstudianteEditar()) {
-			this.getEstudianteAux().setEstadoPersona('1');
-		} else {
-			this.getEstudianteAux().setEstadoPersona('0');
+		log.info(" ##Â Antes de enviar el objeto ##Â ");
+		log.info(nuevoEstudiante);
+		
+		String rptaGuardado = el.crearNuevoEstudiante(nuevoEstudiante);
+		switch (rptaGuardado) {
+		case "ok": // Respuesta guardado correctamente
+			this.setMensajeRespuesta(Constants.ESTUDIANTE_CREADO);
+			this.setMensajeError(false);
+			this.listadoEstudiantes.add(nuevoEstudiante);
+			break;
+		case "duplicado":
+			this.setMensajeRespuesta(Constants.MSJ_IDENTIFICACION_REPETIDO + " "
+					+ nuevoEstudiante.getIdPersona() + ". "+ Constants.MSJ_INTENTO);
+			this.setMensajeError(true);
+			break;
+		case "usuario_duplicado":
+			this.setMensajeRespuesta(Constants.MSJ_USUARIO_REPETIDO + " "
+					+ nuevoEstudiante.getUsuario() + ". "+ Constants.MSJ_INTENTO);
+			this.setMensajeError(true);
+			break;
+		default:
+			this.setMensajeRespuesta(Constants.MSJ_ERROR_GUARDADO + " "
+					+ rptaGuardado + ". "+ Constants.MSJ_INTENTO);
+			this.setMensajeError(true);
+			break;
 		}
-
-		Persona nuevoEstudiante = new Persona(this.getEstudianteAux()
-				.getIdPersona(), perfil, this.getEstudianteAux()
-				.getNombrePersona(), this.getEstudianteAux()
-				.getApellidosPersona(), this.getEstudianteAux()
-				.getFechaNacimiento(), this.getEstudianteAux()
-				.getLugarNacimiento(), this.getEstudianteAux().getDireccion(),
-				this.getEstudianteAux().getCorreoElectronico(), '1',
-				new BigDecimal(0), this.getEstudianteAux().getUsuario(), this
-						.getEstudianteAux().getContrasena());
-
-		this.getCarreraEstudiante().getCarreraEstudiantes()
-				.add(nuevoEstudiante);
-
-		boolean guardado = el.crearNuevoEstudiante(nuevoEstudiante);
-
-		if (guardado) {
-			this.setMensajeRespuesta("");
-			this.getListadoEstudiantes().add(nuevoEstudiante);
-			return "paginaEstudiante";
-		} else {
-			return "error";
-		}
+		
+		return Constants.NAVEGACION_ESTUDIANTE;
 	}
 
 }

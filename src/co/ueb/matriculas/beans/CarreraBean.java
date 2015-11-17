@@ -42,10 +42,19 @@ public class CarreraBean implements Serializable {
 	private Carrera carreraAux = null;
 	private Carrera copiaCarrera = null;
 	private Carrera carreraValidacion = null;
+	private Carrera nuevaCarrera = new Carrera();
 	private boolean banderaEdit = false;
 	private boolean estadoCarreraEditar = false;
 	private boolean mensajeError = false;
 	private String mensajeRespuesta = "";
+	
+	public Carrera getNuevaCarrera() {
+		return nuevaCarrera;
+	}
+
+	public void setNuevaCarrera(Carrera nuevaCarrera) {
+		this.nuevaCarrera = nuevaCarrera;
+	}
 
 	public FacultadBean getFacultadesList() {
 		return facultadesList;
@@ -247,7 +256,11 @@ public class CarreraBean implements Serializable {
 	}
 
 	public String crearCarrera() {
-
+		if (!validarCampos(this.getNuevaCarrera())) {
+			this.setMensajeError(true);
+			this.setMensajeRespuesta(Constants.MSJ_CAMPOS_VACIOS);
+			return Constants.NAVEGACION_MATERIA;
+		}
 		System.out.println("[CarreraBean] - crearCarrera || Entra a crear");
 		Set<Materia> materias = new HashSet<Materia>(0);
 		Set<Persona> personas = new HashSet<Persona>(0);
@@ -287,5 +300,18 @@ public class CarreraBean implements Serializable {
 		}
 		return Constants.NAVEGACION_CARRERA;
 
+	}
+	public boolean validarCampos(Carrera carreraCampos) {
+		if (carreraCampos.getNombreCarrera() == null
+				|| carreraCampos.getNombreCarrera().equals(""))
+			return false;
+		if (carreraCampos.getTotalCreditos().equals(new BigDecimal(0))
+				|| carreraCampos.getTotalCreditos().equals(""))
+			return false;
+		return true;
+	}
+
+	public void vaciarCampos() {
+		this.setNuevaCarrera(new Carrera());
 	}
 }

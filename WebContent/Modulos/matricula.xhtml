@@ -12,9 +12,9 @@
 	<div class="container">
 		<div class="col-md-12" style="margin-bottom:30px">
 			<div class="col-md-3" style="text-align:center">
-				<button data-toggle="modal" data-target="#modalMatriculas" class="botonImg">
+				<h:outputLink value="agregarMaterias.xhtml"  class="botonImg">
 					<h:graphicImage url="/resources/images/add.png"></h:graphicImage>
-				</button>
+				</h:outputLink>
 			</div>
 			<div class="col-md-3" style="text-align:center">
 				<button class="botonImg">
@@ -40,25 +40,7 @@
 			</div>
 		</div>
 		<div class="col-md-12">
-			<h:form>
-			<h:dataTable value="#{facultadBean.listadoFacultades}" var="facultad" class="table table-hover table-striped" id="tablaFacultad">
-				<h:column>
-					<f:facet name="header"># Facultad </f:facet>
-					#{facultad.idFacultad}
-				</h:column>
-				<h:column>
-					<f:facet name="header">Nombre de la Facultad</f:facet>
-					#{facultad.nombreFacultad}
-				</h:column>					
-				<h:column>
-					<f:facet name="header">Acciones</f:facet>
-					<h:commandLink class="botonImg"  data-toggle="modal" data-target="#myModalEdit" actionListener="#{facultadBean.setFacultadAux(facultad)}">
-						<f:ajax execute="@form" render=":modalEditContent" onevent="function(data) { if (data.status == 'success') $('#myModalEdit').modal() ; }"/>
-						<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
-					</h:commandLink>
-				</h:column>
-			</h:dataTable>
-			</h:form>
+			<h:outputLabel value="No has realizado matricula. Por favor registra materias para verlas en este listado" rendered="#{matriculaBean.datosMatricula == null}" />
 		</div>
 	</div>
 	<div class="modal fade" id="modalMatriculas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

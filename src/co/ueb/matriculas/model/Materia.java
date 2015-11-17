@@ -21,6 +21,7 @@ public class Materia implements java.io.Serializable {
 	private BigDecimal creditos;
 	private Character estadoMateria;
 	private Set<?> materiaMatriculas = new HashSet<Object>(0);
+	private Boolean seleccionadaMatricula;
 
 	public Materia() {
 	}
@@ -95,7 +96,13 @@ public class Materia implements java.io.Serializable {
 				+ materiaMatriculas + "]";
 	}
 
-	
+	public Boolean getSeleccionadaMatricula() {
+		return seleccionadaMatricula;
+	}
+
+	public void setSeleccionadaMatricula(Boolean seleccionadaMatricula) {
+		this.seleccionadaMatricula = seleccionadaMatricula;
+	}
 
 	
 }

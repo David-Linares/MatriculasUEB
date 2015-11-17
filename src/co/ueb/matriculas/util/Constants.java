@@ -13,10 +13,15 @@ public class Constants {
 	 * */
 	
 	public static final String HIBERNATE_FILE_NAME = "hibernate.cfg.xml";
-	public static final String MSJ_INTENTO = "Por favor Int�ntalo de nuevo";
-	public static final String MSJ_ERROR_GUARDADO = "Ups, parece que ocurri� un error al momento de guardar el registro";
+	public static final String MSJ_INTENTO = "Por favor Int�ntalo de nuevo";
+	public static final String MSJ_ERROR_GUARDADO = "Ups, parece que ocurri� un error al momento de guardar el registro";
 	public static final String MSJ_NOMBRE_REPETIDO = "Ya existe un registro con el nombre";
-	public static final String MSJ_NOMBRE_VACIO = "El campo nombre no puede estar vac�o";
+	public static final String MSJ_USUARIO_REPETIDO = "Ya existe un registro con este nombre de usuario";
+	public static final String MSJ_IDENTIFICACION_REPETIDO = "Ya existe un registro con este número de identificación";
+	public static final String MSJ_NOMBRE_VACIO = "El campo nombre no puede estar vacío";
+	public static final String MSJ_CREDITOS_EXCEDIDOS = "Excedió la cantidad de créditos permitidos.";
+	public static final String MSJ_USUARIO_NO_EXISTENTE = "El usuario no está registrado en la base de datos de las notas";
+	public static final int CREDITOS_PERMITIDOS = 16;
 	public static final String MSJ_CAMPOS_VACIOS ="Los Campos no pueden estar vacios";
 	
 	
@@ -28,7 +33,9 @@ public class Constants {
 	
 	public static final String NAVEGACION_FACULTAD = "paginaFacultad";
 	public static final String NAVEGACION_MATERIA = "paginaMateria";
+	public static final String NAVEGACION_ESTUDIANTE = "paginaEstudiante";
 	public static final String NAVEGACION_CARRERA = "paginaCarrera";
+	public static final String NAVEGACION_MATRICULA = "paginaMatricula";
 		
 	/*
 	 * Constantes de Facultad
@@ -59,7 +66,6 @@ public class Constants {
 	 * 
 	 * */
 	
-	public static final String MSJ_MATERIA_OK = "Materia Creada Correctamente!!";
 	public static final String MATERIA_CREADA = "Materia Creada Correctamente!!";
 	public static final String MATERIA_ACTUALIZADA = "Materia Actualizada Correctamente!!";
 	public static final String CONSULTA_MATERIAS = "select m from Materia as m order by m.idMateria";
@@ -72,4 +78,15 @@ public class Constants {
 	 * */
 	
 	public static final String MSJ_ESTUDIANTE_OK = "Estudiante Creado Correctamente!!";
+	public static final String ESTUDIANTE_CREADO = "Estudiante Creado Correctamente!!";
+	public static final String PROCEDIMIENTO_INSERTAR_ESTUDIANTE = "{call INSERTAR_PERSONA(?,?,?,?,?,?,?,?,?,?,?,?)}";
+	
+	/*
+	 * Constantes de Matricula
+	 * 
+	 * */
+	
+	public static final String CONSULTA_DATOS_MATRICULA = "FROM Matricula m where m.persona.idPersona = ";
+	public static final String PROCEDIMIENTO_INSERTAR_MATRICULA = "{call INSERTAR_MATRICULA(?,?)}";
+	public static final String PROCEDIMIENTO_INSERTAR_MATERIAS_MATRICULA = "{call INSERTAR_MATERIAS_MATRICULA(?,?,?)}";
 }
