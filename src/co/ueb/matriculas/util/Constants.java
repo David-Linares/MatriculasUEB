@@ -22,6 +22,7 @@ public class Constants {
 	public static final String MSJ_CREDITOS_EXCEDIDOS = "Excedió la cantidad de créditos permitidos.";
 	public static final String MSJ_USUARIO_NO_EXISTENTE = "El usuario no está registrado en la base de datos de las notas";
 	public static final int CREDITOS_PERMITIDOS = 16;
+	public static final String MSJ_CAMPOS_VACIOS ="Los Campos no pueden estar vacios";
 	
 	
 	/*

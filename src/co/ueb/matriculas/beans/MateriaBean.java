@@ -15,36 +15,31 @@ import co.ueb.matriculas.model.Materia;
 import co.ueb.matriculas.model.MateriaMatricula;
 import co.ueb.matriculas.util.Constants;
 
-
-
 public class MateriaBean implements Serializable {
 
-	//Datos de log
+	// Datos de log
 	private final static Logger log = Logger.getLogger("CarreraBean -- ");
-	
+
 	private MateriaLogical ml = new MateriaLogical();
 
-	//Atributos de materia para la vista
+	// Atributos de materia para la vista
 	private String mensajeRespuesta = "";
 	private List<Materia> listadoMaterias = ml.consultarMaterias();
 
-	//Atributos Auxiliares
+	// Atributos Auxiliares
 	private Materia materiaAux = null;
 	private Materia materiaValidacion = null;
-	private Materia nuevaMateria= new Materia();
+	private Materia nuevaMateria = new Materia();
 	private boolean estadoMateriaEditar = false;
-	private boolean mensajeError= false;
-	
-	//Atributos para carrera
+	private boolean mensajeError = false;
+
+	// Atributos para carrera
 	private Carrera carreraMateria = null;
-	private CarreraBean carrerasList = new CarreraBean(); 
+	private CarreraBean carrerasList = new CarreraBean();
 	private List<Carrera> listadoCarreras = carrerasList.getListadoCarreras();
 
-	
-	//Getters y Setters
-	
-	
-	
+	// Getters y Setters
+
 	public Materia getNuevaMateria() {
 		return nuevaMateria;
 	}
@@ -109,10 +104,11 @@ public class MateriaBean implements Serializable {
 		return listadoCarreras;
 	}
 
-	public void setListadoCarreras(List<Carrera> carreras){
-		CarreraBean carrerasList = new CarreraBean(); 
+	public void setListadoCarreras(List<Carrera> carreras) {
+		CarreraBean carrerasList = new CarreraBean();
 		this.listadoCarreras = carrerasList.getListadoCarreras();
-		System.out.println("[MateriaBean] - listadoCarreras => " + this.listadoCarreras);
+		System.out.println("[MateriaBean] - listadoCarreras => "
+				+ this.listadoCarreras);
 	}
 
 	public Materia getMateriaValidacion() {
@@ -131,83 +127,98 @@ public class MateriaBean implements Serializable {
 		this.mensajeError = mensajeError;
 	}
 
-	public void setMateriaAux(Materia materiaAuxEditar){
+	public void setMateriaAux(Materia materiaAuxEditar) {
 		log.info(materiaAuxEditar);
-		if(materiaAuxEditar != null){
+		if (materiaAuxEditar != null) {
 			this.materiaAux = materiaAuxEditar;
 			this.setMateriaValidacion(materiaAuxEditar);
-			
-			if(this.materiaAux.getEstadoMateria().compareTo('1') == 0){
+
+			if (this.materiaAux.getEstadoMateria().compareTo('1') == 0) {
 				this.setEstadoMateriaEditar(true);
-			}else{
+			} else {
 				this.setEstadoMateriaEditar(false);
 			}
 		}
 	}
 
-	
-	public String editarMateria(){
-		
-		if(this.estadoMateriaEditar){
+	public String editarMateria() {
+
+		if (this.estadoMateriaEditar) {
 			this.getMateriaAux().setEstadoMateria('1');
-		}else{
+		} else {
 			this.getMateriaAux().setEstadoMateria('0');
 		}
-		
+
 		String respuesta = ml.modificarMateria(this.getMateriaAux());
 		switch (respuesta) {
-		case "ok": //Respuesta guardado correctamente
+		case "ok": // Respuesta guardado correctamente
 			this.setMensajeRespuesta(Constants.MATERIA_ACTUALIZADA);
 			this.setMensajeError(false);
 			break;
 		case "duplicado":
-			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_REPETIDO + ": " + this.getMateriaAux().getNombreMateria() + " " + Constants.MSJ_INTENTO );
+			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_REPETIDO + ": "
+					+ this.getMateriaAux().getNombreMateria() + " "
+					+ Constants.MSJ_INTENTO);
 			this.setMensajeError(true);
 			for (Materia materia : listadoMaterias) {
-				if (materia.getIdMateria().equals(this.getMateriaAux().getIdMateria())) {
-					materia.setNombreMateria(this.getMateriaValidacion().getNombreMateria());
+				if (materia.getIdMateria().equals(
+						this.getMateriaAux().getIdMateria())) {
+					materia.setNombreMateria(this.getMateriaValidacion()
+							.getNombreMateria());
 				}
 			}
-			this.getMateriaAux().setNombreMateria(this.getMateriaValidacion().getNombreMateria());
+			this.getMateriaAux().setNombreMateria(
+					this.getMateriaValidacion().getNombreMateria());
 			break;
 		default:
-			this.setMensajeRespuesta(Constants.MSJ_ERROR_GUARDADO + " " + respuesta + ". " + Constants.MSJ_INTENTO);
+			this.setMensajeRespuesta(Constants.MSJ_ERROR_GUARDADO + " "
+					+ respuesta + ". " + Constants.MSJ_INTENTO);
 			this.setMensajeError(true);
 			break;
 		}
 		return Constants.NAVEGACION_MATERIA;
 	}
 
-	public String crearMateria(){
+	public String crearMateria() {
+		if (!validarCampos(this.getNuevaMateria())) {
+			this.setMensajeError(true);
+			this.setMensajeRespuesta(Constants.MSJ_CAMPOS_VACIOS);
+			return Constants.NAVEGACION_MATERIA;
+		} 
 		
-		Set<MateriaMatricula> materiaMatricula = new HashSet<MateriaMatricula>(0);
+		Set<MateriaMatricula> materiaMatricula = new HashSet<MateriaMatricula>(
+				0);
 		BigDecimal idMateriaAux = new BigDecimal(1);
-		if (listadoMaterias.size()!=0) {
-			idMateriaAux = listadoMaterias.get(listadoMaterias.size() - 1).getIdMateria().add(new BigDecimal(1));
+		if (listadoMaterias.size() != 0) {
+			idMateriaAux = listadoMaterias.get(listadoMaterias.size() - 1)
+					.getIdMateria().add(new BigDecimal(1));
 		}
-		
+
 		Materia nuevaMateria = new Materia(idMateriaAux,
-				this.getCarreraMateria(), this.getNuevaMateria().getNombreMateria(),
-				this.getNuevaMateria().getCreditos(), '1', materiaMatricula);
+				this.getCarreraMateria(), this.getNuevaMateria()
+						.getNombreMateria(), this.getNuevaMateria()
+						.getCreditos(), '1', materiaMatricula);
 
+		// this.getFacultadCarrera().getCarreras().add(nuevaCarrera);
 
-		//	this.getFacultadCarrera().getCarreras().add(nuevaCarrera);
-	
 		String respuesta = ml.crearNuevaMateria(nuevaMateria);
-		switch (respuesta) {	
-		case "ok": //Respuesta guardado correctamente
+		switch (respuesta) {
+		case "ok": // Respuesta guardado correctamente
 			this.setMensajeRespuesta(Constants.MATERIA_CREADA);
 			this.setMensajeError(false);
 			this.listadoMaterias.add(nuevaMateria);
-			
+
 			break;
 
 		case "duplicado":
-			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_REPETIDO + " " + nuevaMateria.getNombreMateria() + ". " + Constants.MSJ_INTENTO );
+			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_REPETIDO + " "
+					+ nuevaMateria.getNombreMateria() + ". "
+					+ Constants.MSJ_INTENTO);
 			this.setMensajeError(true);
 			break;
 		default:
-			this.setMensajeRespuesta(Constants.MSJ_ERROR_GUARDADO + " " + respuesta + ". " + Constants.MSJ_INTENTO);
+			this.setMensajeRespuesta(Constants.MSJ_ERROR_GUARDADO + " "
+					+ respuesta + ". " + Constants.MSJ_INTENTO);
 			this.setMensajeError(true);
 			break;
 		}
@@ -215,35 +226,35 @@ public class MateriaBean implements Serializable {
 
 	}
 
-	
-	public void vaciarCampos(){
+	public boolean validarCampos(Materia materiaCampos) {
+		if (materiaCampos.getNombreMateria() == null
+				|| materiaCampos.getNombreMateria().equals(""))
+			return false;
+		if (materiaCampos.getCreditos().equals(new BigDecimal(0))
+				|| materiaCampos.getCreditos().equals(""))
+			return false;
+		return true;
+	}
+
+	public void vaciarCampos() {
 		this.setNuevaMateria(new Materia());
 	}
-/*
-	// no se para que funciona
-	public List<SelectItem> getListCarreraSelect() {
-		
-		if(this.listCarreraSelect == null){
-			
-			this.listCarreraSelect = new ArrayList<SelectItem>();
+	/*
+	 * // no se para que funciona public List<SelectItem> getListCarreraSelect()
+	 * {
+	 * 
+	 * if(this.listCarreraSelect == null){
+	 * 
+	 * this.listCarreraSelect = new ArrayList<SelectItem>();
+	 * 
+	 * List<Carrera> listCarreras = cl.consultarCarreras();
+	 * 
+	 * if (listCarreras != null && !listCarreras.isEmpty()) { SelectItem
+	 * itemCarrera; for (Carrera carreraList : listCarreras) { itemCarrera = new
+	 * SelectItem(carreraList.getIdCarrera(), carreraList.getNombreCarrera());
+	 * listCarreraSelect.add(itemCarrera); } } }
+	 * 
+	 * return listCarreraSelect; }
+	 */
 
-			List<Carrera> listCarreras = cl.consultarCarreras();
-
-			if (listCarreras != null && !listCarreras.isEmpty()) {
-				SelectItem itemCarrera;
-				for (Carrera carreraList : listCarreras) {
-					itemCarrera = new SelectItem(carreraList.getIdCarrera(),
-							carreraList.getNombreCarrera());
-					listCarreraSelect.add(itemCarrera);
-				}
-			}
-		}
-
-		return listCarreraSelect;
-	}
-*/
-	
-	}
-
-
-
+}
