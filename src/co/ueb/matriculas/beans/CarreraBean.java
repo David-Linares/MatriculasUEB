@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 
 import javax.faces.model.SelectItem;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import co.ueb.matriculas.logical.CarreraLogical;
 import co.ueb.matriculas.logical.FacultadLogical;
 import co.ueb.matriculas.model.Carrera;
@@ -220,8 +222,9 @@ public class CarreraBean implements Serializable {
 		} else {
 			this.getCarreraAux().setEstadoCarrera('0');
 		}
-
+		System.out.println("[CarreraBean] editarCarrera - CarreraAux es:" + getCarreraAux());
 		String respuesta = cl.modificarCarrera(this.getCarreraAux());
+		System.out.println("[CarreraBean] editarCarrera - la respuesta es:" + respuesta);
 		switch (respuesta) {
 		case "ok": // Respuesta guardado correctamente
 			this.setMensajeRespuesta(Constants.CARRERA_ACTUALIZADA);
@@ -265,7 +268,7 @@ public class CarreraBean implements Serializable {
 		System.out.println("[CarreraBean] crearCarrera - respuesta "+ respuesta);
 		switch (respuesta) {
 		case "ok": // Respuesta guardado correctamente
-			this.setMensajeRespuesta(Constants.MATERIA_CREADA);
+			this.setMensajeRespuesta(Constants.CARRERA_CREADA);
 			this.setMensajeError(false);
 			this.listadoCarreras.add(nuevaCarrera);
 			break;
