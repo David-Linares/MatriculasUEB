@@ -22,10 +22,12 @@ public class EstudianteLogical {
 	
 	private Persona personaEstudiante = new Persona();
 	List<Persona> listadoEstudiantes = new ArrayList<Persona>();
-	
+	private List<Persona> estudiantes;
 	private Session sesion;
 	private String msjRespuesta;
-
+	private String sql;
+	private Query query; 
+	
 	/*
 	 * @SuppressWarnings("unchecked") public List<Persona> getEstudiantes() {
 	 * String sql = "select p from Persona as p";
@@ -106,7 +108,7 @@ public class EstudianteLogical {
 			session.beginTransaction();
 			Query query = session.createQuery(sql);
 			estudiantes = query.list();
-			session.getTransaction().commit();			
+			session.getTransaction().commit();
 		}catch(Exception e){
 			log.error("##Ocurrió un error en la consulta de estudiantes##");
 			log.error(e);
@@ -150,6 +152,7 @@ public class EstudianteLogical {
 		} catch (Exception e) {
 			sesion.getTransaction().rollback();
 			e.printStackTrace();
+			log.error(e);
 			return "error";
 		}
 	}

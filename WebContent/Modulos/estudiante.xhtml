@@ -13,9 +13,17 @@
 	<div class="container">
 		<div class="col-md-12" style="margin-bottom: 30px">
 			<div class="col-md-3" style="text-align: center">
-				<button data-toggle="modal" data-target="#modalAgregarEstudiante" class="botonImg">
-					<h:graphicImage url="/resources/images/add.png"></h:graphicImage>
-				</button>
+				<h:form>
+					<h:commandLink class="botonImg" data-toggle="modal"
+						data-target="#modalAgregarEstudiante"
+						actionListener="#{estudianteBean.vaciarCampos()}">
+						<f:ajax execute="@form" render=":formEstudiante"
+							onevent="function(data) { if (data.status == 'success') $('#myModal').modal() ; }" />
+						<h:graphicImage url="/resources/images/add.png"></h:graphicImage>
+					</h:commandLink>
+				</h:form>
+				
+				
 			</div>
 			<!-- 			<div class="col-md-3" style="text-align:center"> -->
 			<!-- 				<h:form> -->
@@ -77,7 +85,7 @@
 							</h:commandLink>
 						</h:column>
 				</h:dataTable>
-			</h:form>
+			</h:form >
 		</div>
 		<div class="modal fade" id="modalAgregarEstudiante" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
@@ -94,39 +102,57 @@
 							<br></br>
 							<div class="form-group">
 								<label class="control-label">Número de Identificación</label>             
-								<h:inputText id="identificacionEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.nuevoEstudiante.idPersona}"></h:inputText>
+								<h:inputText id="identificacionEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.nuevoEstudiante.idPersona}"
+								onkeypress="if(event.which  != 08) if(event.which  != 09) if(event.which  &lt; 48 || event.which  &gt; 57) return false;"
+								onpaste="return false" maxlength="10"
+								></h:inputText>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Nombre del Estudiante</label>             
-								<h:inputText id="nombreEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.nuevoEstudiante.nombrePersona}"></h:inputText>
+								<h:inputText id="nombreEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.nuevoEstudiante.nombrePersona}"
+								onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+								onkeyup="this.value=this.value.toLowerCase()" maxlength="50"  > 
+					
+								></h:inputText>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Apellidos del Estudiante</label>             
-								<h:inputText id="apellidosEstudiante" class="form-control col-sm-10 empty" required="true" value="#{estudianteBean.nuevoEstudiante.apellidosPersona}"></h:inputText>
+								<h:inputText id="apellidosEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.nuevoEstudiante.apellidosPersona}"
+								onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+								onkeyup="this.value=this.value.toLowerCase()" maxlength="50"  > 
+					
+								></h:inputText>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Lugar de nacimiento</label>
-								<h:inputText id="lugarNacimientoEstudiante" class="form-control col-sm-10 empty" required="true" value="#{estudianteBean.nuevoEstudiante.lugarNacimiento}"></h:inputText>
+								<h:inputText id="lugarNacimientoEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.nuevoEstudiante.lugarNacimiento}"
+								onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+								onkeyup="this.value=this.value.toLowerCase()" maxlength="20"  > 
+					
+								></h:inputText>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Fecha de nacimiento</label>
-								<h:inputText id="fechaNacimientoEstudiante" class="form-control col-sm-10 empty" required="true" value="#{estudianteBean.fechaNacimiento}"></h:inputText>
+								<h:inputText id="fechaNacimientoEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.fechaNacimiento}"></h:inputText>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Dirección</label>
-								<h:inputText id="direccionEstudiante" value="#{estudianteBean.nuevoEstudiante.direccion}" class="form-control col-sm-10 empty" required="true"></h:inputText>
+								<h:inputText id="direccionEstudiante" value="#{estudianteBean.nuevoEstudiante.direccion}" class="form-control col-sm-10 empty" maxlength="50" ></h:inputText>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Correo Electrónico</label>
-								<h:inputText id="correoElectronicoEstudiante" class="form-control col-sm-10 empty" required="true" value="#{estudianteBean.nuevoEstudiante.correoElectronico}"></h:inputText>
+								<h:inputText id="correoElectronicoEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.nuevoEstudiante.correoElectronico} "  maxlength="50"
+								onkeypress=" if(event.which  != 08) if(event.which  != 09)if(event.which  != 45)if(event.which  != 46)if(event.which  != 95) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 64) if(event.which  &lt; 97 || event.which  &gt; 122) if(event.which  &lt; 48 || event.which  &gt; 57)  return false;"
+								onkeyup="this.value=this.value.toLowerCase()"
+								></h:inputText>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Usuario</label>
-								<h:inputText id="usuarioEstudiante" class="form-control col-sm-10 empty" required="true" value="#{estudianteBean.nuevoEstudiante.usuario}"></h:inputText>
+								<h:inputText id="usuarioEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.nuevoEstudiante.usuario}" maxlength="50"></h:inputText>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Contraseña</label>
-								<h:inputSecret id="contrasenaEstudiante" class="form-control col-sm-10 empty" required="true" value="#{estudianteBean.nuevoEstudiante.contrasena}"></h:inputSecret>
+								<h:inputSecret id="contrasenaEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.nuevoEstudiante.contrasena}" maxlength="50"></h:inputSecret>
 							</div>
 														
 <!-- 							<div class="form-control-wrapper"> -->
@@ -162,39 +188,57 @@
 								<br></br>
 								<div class="form-group">
 									<label class="control-label">Número de Identificación</label>             
-									<h:inputText id="identificacionEstudiante" class="form-control col-sm-10 empty" disabled="true" value="#{estudianteBean.estudianteAux.idPersona}"></h:inputText>
+									<h:inputText id="identificacionEstudiante" class="form-control col-sm-10 empty" disabled="true" value="#{estudianteBean.estudianteAux.idPersona}"
+									onkeypress="if(event.which  != 08) if(event.which  != 09) if(event.which  &lt; 48 || event.which  &gt; 57) return false;"
+								onpaste="return false" maxlength="10"
+									></h:inputText>
 								</div>
 								<div class="form-group">
 									<label class="control-label">Nombre del Estudiante</label>             
-									<h:inputText id="nombreEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.estudianteAux.nombrePersona}"></h:inputText>
+									<h:inputText id="nombreEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.estudianteAux.nombrePersona}"
+									onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+									onkeyup="this.value=this.value.toLowerCase()" maxlength="50"  > 
+					
+									></h:inputText>
 								</div>
 								<div class="form-group">
 									<label class="control-label">Apellidos del Estudiante</label>             
-									<h:inputText id="apellidosEstudiante" class="form-control col-sm-10 empty" required="true" value="#{estudianteBean.estudianteAux.apellidosPersona}"></h:inputText>
+									<h:inputText id="apellidosEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.estudianteAux.apellidosPersona}"
+									onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+									onkeyup="this.value=this.value.toLowerCase()" maxlength="50"  > 
+					
+									></h:inputText>
 								</div>
 								<div class="form-group">
 									<label class="control-label">Lugar de nacimiento</label>
-									<h:inputText id="lugarNacimientoEstudiante" class="form-control col-sm-10 empty" required="true" value="#{estudianteBean.estudianteAux.lugarNacimiento}"></h:inputText>
+									<h:inputText id="lugarNacimientoEstudiante" class="form-control col-sm-10 empty"  value="#{estudianteBean.estudianteAux.lugarNacimiento}"
+									onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+									onkeyup="this.value=this.value.toLowerCase()" maxlength="50"  > 
+					
+									></h:inputText>
 								</div>
 								<div class="form-group">
 									<label class="control-label">Fecha de nacimiento</label>
-									<h:inputText id="fechaNacimientoEstudianteEditar" class="form-control col-sm-10 empty" required="true" value="#{estudianteBean.fechaNacimiento}"></h:inputText>
+									<h:inputText id="fechaNacimientoEstudianteEditar" class="form-control col-sm-10 empty" value="#{estudianteBean.fechaNacimiento}"></h:inputText>
 								</div>
 								<div class="form-group">
 									<label class="control-label">Dirección</label>
-									<h:inputText id="direccionEstudiante" value="#{estudianteBean.estudianteAux.direccion}" class="form-control col-sm-10 empty" required="true"></h:inputText>
+									<h:inputText id="direccionEstudiante" value="#{estudianteBean.estudianteAux.direccion}" class="form-control col-sm-10 empty" maxlength="50" ></h:inputText>
 								</div>
 								<div class="form-group">
 									<label class="control-label">Correo Electrónico</label>
-									<h:inputText id="correoElectronicoEstudiante" class="form-control col-sm-10 empty" required="true" value="#{estudianteBean.estudianteAux.correoElectronico}"></h:inputText>
+									<h:inputText id="correoElectronicoEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.estudianteAux.correoElectronico}"
+									onkeypress=" if(event.which  != 08) if(event.which  != 09)if(event.which  != 45)if(event.which  != 46)if(event.which  != 95) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 64) if(event.which  &lt; 97 || event.which  &gt; 122) if(event.which  &lt; 48 || event.which  &gt; 57)  return false;"
+								onkeyup="this.value=this.value.toLowerCase()" maxlength="50"
+									></h:inputText>
 								</div>
 								<div class="form-group">
 									<label class="control-label">Usuario</label>
-									<h:inputText id="usuarioEstudiante" class="form-control col-sm-10 empty" required="true" value="#{estudianteBean.estudianteAux.usuario}"></h:inputText>
+									<h:inputText id="usuarioEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.estudianteAux.usuario}" maxlength="50"></h:inputText>
 								</div>
 								<div class="form-group">
 									<label class="control-label">Contraseña</label>
-									<h:inputSecret id="contrasenaEstudiante" class="form-control col-sm-10 empty" required="true" value="#{estudianteBean.estudianteAux.contrasena}"></h:inputSecret>
+									<h:inputSecret id="contrasenaEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.estudianteAux.contrasena}" maxlength="50"></h:inputSecret>
 								</div>
 															
 	<!-- 							<div class="form-control-wrapper"> -->

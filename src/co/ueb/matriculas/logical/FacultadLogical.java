@@ -94,7 +94,6 @@ public class FacultadLogical {
 					msjRespuesta = callableStatement.getString(4);
 				}
 			});
-			sesion.update(editaFacultad);
 			sesion.getTransaction().commit();
 			return msjRespuesta;
 		}catch(Exception e){
