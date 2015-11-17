@@ -95,6 +95,7 @@ public class Materia implements java.io.Serializable {
 				+ materiaMatriculas + "]";
 	}
 
+	
 
 	
 }

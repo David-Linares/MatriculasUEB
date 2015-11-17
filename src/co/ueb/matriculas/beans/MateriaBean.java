@@ -25,14 +25,13 @@ public class MateriaBean implements Serializable {
 	private MateriaLogical ml = new MateriaLogical();
 
 	//Atributos de materia para la vista
-	private String nombreMateria = "";
 	private String mensajeRespuesta = "";
 	private List<Materia> listadoMaterias = ml.consultarMaterias();
 
 	//Atributos Auxiliares
 	private Materia materiaAux = null;
 	private Materia materiaValidacion = null;
-	private BigDecimal cantidadCreditos;
+	private Materia nuevaMateria= new Materia();
 	private boolean estadoMateriaEditar = false;
 	private boolean mensajeError= false;
 	
@@ -44,20 +43,14 @@ public class MateriaBean implements Serializable {
 	
 	//Getters y Setters
 	
-	public String getNombreMateria() {
-		return nombreMateria;
+	
+	
+	public Materia getNuevaMateria() {
+		return nuevaMateria;
 	}
 
-	public void setNombreMateria(String nombreMateria) {
-		this.nombreMateria = nombreMateria;
-	}
-
-	public BigDecimal getCantidadCreditos() {
-		return cantidadCreditos;
-	}
-
-	public void setCantidadCreditos(BigDecimal cantidadCreditos) {
-		this.cantidadCreditos = cantidadCreditos;
+	public void setNuevaMateria(Materia nuevaMateria) {
+		this.nuevaMateria = nuevaMateria;
 	}
 
 	public Carrera getCarreraMateria() {
@@ -157,13 +150,6 @@ public class MateriaBean implements Serializable {
 	
 	public String editarMateria(){
 		
-		if(this.getMateriaAux().getNombreMateria().equals("")){
-			this.getMateriaAux().setNombreMateria(this.getCopiaMateria().getNombreMateria());
-			this.getMateriaAux().setCreditos(this.getCopiaMateria().getCreditos());
-			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_VACIO);
-			this.setMensajeError(true);
-			return null;
-		}
 		if(this.estadoMateriaEditar){
 			this.getMateriaAux().setEstadoMateria('1');
 		}else{
@@ -174,10 +160,16 @@ public class MateriaBean implements Serializable {
 		switch (respuesta) {
 		case "ok": //Respuesta guardado correctamente
 			this.setMensajeRespuesta(Constants.MATERIA_ACTUALIZADA);
+			this.setMensajeError(false);
 			break;
 		case "duplicado":
 			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_REPETIDO + ": " + this.getMateriaAux().getNombreMateria() + " " + Constants.MSJ_INTENTO );
 			this.setMensajeError(true);
+			for (Materia materia : listadoMaterias) {
+				if (materia.getIdMateria().equals(this.getMateriaAux().getIdMateria())) {
+					materia.setNombreMateria(this.getMateriaValidacion().getNombreMateria());
+				}
+			}
 			this.getMateriaAux().setNombreMateria(this.getMateriaValidacion().getNombreMateria());
 			break;
 		default:
@@ -197,8 +189,8 @@ public class MateriaBean implements Serializable {
 		}
 		
 		Materia nuevaMateria = new Materia(idMateriaAux,
-				this.getCarreraMateria(), this.getNombreMateria(),
-				this.getCantidadCreditos(), '1', materiaMatricula);
+				this.getCarreraMateria(), this.getNuevaMateria().getNombreMateria(),
+				this.getNuevaMateria().getCreditos(), '1', materiaMatricula);
 
 
 		//	this.getFacultadCarrera().getCarreras().add(nuevaCarrera);
@@ -209,6 +201,7 @@ public class MateriaBean implements Serializable {
 			this.setMensajeRespuesta(Constants.MATERIA_CREADA);
 			this.setMensajeError(false);
 			this.listadoMaterias.add(nuevaMateria);
+			
 			break;
 
 		case "duplicado":
@@ -222,6 +215,10 @@ public class MateriaBean implements Serializable {
 		}
 		return Constants.NAVEGACION_MATERIA;
 
+	}
+	
+	public void vaciarCampos(){
+		this.setNuevaMateria(new Materia());
 	}
 /*
 	// no se para que funciona
@@ -245,4 +242,6 @@ public class MateriaBean implements Serializable {
 
 		return listCarreraSelect;
 	}
-*/}
+*/
+	
+	}

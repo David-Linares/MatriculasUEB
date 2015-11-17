@@ -12,9 +12,13 @@
 	<div class="container">
 		<div class="col-md-12" style="margin-bottom:30px">
 			<div class="col-md-3" style="text-align:center">
-				<button data-toggle="modal" data-target="#myModal" class="botonImg">
-					<h:graphicImage url="/resources/images/add.png"></h:graphicImage>
-				</button>
+				<h:form>
+				<h:commandLink class="botonImg"  data-toggle="modal" data-target="#myModal" actionListener="#{materiaBean.vaciarCampos()}">
+						<f:ajax execute="@form" render=":modalAgregar" onevent="function(data) { if (data.status == 'success') $('#myModal').modal() ; }"/>
+						<h:graphicImage url="/resources/images/add.png"></h:graphicImage>
+					</h:commandLink>
+				</h:form>
+				
 			</div>
 <!-- 			<div class="col-md-3" style="text-align:center"> -->
 <!-- 				<h:form> -->
@@ -78,27 +82,38 @@
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Agregar materia</h4>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times; </span></button>
+	        <h4 class="modal-title" id="myModalLabel">Agregar materia </h4>
 	      </div>
-        <h:form >
+        <h:form id="modalAgregar">
 	      <div class="modal-body">
 	      		<br></br>
+	      		<br></br>
 	        	<div class="form-control-wrapper">
-					<h:inputText id="nuevaMateria" class="form-control col-sm-10 empty" required="true" value="#{materiaBean.nombreMateria}" maxlength="50" ></h:inputText>
-					<div class="floating-label">Nombre de la Carrera</div>
-					<span class="material-input"></span>	                    
+					<h:inputText id="nuevaMateria" class="form-control col-sm-10 empty" required="true" immediate="true" value="#{materiaBean.nuevaMateria.nombreMateria}" maxlength="50" requiredMessage="Nombre requerido" > 
+					<h:message for="nuevaMateria"/>
+					</h:inputText>
+					<div class="floating-label">Nombre de la Materia</div>
+					<span class="material-input"></span>
+						<br></br>
+						<br></br>
+					                   
 				</div>
 				<div class="form-control-wrapper">
-					<h:inputText id="creditosMateria" class="form-control col-sm-10 empty" required="true" value="#{materiaBean.cantidadCreditos}" maxlength="3" type="number"></h:inputText>
+					<h:inputText id="creditosMateria" class="form-control col-sm-10 empty" required="true" value="#{materiaBean.nuevaMateria.creditos}" maxlength="1" >
+					
+					</h:inputText>
 					<div class="floating-label">Creditos maximos permitidos</div>
 					<span class="material-input"></span>	                    
 				</div>
 				<br></br>
+				<br></br>
+				
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-	        <h:commandButton class="btn btn-primary" action="#{materiaBean.crearMateria()}" value="Guardar materia" />
+	        <h:commandButton class="btn btn-primary" action="#{materiaBean.crearMateria()}" value="Guardar materia"   />
+	        
 	      </div>
         </h:form>
 	    </div>
@@ -117,11 +132,11 @@
 		      		<br></br>
 		        	<div class="form-group">
 						<label class="control-label">Nombre de la materia</label>             
-						<h:inputText class="form-control col-sm-10 empty" required="true" value="#{materiaBean.materiaAux.nombreMateria}"></h:inputText>
+						<h:inputText class="form-control col-sm-10 empty" required="true" maxlength="50" value="#{materiaBean.materiaAux.nombreMateria}"></h:inputText>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Creditos</label>             
-						<h:inputText class="form-control col-sm-10 empty" required="true" value="#{materiaBean.materiaAux.creditos}"></h:inputText>
+						<h:inputText class="form-control col-sm-10 empty" required="true" maxlength="1" value="#{materiaBean.materiaAux.creditos}"></h:inputText>
 					</div>
 					<div class="togglebutton">
 						<label>
