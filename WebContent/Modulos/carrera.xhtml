@@ -6,25 +6,6 @@
 
 <h:head>
 
-	<script>
-  	function soloNumeros(e){
-    	key = e.keyCode || e.which;
-    	teclado = String.fromCharCode(key);
-    	numeros="0123456789";
-    	especiales="8-37-38-46"; //array
-    	teclado_especial=false;
-
-    	for(var i in especiales){
-			if(key==especiales[i]){
-				teclado_especial=true;
-				}	
-        	}
-    	if(numeros.indexOf(teclado)==-1 &amp;&amp; !teclado_especial)){
-			return false;
-        	}
-	}
-	</script>
-
 </h:head>
 <ui:insert>
 	<ui:include src="/Modulos/header.xhtml"></ui:include>
@@ -115,6 +96,7 @@
 							<h:inputText id="nuevaCarrera"
 								class="form-control col-sm-10 empty" required="true"
 								value="#{carreraBean.nombreCarrera}"
+								onkeypress="if(event.which  != 38) if(event.which  != 37) if(event.which  != 08) if(event.which  != 09) if(event.which  != 46) if(event.which  != 32) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
 								onkeyup="this.value=this.value.toLowerCase()" maxlength="50"></h:inputText>
 							<div class="floating-label">Nombre de la Carrera</div>
 							<span class="material-input"></span>
