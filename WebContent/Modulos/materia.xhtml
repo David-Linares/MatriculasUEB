@@ -4,7 +4,8 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"> 
 
-<h:head></h:head>
+<h:head>
+</h:head>
 	<ui:insert>
 		<ui:include src="/Modulos/header.xhtml"></ui:include>
 	</ui:insert>
@@ -67,7 +68,7 @@
 				</h:column>							
 				<h:column>
 					<f:facet name="header">Acciones</f:facet>
-<h:commandLink class="botonImg"  data-toggle="modal" data-target="#myModalEdit" actionListener="#{materiaBean.setMateriaAux(materia)}">
+					<h:commandLink class="botonImg"  data-toggle="modal" data-target="#myModalEdit" actionListener="#{materiaBean.setMateriaAux(materia)}">
 						<f:ajax execute="@form" render=":modalEditContent" onevent="function(data) { if (data.status == 'success') $('#myModalEdit').modal() ; }"/>
 						<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
 					</h:commandLink>
@@ -90,8 +91,8 @@
 	      		<br></br>
 	      		<br></br>
 	        	<div class="form-control-wrapper">
-					<h:inputText id="nuevaMateria" class="form-control col-sm-10 empty" required="true" immediate="true" value="#{materiaBean.nuevaMateria.nombreMateria}" maxlength="50" requiredMessage="Nombre requerido" > 
-					<h:message for="nuevaMateria"/>
+					<h:inputText id="nombreMateria" name="nombreMateria" class="form-control col-sm-10 empty" value="#{materiaBean.nuevaMateria.nombreMateria}" maxlength="50"  > 
+					
 					</h:inputText>
 					<div class="floating-label">Nombre de la Materia</div>
 					<span class="material-input"></span>
@@ -100,7 +101,7 @@
 					                   
 				</div>
 				<div class="form-control-wrapper">
-					<h:inputText id="creditosMateria" class="form-control col-sm-10 empty" required="true" value="#{materiaBean.nuevaMateria.creditos}" maxlength="1" >
+					<h:inputText id="creditosMateria" name="creditosMateria" class="form-control col-sm-10 empty" value="#{materiaBean.nuevaMateria.creditos}" maxlength="1" >
 					
 					</h:inputText>
 					<div class="floating-label">Creditos maximos permitidos</div>

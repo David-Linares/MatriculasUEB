@@ -17,6 +17,7 @@ public class Constants {
 	public static final String MSJ_ERROR_GUARDADO = "Ups, parece que ocurrió un error al momento de guardar el registro";
 	public static final String MSJ_NOMBRE_REPETIDO = "Ya existe un registro con el nombre";
 	public static final String MSJ_NOMBRE_VACIO = "El campo nombre no puede estar vacío";
+	public static final String MSJ_CAMPOS_VACIOS ="Los Campos no pueden estar vacios";
 	
 	
 	/*
