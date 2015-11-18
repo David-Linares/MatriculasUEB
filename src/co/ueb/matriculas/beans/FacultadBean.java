@@ -39,6 +39,7 @@ public class FacultadBean implements Serializable {
 	private Facultad facultadValidacion = null;
 	private boolean estadoFacultadEditar = false;
 	private boolean mensajeError = false;
+	private String nombreFacultadEditar="";
 
 	// Getters y Setters
 
@@ -99,8 +100,9 @@ public class FacultadBean implements Serializable {
 	public void setFacultadAux(Facultad facultadAux) {
 		log.info("Va a cambiar => " + facultadAux);
 		if (facultadAux != null) {
-			this.setFacultadValidacion(facultadAux);
+			nombreFacultadEditar= facultadAux.getNombreFacultad(); 
 			this.facultadAux = facultadAux;
+			this.setFacultadValidacion(facultadAux);
 			if (this.facultadAux.getEstadoFacultad().compareTo('1') == 0) {
 				this.setEstadoFacultadEditar(true);
 			} else {
@@ -110,13 +112,13 @@ public class FacultadBean implements Serializable {
 	}
 
 	public String editarFacultad() {
-		if (this.getFacultadAux().getNombreFacultad().equals("")) {
-			this.getFacultadAux().setNombreFacultad(
-					this.getFacultadValidacion().getNombreFacultad());
-			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_VACIO);
+		if (!validarCampos(this.getFacultadAux().getNombreFacultad())) {
+			this.facultadAux.setNombreFacultad(nombreFacultadEditar);
 			this.setMensajeError(true);
-			return null;
+			this.setMensajeRespuesta(Constants.MSJ_CAMPOS_VACIOS);
+			return Constants.NAVEGACION_FACULTAD;
 		}
+		
 		if (this.estadoFacultadEditar) {
 			this.getFacultadAux().setEstadoFacultad('1');
 		} else {
@@ -129,12 +131,11 @@ public class FacultadBean implements Serializable {
 			this.setMensajeError(false);
 			break;
 		case "duplicado":
+			this.facultadAux.setNombreFacultad(nombreFacultadEditar);
 			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_REPETIDO + ": "
 					+ this.getFacultadAux().getNombreFacultad() + " "
 					+ Constants.MSJ_INTENTO);
 			this.setMensajeError(true);
-			this.getFacultadAux().setNombreFacultad(
-					this.getFacultadValidacion().getNombreFacultad());
 			break;
 		default:
 			this.setMensajeRespuesta(Constants.MSJ_ERROR_GUARDADO + " "
@@ -162,7 +163,7 @@ public class FacultadBean implements Serializable {
 					.getIdFacultad().add(new BigDecimal(1));
 		}
 		Facultad nuevaFacultad = new Facultad(idFacultadAux,
-				this.nombreFacultad, '1', carreras);
+				this.nombreFacultad.trim(), '1', carreras);
 		log.info("Nueva Facultad => " + nuevaFacultad);
 		String respuesta = fl.crearNuevaFacultad(nuevaFacultad);
 		switch (respuesta) {
@@ -188,7 +189,11 @@ public class FacultadBean implements Serializable {
 
 	// Funcion para validar que los campos no esten vacios
 	public boolean validarCampos(String nombreFacultadCampos) {
-		if (nombreFacultadCampos == null || nombreFacultadCampos.equals(""))
+		log.info(nombreFacultadCampos);
+		log.info(nombreFacultadCampos==null);
+		log.info(nombreFacultadCampos.equals(""));
+		log.info(nombreFacultadCampos.trim().length());
+		if (nombreFacultadCampos == null || nombreFacultadCampos.equals("") || nombreFacultadCampos.trim().length()== 0)
 			return false;
 		return true;
 	}
