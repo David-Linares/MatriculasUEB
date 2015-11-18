@@ -145,10 +145,10 @@
 							<br></br>
 							<div class="form-group">
 								<label class="control-label">Nombre de la carrera</label>
-								<h:inputText class="form-control col-sm-10 empty" maxlength="50"
+								<h:inputText class="form-control col-sm-10 empty"
 									onkeypress="if(event.which  != 38) if(event.which  != 37) if(event.which  != 08) if(event.which  != 09) if(event.which  != 46) if(event.which  != 32) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
-									required="true" onkeyup="this.value=this.value.toLowerCase()"
-									value="#{carreraBean.carreraAux.nombreCarrera}"></h:inputText>
+									onkeyup="this.value=this.value.toLowerCase()"
+									value="#{carreraBean.carreraAux.nombreCarrera}" maxlength="50" ></h:inputText>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Creditos maximos permitidos</label>
