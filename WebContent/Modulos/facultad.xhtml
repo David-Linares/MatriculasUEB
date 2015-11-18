@@ -83,9 +83,8 @@
 	      		<div class="form-group">
 					<label class="control-label">Nombre de la facultad</label>             
 					<h:inputText class="form-control col-sm-10 empty" value="#{facultadBean.nombreFacultad}" maxlength="50"
-					onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
-					onkeyup="this.value=this.value.toLowerCase()"
-					/>
+					onkeypress="if(event.which  != 38) if(event.which != 164) if(event.which  != 37) if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+					onkeyup="this.value=this.value.toLowerCase()"	onpaste="return false" />
 				</div>
 				<br></br>
 	      </div>
@@ -111,9 +110,8 @@
 		        	<div class="form-group">
 						<label class="control-label">Nombre de la facultad</label>             
 						<h:inputText class="form-control col-sm-10 empty" value="#{facultadBean.facultadAux.nombreFacultad}" maxlength="50"
-						onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
-					onkeyup="this.value=this.value.toLowerCase()"
-						/>
+						onkeypress="if(event.which  != 38) if(event.which != 164) if(event.which  != 37) if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+					onkeyup="this.value=this.value.toLowerCase()"	onpaste="return false" />
 					</div>
 					<div class="togglebutton">
 						<label>
