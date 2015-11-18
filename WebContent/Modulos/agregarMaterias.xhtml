@@ -32,9 +32,7 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Seleccionar</f:facet>
-				<h:selectBooleanCheckbox value="#{materia.seleccionadaMatricula}" immediate="true" onchange="" >
-					<f:ajax listener="#{matriculaBean.valueChangeMethod(materia)}" render="@all" event="change"></f:ajax>
-				</h:selectBooleanCheckbox>
+				<input type="checkbox" name="materias[]" value="#{materia.idMateria}"></input>
 			</h:column>
 		</h:dataTable>			
 		</div>

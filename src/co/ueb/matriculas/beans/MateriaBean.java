@@ -143,18 +143,20 @@ public class MateriaBean implements Serializable {
 
 	//Funcion para editar una materia
 	public String editarMateria() {
-		if (!validarCampos(this.getNuevaMateria())) {
+		log.info("##Entró a editar Materia##");
+		if (!validarCampos(this.getMateriaAux())) {
 			this.setMensajeError(true);
 			this.setMensajeRespuesta(Constants.MSJ_CAMPOS_VACIOS);
 			return Constants.NAVEGACION_MATERIA;
 		} 
-		
+		log.info("Pasó validaciones");
 		if (this.estadoMateriaEditar) {
 			this.getMateriaAux().setEstadoMateria('1');
 		} else {
 			this.getMateriaAux().setEstadoMateria('0');
 		}
-
+		log.info("Envia materia a editar");
+		log.info(this.getMateriaAux());
 		String respuesta = ml.modificarMateria(this.getMateriaAux());
 		switch (respuesta) {
 		case "ok": // Respuesta guardado correctamente
@@ -228,6 +230,8 @@ public class MateriaBean implements Serializable {
 
 	//Funcion para validar que los campos no esten vacios
 	public boolean validarCampos(Materia materiaCampos) {
+		log.info("##Validación de materias##");
+		log.info(materiaCampos);
 		if (materiaCampos.getNombreMateria() == null
 				|| materiaCampos.getNombreMateria().equals(""))
 			return false;

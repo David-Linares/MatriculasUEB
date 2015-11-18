@@ -52,15 +52,6 @@ public class MatriculaBean implements Serializable{
 		log.info(this.materiasMatricula);
 	}
 	
-	public Map<Materia, Boolean> getCheckMap() {
-		for (Iterator iterator = materiasListado.iterator(); iterator.hasNext();) {
-			Materia materia = (Materia) iterator.next();
-			log.info(materia);
-			checkMap.put(materia, Boolean.FALSE);
-		}
-		return checkMap;
-	}
-	
 	public int getCreditosPermitidos() {
 		return creditosPermitidos;
 	}

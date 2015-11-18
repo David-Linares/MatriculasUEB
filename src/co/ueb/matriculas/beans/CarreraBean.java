@@ -6,11 +6,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import javax.faces.model.SelectItem;
 
-import com.itextpdf.text.log.SysoCounter;
+import org.jboss.logging.Logger;
 
 import co.ueb.matriculas.logical.CarreraLogical;
 import co.ueb.matriculas.logical.FacultadLogical;
@@ -206,7 +205,7 @@ public class CarreraBean implements Serializable {
 
 	// Metodo para obtener una copia de la carrera seleccionada
 	public void setCarreraAux(Carrera carreraAux) {
-		System.out.println("[CarreraBean] - setCarreraAux ||a�Va a cambiar => "
+		System.out.println("[CarreraBean] - setCarreraAux ||a�Va a cambiar => "
 				+ carreraAux);
 		if (carreraAux != null) {
 			System.out.println("[CarreraBean] CarreraAux NO esta vacio");
@@ -231,18 +230,19 @@ public class CarreraBean implements Serializable {
 					.println("[CarreraBean] editarCarrera - ya valido los campos");
 			this.setMensajeError(true);
 			this.setMensajeRespuesta(Constants.MSJ_CAMPOS_VACIOS);
+			log.info("Se quedó en validaciones");
 			return Constants.NAVEGACION_CARRERA;
 		}
-
+		log.info("Pasó validaciones");
 		if (this.estadoCarreraEditar) {
 			this.getCarreraAux().setEstadoCarrera('1');
 		} else {
 			this.getCarreraAux().setEstadoCarrera('0');
 		}
-		System.out.println("[CarreraBean] editarCarrera - CarreraAux es:"
-				+ getCarreraAux());
+		log.info("Pasó el if de estado carrera");
+		log.info("Objeto que edita ==> " + this.getCarreraAux());
 		String respuesta = cl.modificarCarrera(this.getCarreraAux());
-		System.out.println("[CarreraBean] editarCarrera - la respuesta es:"
+		log.info("[CarreraBean] editarCarrera - la respuesta es:"
 				+ respuesta);
 		switch (respuesta) {
 		case "ok": // Respuesta guardado correctamente
@@ -330,6 +330,8 @@ public class CarreraBean implements Serializable {
 
 	// Metodo que valida si estan vacios los campos
 	public boolean validarCampos(Carrera carreraCampos) {
+		log.info("Validar Campos");
+		log.info(carreraCampos);
 		if (carreraCampos.getNombreCarrera() == null
 				|| carreraCampos.getNombreCarrera().equals(""))
 			return false;
