@@ -1,16 +1,23 @@
-.botonImg{
+.botonImg {
 	background-color: transparent;
 	border: none;
 }
-.btn-cerrar-sesion{
+
+.btn-cerrar-sesion {
 	border: none;
-    background: transparent;
-    color: #030303;
+	background: transparent;
+	color: #030303;
 }
-.title-login{
-    vertical-align: middle;
-    display: inline-block;
+
+.title-login {
+	vertical-align: middle;
+	display: inline-block;
 }
-.title-login img{
+
+.title-login img {
 	height: 100px;
+}
+
+#ui-datepicker-div {
+	z-index: 1003 !important;
 }

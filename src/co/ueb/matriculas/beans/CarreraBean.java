@@ -280,7 +280,7 @@ public class CarreraBean implements Serializable {
 			this.setMensajeRespuesta(Constants.MSJ_CAMPOS_VACIOS);
 			return Constants.NAVEGACION_CARRERA;
 		}
-		System.out.println("[CarreraBean] - crearCarrera || Entra a crear");
+		log.info("Entra a crear Carrera");
 		Set<Materia> materias = new HashSet<Materia>(0);
 		Set<Persona> personas = new HashSet<Persona>(0);
 		BigDecimal idCarreraAux = new BigDecimal(1);

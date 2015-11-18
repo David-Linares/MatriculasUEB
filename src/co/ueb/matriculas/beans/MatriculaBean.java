@@ -121,7 +121,7 @@ public class MatriculaBean implements Serializable{
 	
 	public String hacerMatricula(){
 		log.info("##Se prepara para hacer la matricula##");
-		
+		this.creditosMatriculados = 0;
 		for (Iterator iterator = materiasMatricula.iterator(); iterator.hasNext();) {
 			Materia materia = (Materia) iterator.next();
 			this.creditosMatriculados += Integer.parseInt(materia.getCreditos().toString());

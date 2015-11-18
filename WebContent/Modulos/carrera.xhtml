@@ -33,7 +33,7 @@
 			<!-- 				</h:form> -->
 			<!-- 			</div> -->
 		</div>
-		<h:panelGroup rendered="#{CarreraBean.mensajeError}">
+		<h:panelGroup rendered="#{carreraBean.mensajeError}">
 			<div class="col-md-12 alert alert-dismissable alert-warning">
 				<button type="button" class="close" data-dismiss="alert">×</button>
 				<h4>Error!</h4>
@@ -97,25 +97,27 @@
 				<h:form id="modalAgregar">
 					<div class="modal-body">
 						<br></br> <br></br>
-						<div class="form-control-wrapper">
-							<h:inputText id="nuevaCarrera"
-								class="form-control col-sm-10 empty" 
-								value="#{carreraBean.nombreCarrera}"
-								onkeypress="if(event.which  != 38) if(event.which  != 37) if(event.which  != 08) if(event.which  != 09) if(event.which  != 46) if(event.which  != 32) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
-								onkeyup="this.value=this.value.toLowerCase()" maxlength="50"></h:inputText>
-								
-							<div class="floating-label">Nombre de la Carrera</div>
-							<span class="material-input"></span> <br></br> <br></br>
+						<div class="form-group">
+							<label class="control-label">Nombre de la Carrera</label>             
+							<h:inputText class="form-control col-sm-10 empty" value="#{carreraBean.nuevaCarrera.nombreCarrera}" maxlength="50"
+							onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+							onkeyup="this.value=this.value.toLowerCase()"
+							/>
 						</div>
-						<div class="form-control-wrapper">
+						<div class="form-group">
+							<label class="control-label">Creditos maximos permitidos</label>
 							<h:inputText id="creditosCarrera"
 								class="form-control col-sm-10 empty"
 								onkeypress="if(event.which  != 38) if(event.which  != 37) if(event.which  != 08) if(event.which  != 09) if(event.which  != 46) if(event.which  &lt; 48 || event.which  &gt; 57) return false;"
-								onpaste="return false" value="#{carreraBean.totalCreditos}"
+								onpaste="return false" value="#{carreraBean.nuevaCarrera.totalCreditos}"
 								maxlength="3">
 							</h:inputText>
-							<div class="floating-label">Creditos maximos permitidos</div>
-							<span class="material-input"></span>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Facultad</label>
+							<h:selectOneMenu value="#{carreraBean.facultadCarrera}" converter="facultadConverter">
+								<f:selectItems value="#{carreraBean.listadoFacultades}" var="facultad" itemValue="#{facultad}" itemLabel="#{facultad.nombreFacultad}"/>
+							</h:selectOneMenu>
 						</div>
 						<br></br>
 					</div>
