@@ -137,6 +137,8 @@ public class MateriaBean implements Serializable {
 			this.materiaAux = materiaAuxEditar;
 			this.setMateriaValidacion(materiaAuxEditar);
 
+			this.materiaAux.setNombreMateria(this.materiaAux.getNombreMateria().trim());
+			this.materiaValidacion.setNombreMateria(this.materiaValidacion.getNombreMateria().trim());	
 			if (this.materiaAux.getEstadoMateria().compareTo('1') == 0) {
 				this.setEstadoMateriaEditar(true);
 			} else {
@@ -238,7 +240,7 @@ public class MateriaBean implements Serializable {
 		log.info("##Validación de materias##");
 		log.info(materiaCampos);
 		if (materiaCampos.getNombreMateria() == null
-				|| materiaCampos.getNombreMateria().equals(""))
+				|| materiaCampos.getNombreMateria().equals("") || this.getMateriaAux().getNombreMateria().trim().length()==0)
 			return false;
 		if (materiaCampos.getCreditos().equals(new BigDecimal(0))
 				|| materiaCampos.getCreditos().equals(""))

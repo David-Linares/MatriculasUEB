@@ -45,6 +45,7 @@ public class EstudianteBean implements Serializable {
 	private Persona nuevoEstudiante = new Persona();
 	private Persona estudianteAux = null;
 	private Persona estudianteAuxEditar = null;
+	
 
 	private Perfil perfil = new Perfil(new BigDecimal(1));
 
@@ -157,7 +158,8 @@ public class EstudianteBean implements Serializable {
 		if (copiaEstudianteAux != null) {
 			this.fechaNacimiento = copiaEstudianteAux.getFechaNacimiento().toString();
 			this.estudianteAux = copiaEstudianteAux;
-			this.setEstudianteAuxEditar(copiaEstudianteAux);
+			this.estudianteAuxEditar = copiaEstudianteAux;
+			
 			if (this.getEstudianteAux().getEstadoPersona().compareTo('1') == 0) {
 				this.setEstadoEstudianteEditar(true);
 			} else {
@@ -177,6 +179,7 @@ public class EstudianteBean implements Serializable {
 	public String editarEstudiante() {
 		log.info("## Entra a editar Estudiante ##");
 		if(!validarCampos(this.getEstudianteAux())){
+			this.setEstudianteAux(estudianteAuxEditar);
 			this.setMensajeError(true);
 			this.setMensajeRespuesta(Constants.MSJ_CAMPOS_VACIOS);
 			return Constants.NAVEGACION_ESTUDIANTE;
@@ -207,16 +210,16 @@ public class EstudianteBean implements Serializable {
 		case "ok": // Respuesta guardado correctamente
 			this.setMensajeRespuesta(Constants.ESTUDIANTE_ACTUALIZADO);
 			this.setMensajeError(false);
-			this.listadoEstudiantes.add(nuevoEstudiante);
 			break;
 		case "duplicado":
+			log.info(respuesta);
 			this.setMensajeRespuesta(Constants.MSJ_IDENTIFICACION_REPETIDO + " "
-					+ nuevoEstudiante.getIdPersona() + ". "+ Constants.MSJ_INTENTO);
+					+ estudianteAux.getIdPersona() + ". "+ Constants.MSJ_INTENTO);
 			this.setMensajeError(true);
 			break;
 		case "usuario_duplicado":
 			this.setMensajeRespuesta(Constants.MSJ_USUARIO_REPETIDO + " "
-					+ nuevoEstudiante.getUsuario() + ". "+ Constants.MSJ_INTENTO);
+					+ estudianteAux.getUsuario() + ". "+ Constants.MSJ_INTENTO);
 			this.setMensajeError(true);
 			break;
 		default:
@@ -241,6 +244,7 @@ public class EstudianteBean implements Serializable {
 		log.info(this.getFechaNacimiento());
 		nuevoEstudiante.setContrasena(encriptarContrasena(nuevoEstudiante.getContrasena()));
 		nuevoEstudiante.setEstadoPersona('1');
+		nuevoEstudiante.setUsuario(nuevoEstudiante.getUsuario().trim());
 		try {
 			Date nfecha = dateFormat.parse(this.getFechaNacimiento());
 			nuevoEstudiante.setFechaNacimiento(nfecha);
@@ -281,24 +285,42 @@ public class EstudianteBean implements Serializable {
 
 	//Funcion para validar que los campos no esten vacios
 	public boolean validarCampos(Persona estudianteCampos){
-		if(estudianteCampos.getIdPersona().equals(new BigDecimal(0)) || estudianteCampos.getIdPersona().equals(""))
+		log.info("validacion david canson");
+		log.info(estudianteCampos);
+		log.info(estudianteCampos.getIdPersona().equals(new BigDecimal(0)) || estudianteCampos.getIdPersona().equals(""));
+		log.info(estudianteCampos.getNombrePersona()== null || estudianteCampos.getNombrePersona().equals(""));
+		log.info(estudianteCampos.getApellidosPersona()==null || estudianteCampos.getApellidosPersona().equals(""));
+		log.info(estudianteCampos.getFechaNacimiento()==null || estudianteCampos.getFechaNacimiento().equals(""));
+		log.info(estudianteCampos.getLugarNacimiento()==null || estudianteCampos.getLugarNacimiento().equals(""));
+		log.info(estudianteCampos.getDireccion()==null || estudianteCampos.getDireccion().equals(""));
+		log.info(estudianteCampos.getCorreoElectronico()==null || estudianteCampos.getCorreoElectronico().equals(""));
+		log.info(estudianteCampos.getUsuario()==null || estudianteCampos.getUsuario().equals(""));
+		log.info(estudianteCampos.getContrasena()==null || estudianteCampos.getContrasena().equals(""));
+
+		if(estudianteCampos.getIdPersona().equals(new BigDecimal(0)) || estudianteCampos.getIdPersona().equals("")){
 			return false;
-		if(estudianteCampos.getNombrePersona()== null || estudianteCampos.getNombrePersona().equals(""))
+		}
+		if(estudianteCampos.getNombrePersona()== null || estudianteCampos.getNombrePersona().equals("")){
 			return false;
-		if(estudianteCampos.getApellidosPersona()==null || estudianteCampos.getApellidosPersona().equals(""))
+		}
+		if(estudianteCampos.getApellidosPersona()==null || estudianteCampos.getApellidosPersona().equals("")){
 			return false;
-		if(estudianteCampos.getFechaNacimiento()==null || estudianteCampos.getFechaNacimiento().equals(""))
+		}
+		if(estudianteCampos.getLugarNacimiento()==null || estudianteCampos.getLugarNacimiento().equals("")){
 			return false;
-		if(estudianteCampos.getLugarNacimiento()==null || estudianteCampos.getLugarNacimiento().equals(""))
-		return false;
-		if(estudianteCampos.getDireccion()==null || estudianteCampos.getDireccion().equals(""))
+		}
+		if(estudianteCampos.getDireccion()==null || estudianteCampos.getDireccion().equals("")){
 			return false;
-		if(estudianteCampos.getCorreoElectronico()==null || estudianteCampos.getCorreoElectronico().equals(""))
+		}
+		if(estudianteCampos.getCorreoElectronico()==null || estudianteCampos.getCorreoElectronico().equals("")){
 			return false;
-		if(estudianteCampos.getUsuario()==null || estudianteCampos.getUsuario().equals(""))
+		}
+		if(estudianteCampos.getUsuario()==null || estudianteCampos.getUsuario().equals("")){
 			return false;
-		if (estudianteCampos.getContrasena().equals(new BigDecimal(0)) || estudianteCampos.getContrasena().equals(""))
+		}
+		if (estudianteCampos.getContrasena()==null || estudianteCampos.getContrasena().equals("")){
 			return false;
+		}
 		return true;
 	}
 	

@@ -35,7 +35,6 @@ public class CarreraBean implements Serializable {
 
 	// Atributos auxiliares
 	private Carrera carreraAux = null;
-	private Carrera copiaCarrera = null;
 	private Carrera carreraValidacion = null;
 	private Carrera nuevaCarrera = new Carrera();
 	private boolean estadoCarreraEditar = false;
@@ -123,14 +122,6 @@ public class CarreraBean implements Serializable {
 		this.listFacultadSelect = listFacultadSelect;
 	}
 
-	public Carrera getCopiaCarrera() {
-		return copiaCarrera;
-	}
-
-	public void setCopiaCarrera(Carrera copiaCarrera) {
-		this.copiaCarrera = copiaCarrera;
-	}
-
 	public List<Carrera> getListadoCarreras() {
 		return listadoCarreras;
 	}
@@ -204,16 +195,12 @@ public class CarreraBean implements Serializable {
 	}
 
 	// Metodo para obtener una copia de la carrera seleccionada
-	public void setCarreraAux(Carrera carreraAux) {
-		System.out.println("[CarreraBean] - setCarreraAux ||a�Va a cambiar => "
-				+ carreraAux);
-		if (carreraAux != null) {
-			System.out.println("[CarreraBean] CarreraAux NO esta vacio");
-			System.out.println("[CarreraBean] El nombre de la CarreraAux es"
-					+ carreraAux.getNombreCarrera());
-			// this.setAuxNombreValidacion(carreraAux.getNombreCarrera());
-			this.carreraAux = carreraAux;
-			this.copiaCarrera = carreraAux;
+	public void setCarreraAux(Carrera carreraAuxEditar) {
+		log.info(carreraAuxEditar);
+		if (carreraAuxEditar != null) {
+			this.carreraAux = carreraAuxEditar;
+			this.setCarreraValidacion(carreraAuxEditar);
+
 			if (this.carreraAux.getEstadoCarrera().compareTo('1') == 0) {
 				this.setEstadoCarreraEditar(true);
 			} else {
@@ -228,10 +215,10 @@ public class CarreraBean implements Serializable {
 		if (!validarCampos(this.getCarreraAux())) {
 			this.setMensajeError(true);
 			this.setMensajeRespuesta(Constants.MSJ_CAMPOS_VACIOS);
-			log.info("Se quedó en validaciones");
+			log.info("Se quedo en validaciones");
 			return Constants.NAVEGACION_CARRERA;
 		}
-		log.info("Pasó validaciones");
+		log.info("Paso validaciones");
 		if (this.estadoCarreraEditar) {
 			this.getCarreraAux().setEstadoCarrera('1');
 		} else {
@@ -241,8 +228,7 @@ public class CarreraBean implements Serializable {
 		this.getCarreraAux().setFacultad(this.getFacultadCarrera());
 		log.info("Objeto que edita ==> " + this.getCarreraAux());
 		String respuesta = cl.modificarCarrera(this.getCarreraAux());
-		log.info("[CarreraBean] editarCarrera - la respuesta es:"
-				+ respuesta);
+		log.info("[CarreraBean] editarCarrera - la respuesta es:" + respuesta);
 		switch (respuesta) {
 		case "ok": // Respuesta guardado correctamente
 			this.setMensajeRespuesta(Constants.CARRERA_ACTUALIZADA);
@@ -253,13 +239,6 @@ public class CarreraBean implements Serializable {
 					+ this.getCarreraAux().getNombreCarrera() + " "
 					+ Constants.MSJ_INTENTO);
 			this.setMensajeError(true);
-			for (Carrera carrera : listadoCarreras) {
-				if (carrera.getIdCarrera().equals(
-						this.getCarreraAux().getIdCarrera())) {
-					carrera.setNombreCarrera(this.getCarreraValidacion()
-							.getNombreCarrera());
-				}
-			}
 			this.getCarreraAux().setNombreCarrera(
 					this.getCarreraValidacion().getNombreCarrera());
 			break;

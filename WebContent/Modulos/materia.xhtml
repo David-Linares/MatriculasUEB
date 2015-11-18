@@ -99,8 +99,8 @@
 							<label class="control-label">Nombre de la Materia</label>
 							<h:inputText id="nombreMateria" name="nombreMateria"
 								class="form-control col-sm-10 empty"
-								value="#{materiaBean.nuevaMateria.nombreMateria}"
-								onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+								value="#{materiaBean.nuevaMateria.nombreMateria}" onpaste="return false"
+								onkeypress="if(event.which  != 38) if(event.which  != 37) if(event.which  != 08) if(event.which  != 09) if(event.which  != 46) if(event.which  != 32) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
 								onkeyup="this.value=this.value.toLowerCase()" maxlength="50">
 
 							</h:inputText>
@@ -152,7 +152,7 @@
 								<label class="control-label">Nombre de la materia</label>
 								<h:inputText class="form-control col-sm-10 empty" maxlength="50"
 									value="#{materiaBean.materiaAux.nombreMateria}"
-									onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+									onkeypress="if(event.which  != 38) if(event.which  != 37) if(event.which  != 08) if(event.which  != 09) if(event.which  != 46) if(event.which  != 32) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
 									onkeyup="this.value=this.value.toLowerCase()"></h:inputText>
 							</div>
 							<div class="form-group">
