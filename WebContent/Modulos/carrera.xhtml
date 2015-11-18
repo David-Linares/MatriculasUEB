@@ -96,16 +96,16 @@
 				</div>
 				<h:form id="modalAgregar">
 					<div class="modal-body">
-						<br></br>
-						<br></br>
+						<br></br> <br></br>
 						<div class="form-control-wrapper">
 							<h:inputText id="nuevaCarrera"
 								class="form-control col-sm-10 empty" 
 								value="#{carreraBean.nombreCarrera}"
 								onkeypress="if(event.which  != 38) if(event.which  != 37) if(event.which  != 08) if(event.which  != 09) if(event.which  != 46) if(event.which  != 32) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
 								onkeyup="this.value=this.value.toLowerCase()" maxlength="50"></h:inputText>
+								
 							<div class="floating-label">Nombre de la Carrera</div>
-							<span class="material-input"></span>
+							<span class="material-input"></span> <br></br> <br></br>
 						</div>
 						<div class="form-control-wrapper">
 							<h:inputText id="creditosCarrera"
