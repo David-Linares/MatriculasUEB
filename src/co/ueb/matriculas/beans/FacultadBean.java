@@ -16,42 +16,40 @@ import co.ueb.matriculas.util.Constants;
 
 /**
  * 
- * @author David Linares
- * Modificado: Noviembre 10 de 2015
- * Descripción Cambio: Arreglo de las funciones para llamados del logical
- *   
+ * @author David Linares Modificado: Noviembre 10 de 2015 Descripción Cambio:
+ *         Arreglo de las funciones para llamados del logical
+ * 
  */
-
 
 public class FacultadBean implements Serializable {
 
 	private static final long serialVersionUID = -9166065171751439973L;
-	//Datos de log
+	// Datos de log
 	private static final Logger log = Logger.getLogger(FacultadBean.class);
-	
+
 	private FacultadLogical fl = new FacultadLogical();
-	
-	//Atributos de facultad para la vista.
+
+	// Atributos de facultad para la vista.
 	private String nombreFacultad = "";
 	private String mensajeRespuesta = "";
 	private List<Facultad> listadoFacultades = fl.consultarFacultades();
-	
-	//Atributos Auxiliares
+
+	// Atributos Auxiliares
 	private Facultad facultadAux = null;
 	private Facultad facultadValidacion = null;
 	private boolean estadoFacultadEditar = false;
-	private boolean mensajeError = false; 
+	private boolean mensajeError = false;
 
-	//Getters y Setters
-	
+	// Getters y Setters
+
 	public boolean isMensajeError() {
 		return mensajeError;
 	}
-	
+
 	public void setMensajeError(boolean mensajeError) {
 		this.mensajeError = mensajeError;
 	}
-	
+
 	public String getMensajeRespuesta() {
 		return mensajeRespuesta;
 	}
@@ -59,7 +57,7 @@ public class FacultadBean implements Serializable {
 	public void setMensajeRespuesta(String mensajeRespuesta) {
 		this.mensajeRespuesta = mensajeRespuesta;
 	}
-	
+
 	public Facultad getFacultadValidacion() {
 		return facultadValidacion;
 	}
@@ -96,8 +94,8 @@ public class FacultadBean implements Serializable {
 		this.nombreFacultad = nombreFacultad;
 	}
 
-	//Función para asignar la facultad auxiliar 
-	//que es la que sirve para editar y guardar la facultad temporal
+	// Función para asignar la facultad auxiliar
+	// que es la que sirve para editar y guardar la facultad temporal
 	public void setFacultadAux(Facultad facultadAux) {
 		log.info("Va a cambiar => " + facultadAux);
 		if (facultadAux != null) {
@@ -131,32 +129,35 @@ public class FacultadBean implements Serializable {
 			break;
 		case "duplicado":
 			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_REPETIDO + ": "
-					+ this.getFacultadAux().getNombreFacultad() + " " + Constants.MSJ_INTENTO );
+					+ this.getFacultadAux().getNombreFacultad() + " "
+					+ Constants.MSJ_INTENTO);
 			this.setMensajeError(true);
-			this.getFacultadAux().setNombreFacultad(this.getFacultadValidacion().getNombreFacultad());
+			this.getFacultadAux().setNombreFacultad(
+					this.getFacultadValidacion().getNombreFacultad());
 			break;
 		default:
 			this.setMensajeRespuesta(Constants.MSJ_ERROR_GUARDADO + " "
-					+ respuesta + ". "+ Constants.MSJ_INTENTO);
+					+ respuesta + ". " + Constants.MSJ_INTENTO);
 			this.setMensajeError(true);
 			break;
 		}
 		return Constants.NAVEGACION_FACULTAD;
 	}
 
-	//Funcion para crear una nueva facultad 
+	// Funcion para crear una nueva facultad
 	public String crearFacultad() {
 		log.info("===Crear Facultad===");
 		if (!validarCampos(this.getNombreFacultad())) {
 			this.setMensajeError(true);
 			this.setMensajeRespuesta(Constants.MSJ_CAMPOS_VACIOS);
 			return Constants.NAVEGACION_FACULTAD;
-		} 
-		
+		}
+
 		Set<Carrera> carreras = new HashSet<Carrera>(0);
 		BigDecimal idFacultadAux = new BigDecimal(1);
 		if (this.getListadoFacultades().size() != 0) {
-			idFacultadAux = this.getListadoFacultades().get(this.getListadoFacultades().size() - 1)
+			idFacultadAux = this.getListadoFacultades()
+					.get(this.getListadoFacultades().size() - 1)
 					.getIdFacultad().add(new BigDecimal(1));
 		}
 		Facultad nuevaFacultad = new Facultad(idFacultadAux,
@@ -171,29 +172,29 @@ public class FacultadBean implements Serializable {
 			break;
 		case "duplicado":
 			this.setMensajeRespuesta(Constants.MSJ_NOMBRE_REPETIDO + " "
-					+ nuevaFacultad.getNombreFacultad() + ". "+ Constants.MSJ_INTENTO);
+					+ nuevaFacultad.getNombreFacultad() + ". "
+					+ Constants.MSJ_INTENTO);
 			this.setMensajeError(true);
 			break;
 		default:
 			this.setMensajeRespuesta(Constants.MSJ_ERROR_GUARDADO + " "
-					+ respuesta + ". "+ Constants.MSJ_INTENTO);
+					+ respuesta + ". " + Constants.MSJ_INTENTO);
 			this.setMensajeError(true);
 			break;
 		}
 		return Constants.NAVEGACION_FACULTAD;
 	}
 
-	//Funcion para validar que los campos no esten vacios
-		public boolean validarCampos(String nombreFacultadCampos) {
-			if (nombreFacultadCampos == null
-					|| nombreFacultadCampos.equals(""))
-				return false;
-			return true;
-		}
+	// Funcion para validar que los campos no esten vacios
+	public boolean validarCampos(String nombreFacultadCampos) {
+		if (nombreFacultadCampos == null || nombreFacultadCampos.equals(""))
+			return false;
+		return true;
+	}
 
-		//Funcion para vaciar el formulario de crear facultad
-		public void vaciarCampos() {
-			this.setNombreFacultad("");
-		}
+	// Funcion para vaciar el formulario de crear facultad
+	public void vaciarCampos() {
+		this.setNombreFacultad("");
+	}
 	//
 }

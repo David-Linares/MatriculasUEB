@@ -79,86 +79,96 @@
 								onevent="function(data) { if (data.status == 'success') $('#myModalEdit').modal() ; }" />
 							<h:graphicImage url="/resources/images/32/edit.png"></h:graphicImage>
 						</h:commandLink>
-						
-						
-						
-						
+
+
+
+
 					</h:column>
 				</h:dataTable>
 			</h:form>
 		</div>
 	</div>
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times; </span></button>
-	        <h4 class="modal-title" id="myModalLabel">Agregar materia </h4>
-	      </div>
-        <h:form id="modalAgregar">
-	      <div class="modal-body">
-	      		<br></br>
-	      		<br></br>
-	        	<div class="form-control-wrapper">
-					<h:inputText id="nombreMateria" name="nombreMateria" class="form-control col-sm-10 empty" value="#{materiaBean.nuevaMateria.nombreMateria}" 
-					onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
-					onkeyup="this.value=this.value.toLowerCase()" maxlength="50"  > 
-					
-					</h:inputText>
-					<div class="floating-label">Nombre de la Materia</div>
-					<span class="material-input"></span>
-						<br></br>
-						<br></br>
-					                   
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times; </span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Agregar materia</h4>
 				</div>
-				<div class="form-control-wrapper">
-					<h:inputText id="creditosMateria" name="creditosMateria" class="form-control col-sm-10 empty" value="#{materiaBean.nuevaMateria.creditos}" 
-					onkeypress="if(event.which  != 08) if(event.which  != 09) if(event.which  &lt; 49 || event.which  &gt; 53) return false;"
-								onpaste="return false" maxlength="1" >
-					
-					</h:inputText>
-					<div class="floating-label">Creditos maximos permitidos</div>
-					<span class="material-input"></span>	                    
-				</div>
-				<br></br>
-				<br></br>
-				
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-	        <h:commandButton class="btn btn-primary" action="#{materiaBean.crearMateria()}" value="Guardar materia"   />
-	        
-	      </div>
-        </h:form>
-	    </div>
-	  </div>
+				<h:form id="modalAgregar">
+					<div class="modal-body">
+						<br></br> <br></br>
+						<div class="form-control-wrapper">
+							<h:inputText id="nombreMateria" name="nombreMateria"
+								class="form-control col-sm-10 empty"
+								value="#{materiaBean.nuevaMateria.nombreMateria}"
+								onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+								onkeyup="this.value=this.value.toLowerCase()" maxlength="50">
+
+							</h:inputText>
+							<div class="floating-label">Nombre de la Materia</div>
+							<span class="material-input"></span> <br></br> <br></br>
+
+						</div>
+						<div class="form-control-wrapper">
+							<h:inputText id="creditosMateria" name="creditosMateria"
+								class="form-control col-sm-10 empty"
+								value="#{materiaBean.nuevaMateria.creditos}"
+								onkeypress="if(event.which  != 08) if(event.which  != 09) if(event.which  &lt; 49 || event.which  &gt; 53) return false;"
+								onpaste="return false" maxlength="1">
+
+							</h:inputText>
+							<div class="floating-label">Creditos maximos permitidos</div>
+							<span class="material-input"></span>
+						</div>
+						<br></br> <br></br>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<h:commandButton class="btn btn-primary"
+							action="#{materiaBean.crearMateria()}" value="Guardar materia" />
+
+					</div>
+				</h:form>
+			</div>
+		</div>
 	</div>
 	<h:panelGroup>
-		<div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Modificar materia</h4>
-		      </div>
-	        <h:form  id="modalEditContent">
-		      <div class="modal-body">
-		      		<br></br>
-		        	<div class="form-group">
-						<label class="control-label">Nombre de la materia</label>             
-						<h:inputText class="form-control col-sm-10 empty"  maxlength="50" value="#{materiaBean.materiaAux.nombreMateria}"
-						onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
-					onkeyup="this.value=this.value.toLowerCase()"	></h:inputText>
+		<div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Modificar materia</h4>
 					</div>
-					<div class="form-group">
-						<label class="control-label">Creditos</label>             
-						<h:inputText class="form-control col-sm-10 empty"  maxlength="1" value="#{materiaBean.materiaAux.creditos}"
-						onkeypress="if(event.which  != 08) if(event.which  != 09) if(event.which  &lt; 49 || event.which  &gt; 53) return false;"
-								onpaste="return false"	></h:inputText>
-					</div>
+					<h:form id="modalEditContent">
+						<div class="modal-body">
+							<br></br>
+							<div class="form-group">
+								<label class="control-label">Nombre de la materia</label>
+								<h:inputText class="form-control col-sm-10 empty" maxlength="50"
+									value="#{materiaBean.materiaAux.nombreMateria}"
+									onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+									onkeyup="this.value=this.value.toLowerCase()"></h:inputText>
+							</div>
+							<div class="form-group">
+								<label class="control-label">Creditos</label>
+								<h:inputText class="form-control col-sm-10 empty" maxlength="1"
+									value="#{materiaBean.materiaAux.creditos}"
+									onkeypress="if(event.which  != 08) if(event.which  != 09) if(event.which  &lt; 49 || event.which  &gt; 53) return false;"
+									onpaste="return false"></h:inputText>
+							</div>
 							<div class="togglebutton">
-								<label> Estado materia <br />
-								<h:selectBooleanCheckbox
+								<label> Estado materia <br /> <h:selectBooleanCheckbox
 										value="#{materiaBean.estadoMateriaEditar}" /><span
 									class="toggle"></span>
 								</label>
