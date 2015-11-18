@@ -175,18 +175,33 @@ public class EstudianteBean implements Serializable {
 	}
 
 	public String editarEstudiante() {
-
-		if(!validarCampos(this.getNuevoEstudiante())){
+		log.info("## Entra a editar Estudiante ##");
+		if(!validarCampos(this.getEstudianteAux())){
 			this.setMensajeError(true);
 			this.setMensajeRespuesta(Constants.MSJ_CAMPOS_VACIOS);
 			return Constants.NAVEGACION_ESTUDIANTE;
 		}
+		log.info("Pasó validación");
 		if (this.estadoEstudianteEditar) {
 			this.getEstudianteAux().setEstadoPersona('1');
 		} else {
 			this.getEstudianteAux().setEstadoPersona('0');
 		}
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		log.info(this.getFechaNacimiento());
+		try {
+			Date nfecha = dateFormat.parse(this.getFechaNacimiento());
+			this.getEstudianteAux().setFechaNacimiento(nfecha);
+		} catch (ParseException e) {
+			log.error("Error al momento de convertir la fecha");
+			log.error(e);
+			e.printStackTrace();
+		}
 		this.getEstudianteAux().setContrasena(encriptarContrasena(this.estudianteAux.getContrasena()));
+		log.info("Objeto a enviar");
+		log.info(this.getEstudianteAux());
+		log.info(" ");
 		String respuesta= el.modificarEstudiante(this.getEstudianteAux());
 		switch (respuesta) {
 		case "ok": // Respuesta guardado correctamente

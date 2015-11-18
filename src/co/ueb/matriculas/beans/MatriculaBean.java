@@ -16,6 +16,7 @@ import co.ueb.matriculas.logical.EstudianteLogical;
 import co.ueb.matriculas.logical.MateriaLogical;
 import co.ueb.matriculas.logical.MatriculaLogical;
 import co.ueb.matriculas.model.Materia;
+import co.ueb.matriculas.model.MateriaMatricula;
 import co.ueb.matriculas.model.Matricula;
 import co.ueb.matriculas.model.Persona;
 import co.ueb.matriculas.util.Constants;
@@ -34,6 +35,7 @@ public class MatriculaBean implements Serializable{
 	private String promedio = el.obtenerPromedio(usuarioActual.getIdPersona());
 	private List<Materia> materiasListado = mtl.consultarMaterias();
 	private List<Materia> materiasMatricula = new ArrayList<Materia>();
+	private List<MateriaMatricula> listadoMateriasMatriculadas = ml.obtenerMateriasMatriculadas(usuarioActual.getIdPersona()); 
 	private Map<Materia,Boolean> checkMap = new HashMap<Materia,Boolean>();
 	private Matricula datosMatricula = ml.obtenerDatosMatricula(usuarioActual.getIdPersona());
 	private int creditosPermitidos = Double.parseDouble(promedio) > 3.5 ? 16 : 8;
@@ -159,6 +161,21 @@ public class MatriculaBean implements Serializable{
 	 */
 	public void setMensajeError(Boolean mensajeError) {
 		this.mensajeError = mensajeError;
+	}
+
+	/**
+	 * @return the listadoMateriasMatriculadas
+	 */
+	public List<MateriaMatricula> getListadoMateriasMatriculadas() {
+		return listadoMateriasMatriculadas;
+	}
+
+	/**
+	 * @param listadoMateriasMatriculadas the listadoMateriasMatriculadas to set
+	 */
+	public void setListadoMateriasMatriculadas(
+			List<MateriaMatricula> listadoMateriasMatriculadas) {
+		this.listadoMateriasMatriculadas = listadoMateriasMatriculadas;
 	}	
 	
 }

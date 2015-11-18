@@ -22,11 +22,11 @@
 				</button>
 			</div>
 		</div>
-		<h:panelGroup rendered="#{!facultadBean.mensajeRespuesta.equals('')}">
+		<h:panelGroup rendered="#{!matriculaBean.mensajeRespuesta.equals('')}">
 			<div class="col-md-12 alert alert-dismissable alert-danger" >
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <h4>Error!</h4>
-                <p>#{facultadBean.mensajeRespuesta}</p>
+                <p>#{matriculaBean.mensajeRespuesta}</p>
             </div>
 		</h:panelGroup>
 		<div class="col-md-12">
@@ -42,6 +42,24 @@
 		<div class="col-md-12">
 			<h:outputLabel value="No has realizado matricula. Por favor registra materias para verlas en este listado" rendered="#{matriculaBean.datosMatricula == null}" />
 		</div>
+		<div class="col-md-12">
+			<h:form rendered="#{matriculaBean.datosMatricula != null}">
+			<h:dataTable value="#{matriculaBean.listadoMateriasMatriculadas}" var="materiasMat" class="table table-hover table-striped" id="tablaMatricula">
+				<h:column>
+					<f:facet name="header">Materia</f:facet>
+					#{materiasMat.materia.nombreMateria}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Créditos de la materia</f:facet>
+					#{materiasMat.materia.creditos}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Costo de la materia</f:facet>
+					#{materiasMat.materia.creditos * 300000}
+				</h:column>
+			</h:dataTable>
+			</h:form>
+		</div>
 	</div>
 	<div class="modal fade" id="modalMatriculas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
@@ -56,7 +74,7 @@
 	        	<div class="form-control-wrapper">
 					<h:inputText id="nuevaFacultad" class="form-control col-sm-10 empty" value="#{facultadBean.nombreFacultad}"></h:inputText>
 					<div class="floating-label">Nombre de la facultad</div>
-					<span class="material-input"></span>	                    
+					<span class="material-input"></span>
 				</div>
 				<br></br>
 	      </div>

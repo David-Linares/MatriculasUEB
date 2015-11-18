@@ -15,10 +15,10 @@
 			<div class="col-md-3" style="text-align: center">
 				<h:form>
 					<h:commandLink class="botonImg" data-toggle="modal"
-						data-target="#modalAgregarEstudiante"
+						data-target="#modalagregarestudiante"
 						actionListener="#{estudianteBean.vaciarCampos()}">
 						<f:ajax execute="@form" render=":formEstudiante"
-							onevent="function(data) { if (data.status == 'success') $('#myModal').modal() ; }" />
+							onevent="function(data) { if (data.status == 'success') $('#modalagregarestudiante').modal() ; }" />
 						<h:graphicImage url="/resources/images/add.png"></h:graphicImage>
 					</h:commandLink>
 				</h:form>
@@ -35,12 +35,21 @@
 			<!-- 				</h:form> -->
 			<!-- 			</div> -->
 		</div>
-		<h:panelGroup rendered="#{!estudianteBean.mensajeRespuesta.equals('')}">
-			<div class="col-md-12 alert alert-dismissable alert-danger">
-				<button type="button" class="close" data-dismiss="alert">×</button>
-				<h4>Error!</h4>
-				<p>#{estudianteBean.mensajeRespuesta}</p>
-			</div>
+		<h:panelGroup rendered="#{estudianteBean.mensajeError}">
+			<div class="col-md-12 alert alert-dismissable alert-danger" >
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4>Error!</h4>
+                <p>#{estudianteBean.mensajeRespuesta}</p>
+            </div>
+		</h:panelGroup>
+		<h:panelGroup rendered="#{!estudianteBean.mensajeError}">
+			<h:panelGroup rendered="#{estudianteBean.mensajeRespuesta != ''}">
+				<div class="col-md-12 alert alert-dismissable alert-success" >
+	                <button type="button" class="close" data-dismiss="alert">×</button>
+	                <h4>Correcto!</h4>
+	                <p>#{estudianteBean.mensajeRespuesta}</p>
+	            </div>
+            </h:panelGroup>
 		</h:panelGroup>
 		<div class="col-md-12">
 			<h:form>
@@ -87,7 +96,7 @@
 				</h:dataTable>
 			</h:form >
 		</div>
-		<div class="modal fade" id="modalAgregarEstudiante" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal fade" id="modalagregarestudiante" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -171,7 +180,6 @@
 				</div>
 			</div>
 		</div>
-		
 		<h:panelGroup>
 			<div class="modal fade" id="modalEditarEstudiante" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog" role="document">
@@ -239,6 +247,12 @@
 								<div class="form-group">
 									<label class="control-label">Contraseña</label>
 									<h:inputSecret id="contrasenaEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.estudianteAux.contrasena}" maxlength="50"></h:inputSecret>
+								</div>
+								<div class="togglebutton">
+									<label>
+			                            Estado Estudiante
+			                            <br/><h:selectBooleanCheckbox value="#{estudianteBean.estadoEstudianteEditar}" /><span class="toggle"></span>
+			                        </label>
 								</div>
 															
 	<!-- 							<div class="form-control-wrapper"> -->

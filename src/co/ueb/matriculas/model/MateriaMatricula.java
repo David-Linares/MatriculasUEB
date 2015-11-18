@@ -43,14 +43,6 @@ public class MateriaMatricula implements java.io.Serializable {
 
 	public void setMatricula(Matricula matricula) {
 		this.matricula = matricula;
-	}
-
-	@Override
-	public String toString() {
-		return "MateriaMatricula [id=" + id + ", materia=" + materia
-				+ ", matricula=" + matricula + "]";
-	}
-	
-	
+	}	
 	
 }

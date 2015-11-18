@@ -101,14 +101,14 @@ public class EstudianteLogical {
 	@SuppressWarnings("unchecked")
 	public List<Persona> consultarEstudiantes() {
 		log.info("Entró a consultar Estudiantes");
-		List<Persona> estudiantes = new ArrayList<Persona>();
-		String sql = "select e from Persona as e where e.perfil.idPerfil = 1 order by e.nombrePersona, e.apellidosPersona";
-		Session session = HibernateSession.getSf().getCurrentSession();
+		estudiantes = new ArrayList<Persona>();
+		sql = "select e from Persona as e where e.perfil.idPerfil = 1 order by e.nombrePersona, e.apellidosPersona";
+		sesion = HibernateSession.getSf().getCurrentSession();
 		try{
-			session.beginTransaction();
-			Query query = session.createQuery(sql);
+			sesion.beginTransaction();
+			query = sesion.createQuery(sql);
 			estudiantes = query.list();
-			session.getTransaction().commit();
+			sesion.getTransaction().commit();
 		}catch(Exception e){
 			log.error("##Ocurrió un error en la consulta de estudiantes##");
 			log.error(e);
@@ -120,13 +120,16 @@ public class EstudianteLogical {
 	}
 
 	public String modificarEstudiante(Persona editaEstudiante) {
+		log.info("##Entró Modificar Estudiante Logical##");
 		Session sesion = HibernateSession.getSf().getCurrentSession();
+		log.info(editaEstudiante);
 		try {
 			sesion.beginTransaction();
 			java.util.Date utilStartDate = editaEstudiante.getFechaNacimiento();
 			java.sql.Date sqlFechaNacimiento = new java.sql.Date(utilStartDate.getTime());
+			log.info(sqlFechaNacimiento);
+			log.info(editaEstudiante.getPerfil().getIdPerfil());
 			sesion.doWork(new Work() {
-				
 				@Override
 				public void execute(Connection connection) throws SQLException {
 					CallableStatement callableStatement = connection.prepareCall(Constants.FUNCION_MODIFICAR_ESTUDIANTE);	
@@ -144,15 +147,16 @@ public class EstudianteLogical {
 					callableStatement.setString(12, editaEstudiante.getContrasena());
 					callableStatement.setBigDecimal(13, editaEstudiante.getPerfil().getIdPerfil());
 					callableStatement.executeUpdate();
-					msjRespuesta = callableStatement.getString(12);
+					msjRespuesta = callableStatement.getString(1);
 				}
 			});
 			sesion.getTransaction().commit();
+			log.info("Respuesta " + msjRespuesta);
 			return msjRespuesta;
 		} catch (Exception e) {
+			log.error(e);
 			sesion.getTransaction().rollback();
 			e.printStackTrace();
-			log.error(e);
 			return "error";
 		}
 	}

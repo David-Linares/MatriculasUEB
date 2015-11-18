@@ -83,7 +83,7 @@ public class Constants {
 	public static final String CONSULTA_ESTUDIANTES= "select e from Persona as e where e.perfil.idPerfil = 1 order by e.nombrePersona, e.apellidosPersona";
 	public static final String ESTUDIANTE_MODIFICADO = "Estudiante modificado Correctamente!!";
 	public static final String PROCEDIMIENTO_INSERTAR_ESTUDIANTE = "{call INSERTAR_PERSONA(?,?,?,?,?,?,?,?,?,?,?,?)}";
-	public static final String FUNCION_MODIFICAR_ESTUDIANTE = "{? = modificar_estudiante(?,?,?,?,?,?,?,?,?,?,?,?)}";
+	public static final String FUNCION_MODIFICAR_ESTUDIANTE = "{? = call modificar_estudiante(?,?,?,?,?,?,?,?,?,?,?,?)}";
 	
 	/*
 	 * Constantes de Matricula
@@ -91,6 +91,7 @@ public class Constants {
 	 * */
 	
 	public static final String CONSULTA_DATOS_MATRICULA = "FROM Matricula m where m.persona.idPersona = ";
+	public static final String CONSULTA_DATOS_MATRICULA_MATERIAS = "FROM MateriaMatricula mm where mm.matricula.persona.idPersona = ";
 	public static final String PROCEDIMIENTO_INSERTAR_MATRICULA = "{call INSERTAR_MATRICULA(?,?)}";
 	public static final String PROCEDIMIENTO_INSERTAR_MATERIAS_MATRICULA = "{call INSERTAR_MATERIAS_MATRICULA(?,?,?)}";
 }

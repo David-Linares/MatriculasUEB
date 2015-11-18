@@ -6,7 +6,10 @@ package co.ueb.matriculas.logical;
 import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,6 +20,7 @@ import org.jboss.logging.Logger;
 
 import co.ueb.matriculas.model.Facultad;
 import co.ueb.matriculas.model.Materia;
+import co.ueb.matriculas.model.MateriaMatricula;
 import co.ueb.matriculas.model.Matricula;
 import co.ueb.matriculas.util.Constants;
 import co.ueb.matriculas.util.HibernateSession;
@@ -57,6 +61,30 @@ public class MatriculaLogical {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<MateriaMatricula> obtenerMateriasMatriculadas(BigDecimal id_persona){
+		log.info("##Se prepara para consultar los datos de la matricula##");
+		Session sesion  = HibernateSession.getSf().getCurrentSession();
+		List<MateriaMatricula> resultadoDatosMateria = new ArrayList<MateriaMatricula>();
+		MateriaMatricula datosRespuesta = new MateriaMatricula();
+		try {
+			sesion.beginTransaction();
+			consulta = Constants.CONSULTA_DATOS_MATRICULA_MATERIAS + id_persona;
+			log.info("consulta | " +consulta);
+			query = sesion.createQuery(consulta);
+			resultadoDatosMateria = query.list();
+			sesion.getTransaction().commit();
+			return resultadoDatosMateria;
+		} catch (Exception e) {
+			log.error("##Ocurrió un error consultando la matricula##");
+			log.error(e);
+			sesion.getTransaction().rollback();
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 	
 	public String crearMatricula(List<Materia> materiasMatricula, BigDecimal id_persona){
