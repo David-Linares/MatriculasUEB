@@ -14,9 +14,12 @@ import org.jboss.logging.Logger;
 import co.ueb.matriculas.logical.PersonaLogical;
 import co.ueb.matriculas.model.Persona;
 
-@SuppressWarnings("serial")
 public class LoginBean implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7615263431843701653L;
 	private String usuario;
 	private String contrasena;
 	private String resultado;

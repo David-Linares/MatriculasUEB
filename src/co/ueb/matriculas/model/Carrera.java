@@ -105,8 +105,7 @@ public class Carrera implements java.io.Serializable {
 		return "Carrera [idCarrera=" + idCarrera + ", facultad=" + facultad
 				+ ", nombreCarrera=" + nombreCarrera + ", totalCreditos="
 				+ totalCreditos + ", estadoCarrera=" + estadoCarrera
-				+ ", materias=" + materias + ", carreraEstudiantes="
-				+ carreraEstudiantes + "]";
+				+ "]";
 	}
 
 	@Override

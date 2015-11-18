@@ -13,6 +13,7 @@ import java.util.List;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.jboss.logging.Logger;
 
+import co.ueb.matriculas.logical.CarreraLogical;
 import co.ueb.matriculas.logical.EstudianteLogical;
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Perfil;
@@ -37,9 +38,9 @@ public class EstudianteBean implements Serializable {
 	private boolean estadoEstudianteEditar = false;
 
 	private EstudianteLogical el = new EstudianteLogical();
+	private CarreraLogical cl = new CarreraLogical();
 
 	private Carrera carreraEstudiante = null;
-	private CarreraBean carreraList = new CarreraBean();
 
 	private Persona nuevoEstudiante = new Persona();
 	private Persona estudianteAux = null;
@@ -48,7 +49,7 @@ public class EstudianteBean implements Serializable {
 	private Perfil perfil = new Perfil(new BigDecimal(1));
 
 	private List<Persona> listadoEstudiantes = el.consultarEstudiantes();
-	private List<Carrera> listadoCarreras = carreraList.getListadoCarreras();
+	private List<Carrera> listadoCarreras = cl.consultarCarreras();
 	
 	private String fechaNacimiento;
 	
@@ -83,14 +84,6 @@ public class EstudianteBean implements Serializable {
 
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
-	}
-
-	public CarreraBean getCarreraList() {
-		return carreraList;
-	}
-
-	public void setCarreraList(CarreraBean carreraList) {
-		this.carreraList = carreraList;
 	}
 
 	public List<Carrera> getListadoCarreras() {
@@ -159,6 +152,7 @@ public class EstudianteBean implements Serializable {
 	}
 	
 	public void setEstudianteAux(Persona copiaEstudianteAux) {
+		log.info("##Entro a setEstudianteAux##");
 		log.info(copiaEstudianteAux);
 		if (copiaEstudianteAux != null) {
 			this.fechaNacimiento = copiaEstudianteAux.getFechaNacimiento().toString();
@@ -182,6 +176,11 @@ public class EstudianteBean implements Serializable {
 
 	public String editarEstudiante() {
 
+		if(!validarCampos(this.getNuevoEstudiante())){
+			this.setMensajeError(true);
+			this.setMensajeRespuesta(Constants.MSJ_CAMPOS_VACIOS);
+			return Constants.NAVEGACION_ESTUDIANTE;
+		}
 		if (this.estadoEstudianteEditar) {
 			this.getEstudianteAux().setEstadoPersona('1');
 		} else {
@@ -191,7 +190,7 @@ public class EstudianteBean implements Serializable {
 		String respuesta= el.modificarEstudiante(this.getEstudianteAux());
 		switch (respuesta) {
 		case "ok": // Respuesta guardado correctamente
-			this.setMensajeRespuesta(Constants.ESTUDIANTE_MODIFICADO);
+			this.setMensajeRespuesta(Constants.ESTUDIANTE_ACTUALIZADO);
 			this.setMensajeError(false);
 			this.listadoEstudiantes.add(nuevoEstudiante);
 			break;
@@ -215,7 +214,11 @@ public class EstudianteBean implements Serializable {
 	}
 
 	public String crearEstudiante() {
-
+		if(!validarCampos(this.getNuevoEstudiante())){
+			this.setMensajeError(true);
+			this.setMensajeRespuesta(Constants.MSJ_CAMPOS_VACIOS);
+			return Constants.NAVEGACION_ESTUDIANTE;
+		}
 		log.info(nuevoEstudiante);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		nuevoEstudiante.setPerfil(perfil); //Cambiar por Select
@@ -261,4 +264,31 @@ public class EstudianteBean implements Serializable {
 		return Constants.NAVEGACION_ESTUDIANTE;
 	}
 
+	//Funcion para validar que los campos no esten vacios
+	public boolean validarCampos(Persona estudianteCampos){
+		if(estudianteCampos.getIdPersona().equals(new BigDecimal(0)) || estudianteCampos.getIdPersona().equals(""))
+			return false;
+		if(estudianteCampos.getNombrePersona()== null || estudianteCampos.getNombrePersona().equals(""))
+			return false;
+		if(estudianteCampos.getApellidosPersona()==null || estudianteCampos.getApellidosPersona().equals(""))
+			return false;
+		if(estudianteCampos.getFechaNacimiento()==null || estudianteCampos.getFechaNacimiento().equals(""))
+			return false;
+		if(estudianteCampos.getLugarNacimiento()==null || estudianteCampos.getLugarNacimiento().equals(""))
+		return false;
+		if(estudianteCampos.getDireccion()==null || estudianteCampos.getDireccion().equals(""))
+			return false;
+		if(estudianteCampos.getCorreoElectronico()==null || estudianteCampos.getCorreoElectronico().equals(""))
+			return false;
+		if(estudianteCampos.getUsuario()==null || estudianteCampos.getUsuario().equals(""))
+			return false;
+		if (estudianteCampos.getContrasena().equals(new BigDecimal(0)) || estudianteCampos.getContrasena().equals(""))
+			return false;
+		return true;
+	}
+	
+	//Funcion para vaciar el formulario de crear estudiante
+	public void vaciarCampos(){
+		this.setNuevoEstudiante(new Persona());
+	}
 }
