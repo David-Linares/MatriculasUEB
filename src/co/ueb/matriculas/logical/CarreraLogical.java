@@ -45,7 +45,7 @@ public class CarreraLogical implements Serializable {
 					CallableStatement callableStatement = conexion.prepareCall(Constants.PROCEDIMIENTO_INSERTAR_CARRERA);
 					callableStatement.setString(1, nuevaCarrera.getNombreCarrera());
 					callableStatement.setBigDecimal(2, nuevaCarrera.getTotalCreditos());
-					callableStatement.setBigDecimal(3, new BigDecimal(1));
+					callableStatement.setBigDecimal(3, nuevaCarrera.getFacultad().getIdFacultad());
 					callableStatement.registerOutParameter(4, java.sql.Types.VARCHAR);
 					callableStatement.executeUpdate();
 					msjRespuesta= callableStatement.getString(4);
@@ -99,7 +99,7 @@ public class CarreraLogical implements Serializable {
 					callableStatement.setBigDecimal(1, editaCarrera.getIdCarrera());
 					callableStatement.setString(2, editaCarrera.getNombreCarrera());
 					callableStatement.setBigDecimal(3, editaCarrera.getTotalCreditos());
-					callableStatement.setBigDecimal(4, new BigDecimal(1));
+					callableStatement.setBigDecimal(4, editaCarrera.getFacultad().getIdFacultad());
 					callableStatement.setString(5, editaCarrera.getEstadoCarrera().toString());				
 					callableStatement.registerOutParameter(6, java.sql.Types.VARCHAR);
 					callableStatement.executeUpdate();
@@ -128,6 +128,26 @@ public class CarreraLogical implements Serializable {
 			if (carreraQuery == null) {
 				return null;
 			}
+			sesion.getTransaction().commit();
+		} catch (Exception e) {
+			sesion.getTransaction().rollback();
+			e.printStackTrace();
+		}
+		return carreraQuery;
+	}
+	
+	public Carrera getCarreraById(BigDecimal id_carrera){		
+		log.info("##Get Carrera by Id##");
+		sesion  = HibernateSession.getSf().getCurrentSession();
+		try {
+			sesion.beginTransaction();
+			String hql = "FROM Carrera WHERE idCarrera = " + id_carrera;
+			query = sesion.createQuery(hql);
+			carreraQuery = (Carrera) query.uniqueResult();
+			if (carreraQuery == null) {
+				return null;
+			}
+			log.info("Encontró => "+carreraQuery);
 			sesion.getTransaction().commit();
 		} catch (Exception e) {
 			sesion.getTransaction().rollback();

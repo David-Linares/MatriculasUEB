@@ -5,6 +5,10 @@
   <converter-id>facultadConverter</converter-id>
   <converter-class>co.ueb.matriculas.converter.FacultadConverter</converter-class>
  </converter>
+ <converter>
+  <converter-id>carreraConverter</converter-id>
+  <converter-class>co.ueb.matriculas.converter.CarreraConverter</converter-class>
+ </converter>
  <managed-bean>
   <managed-bean-name>estudianteBean</managed-bean-name>
   <managed-bean-class>co.ueb.matriculas.beans.EstudianteBean</managed-bean-class>

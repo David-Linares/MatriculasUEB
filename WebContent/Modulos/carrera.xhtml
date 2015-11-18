@@ -159,6 +159,12 @@
 									onpaste="return false" 
 									value="#{carreraBean.carreraAux.totalCreditos}"></h:inputText>
 							</div>
+							<div class="form-group">
+								<label class="control-label">Facultad</label>
+								<h:selectOneMenu value="#{carreraBean.facultadCarrera}" converter="facultadConverter">
+									<f:selectItems value="#{carreraBean.listadoFacultades}" var="facultad" itemValue="#{facultad}" itemLabel="#{facultad.nombreFacultad}"/>
+								</h:selectOneMenu>
+							</div>
 							<div class="togglebutton">
 								<label> Estado Carrera <br /> <h:selectBooleanCheckbox
 										value="#{carreraBean.estadoCarreraEditar}" /><span

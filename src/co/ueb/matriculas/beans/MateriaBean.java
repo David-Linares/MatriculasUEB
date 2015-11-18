@@ -8,7 +8,6 @@ import java.util.Set;
 
 import org.jboss.logging.Logger;
 
-import co.ueb.matriculas.logical.CarreraLogical;
 import co.ueb.matriculas.logical.MateriaLogical;
 import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Materia;
@@ -16,6 +15,11 @@ import co.ueb.matriculas.model.MateriaMatricula;
 import co.ueb.matriculas.util.Constants;
 
 public class MateriaBean implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8852068793121506999L;
 
 	// Datos de log
 	private final static Logger log = Logger.getLogger("CarreraBean -- ");
@@ -155,6 +159,7 @@ public class MateriaBean implements Serializable {
 		} else {
 			this.getMateriaAux().setEstadoMateria('0');
 		}
+		this.getMateriaAux().setCarrera(this.getCarreraMateria());
 		log.info("Envia materia a editar");
 		log.info(this.getMateriaAux());
 		String respuesta = ml.modificarMateria(this.getMateriaAux());
@@ -195,14 +200,14 @@ public class MateriaBean implements Serializable {
 			idMateriaAux = listadoMaterias.get(listadoMaterias.size() - 1)
 					.getIdMateria().add(new BigDecimal(1));
 		}
-
+		
 		Materia nuevaMateria = new Materia(idMateriaAux,
 				this.getCarreraMateria(), this.getNuevaMateria()
 						.getNombreMateria(), this.getNuevaMateria()
 						.getCreditos(), '1', materiaMatricula);
 
 		// this.getFacultadCarrera().getCarreras().add(nuevaCarrera);
-
+		nuevaMateria.setCarrera(this.getCarreraMateria());
 		String respuesta = ml.crearNuevaMateria(nuevaMateria);
 		switch (respuesta) {
 		case "ok": // Respuesta guardado correctamente

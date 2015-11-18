@@ -224,10 +224,8 @@ public class CarreraBean implements Serializable {
 
 	// Metodo para editar Carrera
 	public String editarCarrera() {
-		System.out.println("[CarreraBean] editarCarrera - Entro");
-		if (!validarCampos(this.getNuevaCarrera())) {
-			System.out
-					.println("[CarreraBean] editarCarrera - ya valido los campos");
+		log.info("##Entró a Editar Carrera##");
+		if (!validarCampos(this.getCarreraAux())) {
 			this.setMensajeError(true);
 			this.setMensajeRespuesta(Constants.MSJ_CAMPOS_VACIOS);
 			log.info("Se quedó en validaciones");
@@ -240,6 +238,7 @@ public class CarreraBean implements Serializable {
 			this.getCarreraAux().setEstadoCarrera('0');
 		}
 		log.info("Pasó el if de estado carrera");
+		this.getCarreraAux().setFacultad(this.getFacultadCarrera());
 		log.info("Objeto que edita ==> " + this.getCarreraAux());
 		String respuesta = cl.modificarCarrera(this.getCarreraAux());
 		log.info("[CarreraBean] editarCarrera - la respuesta es:"
@@ -288,23 +287,11 @@ public class CarreraBean implements Serializable {
 			idCarreraAux = listadoCarreras.get(listadoCarreras.size() - 1)
 					.getIdCarrera().add(new BigDecimal(1));
 		}
-
-		Carrera nuevaCarrera = new Carrera(idCarreraAux,
-				this.getFacultadCarrera(), this.nombreCarrera,
-				this.totalCreditos, '1', materias, personas);
+		this.getNuevaCarrera().setIdCarrera(idCarreraAux);
+		this.getNuevaCarrera().setFacultad(this.getFacultadCarrera());
 		// this.getFacultadCarrera().getCarreras().add(nuevaCarrera);
-		String respuesta = cl.crearNuevaCarrera(nuevaCarrera);
-		System.out
-				.println("[CarreraLogical] crearCarrera - el nombre de la nueva carrera es: "
-						+ this.nombreCarrera);
-		System.out
-				.println("[CarreraLogical] crearCarrera - la cantidad de creditos de la nueva carrera es: "
-						+ this.totalCreditos);
-		System.out
-				.println("[CarreraLogical] crearCarrera - la nueva carrera es: "
-						+ nuevaCarrera);
-		System.out.println("[CarreraBean] crearCarrera - respuesta "
-				+ respuesta);
+		log.info("El objeto que envía es " + this.getNuevaCarrera());
+		String respuesta = cl.crearNuevaCarrera(this.getNuevaCarrera());
 		switch (respuesta) {
 		case "ok": // Respuesta guardado correctamente
 			this.setMensajeRespuesta(Constants.CARRERA_CREADA);

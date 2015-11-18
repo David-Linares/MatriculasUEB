@@ -1,7 +1,5 @@
 package co.ueb.matriculas.logical;
 
-
-import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -44,7 +42,7 @@ public class MateriaLogical {
 					CallableStatement callableStatement = conexion.prepareCall(Constants.PROCEDIMIENTO_INSERTAR_MATERIA);
 					callableStatement.setString(1, nuevaMateria.getNombreMateria());
 					callableStatement.setBigDecimal(2, nuevaMateria.getCreditos());
-					callableStatement.setBigDecimal(3, new BigDecimal(1));
+					callableStatement.setBigDecimal(3, nuevaMateria.getCarrera().getIdCarrera());
 					callableStatement.registerOutParameter(4, java.sql.Types.VARCHAR);
 					callableStatement.executeUpdate();
 					msjRespuesta= callableStatement.getString(4);
@@ -94,7 +92,7 @@ public class MateriaLogical {
 					callableStatement.setString(2, editaMateria.getNombreMateria());
 					callableStatement.setBigDecimal(3, editaMateria.getCreditos());
 					callableStatement.setString(4, editaMateria.getEstadoMateria().toString());
-					callableStatement.setBigDecimal(5, new BigDecimal(1));
+					callableStatement.setBigDecimal(5, editaMateria.getCarrera().getIdCarrera());
 					callableStatement.registerOutParameter(6, java.sql.Types.VARCHAR);
 					callableStatement.executeUpdate();
 					msjRespuesta= callableStatement.getString(6);
