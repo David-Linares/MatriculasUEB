@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.jdbc.Work;
@@ -106,16 +108,21 @@ public class MatriculaLogical {
 						int codMatricula = Integer.parseInt(msjRespuesta);
 						log.info("Código de matricula creada = "+codMatricula);
 						log.info(materiasMatricula);
+						FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("codMatricula", codMatricula);
+						msjRespuesta = "ok";
 						for (Iterator iterator = materiasMatricula.iterator(); iterator
 								.hasNext();) {
 							Materia materia = (Materia) iterator.next();
-							callableStatement = connection.prepareCall(Constants.PROCEDIMIENTO_INSERTAR_MATERIAS_MATRICULA);	
-							callableStatement.setInt(1, codMatricula);
-							callableStatement.setBigDecimal(2, materia.getIdMateria());
-							callableStatement.registerOutParameter(3, java.sql.Types.VARCHAR);
-							callableStatement.executeUpdate();		
-							String rpta = callableStatement.getString(3);
-							log.info("Respuesta Procedimiento Materias = "+rpta);
+							CallableStatement callableStatement2 = connection.prepareCall(Constants.PROCEDIMIENTO_INSERTAR_MATERIAS_MATRICULA);	
+							callableStatement2.setInt(1, codMatricula);
+							callableStatement2.setBigDecimal(2, materia.getIdMateria());
+							callableStatement2.registerOutParameter(3, java.sql.Types.VARCHAR);
+							callableStatement2.executeUpdate();
+							msjRespuesta = callableStatement2.getString(3);
+							if (!msjRespuesta.equals("ok")) {
+								log.error("Se produjó un error creando las materias");
+								log.error(msjRespuesta);
+							}
 						}
 					}catch(Exception e){
 						sesion.getTransaction().rollback();
@@ -125,6 +132,7 @@ public class MatriculaLogical {
 					}
 				}
 			});
+			log.info("Terminó generación de matriculas ok");
 			sesion.getTransaction().commit();
 			return msjRespuesta;
 		} catch (Exception e) {

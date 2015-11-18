@@ -11,8 +11,8 @@
 <body>
 	<div class="container">
 		<div class="col-md-offset-9 col-md-3" style="text-align:center">
-			<h:form>
-				<h:commandLink action="#{matriculaBean.hacerMatricula()}" class="botonImg">
+			<h:form id="formMateriasMatr">
+				<h:commandLink id="botonSubmitMaterias" class="botonImg" action="#{matriculaBean.hacerMatricula()}">
 					<h:graphicImage url="/resources/images/go.png"></h:graphicImage>
 				</h:commandLink>
 			</h:form>
@@ -32,7 +32,9 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Seleccionar</f:facet>
-				<input type="checkbox" name="materias[]" value="#{materia.idMateria}"></input>
+				<h:selectBooleanCheckbox value="#{materia.seleccionadaMatricula}">
+					<f:ajax event="click" listener="#{matriculaBean.valueChangeMethod(materia)}"></f:ajax>
+				</h:selectBooleanCheckbox>
 			</h:column>
 		</h:dataTable>			
 		</div>

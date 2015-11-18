@@ -1,14 +1,15 @@
 package co.ueb.matriculas.beans;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
 
 import org.jboss.logging.Logger;
 
@@ -36,20 +37,26 @@ public class MatriculaBean implements Serializable{
 	private List<Materia> materiasListado = mtl.consultarMaterias();
 	private List<Materia> materiasMatricula = new ArrayList<Materia>();
 	private List<MateriaMatricula> listadoMateriasMatriculadas = ml.obtenerMateriasMatriculadas(usuarioActual.getIdPersona()); 
-	private Map<Materia,Boolean> checkMap = new HashMap<Materia,Boolean>();
 	private Matricula datosMatricula = ml.obtenerDatosMatricula(usuarioActual.getIdPersona());
 	private int creditosPermitidos = Double.parseDouble(promedio) > 3.5 ? 16 : 8;
 	private int creditosMatriculados;
 	private String mensajeRespuesta = "";
 	private Boolean mensajeError = false;
-	
+	private String materiasHidden;	
 
-	public void valueChangeMethod(Materia materiaselect){
+	public String getMateriasHidden() {
+		return materiasHidden;
+	}
+
+	public void setMateriasHidden(String materiasHidden) {
+		this.materiasHidden = materiasHidden;
+	}
+
+	public void valueChangeMethod(Materia materiaSeleccionada){
 //		this.setCreditosMatriculados(this.creditosMatriculados + creditos); 
 		log.info("entro");
-		log.info(materiaselect);
-		this.materiasMatricula.add(materiaselect);
-		log.info(this.materiasMatricula);
+		log.info(materiaSeleccionada);
+		materiasMatricula.add(materiaSeleccionada);
 	}
 	
 	public int getCreditosPermitidos() {
@@ -119,6 +126,7 @@ public class MatriculaBean implements Serializable{
 			Materia materia = (Materia) iterator.next();
 			this.creditosMatriculados += Integer.parseInt(materia.getCreditos().toString());
 		}
+		log.info("Créditos matriculados = "+this.creditosMatriculados);
 		try{
 			if(Double.parseDouble(this.promedio) < 3.5){
 				if(this.creditosMatriculados > (Constants.CREDITOS_PERMITIDOS / 2)){
@@ -126,10 +134,35 @@ public class MatriculaBean implements Serializable{
 					this.setMensajeError(true);
 					return Constants.NAVEGACION_MATRICULA;
 				}
+			}else{
+				if(this.creditosMatriculados > Constants.CREDITOS_PERMITIDOS){
+					this.setMensajeRespuesta(Constants.MSJ_CREDITOS_EXCEDIDOS+" "+Constants.CREDITOS_PERMITIDOS);
+					this.setMensajeError(true);
+					return Constants.NAVEGACION_MATRICULA;
+				}
 			}
-			
-			ml.crearMatricula(this.materiasMatricula, this.usuarioActual.getIdPersona());
-			
+			log.info("Va a enviar el objeto");
+			log.info(this.materiasMatricula);
+			String msjRespuesta = ml.crearMatricula(this.materiasMatricula, this.usuarioActual.getIdPersona());
+			switch (msjRespuesta) {
+			case "ok":
+				String cod_matricula = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("codMatricula");
+				this.setMensajeError(false);
+				this.setMensajeRespuesta(Constants.MATRICULA_CREADA);
+				Set<MateriaMatricula> materias_matriculas = new HashSet<MateriaMatricula>();
+				for (Iterator iterator = materiasMatricula.iterator(); iterator.hasNext();) {
+					Materia materia = (Materia) iterator.next();
+					MateriaMatricula materiaMatriculada = new MateriaMatricula(null, new Materia(materia.getIdMateria()), new Matricula(new BigDecimal(cod_matricula)));
+					materias_matriculas.add(materiaMatriculada);
+				}
+				this.datosMatricula.setMateriaMatriculas(materias_matriculas);
+				break;
+			default:
+				this.setMensajeError(true);
+				this.setMensajeRespuesta(Constants.MSJ_ERROR_GUARDADO + " " + msjRespuesta + ". "+Constants.MSJ_INTENTO);
+				break;
+			}
+			return Constants.NAVEGACION_MATRICULA;
 		}catch(Exception e){
 			this.setMensajeRespuesta(Constants.MSJ_USUARIO_NO_EXISTENTE+" ");
 			this.setMensajeError(true);
@@ -137,7 +170,7 @@ public class MatriculaBean implements Serializable{
 			e.printStackTrace();
 		}
 		
-		return Constants.NAVEGACION_MATRICULA;
+		return "";
 	}
 
 	/**

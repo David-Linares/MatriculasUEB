@@ -12,7 +12,7 @@
 	<div class="container">
 		<div class="col-md-12" style="margin-bottom:30px">
 			<div class="col-md-3" style="text-align:center">
-				<h:outputLink value="agregarMaterias.xhtml"  class="botonImg">
+				<h:outputLink value="agregarMaterias.xhtml" rendered="#{matriculaBean.datosMatricula == null}"  class="botonImg">
 					<h:graphicImage url="/resources/images/add.png"></h:graphicImage>
 				</h:outputLink>
 			</div>
@@ -21,24 +21,33 @@
 					<h:graphicImage url="/resources/images/pdf.png"></h:graphicImage>
 				</button>
 			</div>
+			<div class="col-md-3">
+				Valor de la matricula 
+				<h:outputLabel value="#{matriculaBean.datosMatricula.costoMatricula}" rendered="#{matriculaBean.datosMatricula != null}" >
+				 	<f:convertNumber type="currency" currencySymbol="$" locale="es_CO" maxFractionDigits="0"/>
+				</h:outputLabel>
+			</div>
+			<div class="col-md-3">
+				Total de Créditos de la matricula 
+				<h:outputLabel value="#{matriculaBean.datosMatricula.totalCreditos}" rendered="#{matriculaBean.datosMatricula != null}" />
+			</div>
 		</div>
-		<h:panelGroup rendered="#{!matriculaBean.mensajeRespuesta.equals('')}">
+		<h:panelGroup rendered="#{matriculaBean.mensajeError}">
 			<div class="col-md-12 alert alert-dismissable alert-danger" >
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <h4>Error!</h4>
                 <p>#{matriculaBean.mensajeRespuesta}</p>
             </div>
 		</h:panelGroup>
-		<div class="col-md-12">
-			<div class="col-md-6">
-				<label>Promedio Acumulado:</label>
-				<label style="font-weight: bold;">#{matriculaBean.promedio}</label>
-			</div>
-			<div class="col-md-6">
-				<label>Créditos Permitidos:</label>
-				<label style="font-weight: bold;">#{matriculaBean.creditosPermitidos}</label>
-			</div>
-		</div>
+		<h:panelGroup rendered="#{!matriculaBean.mensajeError}">
+			<h:panelGroup rendered="#{matriculaBean.mensajeRespuesta != ''}">
+				<div class="col-md-12 alert alert-dismissable alert-success" >
+	                <button type="button" class="close" data-dismiss="alert">×</button>
+	                <h4>Correcto!</h4>
+	                <p>#{matriculaBean.mensajeRespuesta}</p>
+	            </div>
+            </h:panelGroup>
+		</h:panelGroup>
 		<div class="col-md-12">
 			<h:outputLabel value="No has realizado matricula. Por favor registra materias para verlas en este listado" rendered="#{matriculaBean.datosMatricula == null}" />
 		</div>
@@ -55,7 +64,9 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">Costo de la materia</f:facet>
-					#{materiasMat.materia.creditos * 300000}
+					<h:outputLabel style="font-weight=100" value="#{materiasMat.materia.creditos * 300000}" rendered="#{matriculaBean.datosMatricula != null}" >
+					 	<f:convertNumber type="currency" currencySymbol="$" locale="es_CO" maxFractionDigits="0"/>
+					</h:outputLabel>
 				</h:column>
 			</h:dataTable>
 			</h:form>
