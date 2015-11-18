@@ -278,7 +278,7 @@ public class CarreraBean implements Serializable {
 		if (!validarCampos(this.getNuevaCarrera())) {
 			this.setMensajeError(true);
 			this.setMensajeRespuesta(Constants.MSJ_CAMPOS_VACIOS);
-			return Constants.NAVEGACION_MATERIA;
+			return Constants.NAVEGACION_CARRERA;
 		}
 		System.out.println("[CarreraBean] - crearCarrera || Entra a crear");
 		Set<Materia> materias = new HashSet<Materia>(0);
