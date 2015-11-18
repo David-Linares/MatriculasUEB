@@ -13,14 +13,14 @@ public class Constants {
 	 * */
 	
 	public static final String HIBERNATE_FILE_NAME = "hibernate.cfg.xml";
-	public static final String MSJ_INTENTO = "Por favor Intï¿½ntalo de nuevo";
-	public static final String MSJ_ERROR_GUARDADO = "Ups, parece que ocurriï¿½ un error al momento de guardar el registro";
+	public static final String MSJ_INTENTO = "Por favor Inténtalo de nuevo";
+	public static final String MSJ_ERROR_GUARDADO = "Ups, parece que ocurrió un error al momento de guardar el registro";
 	public static final String MSJ_NOMBRE_REPETIDO = "Ya existe un registro con el nombre";
 	public static final String MSJ_USUARIO_REPETIDO = "Ya existe un registro con este nombre de usuario";
-	public static final String MSJ_IDENTIFICACION_REPETIDO = "Ya existe un registro con este nÃºmero de identificaciÃ³n";
-	public static final String MSJ_NOMBRE_VACIO = "El campo nombre no puede estar vacÃ­o";
-	public static final String MSJ_CREDITOS_EXCEDIDOS = "ExcediÃ³ la cantidad de crÃ©ditos permitidos.";
-	public static final String MSJ_USUARIO_NO_EXISTENTE = "El usuario no estÃ¡ registrado en la base de datos de las notas";
+	public static final String MSJ_IDENTIFICACION_REPETIDO = "Ya existe un registro con este número de identificación";
+	public static final String MSJ_NOMBRE_VACIO = "El campo nombre no puede estar vacío";
+	public static final String MSJ_CREDITOS_EXCEDIDOS = "Excedió la cantidad de créditos permitidos.";
+	public static final String MSJ_USUARIO_NO_EXISTENTE = "El usuario no está¡ registrado en la base de datos de las notas";
 	public static final int CREDITOS_PERMITIDOS = 16;
 	public static final String MSJ_CAMPOS_VACIOS ="Los Campos no pueden estar vacios";
 	

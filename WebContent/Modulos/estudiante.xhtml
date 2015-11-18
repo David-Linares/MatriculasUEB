@@ -113,32 +113,22 @@
 								<label class="control-label">Número de Identificación</label>             
 								<h:inputText id="identificacionEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.nuevoEstudiante.idPersona}"
 								onkeypress="if(event.which  != 08) if(event.which  != 09) if(event.which  &lt; 48 || event.which  &gt; 57) return false;"
-								onpaste="return false" maxlength="10"
-								></h:inputText>
+								onpaste="return false" maxlength="10"></h:inputText>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Nombre del Estudiante</label>             
 								<h:inputText id="nombreEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.nuevoEstudiante.nombrePersona}"
-								onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
-								onkeyup="this.value=this.value.toLowerCase()" maxlength="50"  > 
-					
-								></h:inputText>
+								onkeyup="this.value=this.value.toLowerCase()" maxlength="50"  > </h:inputText>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Apellidos del Estudiante</label>             
 								<h:inputText id="apellidosEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.nuevoEstudiante.apellidosPersona}"
-								onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
-								onkeyup="this.value=this.value.toLowerCase()" maxlength="50"  > 
-					
-								></h:inputText>
+								onkeyup="this.value=this.value.toLowerCase()" maxlength="50"  > </h:inputText>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Lugar de nacimiento</label>
 								<h:inputText id="lugarNacimientoEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.nuevoEstudiante.lugarNacimiento}"
-								onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
-								onkeyup="this.value=this.value.toLowerCase()" maxlength="20"  > 
-					
-								></h:inputText>
+								onkeyup="this.value=this.value.toLowerCase()" maxlength="20"  > </h:inputText>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Fecha de nacimiento</label>
@@ -150,14 +140,15 @@
 							</div>
 							<div class="form-group">
 								<label class="control-label">Correo Electrónico</label>
-								<h:inputText id="correoElectronicoEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.nuevoEstudiante.correoElectronico} "  maxlength="50"
-								onkeypress=" if(event.which  != 08) if(event.which  != 09)if(event.which  != 45)if(event.which  != 46)if(event.which  != 95) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 64) if(event.which  &lt; 97 || event.which  &gt; 122) if(event.which  &lt; 48 || event.which  &gt; 57)  return false;"
-								onkeyup="this.value=this.value.toLowerCase()"
-								></h:inputText>
+								<h:inputText id="correoElectronicoEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.nuevoEstudiante.correoElectronico}"  maxlength="50"
+								onkeyup="this.value=this.value.toLowerCase()"></h:inputText>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Usuario</label>
-								<h:inputText id="usuarioEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.nuevoEstudiante.usuario}" maxlength="50"></h:inputText>
+								<h:inputText id="usuarioEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.nuevoEstudiante.usuario}" maxlength="50"
+								onkeypress="if(event.which  != 38) if(event.which != 164) if(event.which  != 37) if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+								onkeyup="this.value=this.value.toLowerCase()" onpaste="return false" 
+								></h:inputText>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Contraseña</label>
@@ -204,24 +195,21 @@
 								<div class="form-group">
 									<label class="control-label">Nombre del Estudiante</label>             
 									<h:inputText id="nombreEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.estudianteAux.nombrePersona}"
-									onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
-									onkeyup="this.value=this.value.toLowerCase()" maxlength="50"  > 
+									onkeyup="this.value=this.value.toLowerCase()" maxlength="50"   
 					
 									></h:inputText>
 								</div>
 								<div class="form-group">
 									<label class="control-label">Apellidos del Estudiante</label>             
 									<h:inputText id="apellidosEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.estudianteAux.apellidosPersona}"
-									onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
-									onkeyup="this.value=this.value.toLowerCase()" maxlength="50"  > 
+									onkeyup="this.value=this.value.toLowerCase()" maxlength="50"  
 					
 									></h:inputText>
 								</div>
 								<div class="form-group">
 									<label class="control-label">Lugar de nacimiento</label>
 									<h:inputText id="lugarNacimientoEstudiante" class="form-control col-sm-10 empty"  value="#{estudianteBean.estudianteAux.lugarNacimiento}"
-									onkeypress=" if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
-									onkeyup="this.value=this.value.toLowerCase()" maxlength="50"  > 
+									onkeyup="this.value=this.value.toLowerCase()" maxlength="50"  
 					
 									></h:inputText>
 								</div>
@@ -236,13 +224,15 @@
 								<div class="form-group">
 									<label class="control-label">Correo Electrónico</label>
 									<h:inputText id="correoElectronicoEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.estudianteAux.correoElectronico}"
-									onkeypress=" if(event.which  != 08) if(event.which  != 09)if(event.which  != 45)if(event.which  != 46)if(event.which  != 95) if(event.which  != 32) if(event.which  &lt; 164) if(event.which  &lt; 64) if(event.which  &lt; 97 || event.which  &gt; 122) if(event.which  &lt; 48 || event.which  &gt; 57)  return false;"
-								onkeyup="this.value=this.value.toLowerCase()" maxlength="50"
+									onkeyup="this.value=this.value.toLowerCase()" maxlength="50"
 									></h:inputText>
 								</div>
 								<div class="form-group">
 									<label class="control-label">Usuario</label>
-									<h:inputText id="usuarioEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.estudianteAux.usuario}" maxlength="50"></h:inputText>
+									<h:inputText id="usuarioEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.estudianteAux.usuario}" maxlength="50"
+									onkeypress="if(event.which  != 38) if(event.which != 164) if(event.which  != 37) if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
+										onkeyup="this.value=this.value.toLowerCase()"	onpaste="return false" ></h:inputText>
+								
 								</div>
 								<div class="form-group">
 									<label class="control-label">Contraseña</label>
