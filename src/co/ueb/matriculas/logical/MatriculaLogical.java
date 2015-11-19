@@ -108,7 +108,7 @@ public class MatriculaLogical {
 						int codMatricula = Integer.parseInt(msjRespuesta);
 						log.info("Código de matricula creada = "+codMatricula);
 						log.info(materiasMatricula);
-						FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("codMatricula", codMatricula);
+						FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("codMatricula", String.valueOf(codMatricula));
 						msjRespuesta = "ok";
 						for (Iterator iterator = materiasMatricula.iterator(); iterator
 								.hasNext();) {

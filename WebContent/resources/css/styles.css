@@ -18,6 +18,9 @@
 	height: 100px;
 }
 
-#ui-datepicker-div {
-	z-index: 1003 !important;
+.ui-datepicker {
+	width: 17em;
+	padding: .2em .2em 0;
+	display: none;
+	z-index: 2000 !important;
 }

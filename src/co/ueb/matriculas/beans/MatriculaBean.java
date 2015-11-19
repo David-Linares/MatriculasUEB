@@ -146,7 +146,7 @@ public class MatriculaBean implements Serializable{
 			String msjRespuesta = ml.crearMatricula(this.materiasMatricula, this.usuarioActual.getIdPersona());
 			switch (msjRespuesta) {
 			case "ok":
-				String cod_matricula = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("codMatricula");
+				int cod_matricula = Integer.parseInt((String)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("codMatricula"));
 				this.setMensajeError(false);
 				this.setMensajeRespuesta(Constants.MATRICULA_CREADA);
 				Set<MateriaMatricula> materias_matriculas = new HashSet<MateriaMatricula>();
@@ -155,7 +155,9 @@ public class MatriculaBean implements Serializable{
 					MateriaMatricula materiaMatriculada = new MateriaMatricula(null, new Materia(materia.getIdMateria()), new Matricula(new BigDecimal(cod_matricula)));
 					materias_matriculas.add(materiaMatriculada);
 				}
-				this.datosMatricula.setMateriaMatriculas(materias_matriculas);
+				datosMatricula = ml.obtenerDatosMatricula(usuarioActual.getIdPersona());
+				datosMatricula.setMateriaMatriculas(materias_matriculas);
+				this.setListadoMateriasMatriculadas(ml.obtenerMateriasMatriculadas(usuarioActual.getIdPersona()));
 				break;
 			default:
 				this.setMensajeError(true);

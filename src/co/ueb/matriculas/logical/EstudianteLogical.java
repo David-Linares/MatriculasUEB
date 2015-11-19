@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.jdbc.Work;
 import org.jboss.logging.Logger;
 
+import co.ueb.matriculas.model.Carrera;
 import co.ueb.matriculas.model.Persona;
 import co.ueb.matriculas.util.Constants;
 import co.ueb.matriculas.util.HibernateSession;
@@ -58,7 +59,7 @@ public class EstudianteLogical {
 		return promedioRespuesta;
 	}
 
-	public String crearNuevoEstudiante(Persona nuevoEstudiante) {
+	public String crearNuevoEstudiante(Persona nuevoEstudiante, Carrera carreraEstudiante) {
 		log.info("## Se prepara para crear estudiante ## ");
 		sesion = HibernateSession.getSf().getCurrentSession();
 		try {
@@ -81,9 +82,10 @@ public class EstudianteLogical {
 					callableStatement.setString(9, nuevoEstudiante.getUsuario());
 					callableStatement.setString(10, nuevoEstudiante.getContrasena());
 					callableStatement.setBigDecimal(11, nuevoEstudiante.getPerfil().getIdPerfil());
-					callableStatement.registerOutParameter(12, java.sql.Types.VARCHAR);
+					callableStatement.setBigDecimal(12, carreraEstudiante.getIdCarrera());
+					callableStatement.registerOutParameter(13, java.sql.Types.VARCHAR);
 					callableStatement.executeUpdate();
-					msjRespuesta = callableStatement.getString(12);
+					msjRespuesta = callableStatement.getString(13);
 				}
 			});
 			log.info("Respuesta de Procedimiento: "+msjRespuesta);
@@ -119,7 +121,7 @@ public class EstudianteLogical {
 		return estudiantes;
 	}
 
-	public String modificarEstudiante(Persona editaEstudiante) {
+	public String modificarEstudiante(Persona editaEstudiante, Carrera carreraEstudiante) {
 		log.info("##Entró Modificar Estudiante Logical##");
 		Session sesion = HibernateSession.getSf().getCurrentSession();
 		log.info(editaEstudiante);
@@ -146,6 +148,7 @@ public class EstudianteLogical {
 					callableStatement.setString(11, editaEstudiante.getUsuario());
 					callableStatement.setString(12, editaEstudiante.getContrasena());
 					callableStatement.setBigDecimal(13, editaEstudiante.getPerfil().getIdPerfil());
+					callableStatement.setBigDecimal(14, carreraEstudiante.getIdCarrera());
 					callableStatement.executeUpdate();
 					msjRespuesta = callableStatement.getString(1);
 				}

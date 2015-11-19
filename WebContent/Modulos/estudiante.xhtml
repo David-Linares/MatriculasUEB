@@ -67,10 +67,6 @@
 							<f:facet name="header">Apellidos</f:facet>
 						#{estudiante.apellidosPersona}
 					</h:column>
-						<h:column>
-							<f:facet name="header">F/Nacimiento</f:facet>
-						#{estudiante.fechaNacimiento}
-					</h:column>
 					
 					<h:column>
 							<f:facet name="header">Dirección</f:facet>
@@ -79,6 +75,10 @@
 					<h:column>
 							<f:facet name="header">Correo</f:facet>
 						#{estudiante.correoElectronico}
+					</h:column>
+						<h:column>
+							<f:facet name="header">F/Nacimiento</f:facet>
+						#{estudiante.fechaNacimiento}
 					</h:column>
 					<h:column>
 							<f:facet name="header">Usuario</f:facet>
@@ -137,6 +137,12 @@
 							<div class="form-group">
 								<label class="control-label">Dirección</label>
 								<h:inputText id="direccionEstudiante" value="#{estudianteBean.nuevoEstudiante.direccion}" class="form-control col-sm-10 empty" maxlength="50" ></h:inputText>
+							</div>
+							<div class="form-group">
+								<label class="control-label">Carrera</label>
+								<h:selectOneMenu value="#{estudianteBean.carreraEstudiante}" converter="carreraConverter">
+									<f:selectItems value="#{estudianteBean.listadoCarreras}" var="carrera" itemValue="#{carrera}" itemLabel="#{carrera.nombreCarrera}"/>
+								</h:selectOneMenu>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Correo Electrónico</label>
@@ -228,8 +234,14 @@
 									></h:inputText>
 								</div>
 								<div class="form-group">
+									<label class="control-label">Carrera</label>
+									<h:selectOneMenu value="#{estudianteBean.carreraEstudiante}" converter="carreraConverter">
+										<f:selectItems value="#{estudianteBean.listadoCarreras}" var="carrera" itemValue="#{carrera}" itemLabel="#{carrera.nombreCarrera}"/>
+									</h:selectOneMenu>
+								</div>
+								<div class="form-group">
 									<label class="control-label">Usuario</label>
-									<h:inputText id="usuarioEstudiante" class="form-control col-sm-10 empty" value="#{estudianteBean.estudianteAux.usuario}" maxlength="50"
+									<h:inputText id="usuarioEstudiante" class="form-control col-sm-10 empty" disabled="true" value="#{estudianteBean.estudianteAux.usuario}" maxlength="50"
 									onkeypress="if(event.which  != 38) if(event.which != 164) if(event.which  != 37) if(event.which  != 08) if(event.which  != 09) if(event.which  != 32) if(event.which  &lt; 97 || event.which  &gt; 122) return false;"
 										onkeyup="this.value=this.value.toLowerCase()"	onpaste="return false" ></h:inputText>
 								

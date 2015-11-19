@@ -13,14 +13,14 @@ public class Constants {
 	 * */
 	
 	public static final String HIBERNATE_FILE_NAME = "hibernate.cfg.xml";
-	public static final String MSJ_INTENTO = "Por favor Inténtalo de nuevo";
-	public static final String MSJ_ERROR_GUARDADO = "Ups, parece que ocurrió un error al momento de guardar el registro";
+	public static final String MSJ_INTENTO = "Por favor Intï¿½ntalo de nuevo";
+	public static final String MSJ_ERROR_GUARDADO = "Ups, parece que ocurriï¿½ un error al momento de guardar el registro";
 	public static final String MSJ_NOMBRE_REPETIDO = "Ya existe un registro con el nombre";
 	public static final String MSJ_USUARIO_REPETIDO = "Ya existe un registro con este nombre de usuario";
-	public static final String MSJ_IDENTIFICACION_REPETIDO = "Ya existe un registro con este número de identificación";
-	public static final String MSJ_NOMBRE_VACIO = "El campo nombre no puede estar vacío";
-	public static final String MSJ_CREDITOS_EXCEDIDOS = "Excedió la cantidad de créditos permitidos.";
-	public static final String MSJ_USUARIO_NO_EXISTENTE = "El usuario no está¡ registrado en la base de datos de las notas";
+	public static final String MSJ_IDENTIFICACION_REPETIDO = "Ya existe un registro con este nï¿½mero de identificaciï¿½n";
+	public static final String MSJ_NOMBRE_VACIO = "El campo nombre no puede estar vacï¿½o";
+	public static final String MSJ_CREDITOS_EXCEDIDOS = "Excediï¿½ la cantidad de crï¿½ditos permitidos.";
+	public static final String MSJ_USUARIO_NO_EXISTENTE = "El usuario no estï¿½ registrado en la base de datos de las notas";
 	public static final int CREDITOS_PERMITIDOS = 16;
 	public static final String MSJ_CAMPOS_VACIOS ="Los Campos no pueden estar vacios";
 	
@@ -82,8 +82,8 @@ public class Constants {
 	public static final String ESTUDIANTE_ACTUALIZADO = "Estudiante Actualizado Correctamente!!";
 	public static final String CONSULTA_ESTUDIANTES= "select e from Persona as e where e.perfil.idPerfil = 1 order by e.nombrePersona, e.apellidosPersona";
 	public static final String ESTUDIANTE_MODIFICADO = "Estudiante modificado Correctamente!!";
-	public static final String PROCEDIMIENTO_INSERTAR_ESTUDIANTE = "{call INSERTAR_PERSONA(?,?,?,?,?,?,?,?,?,?,?,?)}";
-	public static final String FUNCION_MODIFICAR_ESTUDIANTE = "{? = call modificar_estudiante(?,?,?,?,?,?,?,?,?,?,?,?)}";
+	public static final String PROCEDIMIENTO_INSERTAR_ESTUDIANTE = "{call INSERTAR_PERSONA(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+	public static final String FUNCION_MODIFICAR_ESTUDIANTE = "{? = call modificar_estudiante(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
 	
 	/*
 	 * Constantes de Matricula

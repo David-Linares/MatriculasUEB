@@ -8,7 +8,10 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.jboss.logging.Logger;
@@ -16,6 +19,7 @@ import org.jboss.logging.Logger;
 import co.ueb.matriculas.logical.CarreraLogical;
 import co.ueb.matriculas.logical.EstudianteLogical;
 import co.ueb.matriculas.model.Carrera;
+import co.ueb.matriculas.model.CarreraEstudiante;
 import co.ueb.matriculas.model.Perfil;
 import co.ueb.matriculas.model.Persona;
 import co.ueb.matriculas.util.Constants;
@@ -205,7 +209,7 @@ public class EstudianteBean implements Serializable {
 		log.info("Objeto a enviar");
 		log.info(this.getEstudianteAux());
 		log.info(" ");
-		String respuesta= el.modificarEstudiante(this.getEstudianteAux());
+		String respuesta= el.modificarEstudiante(this.getEstudianteAux(), this.getCarreraEstudiante());
 		switch (respuesta) {
 		case "ok": // Respuesta guardado correctamente
 			this.setMensajeRespuesta(Constants.ESTUDIANTE_ACTUALIZADO);
@@ -240,7 +244,9 @@ public class EstudianteBean implements Serializable {
 		log.info(nuevoEstudiante);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		nuevoEstudiante.setPerfil(perfil); //Cambiar por Select
-		nuevoEstudiante.setPromedio(new BigDecimal(5.0));
+		Random rand = new Random();
+	    int randomNum = rand.nextInt((10 - 0) + 1) + 0;
+		nuevoEstudiante.setPromedio(new BigDecimal(randomNum / 2));
 		log.info(this.getFechaNacimiento());
 		nuevoEstudiante.setContrasena(encriptarContrasena(nuevoEstudiante.getContrasena()));
 		nuevoEstudiante.setEstadoPersona('1');
@@ -256,7 +262,7 @@ public class EstudianteBean implements Serializable {
 		log.info(" ## Antes de enviar el objeto ## ");
 		log.info(nuevoEstudiante);
 		
-		String rptaGuardado = el.crearNuevoEstudiante(nuevoEstudiante);
+		String rptaGuardado = el.crearNuevoEstudiante(nuevoEstudiante, this.getCarreraEstudiante());
 		switch (rptaGuardado) {
 		case "ok": // Respuesta guardado correctamente
 			this.setMensajeRespuesta(Constants.ESTUDIANTE_CREADO);
