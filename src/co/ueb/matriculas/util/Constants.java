@@ -94,5 +94,5 @@ public class Constants {
 	public static final String CONSULTA_DATOS_MATRICULA_MATERIAS = "FROM MateriaMatricula mm where mm.matricula.persona.idPersona = ";
 	public static final String PROCEDIMIENTO_INSERTAR_MATRICULA = "{call INSERTAR_MATRICULA(?,?)}";
 	public static final String PROCEDIMIENTO_INSERTAR_MATERIAS_MATRICULA = "{call INSERTAR_MATERIAS_MATRICULA(?,?,?)}";
-	public static final String MATRICULA_CREADA = "La matricula se generÃ³ correctamente!!";
+	public static final String MATRICULA_CREADA = "La matricula se generó correctamente!!";
 }
